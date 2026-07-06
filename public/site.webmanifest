@@ -1,0 +1,16 @@
+{
+  "name": "Aarjav Infotech",
+  "short_name": "Aarjav",
+  "description": "Innovative technology solutions for modern businesses",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
