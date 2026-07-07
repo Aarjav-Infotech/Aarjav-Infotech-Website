@@ -9,7 +9,7 @@ import {
 import type { ReactNode } from "react";
 
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
-import { ANIMATION } from "@/lib/constants";
+import { MOTION } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 interface FadeInProps extends HTMLMotionProps<"div"> {
@@ -50,9 +50,9 @@ export function FadeIn({
           x: 0,
           y: 0,
           transition: {
-            duration: ANIMATION.duration.normal,
+            duration: MOTION.duration.normal,
             delay,
-            ease: ANIMATION.ease,
+            ease: MOTION.easing.standard,
           },
         },
       };
@@ -83,7 +83,7 @@ interface StaggerContainerProps {
 export function StaggerContainer({
   children,
   className,
-  staggerDelay = ANIMATION.stagger,
+  staggerDelay = MOTION.stagger,
 }: StaggerContainerProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -125,8 +125,8 @@ export function StaggerItem({
           opacity: 1,
           y: 0,
           transition: {
-            duration: ANIMATION.duration.normal,
-            ease: ANIMATION.ease,
+            duration: MOTION.duration.normal,
+            ease: MOTION.easing.standard,
           },
         },
       }}
@@ -155,8 +155,8 @@ export function PageTransition({ children, className }: PageTransitionProps) {
         animate={{ opacity: 1, y: 0 }}
         exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }}
         transition={{
-          duration: ANIMATION.duration.fast,
-          ease: ANIMATION.ease,
+          duration: MOTION.duration.fast,
+          ease: MOTION.easing.standard,
         }}
       >
         {children}

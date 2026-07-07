@@ -1,6 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+import { BREAKPOINTS } from "@/lib/theme";
 
 interface UseMediaQueryOptions {
   defaultValue?: boolean;
@@ -31,29 +33,10 @@ export function useMediaQuery(
 }
 
 /**
- * Returns true when viewport width is below the md breakpoint (768px).
+ * Returns true when viewport width is below the md breakpoint.
  */
 export function useIsMobile(): boolean {
-  return useMediaQuery("(max-width: 767px)", { defaultValue: false });
-}
-
-/**
- * Locks body scroll — useful for mobile navigation overlays.
- */
-export function useScrollLock(locked: boolean): void {
-  const lockScroll = useCallback((): void => {
-    document.body.style.overflow = "hidden";
-  }, []);
-
-  const unlockScroll = useCallback((): void => {
-    document.body.style.overflow = "";
-  }, []);
-
-  useEffect(() => {
-    if (locked) {
-      lockScroll();
-      return unlockScroll;
-    }
-    unlockScroll();
-  }, [locked, lockScroll, unlockScroll]);
+  return useMediaQuery(`(max-width: calc(${BREAKPOINTS.md} - 1px))`, {
+    defaultValue: false,
+  });
 }

@@ -1,3 +1,5 @@
+import { MOTION } from "@/lib/theme";
+
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Aarjav Infotech";
 
 export const APP_URL =
@@ -14,10 +16,11 @@ export const ROUTES = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: ROUTES.home, label: "Home" },
-  { href: ROUTES.about, label: "About" },
-  { href: ROUTES.services, label: "Services" },
-  { href: ROUTES.contact, label: "Contact" },
+  { href: "/ai-services", label: "AI Services", hasDropdown: true },
+  { href: "/digital-products", label: "Digital Products", hasDropdown: true },
+  { href: "/industries", label: "Industries", hasDropdown: true },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About", hasDropdown: true },
 ] as const;
 
 export const CONTACT_INFO = {
@@ -27,13 +30,9 @@ export const CONTACT_INFO = {
 } as const;
 
 export const ANIMATION = {
-  duration: {
-    fast: 0.15,
-    normal: 0.25,
-    slow: 0.3,
-  },
-  ease: [0.25, 0.1, 0.25, 1] as const,
-  stagger: 0.08,
+  duration: MOTION.duration,
+  ease: MOTION.easing.standard,
+  stagger: MOTION.stagger,
 } as const;
 
 export const API_ROUTES = {

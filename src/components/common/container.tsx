@@ -1,16 +1,19 @@
 import type { ComponentProps, ReactNode } from "react";
 
+import { CONTAINERS } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 interface ContainerProps extends ComponentProps<"div"> {
   children: ReactNode;
-  size?: "default" | "narrow" | "wide";
+  size?: "default" | "narrow" | "wide" | "ultra" | "full";
 }
 
-const sizeClasses = {
-  default: "max-w-7xl",
-  narrow: "max-w-3xl",
-  wide: "max-w-[90rem]",
+const sizeStyles = {
+  default: { maxWidth: CONTAINERS.default },
+  narrow: { maxWidth: CONTAINERS.narrow },
+  wide: { maxWidth: CONTAINERS.wide },
+  ultra: { maxWidth: CONTAINERS.ultra },
+  full: { maxWidth: "none" },
 } as const;
 
 /**
@@ -20,15 +23,13 @@ export function Container({
   children,
   className,
   size = "default",
+  style,
   ...props
 }: ContainerProps) {
   return (
     <div
-      className={cn(
-        "container-padding mx-auto w-full",
-        sizeClasses[size],
-        className,
-      )}
+      className={cn("container-padding mx-auto w-full", className)}
+      style={{ ...sizeStyles[size], ...style }}
       {...props}
     >
       {children}

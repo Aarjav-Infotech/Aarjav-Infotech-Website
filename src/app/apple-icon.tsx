@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 
+import { BRAND } from "@/lib/theme";
+
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
@@ -12,9 +14,9 @@ export default function AppleIcon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#4f46e5",
+        background: BRAND.primary,
         borderRadius: 32,
-        color: "white",
+        color: BRAND.foreground,
         fontSize: 96,
         fontWeight: 700,
       }}
