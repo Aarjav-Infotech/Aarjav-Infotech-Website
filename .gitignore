@@ -46,3 +46,7 @@ coverage/
 # Misc
 .vercel
 .turbo
+
+
+/docs
+AGENTS.md

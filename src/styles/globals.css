@@ -4,8 +4,9 @@
 
 @theme inline {
   /* Typography */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans-stack);
+  --font-ui: var(--font-ui-stack);
+  --font-mono: var(--font-mono-stack);
 
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
@@ -37,15 +38,57 @@
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 300ms;
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
 
   /* Spacing scale extensions */
+  --spacing-gutter: 1.5rem;
+  --spacing-card: 1.5rem;
+  --spacing-control: 1rem;
   --spacing-section: 5rem;
   --spacing-section-lg: 7rem;
+  --spacing-section-xl: 9rem;
+
+  /* Breakpoints */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  /* Z-index */
+  --z-index-base: 0;
+  --z-index-dropdown: 20;
+  --z-index-sticky: 30;
+  --z-index-overlay: 40;
+  --z-index-modal: 50;
+  --z-index-toast: 60;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 1px rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 28px rgb(0 0 0 / 0.12);
+  --shadow-elevated: 0 16px 40px rgb(0 0 0 / 0.14);
+
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 /* Design Tokens — Light Theme */
 :root {
   --radius: 0.625rem;
+  --font-sans-stack: "Instrument Sans", "IBM Plex Sans", system-ui, sans-serif;
+  --font-ui-stack: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono-stack: "IBM Plex Mono", "SFMono-Regular", monospace;
 
   --background: oklch(0.99 0.002 247);
   --foreground: oklch(0.145 0.02 265);
