@@ -5,6 +5,8 @@ import { HomeIndustries } from "./home-industries";
 import { HomePartners } from "./home-partners";
 import { HomeProducts } from "./home-products";
 import { HomeProvenResults } from "./home-proven-results";
+import { HomeTechnologies } from "./home-technologies";
+import { HomeSecurity } from "./home-security";
 import { HomeTestimonials } from "./home-testimonials";
 import { HomeWhatWeDo } from "./home-what-we-do";
 import { HomeContact } from "./home-contact";
@@ -19,11 +21,20 @@ export function HomeContent() {
     <>
       <Hero
         align="left"
-        eyebrow="✦ Workflow orchestration"
-        title="Automate critical workflows. Integrate the tools you rely on ."
+        eyebrow="Workflow orchestration"
+        eyebrowClassName="text-[#08388D] text-[18px] font-medium leading-[17.6px] tracking-normal normal-case"
+        title={
+          <>
+            Automate critical workflows. <br />
+            Integrate the tools you rely on.
+          </>
+        }
+        titleClassName="text-[#000000] text-[74px] font-medium leading-[81.4px] tracking-[-3px]"
         description="End-to-end automation across Sales, Support, Finance, and Operations."
-        bgImage="/images/hero.png"
+        descriptionClassName="text-[#000000] text-[20px] font-medium leading-[28px] tracking-normal"
+        bgVideo="/videos/Hero_Section.mp4"
         tone="transparent"
+        className="rounded-bl-[80px] bg-[#E5F0FF]/20"
         actions={[
           {
             label: "Book a discovery call",
@@ -42,7 +53,7 @@ export function HomeContent() {
         eyebrow="TEAMS CHOOSE US FOR RELIABLE DELIVERY"
         partners={[
           {
-            src: "/images/patners.png",
+            src: "/svg/patners.svg",
             alt: "Our Technology Stack Partners",
             width: 1280,
             height: 100,
@@ -188,7 +199,9 @@ export function HomeContent() {
       />
       <HomeIndustries />
       <HomeProvenResults />
+      <HomeTechnologies />
       <HomeTestimonials />
+      <HomeSecurity />
       <HomeContact />
       <HomeFaq />
       <HomeArticles />

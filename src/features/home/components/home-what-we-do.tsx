@@ -56,7 +56,7 @@ export function HomeWhatWeDo({
   items,
 }: HomeWhatWeDoProps) {
   return (
-    <section className="mx-auto w-full max-w-[1440px] overflow-hidden px-8 pt-24 pb-24">
+    <section className="w-full overflow-hidden px-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

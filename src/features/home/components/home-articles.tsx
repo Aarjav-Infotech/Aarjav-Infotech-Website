@@ -31,14 +31,25 @@ const articles = [
 
 export function HomeArticles() {
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] rounded-bl-[80px] bg-[#F9F9F9] pt-[44px] pb-[60px] lg:pb-[100px]">
-      <div className="relative w-full px-4 md:px-[80px]">
-        <div className="flex flex-col">
+    <section className="relative max-h-[1053px] w-full bg-transparent">
+      <div className="max-h-auto relative w-full overflow-hidden rounded-bl-[80px]">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 h-full w-full">
+          <Image
+            src="/images/white_bg.png"
+            alt="Articles Background"
+            fill
+            // className="object-cover object-top"
+            priority
+          />
+        </div>
+
+        <div className="relative z-10 flex w-full flex-col gap-[10px] px-4 pt-[100px] pb-[60px] md:px-[80px] lg:pt-[199px] lg:pb-[99px]">
           {/* Header */}
-          <div className="mb-[20px] flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div className="flex w-full flex-col lg:w-[630px]">
+          <div className="flex flex-col items-start justify-between gap-6 pb-[20px] md:flex-row md:items-end">
+            <div className="flex w-full flex-col gap-[20px] lg:w-[630px]">
               <p
-                className="mb-[10px] text-[12px] leading-[15.6px] font-normal tracking-[1px] text-black uppercase"
+                className="text-[12px] leading-[15.6px] font-normal tracking-[1px] text-black uppercase"
                 style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
               >
                 FROM OUR BLOG
@@ -94,12 +105,15 @@ export function HomeArticles() {
                     <p className="mb-[10px] line-clamp-3 text-[16px] leading-[22.4px] font-normal text-black/60">
                       {article.desc}
                     </p>
-                    <div className="mt-auto">
-                      <div className="inline-flex items-center justify-center gap-2 rounded-[60px] border border-black/20 px-[25px] py-[16px] shadow-sm transition-all duration-300 group-hover:bg-black group-hover:text-white">
-                        <span className="text-[14px] leading-[14px] font-medium">
+                    <div className="mt-auto pt-[20px]">
+                      <div className="inline-flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] border border-transparent bg-white px-[25px] text-black shadow-sm transition-all duration-300 [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]">
+                        <span className="text-[16px] leading-[17.6px] font-medium">
                           Read more
                         </span>
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight
+                          className="h-[19px] w-[19px]"
+                          strokeWidth={2}
+                        />
                       </div>
                     </div>
                   </div>
