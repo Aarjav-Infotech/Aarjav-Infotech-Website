@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/common/container";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { APP_NAME, NAV_LINKS, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -45,12 +44,12 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.0, ease: "easeOut" }}
-      className="z-sticky group fixed top-[30px] right-0 left-0 w-full"
+      className="z-sticky group fixed top-[30px] right-0 left-0 flex w-full justify-center"
     >
-      <Container>
+      <div className="w-full px-4 md:px-8">
         <nav
           className={cn(
-            "flex h-[72px] items-center justify-between rounded-full px-8 shadow-sm ring-1 ring-black/5 transition-all duration-300",
+            "mx-auto flex h-[72px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-[30px] py-[10px] shadow-sm ring-1 ring-black/5 transition-all duration-300",
             isScrolled
               ? "bg-white/60 backdrop-blur-md group-hover:bg-white"
               : "bg-white",
@@ -72,7 +71,7 @@ export function Navbar() {
           >
             {/* {APP_NAME}  */}
             <Image
-              src="/images/logo.png"
+              src="/svg/logo.svg"
               alt={APP_NAME}
               width={180}
               height={48}
@@ -105,7 +104,7 @@ export function Navbar() {
           <div className="hidden md:block">
             <Button
               asChild
-              className="rounded-full bg-black text-white hover:bg-black/90"
+              className="rounded-full border border-transparent bg-black text-white transition-all duration-300 hover:border-transparent hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]"
             >
               <Link href={ROUTES.contact}>
                 Book a discovery call <ArrowRight className="ml-1 size-4" />
@@ -162,7 +161,7 @@ export function Navbar() {
             </ul>
           </nav>
         )}
-      </Container>
+      </div>
     </motion.header>
   );
 }

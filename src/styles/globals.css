@@ -90,7 +90,7 @@
   --font-ui-stack: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono-stack: "IBM Plex Mono", "SFMono-Regular", monospace;
 
-  --background: oklch(0.99 0.002 247);
+  --background: #ffffff;
   --foreground: oklch(0.145 0.02 265);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0.02 265);
@@ -146,10 +146,22 @@
 
   html {
     @apply scroll-smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   :focus-visible {
@@ -175,5 +187,52 @@
 
   .container-padding {
     @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .site-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .site-container {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .site-container {
+      max-width: 720px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-container {
+      max-width: 960px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .site-container {
+      max-width: 1140px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .site-container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .site-container {
+      max-width: 1440px;
+    }
   }
 }

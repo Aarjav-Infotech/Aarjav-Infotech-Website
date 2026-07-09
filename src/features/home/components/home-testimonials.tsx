@@ -11,32 +11,36 @@ interface Testimonial {
   title: string;
   review: string;
   avatar: string;
+  rating: number;
 }
 
 const testimonials: Testimonial[] = [
   {
     id: "01",
-    name: "Alex Rivera",
-    title: "COO, HAUS",
+    name: "Kevin W.",
+    title: "Delfa Innovators",
     review:
-      "The team didn't just build an automation; they re-engineered our entire operations workflow. We're moving twice as fast now.",
+      '"We deal with a huge volume of sales data. This dashboard is fast, reliable, and handles real-time metrics across a million records without any lag. The S3 integration is seamless."',
     avatar: "/images/testimonial-avatar.png",
+    rating: 5,
   },
   {
     id: "02",
-    name: "Sarah Jenkins",
-    title: "VP ENGINEERING, DATACORP",
+    name: "Ted S.",
+    title: "Project Manager",
     review:
-      '"Finally, an automation partner who actually understands enterprise security requirements. No hand-waving, just solid execution."',
+      '"Construction finance is complex, but this ERP handles audits, approvals, and reporting in one place. It has brought a new level of control and clarity to our financials."',
     avatar: "/images/testimonial-avatar.png",
+    rating: 4,
   },
   {
     id: "03",
-    name: "Michael Chen",
-    title: "VP OF SALES, TECHFLOW",
+    name: "Ralph D.",
+    title: "Grade Construction",
     review:
-      '"The team understands our complex requirements perfectly. They delivered an automation system that scales effortlessly. Worth every penny."',
+      '"The role-based flow means the right people see the right documents at the right time. It\'s reduced delays and added massive accountability across departments."',
     avatar: "/images/testimonial-avatar.png",
+    rating: 3,
   },
   {
     id: "04",
@@ -45,6 +49,7 @@ const testimonials: Testimonial[] = [
     review:
       '"Working with them has been a game-changer for our business. The custom integrations saved us hundreds of hours each month."',
     avatar: "/images/testimonial-avatar.png",
+    rating: 5,
   },
 ];
 
@@ -56,8 +61,10 @@ export function HomeTestimonials() {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
       } else {
-        setCardsToShow(2.4); // Show 2 full cards and part of the third to hint scrolling
+        setCardsToShow(3);
       }
     };
     handleResize();
@@ -78,7 +85,7 @@ export function HomeTestimonials() {
   };
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 pt-16 pb-16 md:px-[80px] md:pt-[80px] md:pb-[80px]">
+    <section className="mx-auto w-full max-w-[1440px] px-4 pt-16 md:px-[80px]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -95,18 +102,55 @@ export function HomeTestimonials() {
         <div
           className="flex gap-[30px] transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(calc(-${currentIndex * (100 / cardsToShow)}%))`,
+            transform: `translateX(calc(-${currentIndex} * (100% / ${cardsToShow} + ${30 / cardsToShow}px)))`,
           }}
         >
           {testimonials.map((testimonial, _idx) => (
             <div
               key={testimonial.id}
               className="flex-shrink-0"
-              style={{ width: `calc(${100 / cardsToShow}% - 30px)` }}
+              style={{
+                width: `calc(${100 / cardsToShow}% - ${(30 * (cardsToShow - 1)) / cardsToShow}px)`,
+              }}
             >
-              <div className="flex h-full min-h-[213px] w-full flex-col gap-[20px] rounded-[20px] border border-black/5 bg-[#f9f9f9] p-8 md:p-[30px]">
-                <div className="flex h-[44px] items-center gap-[15px]">
-                  <div className="relative h-[44px] w-[44px] shrink-0 overflow-hidden rounded-[4px] bg-black/10">
+              <div className="flex h-[307px] flex-col">
+                <div className="relative h-[237px] w-full overflow-hidden rounded-[28px] bg-[#F0F6FF] px-[30px] pt-[30px] pb-[35px]">
+                  {/* 66 Watermark */}
+                  <div className="absolute top-0 right-0 z-0 opacity-80 mix-blend-multiply">
+                    <Image
+                      src="/svg/66.svg"
+                      alt="Quote watermark"
+                      width={191}
+                      height={192}
+                      className="object-contain"
+                    />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col gap-[16px]">
+                    {/* Stars */}
+                    <div className="flex gap-[4px]">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <div key={i} className="relative h-[16px] w-[16px]">
+                          <Image
+                            src="/svg/star.svg"
+                            alt="Star"
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Review text */}
+                    <p className="text-[16px] leading-[28px] font-medium text-black">
+                      {testimonial.review}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Avatar and Name */}
+                <div className="relative flex h-[70px] items-center px-[30px]">
+                  <div className="absolute top-[-20px] left-[30px] h-[70px] w-[70px] shrink-0 overflow-hidden rounded-[24px] bg-black/10">
                     <Image
                       src={testimonial.avatar}
                       alt={testimonial.name}
@@ -117,21 +161,15 @@ export function HomeTestimonials() {
                       }}
                     />
                   </div>
-                  <div className="flex flex-col justify-center">
-                    <h4 className="text-[20px] leading-[28px] font-medium text-black">
+                  <div className="ml-[90px] flex flex-col justify-center gap-[2px]">
+                    <h4 className="text-[16px] leading-[24px] font-bold text-black">
                       {testimonial.name}
                     </h4>
-                    <p
-                      className="text-[12px] leading-[15.6px] font-normal tracking-[1px] text-black uppercase"
-                      style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
-                    >
+                    <p className="text-[14px] leading-[20px] font-normal text-black/70">
                       {testimonial.title}
                     </p>
                   </div>
                 </div>
-                <p className="text-[18px] leading-[28.8px] font-normal text-black">
-                  {testimonial.review}
-                </p>
               </div>
             </div>
           ))}

@@ -8,52 +8,44 @@ import { ROUTES } from "@/lib/constants";
 
 const faqs = [
   {
-    question: "How long does a typical automation project take?",
+    question: "Why should we trust our mission-critical data with you?",
     answer:
-      "Projects typically range from 2-6 weeks depending on complexity. We start with a quick discovery phase and provide a clear timeline before any work begins.",
+      "We treat security as a foundational architecture, not an afterthought. For government and enterprise projects, we deploy air-gapped ready systems and sovereign data environments that ensure your proprietary intelligence never touches the public internet. Our code is built to be audited, and our infrastructure is built to be impenetrable.",
   },
   {
-    question: "What access do you need to our systems?",
+    question:
+      "How does your engineering approach differ from standard agencies?",
     answer:
-      "We require temporary administrative or API access to the specific platforms involved in the automation. All access is handled securely.",
+      "We don't just build software — we engineer systems designed for longevity, compliance, and scale. Every project follows a structured methodology rooted in enterprise-grade architecture, rigorous testing, and future-proof design principles.",
   },
   {
-    question: "Who owns the automations you build?",
+    question:
+      "Can you handle projects at government or global enterprise scale?",
     answer:
-      "You have 100% full ownership of all workflows, scripts, and automations upon project completion.",
+      "Absolutely. We've built and deployed solutions for government bodies, defense-adjacent programs, and multinational enterprises. Our team understands procurement cycles, regulatory compliance, and the operational rigor these environments demand.",
   },
   {
-    question: "What happens if something breaks after launch?",
+    question: "How do you ensure long-term system evolution?",
     answer:
-      "We offer a 30-day warranty period for any bug fixes, and we also provide optional ongoing maintenance plans for continued peace of mind.",
-  },
-  {
-    question: "How do you handle data security?",
-    answer:
-      "We follow strict industry best practices. We never store your sensitive data on our servers and strictly use secure API connections and encrypted credentials.",
-  },
-  {
-    question: "Can you work with our existing tools and vendors?",
-    answer:
-      "Yes, we specialize in integrating disparate systems. Whether it's via native APIs, custom webhooks, or RPA, we make your tools talk to each other.",
+      "We design modular, well-documented systems that evolve with your needs. Our architecture supports iterative upgrades, version-controlled deployments, and seamless integration of emerging technologies without costly rewrites.",
   },
   {
     question: "Do you offer ongoing maintenance?",
     answer:
-      "Absolutely. We offer tailored SLA support packages for continuous monitoring, optimization, and updates as your business scales.",
+      "Yes. We offer tailored SLA support packages for continuous monitoring, optimization, and updates as your business scales. Our team stays engaged post-launch to ensure your systems run at peak performance.",
   },
   {
     question: "What if we're not sure what to automate first?",
     answer:
-      "That's exactly what our discovery process is for! We audit your current workflows and identify the highest ROI opportunities to tackle first.",
+      "That's exactly what our discovery process is for. We audit your current workflows, identify inefficiencies, and recommend the highest-ROI automation opportunities to tackle first — so you see value fast.",
   },
 ];
 
 export function HomeFaq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] bg-white py-[80px] lg:py-[120px]">
+    <section className="relative w-full bg-cover bg-center bg-no-repeat pt-[80px]">
       <div className="relative w-full px-4 md:px-[80px]">
         <div className="flex flex-col items-stretch justify-center gap-12 lg:flex-row lg:gap-[20px]">
           {/* Left Column */}
@@ -89,7 +81,7 @@ export function HomeFaq() {
 
               <Link
                 href={ROUTES.contact}
-                className="flex w-max items-center justify-center gap-2 rounded-[60px] bg-black px-[25px] py-[17px] font-medium text-white transition-colors hover:bg-black/80"
+                className="flex h-[54px] w-max items-center justify-center gap-[19px] rounded-[60px] border border-transparent bg-black px-[25px] text-[16px] leading-[17.6px] font-medium text-white transition-all duration-300 hover:border-transparent hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]"
               >
                 Book a discovery call
                 <Image
@@ -103,37 +95,37 @@ export function HomeFaq() {
             </motion.div>
           </div>
 
-          {/* Right Column */}
+          {/* Right Column — FAQ Accordion */}
           <div className="w-full shrink-0 lg:w-[630px]">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex h-full flex-col overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-sm"
+              className="flex flex-col overflow-hidden rounded-[20px] border border-black/10 bg-white"
             >
               {faqs.map((faq, i) => (
-                <div
-                  key={i}
-                  className="flex flex-1 flex-col justify-center border-b border-black/10 last:border-b-0"
-                >
+                <div key={i} className="border-b border-black/10">
+                  {/* Question row */}
                   <button
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                    className="flex w-full items-center justify-between bg-white px-6 py-5 text-left transition-colors hover:bg-black/5 sm:px-8 sm:py-[28px]"
+                    className="group flex w-full items-center justify-between px-[25px] py-[26px] text-left transition-colors"
+                    aria-expanded={openIndex === i}
                   >
-                    <span className="pr-4 text-[16px] font-normal text-black">
+                    <span className="pr-4 text-[20px] leading-[28px] font-semibold text-black transition-colors duration-200">
                       {faq.question}
                     </span>
                     <svg
-                      width="10"
-                      height="6"
-                      viewBox="0 0 10 6"
+                      width="12"
+                      height="7"
+                      viewBox="0 0 12 7"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       className={`shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
+                      aria-hidden="true"
                     >
                       <path
-                        d="M1 1L5 5L9 1"
+                        d="M1 1L6 6L11 1"
                         stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinecap="round"
@@ -141,15 +133,18 @@ export function HomeFaq() {
                       />
                     </svg>
                   </button>
+
+                  {/* Answer panel */}
                   <AnimatePresence>
                     {openIndex === i && (
                       <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pt-0 pb-5 text-[15px] leading-relaxed text-black/60 sm:px-8 sm:pb-[28px]">
+                        <div className="px-[25px] pb-[26px] text-[20px] leading-[28px] font-medium text-black/60">
                           {faq.answer}
                         </div>
                       </motion.div>

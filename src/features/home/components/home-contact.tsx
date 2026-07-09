@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 
 export function HomeContact() {
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] bg-transparent">
+    <section className="relative w-full bg-transparent">
       <div className="relative w-full overflow-visible">
         {/* Background Image */}
         <Image
@@ -44,7 +44,7 @@ export function HomeContact() {
                 </p>
               </div>
 
-              <div className="mt-[112px] flex w-full flex-col gap-[10px] lg:mt-auto">
+              <div className="mt-[112px] flex w-full flex-col gap-[10px] border-t border-white/20 pt-[40px] lg:mt-auto">
                 <p className="text-[16px] leading-[22.4px] font-normal text-white/80">
                   30 minutes to explore your automation opportunities. No pitch,
                   no pressure—just a focused conversation about your workflow
@@ -71,7 +71,10 @@ export function HomeContact() {
 
                 {/* Contact Info Cards */}
                 <div className="flex w-full flex-col gap-4 sm:flex-row">
-                  <div className="flex-1 rounded-[12px] border border-white/5 bg-white/10 p-5 backdrop-blur-sm">
+                  <a
+                    href="tel:+919964919000"
+                    className="flex-1 rounded-[12px] border border-white/5 bg-white/10 p-5 backdrop-blur-sm transition-colors hover:bg-black/60"
+                  >
                     <p
                       className="mb-2 text-[12px] leading-[15.6px] font-normal tracking-[1px] text-white uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
@@ -81,8 +84,11 @@ export function HomeContact() {
                     <p className="text-[16px] font-medium text-white">
                       +91 9964919000
                     </p>
-                  </div>
-                  <div className="flex-1 rounded-[12px] border border-white/5 bg-white/10 p-5 backdrop-blur-sm">
+                  </a>
+                  <a
+                    href="mailto:business@aarjavinfotech.com"
+                    className="flex-1 rounded-[12px] border border-white/5 bg-white/10 p-5 backdrop-blur-sm transition-colors hover:bg-black/60"
+                  >
                     <p
                       className="mb-2 text-[12px] leading-[15.6px] font-normal tracking-[1px] text-white uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
@@ -92,7 +98,7 @@ export function HomeContact() {
                     <p className="text-[16px] font-medium text-white">
                       business@aarjavinfotech.com
                     </p>
-                  </div>
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -106,7 +112,7 @@ export function HomeContact() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full shrink-0 lg:w-[630px]"
           >
-            <div className="flex h-full flex-col rounded-[20px] bg-white p-8 shadow-xl md:p-[40px]">
+            <div className="flex h-full flex-col rounded-[20px] bg-[#FAF9F7] px-8 pt-8 pb-5 md:px-[40px] md:pt-[39px] md:pb-[20px]">
               <div className="mb-[30px] flex flex-col items-center gap-[10px] text-center">
                 <Image
                   src="/svg/call_icon.svg"
@@ -125,71 +131,71 @@ export function HomeContact() {
               </div>
 
               <form
-                className="flex flex-col gap-[10px]"
+                className="flex flex-col gap-[20px]"
                 onSubmit={(e) => e.preventDefault()}
               >
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-[10px]">
                   <label
-                    className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                    className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                     style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                   >
                     NAME
                   </label>
                   <input
                     type="text"
-                    className="h-[48px] w-full rounded-[8px] border border-black/10 bg-transparent px-4 text-black transition-colors outline-none focus:border-black/30"
+                    className="h-[45px] w-full rounded-[8px] border border-black/10 bg-white px-4 text-black transition-colors outline-none focus:border-black/30"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 gap-[10px] sm:grid-cols-2">
-                  <div className="flex flex-col gap-1">
+                <div className="grid grid-cols-1 gap-[20px] sm:grid-cols-2">
+                  <div className="flex flex-col gap-[10px]">
                     <label
-                      className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                      className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                     >
                       PHONE
                     </label>
                     <input
                       type="tel"
-                      className="h-[48px] w-full rounded-[8px] border border-black/10 bg-transparent px-4 text-black transition-colors outline-none focus:border-black/30"
+                      className="h-[45px] w-full rounded-[8px] border border-black/10 bg-white px-4 text-black transition-colors outline-none focus:border-black/30"
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-[10px]">
                     <label
-                      className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                      className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                     >
                       BUSINESS EMAIL
                     </label>
                     <input
                       type="email"
-                      className="h-[48px] w-full rounded-[8px] border border-black/10 bg-transparent px-4 text-black transition-colors outline-none focus:border-black/30"
+                      className="h-[45px] w-full rounded-[8px] border border-black/10 bg-white px-4 text-black transition-colors outline-none focus:border-black/30"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-[10px] sm:grid-cols-2">
-                  <div className="flex flex-col gap-1">
+                <div className="grid grid-cols-1 gap-[20px] sm:grid-cols-2">
+                  <div className="flex flex-col gap-[10px]">
                     <label
-                      className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                      className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                     >
                       COMPANY NAME
                     </label>
                     <input
                       type="text"
-                      className="h-[48px] w-full rounded-[8px] border border-black/10 bg-transparent px-4 text-black transition-colors outline-none focus:border-black/30"
+                      className="h-[45px] w-full rounded-[8px] border border-black/10 bg-white px-4 text-black transition-colors outline-none focus:border-black/30"
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-[10px]">
                     <label
-                      className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                      className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                       style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                     >
                       SUBJECT
                     </label>
                     <div className="relative">
-                      <select className="h-[48px] w-full cursor-pointer appearance-none rounded-[8px] border border-black/10 bg-transparent px-4 text-black transition-colors outline-none focus:border-black/30">
+                      <select className="h-[45px] w-full cursor-pointer appearance-none rounded-[8px] border border-black/10 bg-white px-4 text-black transition-colors outline-none focus:border-black/30">
                         <option value="">Select</option>
                         <option value="automation">Workflow Automation</option>
                         <option value="integration">System Integration</option>
@@ -217,26 +223,26 @@ export function HomeContact() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-[10px] pb-[10px]">
                   <label
-                    className="text-[10px] font-medium tracking-[1px] text-black/60 uppercase"
+                    className="text-[12px] leading-[15.6px] font-normal tracking-normal text-black/60 uppercase"
                     style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
                   >
                     MESSAGE
                   </label>
                   <textarea
                     placeholder="Tell us about what you want to automate..."
-                    className="h-[120px] w-full resize-none rounded-[8px] border border-black/10 bg-transparent p-4 text-black transition-colors outline-none placeholder:text-black/30 focus:border-black/30"
+                    className="h-[120px] w-full resize-none rounded-[8px] border border-black/10 bg-white p-4 text-black transition-colors outline-none placeholder:text-black/30 focus:border-black/30"
                   />
                 </div>
 
-                <div className="mt-2 flex flex-col gap-[20px]">
+                <div className="flex flex-col gap-[20px]">
                   <p className="text-[14px] leading-[19.6px] font-normal text-black/60">
                     We&apos;ll only use your info to respond to your inquiry.
                   </p>
                   <button
                     type="submit"
-                    className="flex w-max items-center justify-center gap-2 rounded-[60px] bg-black px-[25px] py-[17px] font-medium text-white transition-colors hover:bg-black/80"
+                    className="flex h-[54px] w-max items-center justify-center gap-[19px] rounded-[60px] border border-transparent bg-black px-[25px] text-[16px] leading-[17.6px] font-medium text-white transition-all duration-300 hover:border-transparent hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]"
                   >
                     Send message
                     <Image

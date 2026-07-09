@@ -55,30 +55,32 @@ export function HomeProducts({
   bgImageSrc = "/images/mask_group.png",
 }: HomeProductsProps) {
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] px-8 pt-24 pb-24">
-      <div className="absolute inset-0 z-0 m-4 overflow-hidden rounded-[48px]">
+    <section className="relative w-full px-8">
+      <div className="absolute inset-0 z-0 rounded-[48px]">
         <Image
           src={bgImageSrc}
           fill
-          className="object-cover"
+          // className="object-cover"
           alt="Background pattern"
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1280px]">
+      <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col gap-[10px] pt-[199px] pb-[99px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-16 flex flex-col items-start space-y-4"
+          className="mb-[10px] flex flex-col items-start gap-[10px]"
         >
-          <h2 className="text-foreground text-4xl font-semibold tracking-tight md:text-5xl">
+          <h2 className="text-foreground text-[48px] leading-[49px] font-medium tracking-tight">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-muted-foreground text-lg">{subtitle}</p>
+            <p className="text-muted-foreground text-[16px] leading-[23px]">
+              {subtitle}
+            </p>
           )}
         </motion.div>
 
@@ -88,16 +90,16 @@ export function HomeProducts({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-[20px] md:grid-cols-2 lg:grid-cols-3"
         >
           {products.map((product, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
               {...cardHoverProps}
-              className="group flex h-full flex-col rounded-[32px] border border-transparent bg-white/70 p-8 shadow-sm backdrop-blur-[4px] transition-colors duration-300 hover:border-gray-100 hover:bg-white"
+              className="group flex h-full flex-col gap-[26px] rounded-[20px] border border-black/10 bg-white/80 p-[20px] shadow-sm backdrop-blur-[4px] transition-colors duration-300 hover:border-gray-300 hover:bg-white"
             >
-              <div className="mb-4 flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 {product.tags.map((tag) => (
                   <span
                     key={tag}
@@ -107,7 +109,7 @@ export function HomeProducts({
                   </span>
                 ))}
               </div>
-              <h3 className="mb-8 text-[20px] leading-[28px] font-medium">
+              <h3 className="text-[20px] leading-[28px] font-medium">
                 {product.title}
               </h3>
 
