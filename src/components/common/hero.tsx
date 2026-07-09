@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/common/container";
@@ -19,7 +20,7 @@ interface HeroAction {
 interface HeroProps {
   align?: "left" | "center";
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   subtitle?: string;
   description?: string;
   actions?: HeroAction[];
@@ -27,8 +28,12 @@ interface HeroProps {
   media?: ReactNode;
   tone?: "default" | "muted" | "gradient" | "transparent";
   bgImage?: string;
+  bgVideo?: string;
   children?: ReactNode;
   className?: string;
+  eyebrowClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
 const toneClasses = {
@@ -51,28 +56,43 @@ export function Hero({
   media,
   tone = "default",
   bgImage,
+  bgVideo,
   children,
   className,
+  eyebrowClassName,
+  titleClassName,
+  descriptionClassName,
 }: HeroProps) {
   return (
     <section
       className={cn(
         "section-padding relative w-full overflow-hidden",
-        bgImage && "flex flex-col justify-center pt-32 lg:h-[725px] lg:pt-24",
-        !bgImage && "bg-gradient-to-b",
-        !bgImage && (toneClasses as Record<string, string>)[tone],
+        (bgImage || bgVideo) &&
+          "flex flex-col justify-center rounded-b-[40px] pt-32 lg:h-[724px] lg:pt-24",
+        !(bgImage || bgVideo) && "bg-gradient-to-b",
+        !(bgImage || bgVideo) && (toneClasses as Record<string, string>)[tone],
         bgImage && "bg-cover bg-center bg-no-repeat",
         className,
       )}
       style={bgImage ? { backgroundImage: `url(${bgImage})` } : undefined}
       aria-labelledby="hero-heading"
     >
+      {bgVideo && (
+        <video
+          src={bgVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 z-[-1] h-full w-full object-cover object-right lg:object-center"
+        />
+      )}
       <Container>
         <div
           className={cn(
             layout === "split"
               ? "grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
-              : cn("max-w-4xl", align === "center" && "mx-auto"),
+              : cn("max-w-[953px]", align === "center" && "mx-auto"),
           )}
         >
           <motion.div
@@ -104,7 +124,11 @@ export function Hero({
                     transition: { duration: 1.2, ease: "easeOut" },
                   },
                 }}
-                className="text-muted-foreground font-ui mb-4 text-sm font-medium tracking-[0.08em] uppercase"
+                className={cn(
+                  "mb-4 text-[18px] font-medium text-[#08388D]",
+                  eyebrowClassName,
+                )}
+                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
               >
                 {eyebrow}
               </motion.p>
@@ -124,7 +148,11 @@ export function Hero({
                 align={align}
                 id="hero-heading"
                 subtitle={subtitle}
-                className="text-[74px] leading-[81.4px] font-medium tracking-[-3px]"
+                className={cn(
+                  "text-[74px] leading-[81.4px] font-medium tracking-[-3px] text-[#000000]",
+                  titleClassName,
+                )}
+                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
               >
                 {title}
               </Heading>
@@ -139,7 +167,11 @@ export function Hero({
                     transition: { duration: 1.2, ease: "easeOut" },
                   },
                 }}
-                className="text-muted-foreground text-lg leading-relaxed"
+                className={cn(
+                  "text-[20px] leading-[1.4] font-medium text-[#000000]",
+                  descriptionClassName,
+                )}
+                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
               >
                 {description}
               </motion.p>
@@ -167,15 +199,23 @@ export function Hero({
                     asChild
                     className={cn(
                       action.variant !== "outline" &&
-                        "bg-black text-white hover:bg-black/90",
+                        "border border-transparent bg-black text-white hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]",
                       action.variant === "outline" &&
-                        "border-gray-300 bg-white text-black hover:bg-gray-50",
-                      "rounded-full",
+                        "border border-transparent bg-white text-black [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]",
+                      "flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] px-[25px] text-[16px] leading-[17.6px] font-medium transition-all duration-300",
                     )}
                   >
-                    <Link href={action.href}>
+                    <Link
+                      href={action.href}
+                      className="flex items-center gap-[19px]"
+                    >
                       {action.label}
-                      {action.hasArrow && <span className="ml-1">➔</span>}
+                      {action.hasArrow && (
+                        <ArrowRight
+                          className="h-[19px] w-[19px]"
+                          strokeWidth={2}
+                        />
+                      )}
                     </Link>
                   </Button>
                 ))}

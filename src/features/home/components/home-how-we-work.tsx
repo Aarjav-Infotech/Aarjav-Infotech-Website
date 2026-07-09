@@ -27,8 +27,8 @@ export function HomeHowWeWork({
   centerImageSrc = "/images/leyers.png",
 }: HomeHowWeWorkProps) {
   return (
-    <section className="overflow-hidden bg-white py-24">
-      <div className="mx-auto w-full max-w-[1440px] rounded-b-[48px] bg-white px-8">
+    <section className="overflow-hidden bg-white py-10">
+      <div className="w-full rounded-b-[48px] bg-white px-8">
         <div className="mx-auto max-w-[1280px]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

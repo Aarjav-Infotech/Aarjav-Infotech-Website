@@ -52,12 +52,12 @@ const industries: IndustryCard[] = [
 ];
 
 export function HomeIndustries() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
-  const [isDesktop, setIsDesktop] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
   const viewportRef = useRef<HTMLDivElement>(null);
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Responsive breakpoints
   useEffect(() => {
@@ -65,13 +65,10 @@ export function HomeIndustries() {
       const width = window.innerWidth;
       if (width >= 1024) {
         setVisibleCount(4);
-        setIsDesktop(true);
       } else if (width >= 768) {
         setVisibleCount(2);
-        setIsDesktop(false);
       } else {
         setVisibleCount(1);
-        setIsDesktop(false);
       }
     };
 
@@ -109,91 +106,98 @@ export function HomeIndustries() {
   const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
   // Math for exact translation to prevent track shifting on hover
-  const gap = 24; // 24px gap based on gap-6
-  const baseWidthPx =
-    containerWidth > 0
-      ? (containerWidth - (visibleCount - 1) * gap) / visibleCount
-      : 0;
-  const stepPx = baseWidthPx + gap;
-  const trackTranslateX = containerWidth > 0 ? -(currentIndex * stepPx) : 0;
+  const gap = 30; // 30px gap
+
+  const getCardWidth = (index: number) => {
+    if (visibleCount === 1) return containerWidth;
+
+    const W = containerWidth - (visibleCount - 1) * gap;
+    if (hoveredIndex === null) return W / visibleCount;
+
+    if (visibleCount === 4) {
+      if (index === hoveredIndex) return W * 0.45;
+      return W * (0.55 / 3);
+    }
+
+    if (visibleCount === 2) {
+      if (index === hoveredIndex) return W * 0.65;
+      return W * 0.35;
+    }
+
+    return W / visibleCount;
+  };
+
+  const getTrackTranslateX = () => {
+    if (containerWidth === 0) return 0;
+    let translate = 0;
+    for (let i = 0; i < currentIndex; i++) {
+      translate += getCardWidth(i) + gap;
+    }
+    return -translate;
+  };
 
   return (
-    <section className="relative mx-auto w-full max-w-[1440px] px-4 pt-16 pb-20 md:px-8">
+    <section className="relative flex w-full flex-col justify-center px-4 py-20 md:h-[971px] md:px-8">
       {/* Background Graphic Box */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src="/images/section_6.png"
           fill
-          className="object-cover"
+          // className="object-cover"
           alt="Built for your industry background grid"
           priority
           sizes="100vw"
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-[1380px] flex-col justify-between pt-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-col px-4 md:px-0">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-10 px-4 md:px-0"
+          className="mb-[30px] flex flex-col gap-[10px] px-4 md:px-[50px]"
         >
-          <h2 className="text-3xl font-semibold tracking-tight text-white md:text-5xl">
+          <h2 className="text-[48px] leading-[49px] font-normal tracking-tight text-white">
             Built for your industry
           </h2>
-          <p className="mt-3 text-sm font-normal text-white/60 md:text-base">
+          <p className="text-[16px] leading-[22.4px] font-normal text-white">
             We tailor to your data + compliance needs
           </p>
         </motion.div>
 
         {/* Carousel Viewport */}
-        <div className="relative h-[513px] w-full overflow-hidden px-4 md:px-0">
-          <div ref={viewportRef} className="h-full w-full">
+        <div className="relative h-[513px] w-full overflow-hidden">
+          <div
+            ref={viewportRef}
+            className="h-full w-full"
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
             <div
-              className="flex h-full gap-6 transition-transform duration-500 ease-in-out"
+              className="flex h-full gap-[30px] transition-transform duration-500 ease-in-out"
               style={{
                 transform:
                   containerWidth > 0
-                    ? `translateX(${trackTranslateX}px)`
+                    ? `translateX(${getTrackTranslateX()}px)`
                     : `translateX(0px)`,
               }}
             >
               {industries.map((card, index) => {
-                const isHovered = hoveredIndex === index;
-
                 // Calculate precise widths based on hover math
                 let widthStyle = {};
                 if (containerWidth > 0) {
-                  if (!isDesktop || hoveredIndex === null) {
-                    widthStyle = { width: `${baseWidthPx}px` };
-                  } else if (hoveredIndex === index) {
-                    // Hovered card takes up 60% more width
-                    widthStyle = { width: `${baseWidthPx * 1.6}px` };
-                  } else {
-                    const isVisible =
-                      index >= currentIndex &&
-                      index < currentIndex + visibleCount;
-                    if (isVisible) {
-                      // Other visible cards shrink by exact proportion (0.6 / 3 = 0.2 -> 0.8)
-                      widthStyle = { width: `${baseWidthPx * 0.8}px` };
-                    } else {
-                      // Invisible cards maintain base width
-                      widthStyle = { width: `${baseWidthPx}px` };
-                    }
-                  }
+                  widthStyle = { width: `${getCardWidth(index)}px` };
                 }
 
                 return (
                   <div
                     key={card.title}
-                    onMouseEnter={() => isDesktop && setHoveredIndex(index)}
-                    onMouseLeave={() => isDesktop && setHoveredIndex(null)}
+                    onMouseEnter={() => setHoveredIndex(index)}
                     className={cn(
-                      "group relative h-full shrink-0 cursor-pointer overflow-hidden rounded-[24px] border border-white/10 shadow-lg transition-all duration-400 ease-in-out",
+                      "group relative h-full shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 shadow-lg transition-all duration-500 ease-in-out",
                       containerWidth === 0 &&
-                        "w-full md:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)]",
+                        "w-full md:w-[calc((100%-30px)/2)] lg:w-[calc((100%-90px)/4)]",
                     )}
                     style={widthStyle}
                   >
@@ -206,51 +210,51 @@ export function HomeIndustries() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
 
-                    {/* Dark gradient overlay for typography readability */}
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
-
                     {/* Card Content Panel */}
                     <div
                       className={cn(
-                        "absolute bottom-0 left-0 z-20 flex flex-col justify-end overflow-hidden bg-white text-black transition-all duration-400 ease-in-out",
-                        isDesktop
-                          ? isHovered
-                            ? "h-[240px] w-full rounded-t-[24px] p-6"
-                            : "h-[56px] w-[80%] max-w-[220px] rounded-tr-[24px] px-5 py-4"
-                          : "h-[210px] w-full rounded-t-[24px] p-5",
+                        "absolute bottom-0 left-0 z-20 flex flex-col overflow-hidden rounded-tr-[20px] bg-white transition-all duration-500 ease-in-out",
+                        hoveredIndex === index
+                          ? "w-full p-[20px]"
+                          : "w-max p-[20px]",
                       )}
                     >
-                      {/* Category Title */}
-                      <h3
-                        className={cn(
-                          "font-bold whitespace-nowrap text-black transition-all duration-300",
-                          isDesktop
-                            ? isHovered
-                              ? "mb-2 text-left text-lg whitespace-normal md:text-xl"
-                              : "w-full truncate text-left text-sm leading-none md:text-base"
-                            : "mb-2 text-left text-base whitespace-normal",
-                        )}
-                      >
-                        {card.title}
-                      </h3>
-
-                      {/* Description & Read More details */}
                       <div
                         className={cn(
-                          "flex flex-col justify-start transition-all duration-400 ease-in-out",
-                          isDesktop
-                            ? isHovered
-                              ? "max-h-[200px] opacity-100"
-                              : "pointer-events-none max-h-0 opacity-0"
-                            : "max-h-[200px] opacity-100",
+                          "flex items-center transition-all duration-500",
+                          hoveredIndex === index ? "mb-[14px]" : "mb-0",
                         )}
                       >
-                        <p className="mt-1 line-clamp-4 text-xs leading-relaxed text-neutral-600 md:text-sm">
-                          {card.description}
-                        </p>
-                        <span className="mt-3 inline-block text-xs font-semibold text-blue-600 hover:underline md:text-sm">
-                          Read More
-                        </span>
+                        <h3
+                          className={cn(
+                            "leading-none whitespace-nowrap text-black transition-all duration-500",
+                            hoveredIndex === index
+                              ? "text-[24px] font-bold"
+                              : "text-[16px] font-medium",
+                          )}
+                        >
+                          {card.title}
+                        </h3>
+                      </div>
+                      <div
+                        className={cn(
+                          "grid w-full transition-all duration-500 ease-in-out",
+                          hoveredIndex === index
+                            ? "relative grid-rows-[1fr] opacity-100"
+                            : "absolute grid-rows-[0fr] opacity-0",
+                        )}
+                      >
+                        <div className="flex min-w-[200px] flex-col gap-[14px] overflow-hidden">
+                          <p className="line-clamp-4 text-[14px] leading-relaxed text-[#475467]">
+                            {card.description}
+                          </p>
+                          <a
+                            href="#read-more"
+                            className="text-[14px] font-semibold text-[#08388D] hover:underline"
+                          >
+                            Read More
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -261,32 +265,32 @@ export function HomeIndustries() {
         </div>
 
         {/* Navigation Arrow Controls */}
-        <div className="mt-8 flex items-center justify-end gap-4 px-4 md:px-0">
+        <div className="mt-[45px] flex items-center justify-end gap-4 px-4 md:px-[50px]">
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
             className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-full border border-white/20 backdrop-blur-md transition-all duration-300",
+              "flex h-[44px] w-[44px] items-center justify-center rounded-[50px] transition-all duration-300",
               currentIndex === 0
-                ? "cursor-not-allowed bg-black/30 text-white opacity-30"
-                : "cursor-pointer bg-black/50 text-white opacity-100 hover:scale-105 hover:bg-white hover:text-black",
+                ? "cursor-not-allowed bg-white/5 text-white/30"
+                : "cursor-pointer bg-white/20 text-white hover:scale-105 hover:bg-white hover:text-black",
             )}
             aria-label="Previous slide"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-[14px] w-[14px]" />
           </button>
           <button
             onClick={handleNext}
             disabled={currentIndex >= maxIndex}
             className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-full border border-white/20 backdrop-blur-md transition-all duration-300",
+              "flex h-[44px] w-[44px] items-center justify-center rounded-[50px] transition-all duration-300",
               currentIndex >= maxIndex
-                ? "cursor-not-allowed bg-black/30 text-white opacity-30"
-                : "cursor-pointer bg-black/50 text-white opacity-100 hover:scale-105 hover:bg-white hover:text-black",
+                ? "cursor-not-allowed bg-white/5 text-white/30"
+                : "cursor-pointer bg-white/20 text-white hover:scale-105 hover:bg-white hover:text-black",
             )}
             aria-label="Next slide"
           >
-            <ArrowRight className="h-5 w-5" />
+            <ArrowRight className="h-[14px] w-[14px]" />
           </button>
         </div>
       </div>
