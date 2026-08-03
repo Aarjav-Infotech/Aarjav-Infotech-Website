@@ -13,15 +13,16 @@ export interface BentoItem {
 
 export interface HomeWhatWeDoProps {
   eyebrow?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
-  items: {
-    workflow: BentoItem;
-    triage: BentoItem;
-    tools: BentoItem;
-    orchestration: BentoItem;
-    voice: BentoItem;
-    document: BentoItem;
+  bgImage?: string;
+  items?: {
+    workflow?: BentoItem;
+    triage?: BentoItem;
+    tools?: BentoItem;
+    orchestration?: BentoItem;
+    voice?: BentoItem;
+    document?: BentoItem;
   };
 }
 
@@ -29,235 +30,299 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 50, damping: 15 },
+    transition: { type: "spring", stiffness: 70, damping: 16 },
   },
 };
 
-const cardHoverProps = {
-  whileHover: { y: -8, boxShadow: "0px 15px 30px rgba(0,0,0,0.08)" },
-  transition: { duration: 0.3, ease: "easeOut" as const },
-};
-
 export function HomeWhatWeDo({
-  eyebrow,
-  title,
-  subtitle,
-  items,
+  eyebrow = "Services",
+  title = "End-to-End AI Services",
+  subtitle = "From workflow automation to system integration, we deliver outcomes that move your business forward.",
+  bgImage = "/images/what-we-do-bg.svg",
+  items = {} as any,
 }: HomeWhatWeDoProps) {
+  const workflow = items?.workflow || {
+    imageSrc: "/Animation/1.gif",
+    title: "AI Workflow Automation",
+    description:
+      "Transform repetitive business processes into intelligent AI-powered workflows that eliminate bottlenecks and drive exponential efficiency.",
+    features: [
+      "Autonomous AI Agents",
+      "Advanced Workflow Orchestration",
+      "Real-time Process Optimization",
+    ],
+  };
+
+  const triage = items?.triage || {
+    imageSrc: "/Animation/2.gif",
+    title: "Support Triage & AI Ticketing",
+    description:
+      "Connect emails, WhatsApp, and websites to a unified AI system that triages, responds, and resolves customer inquiries instantly.",
+  };
+
+  const tools = items?.tools || {
+    imageSrc: "/Animation/3.gif",
+    title: "AI Tools & Agents",
+    description: "Build custom AI assistants tailored to your data.",
+  };
+
+  const orchestration = items?.orchestration || {
+    imageSrc: "/Animation/4.gif",
+    title: "Data Orchestration",
+    description: "Synchronize ERP, CRM, and APIs effortlessly.",
+  };
+
+  const voice = items?.voice || {
+    imageSrc: "/Animation/5.gif",
+    title: "AI Voice Agent Deployment",
+    description:
+      "Deploy multilingual AI voice agents that handle high-volume calls with human-like natural language processing and zero latency.",
+  };
+
+  const documentItem = items?.document || {
+    imageSrc: "/Animation/6.gif",
+    title: "AI Document Processing",
+    description:
+      "Automatically extract, classify, and validate data from invoices, contracts, and IDs with 99% accuracy using proprietary OCR models.",
+  };
+
   return (
-    <section className="w-full overflow-hidden px-8">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="mx-auto mb-16 flex max-w-[1280px] flex-col items-start space-y-4"
-      >
-        {eyebrow && (
-          <p className="text-foreground text-sm font-semibold tracking-wider uppercase">
+    <section className="relative w-full py-16 px-0 sm:px-6 lg:px-0">
+      {/* Outer Elevated Canvas Frame */}
+      <div className="relative mx-auto max-w-full overflow-hidden rounded-[40px] sm:rounded-[40px] sm:p-10 lg:p-12 border-b-[12px] border-b-transparent">
+        {/* SVG Background Layer */}
+        <div className="absolute inset-0 -z-10 pointer-events-none select-none">
+          <Image
+            src={bgImage}
+            alt="Background pattern"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </div>
+        
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative z-10 mb-10 flex flex-col items-center space-y-3.5 text-center sm:mb-12"
+        >
+          {/* Pill Badge */}
+          <div className="inline-flex items-center gap-1.5 rounded border bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-xl/20 ">
+            <span className="h-1.5 w-1.5 rounded F3] bg-[#2b2bad]" />
             {eyebrow}
-          </p>
-        )}
-        <h2 className="text-foreground text-4xl font-semibold tracking-tight md:text-5xl">
-          {title}
-        </h2>
-        {subtitle && (
-          <p className="text-muted-foreground text-lg">{subtitle}</p>
-        )}
-      </motion.div>
+          </div>
 
-      {/* Bento Grid */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mx-auto flex max-w-[1280px] flex-col gap-6"
-      >
-        {/* Top Section: 2 columns */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* Left Column: AI Workflow Automation */}
-          <motion.div
-            variants={itemVariants}
-            {...cardHoverProps}
-            className="group flex h-full flex-col overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm"
-          >
-            <div className="relative mb-8 min-h-[280px] w-full shrink-0 overflow-hidden rounded-2xl bg-[#f4f7fb]">
-              <Image
-                src={items.workflow.imageSrc}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                alt={items.workflow.title}
-                unoptimized
-              />
-            </div>
-            <h3 className="mb-3 text-2xl font-semibold">
-              {items.workflow.title}
-            </h3>
-            <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
-              {items.workflow.description}
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+
+          {subtitle && (
+            <p className="max-w-full text-lg leading-relaxed text-black sm:text-lg md:text-lg">
+              {subtitle}
             </p>
-            {items.workflow.features && items.workflow.features.length > 0 && (
-              <ul className="mt-auto space-y-3">
-                {items.workflow.features.map((feature, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-sm font-medium"
-                  >
-                    <CheckCircle2 className="text-primary h-5 w-5" /> {feature}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </motion.div>
+          )}
+        </motion.div>
 
-          {/* Right Column: Stack of Triage + (Tools & Data) */}
-          <div className="flex flex-col gap-6">
-            {/* Support Triage (Top) */}
+        {/* Bento Grid Container */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="relative z-10 flex flex-col gap-5"
+        >
+          {/* TOP SECTION: Left Big Feature + Right Stack */}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+            {/* 1. AI Workflow Automation */}
             <motion.div
               variants={itemVariants}
-              {...cardHoverProps}
-              className="group flex flex-col gap-[32px] overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm sm:flex-row lg:h-[237px]"
+              className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:p-8 lg:col-span-6"
             >
-              <div className="flex flex-1 flex-col justify-center">
-                <h3 className="mb-3 text-xl font-semibold">
-                  {items.triage.title}
+              <div>
+                <div className="relative mb-6 h-[220px] w-full overflow-hidden rounded-[10px]  sm:h-[260px]">
+                  <Image
+                    src={workflow.imageSrc}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                    alt={workflow.title}
+                    unoptimized
+                  />
+                </div>
+
+                <h3 className="mb-2.5 text-2xl font-extrabold text-black-900 sm:text-3xl">
+                  {workflow.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {items.triage.description}
+
+                <p className="mb-6 text-basic leading-relaxed text-black-500 sm:text-basic">
+                  {workflow.description}
                 </p>
               </div>
-              <div className="relative min-h-[140px] w-full shrink-0 overflow-hidden rounded-xl bg-[#f4f7fb] sm:h-full sm:w-[240px]">
+
+              {workflow.features && workflow.features.length > 0 && (
+                <ul className="space-y-2.5 pt-1 border-t border-black-100">
+                  {workflow.features.map((feature, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-2 text-sm font-medium text-black-800 sm:text-basic"
+                    >
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-blue-600" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+
+            {/* Right Stack (Triage + Subgrid) */}
+            <div className="flex flex-col gap-5 lg:col-span-6">
+              {/* 2. Support Triage & AI Ticketing */}
+              <motion.div
+                variants={itemVariants}
+                className="group flex flex-col items-center justify-between gap-5 rounded-[28px] border border-white/90 bg-white/90 p-7.5 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:flex-row sm:p-7"
+              >
+                <div className="flex-1 w-40">
+                  <h3 className="mb-2 text-xl font-bold text-black-900 sm:text-xl  w-60">
+                    {triage.title}
+                  </h3>
+                  <p className="text-basic leading-relaxed text-black-500 w-75">
+                    {triage.description}
+                  </p>
+                </div>
+                <div className="relative h-[150px] w-full shrink-0 overflow-hidden rounded-[10px]  md:w-[260px] sm:w-[170px]">
+                  <Image
+                    src={triage.imageSrc}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 260px"
+                    className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                    alt={triage.title}
+                    unoptimized
+                  />
+                </div>
+              </motion.div>
+
+              {/* 3. Subgrid: AI Tools + Data Orchestration */}
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                {/* AI Tools & Agents */}
+                <motion.div
+                  variants={itemVariants}
+                  className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-7.5
+                   shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md"
+                >
+                  <div className="relative mb-4 h-[120px] w-full overflow-hidden rounded-[10px] ">
+                    <Image
+                      src={tools.imageSrc}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 220px"
+                      className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                      alt={tools.title}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="px-2 pb-7">
+                    <h3 className="mb-1 text-xl font-bold text-black-900 sm:text-lg">
+                      {tools.title}
+                    </h3>
+                    <p className="text-basic leading-relaxed text-black-500">
+                      {tools.description}
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Data Orchestration */}
+                <motion.div
+                  variants={itemVariants}
+                  className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-7.5 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md"
+                >
+                  <div className="relative mb-4 h-[120px] w-full overflow-hidden rounded-[10px]">
+                    <Image
+                      src={orchestration.imageSrc}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 220px"
+                      className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                      alt={orchestration.title}
+                      unoptimized
+                    />
+                  </div>
+                  <div className="px-2 pb-7">
+                    <h3 className="mb-1 text-xl font-bold text-black-900 sm:text-lg mt-1">
+                      {orchestration.title}
+                    </h3>
+                    <p className="text-basic leading-relaxed text-black-500 ">
+                      {orchestration.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* BOTTOM SECTION: 2 Equal Horizontal Split Cards */}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {/* 4. AI Voice Agent Deployment */}
+            <motion.div
+              variants={itemVariants}
+              className="group flex flex-col items-center justify-between gap-11 rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:flex-row sm:p-7"
+            >
+              <div className="flex-1 px-2 pb-8">
+                <h3 className="mb-2 text-xl font-bold text-black-900 sm:text-xl">
+                  {voice.title}
+                </h3>
+                <p className="text-basic leading-relaxed text-black-500">
+                  {voice.description}
+                </p>
+              </div>
+              <div className="relative h-[135px] w-full shrink-0 overflow-hidden rounded-[10px]  sm:w-[190px]">
                 <Image
-                  src={items.triage.imageSrc}
+                  src={voice.imageSrc}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  alt={items.triage.title}
+                  sizes="(max-width: 640px) 100vw, 190px"
+                  className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                  alt={voice.title}
                   unoptimized
                 />
               </div>
             </motion.div>
 
-            {/* 2-col subgrid (Bottom) */}
-            <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:h-[336px]">
-              {/* AI Tools & Agents */}
-              <motion.div
-                variants={itemVariants}
-                {...cardHoverProps}
-                className="group flex h-full flex-col overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm"
-              >
-                <div className="relative mb-6 min-h-[140px] w-full shrink-0 overflow-hidden rounded-xl bg-[#f4f7fb]">
-                  <Image
-                    src={items.tools.imageSrc}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    alt={items.tools.title}
-                    unoptimized
-                  />
-                </div>
-                <div className="flex flex-1 flex-col justify-end">
-                  <h3 className="mb-2 text-xl font-semibold">
-                    {items.tools.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {items.tools.description}
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Data Orchestration */}
-              <motion.div
-                variants={itemVariants}
-                {...cardHoverProps}
-                className="group flex h-full flex-col overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm"
-              >
-                <div className="relative mb-6 min-h-[140px] w-full shrink-0 overflow-hidden rounded-xl bg-[#f4f7fb]">
-                  <Image
-                    src={items.orchestration.imageSrc}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    alt={items.orchestration.title}
-                    unoptimized
-                  />
-                </div>
-                <div className="flex flex-1 flex-col justify-end">
-                  <h3 className="mb-2 text-xl font-semibold">
-                    {items.orchestration.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {items.orchestration.description}
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+            {/* 5. AI Document Processing */}
+            <motion.div
+              variants={itemVariants}
+              className="group flex flex-col items-center justify-between gap-9 rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:flex-row sm:p-7"
+            >
+              <div className="relative order-2 h-[135px] w-full shrink-0 overflow-hidden rounded-[10px]  sm:order-1 sm:w-[190px]">
+                <Image
+                  src={documentItem.imageSrc}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 190px"
+                  className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
+                  alt={documentItem.title}
+                  unoptimized
+                />
+              </div>
+              <div className="order-1 flex-1 sm:order-2">
+                <h3 className="mb-2 text-xl font-bold text-black-900 sm:text-xl">
+                  {documentItem.title}
+                </h3>
+                <p className="text-basic leading-relaxed text-black-500">
+                  {documentItem.description}
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </div>
-
-        {/* Bottom Section: 2 columns */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* AI Voice Agent */}
-          <motion.div
-            variants={itemVariants}
-            {...cardHoverProps}
-            className="group flex flex-col items-center gap-[32px] overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm sm:flex-row lg:h-[237px]"
-          >
-            <div className="flex flex-1 flex-col justify-center">
-              <h3 className="mb-3 text-xl font-semibold">
-                {items.voice.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {items.voice.description}
-              </p>
-            </div>
-            <div className="relative min-h-[140px] w-full shrink-0 overflow-hidden rounded-xl bg-[#f4f7fb] sm:h-full sm:w-[240px]">
-              <Image
-                src={items.voice.imageSrc}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                alt={items.voice.title}
-                unoptimized
-              />
-            </div>
-          </motion.div>
-
-          {/* AI Document Processing */}
-          <motion.div
-            variants={itemVariants}
-            {...cardHoverProps}
-            className="group flex flex-col items-center gap-[32px] overflow-hidden rounded-[32px] border bg-white p-[30px] shadow-sm sm:flex-row lg:h-[237px]"
-          >
-            <div className="relative min-h-[140px] w-full shrink-0 overflow-hidden rounded-xl bg-[#f4f7fb] sm:h-full sm:w-[240px]">
-              <Image
-                src={items.document.imageSrc}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                alt={items.document.title}
-                unoptimized
-              />
-            </div>
-            <div className="flex flex-1 flex-col justify-center">
-              <h3 className="mb-3 text-xl font-semibold">
-                {items.document.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {items.document.description}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

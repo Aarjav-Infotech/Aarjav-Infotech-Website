@@ -85,8 +85,9 @@
 
 /* Design Tokens — Light Theme */
 :root {
-  --radius: 0.625rem;
-  --font-sans-stack: "Instrument Sans", "IBM Plex Sans", system-ui, sans-serif;
+--radius: 0.625rem;
+  /* Updated --font-sans-stack to include Urbanist */
+  --font-sans-stack: "Urbanist", "IBM Plex Sans", system-ui, sans-serif;
   --font-ui-stack: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono-stack: "IBM Plex Mono", "SFMono-Regular", monospace;
 
@@ -113,6 +114,7 @@
   --success: oklch(0.55 0.15 145);
   --warning: oklch(0.75 0.15 85);
   --info: oklch(0.55 0.15 240);
+  margin:0 16px;
 }
 
 /* Design Tokens — Dark Theme */

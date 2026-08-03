@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp } from "lucide-react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 import { APP_NAME, ROUTES } from "@/lib/constants";
 
@@ -251,7 +251,7 @@ export function Footer() {
           </div>
 
           {/* Huge AARJAV INFOTECH — below content, clipped by overflow-hidden */}
-          <div className="pointer-events-none absolute right-0 bottom-0 left-0 overflow-hidden px-4 md:px-8 lg:px-[80px]">
+          {/* <div className="pointer-events-none absolute right-0 bottom-0 left-0 overflow-hidden px-4 md:px-8 lg:px-[80px]">
             <motion.h1
               initial={{ y: "100%" }}
               whileInView={{ y: "25%" }}
@@ -262,7 +262,7 @@ export function Footer() {
             >
               AARJAV INFOTECH
             </motion.h1>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

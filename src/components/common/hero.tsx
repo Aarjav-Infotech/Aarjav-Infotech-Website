@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+// import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/common/container";
@@ -26,6 +26,7 @@ interface HeroProps {
   actions?: HeroAction[];
   layout?: "centered" | "split";
   media?: ReactNode;
+  decoration?: ReactNode;
   tone?: "default" | "muted" | "gradient" | "transparent";
   bgImage?: string;
   bgVideo?: string;
@@ -54,6 +55,7 @@ export function Hero({
   actions,
   layout = "centered",
   media,
+  decoration,
   tone = "default",
   bgImage,
   bgVideo,
@@ -90,8 +92,9 @@ export function Hero({
       <Container>
         <div
           className={cn(
+            "relative z-10",
             layout === "split"
-              ? "grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
+              ? "grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] site-container"
               : cn("max-w-[953px]", align === "center" && "mx-auto"),
           )}
         >
@@ -128,7 +131,7 @@ export function Hero({
                   "mb-4 text-[18px] font-medium text-[#08388D]",
                   eyebrowClassName,
                 )}
-                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+                style={{ fontFamily: "'Urbanist', sans-serif" }}
               >
                 {eyebrow}
               </motion.p>
@@ -152,7 +155,7 @@ export function Hero({
                   "text-[74px] leading-[81.4px] font-medium tracking-[-3px] text-[#000000]",
                   titleClassName,
                 )}
-                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+                style={{ fontFamily: "'Urbanist', sans-serif" }}
               >
                 {title}
               </Heading>
@@ -171,7 +174,7 @@ export function Hero({
                   "text-[20px] leading-[1.4] font-medium text-[#000000]",
                   descriptionClassName,
                 )}
-                style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+                style={{ fontFamily: "'Urbanist', sans-serif" }}
               >
                 {description}
               </motion.p>
@@ -198,9 +201,9 @@ export function Hero({
                     size="lg"
                     asChild
                     className={cn(
-                      action.variant !== "outline" &&
-                        "border border-transparent bg-black text-white hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]",
-                      action.variant === "outline" &&
+                      (action.variant ?? "default") !== "outline" &&
+                        "px-7 py-6 rounded-full text-white shadow-md border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)]  gap-3 hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] bg-[length:200%_200%] hover:px-7.5 transition-all ease-in-out duration-500",
+                      (action.variant ?? "default") === "outline" &&
                         "border border-transparent bg-white text-black [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]",
                       "flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] px-[25px] text-[16px] leading-[17.6px] font-medium transition-all duration-300",
                     )}
@@ -210,12 +213,6 @@ export function Hero({
                       className="flex items-center gap-[19px]"
                     >
                       {action.label}
-                      {action.hasArrow && (
-                        <ArrowRight
-                          className="h-[19px] w-[19px]"
-                          strokeWidth={2}
-                        />
-                      )}
                     </Link>
                   </Button>
                 ))}
@@ -241,6 +238,12 @@ export function Hero({
           )}
         </div>
       </Container>
+
+      {decoration && (
+        <div className="pointer-events-none absolute inset-0 z-0">
+          {decoration}
+        </div>
+      )}
     </section>
   );
 }

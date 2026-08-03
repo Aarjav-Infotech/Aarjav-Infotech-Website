@@ -51,7 +51,7 @@ export function Navbar() {
           className={cn(
             "mx-auto flex h-[72px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-[30px] py-[10px] shadow-sm ring-1 ring-black/5 transition-all duration-300",
             isScrolled
-              ? "bg-white/60 backdrop-blur-md group-hover:bg-white"
+              ? "bg-white/60 backdrop-blur-md "
               : "bg-white",
           )}
           aria-label="Main navigation"
@@ -104,8 +104,7 @@ export function Navbar() {
           <div className="hidden md:block">
             <Button
               asChild
-              className="rounded-full border border-transparent bg-black text-white transition-all duration-300 hover:border-transparent hover:bg-[linear-gradient(90deg,#091E46_1%,#075FF3_100%)]"
-            >
+              className="px-7 py-6 rounded-full text-white shadow-md border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] gap-3 hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] bg-[length:200%_200%] hover:px-7.5 transition-all ease-in-out duration-500">
               <Link href={ROUTES.contact}>
                 Book a discovery call <ArrowRight className="ml-1 size-4" />
               </Link>
