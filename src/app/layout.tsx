@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
-import { Instrument_Sans } from "next/font/google";
+// 1. Import Urbanist instead of Instrument_Sans
+import { Urbanist } from "next/font/google";
 
 import { SiteLayout } from "@/components/layout/site-layout";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
@@ -8,9 +9,10 @@ import { createMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/theme";
 import "@/styles/globals.css";
 
-const instrumentSans = Instrument_Sans({
+// 2. Configure Urbanist
+const urbanist = Urbanist({
   subsets: ["latin"],
-  variable: "--font-sans-stack",
+  variable: "--font-sans-stack", // Keeps the existing CSS variable name unbroken
 });
 
 export const metadata: Metadata = {
@@ -38,7 +40,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={instrumentSans.variable}>
+    // 3. Apply the updated variable class
+    <html lang="en" className={urbanist.variable}>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
           href="#main-content"
