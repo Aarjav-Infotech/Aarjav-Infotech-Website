@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 export function InlineCapsule() {
   const capsuleRef = useRef<HTMLSpanElement>(null);
@@ -21,17 +22,16 @@ export function InlineCapsule() {
     >
       {/* 3D Slot Pill Base Container */}
       <span className="relative inline-flex h-[56px] w-[140px] items-center justify-center rounded-full bg-[linear-gradient(180deg,#00144D_0%,#003BB3_50%,#0055FF_100%)] shadow-[inset_0_6px_12px_rgba(0,0,0,0.85)] md:h-[68px] md:w-[175px]">
-        
         {/* Dark Rim Depth Overlay */}
         <span className="pointer-events-none absolute inset-0 z-20 rounded-full shadow-[inset_0_4px_8px_rgba(0,0,0,0.7)]" />
 
         {/* --- 1. TOP-LEFT ICON --- */}
-        <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+        <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
           <motion.div
-            className="absolute left-[30px] -top-[18px] z-10 w-[30px] md:w-[50px]"
+            className="absolute -top-[18px] left-[30px] z-10 w-[30px] md:w-[50px]"
             style={{ x: translateX, y: translateY }}
           >
-            <img
+            <Image
               src="/icons/icon_1.svg"
               alt="Top Icon"
               className="h-auto w-full rotate-[10deg] drop-shadow-md"
@@ -41,10 +41,10 @@ export function InlineCapsule() {
 
         {/* --- 2. CENTER-RIGHT ICON --- */}
         <motion.div
-          className="absolute right-[25px] top-[40px] z-30 w-[50px] md:w-[60px]"
+          className="absolute top-[40px] right-[25px] z-30 w-[50px] md:w-[60px]"
           style={{ x: translateX, y: translateY }}
         >
-          <img
+          <Image
             src="/icons/icon_2.svg"
             alt="Center Right Icon"
             className="h-auto w-full rotate-[20deg] drop-shadow-2xl"
@@ -53,16 +53,15 @@ export function InlineCapsule() {
 
         {/* --- 3. DOWNSIDE OUTSIDE ICON --- */}
         <motion.div
-          className="absolute left-[24px] -bottom-[70px] z-30 w-[50px] md:w-[60px]"
+          className="absolute -bottom-[70px] left-[24px] z-30 w-[50px] md:w-[60px]"
           style={{ x: translateX, y: translateY }}
         >
-          <img
+          <Image
             src="/icons/icon_1.svg"
             alt="Bottom Icon"
             className="h-auto w-full -rotate-[45deg] drop-shadow-2xl"
           />
         </motion.div>
-
       </span>
     </span>
   );
@@ -92,10 +91,10 @@ export function HeroFloatingIcons() {
     >
       {/* Left Tube / Cylinder Asset (Hidden on mobile, visible on md screens and up) */}
       <motion.div
-        className="hidden md:block transform-gpu absolute left-[10%] md:left-[16%] bottom-[25%] md:bottom-[28%] z-30 w-[65px] md:w-[90px] [will-change:transform]"
+        className="absolute bottom-[25%] left-[10%] z-30 hidden w-[65px] transform-gpu [will-change:transform] md:bottom-[28%] md:left-[16%] md:block md:w-[90px]"
         style={{ y: tubeY }}
       >
-        <img
+        <Image
           src="/icons/cylinder.svg"
           alt="Decoration Tube"
           className="h-auto w-full object-contain drop-shadow-2xl"
@@ -104,7 +103,7 @@ export function HeroFloatingIcons() {
 
       {/* Right Pinwheel Asset (Hidden on mobile, visible on md screens and up) */}
       <motion.div
-        className="hidden md:block absolute right-[8%] md:right-[12%] bottom-[10%] md:bottom-[15%] z-30 w-[120px] md:w-[170px]"
+        className="absolute right-[8%] bottom-[10%] z-30 hidden w-[120px] md:right-[12%] md:bottom-[15%] md:block md:w-[170px]"
         style={{ y: pinwheelY }}
       >
         <motion.img
