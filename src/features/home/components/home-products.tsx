@@ -94,16 +94,15 @@ export function HomeProducts({
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-0">
       {/* Container Frame with SVG Background */}
-      <div className="relative mx-auto max-w-full overflow-hidden rounded-[36px] border border-white/30 p-6 sm:rounded-[44px] sm:p-10 lg:p-12 shadow-sm">
-
+      <div className="relative mx-auto max-w-full overflow-hidden rounded-[36px] border border-white/30 p-6 shadow-sm sm:rounded-[44px] sm:p-10 lg:p-12">
         {/* Background Overlay */}
-        <div className="absolute inset-0 -z-10 pointer-events-none select-none border border-white/80">
+        <div className="pointer-events-none absolute inset-0 -z-10 border border-white/80 select-none">
           <Image
             src={bgImageSrc}
             alt="Section background"
             fill
             priority
-            className="object-cover object-center border border-white/80 "
+            className="border border-white/80 object-cover object-center"
           />
         </div>
 
@@ -117,10 +116,10 @@ export function HomeProducts({
         >
           {/* Eyebrow Pill Badge */}
           {eyebrow && (
-              <div className="inline-flex items-center gap-1.5 rounded border bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-xl/20 ">
-            <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
-            {eyebrow}
-          </div>
+            <div className="inline-flex items-center gap-1.5 rounded border bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-xl/20">
+              <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
+              {eyebrow}
+            </div>
           )}
 
           {/* Title */}
@@ -130,7 +129,7 @@ export function HomeProducts({
 
           {/* Subtitle */}
           {subtitle && (
-            <p className="max-w-[640px] text-xs font-medium leading-relaxed text-slate-600 sm:text-sm">
+            <p className="max-w-[640px] text-xs leading-relaxed font-medium text-slate-600 sm:text-sm">
               {subtitle}
             </p>
           )}
@@ -150,10 +149,10 @@ export function HomeProducts({
               variants={itemVariants}
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
-              className="group flex flex-col justify-between rounded-[20px] border border-slate-200/80 bg-white/80 p-5 backdrop-blur-sm shadow-xs backdrop-blur-md transition-all duration-300 hover:border-slate-300 hover:bg-white hover:shadow-md"
+              className="group flex flex-col justify-between rounded-[20px] border border-slate-200/80 bg-white/80 p-5 shadow-xs backdrop-blur-md backdrop-blur-sm transition-all duration-300 hover:border-slate-300 hover:bg-white hover:shadow-md"
             >
               {/* TOP CONTAINER */}
-              <div className="flex flex-col flex-1 justify-between">
+              <div className="flex flex-1 flex-col justify-between">
                 <div>
                   {/* Image Display Area */}
                   <div className="relative mb-5 h-[260px] w-full overflow-hidden rounded-[18px] border border-slate-100 bg-gradient-to-b from-white to-slate-50">
@@ -173,7 +172,7 @@ export function HomeProducts({
                       {product.tags?.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-slate-200/90 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-slate-700 shadow-2xs"
+                          className="rounded-full border border-slate-200/90 bg-white px-3 py-1 text-[11px] font-semibold tracking-wider text-slate-700 uppercase shadow-2xs"
                         >
                           {tag}
                         </span>
@@ -190,25 +189,27 @@ export function HomeProducts({
                 </div>
 
                 {/* Card Title (Fixed height keeps rows perfectly aligned) */}
-                <div className="mb-3 flex items-start h-[52px]">
-                  <h3 className="text-[18px] font-bold leading-[1.3] text-slate-900 line-clamp-2">
+                <div className="mb-3 flex h-[30px] items-start">
+                  <h3 className="line-clamp-2 text-[18px] leading-[1.3] font-bold text-slate-900">
                     {product.title}
                   </h3>
                 </div>
               </div>
 
               {/* FOOTER CONTAINER */}
-              <div className="border-t border-slate-100/90 pt-4 space-y-2">
+              <div className="space-y-2 border-t-2 border-slate-200 pt-4">
                 {/* Workflow Line (Locked height so lines match horizontally) */}
-                <div className="text-[16px] flex items-start min-h-[40px]">
+                <div className="flex min-h-[40px] items-start text-[16px]">
                   <p className="leading-relaxed">
                     <span className="font-bold text-slate-900">Workflow: </span>
-                    <span className="font-medium text-slate-700 ">{product.workflow}</span>
+                    <span className="font-medium text-slate-700">
+                      {product.workflow}
+                    </span>
                   </p>
                 </div>
 
                 {/* Result Text */}
-                <p className="text-[16px] font-bold leading-[1.45] text-[#2b2bad] line-clamp-2 tracking-[0.7px]">
+                <p className="line-clamp-2 text-[16px] leading-[1.45] font-bold tracking-[0.7px] text-[#2b2bad]">
                   {product.result}
                 </p>
               </div>
