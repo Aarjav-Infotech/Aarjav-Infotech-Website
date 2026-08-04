@@ -1,13 +1,17 @@
 "use client";
 
 import { Hero } from "@/components/common/hero";
-import { HeroFloatingIcons, InlineCapsule } from "@/components/common/hero-floating-icons";
+import {
+  HeroFloatingIcons,
+  InlineCapsule,
+} from "@/components/common/hero-floating-icons";
 import { ROUTES } from "@/lib/constants";
 import { HomeProvenResults } from "./home-proven-results";
-import{HomeWhatWeDo} from "./home-what-we-do";
+import { HomeWhatWeDo } from "./home-what-we-do";
 import { HomeProducts } from "./home-products";
+import { HomeTechnologies } from "./home-technologies";
+
 // import { HomeHowWeWork } from "./home-how-we-work";
-// import { HomeTechnologies } from "./home-technologies";
 // import { HomeTestimonials } from "./home-testimonials";
 // import { HomeSecurity } from "./home-security";
 // import { HomeContact } from "./home-contact";
@@ -27,7 +31,6 @@ export function HomeContent() {
           <span className="relative inline-block leading-[1.08] tracking-[-2px] md:tracking-[-3px]">
             Power Your Enterprise with <br className="hidden md:inline" />
             Next-Generation AI.
-            
             <InlineCapsule />
           </span>
         }
@@ -54,9 +57,9 @@ export function HomeContent() {
       <HomeProvenResults />
       <HomeWhatWeDo />
       <HomeProducts />
+      <HomeTechnologies />
 
       {/* <HomeHowWeWork /> */}
-      {/* <HomeTechnologies /> */}
       {/* <HomeTestimonials /> */}
       {/* <HomeSecurity /> */}
       {/* <HomeContact /> */}

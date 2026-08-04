@@ -27,23 +27,22 @@ export function HomeHowWeWork({
   centerImageSrc = "/images/leyers.png",
 }: HomeHowWeWorkProps) {
   return (
-    <section className="relative w-full bg-white py-16 md:py-24 ">
+    <section className="relative w-full bg-white py-16 md:py-24">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-8">
-        
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-12 md:mb-20 text-center md:text-left"
+          className="mb-12 text-center md:mb-20 md:text-left"
         >
           {eyebrow && (
             <p className="mb-3 text-[11px] font-bold tracking-[0.1em] text-blue-600 uppercase">
               {eyebrow}
             </p>
           )}
-          <h2 className="mb-4 text-[36px] font-bold leading-[1.15] text-slate-900 md:text-[48px] lg:text-[52px]">
+          <h2 className="mb-4 text-[36px] leading-[1.15] font-bold text-slate-900 md:text-[48px] lg:text-[52px]">
             {title}
           </h2>
           {subtitle && (
@@ -55,7 +54,6 @@ export function HomeHowWeWork({
 
         {/* Interactive Step Cards Grid */}
         <div className="relative grid grid-cols-1 items-center gap-10 lg:grid-cols-[340px_1fr_340px] lg:gap-0">
-          
           {/* CENTER IMAGE (Desktop Absolute Placement) */}
           <div className="pointer-events-none absolute top-1/2 left-1/2 z-0 hidden h-[680px] w-[880px] -translate-x-1/2 -translate-y-1/2 lg:block">
             <motion.div
@@ -81,6 +79,7 @@ export function HomeHowWeWork({
           <div className="z-20 flex flex-col gap-6 lg:gap-12">
             {leftSteps.map((item, idx) => {
               const stepNumber = parseInt(item.step, 10) || idx + 1;
+              <span>{stepNumber}</span>;
               return (
                 <motion.div
                   key={item.step || idx}
@@ -90,7 +89,12 @@ export function HomeHowWeWork({
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{
                     opacity: { duration: 0.4, delay: idx * 0.15 },
-                    x: { type: "spring", stiffness: 70, damping: 16, delay: idx * 0.15 },
+                    x: {
+                      type: "spring",
+                      stiffness: 70,
+                      damping: 16,
+                      delay: idx * 0.15,
+                    },
                     y: { type: "spring", stiffness: 350, damping: 22 },
                   }}
                   className="group relative flex w-full cursor-pointer flex-col rounded-[20px] border border-slate-200 bg-white/95 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-sm transition-all duration-300 hover:border-blue-600 hover:shadow-[0_12px_30px_rgba(37,99,235,0.12)]"
@@ -100,10 +104,10 @@ export function HomeHowWeWork({
                     <div className="absolute top-1/2 right-0 h-[8px] w-[8px] -translate-y-1/2 rounded-full bg-blue-600 shadow-[0_0_0_4px_rgba(37,99,235,0.15)]" />
                   </div>
 
-                  <div className="mb-3 border-b border-slate-100 pb-3 text-[11px] font-bold tracking-wider text-slate-400 uppercase group-hover:text-blue-600 transition-colors">
+                  <div className="mb-3 border-b border-slate-100 pb-3 text-[11px] font-bold tracking-wider text-slate-400 uppercase transition-colors group-hover:text-blue-600">
                     STEP {item.step}
                   </div>
-                  <h3 className="mb-2 text-[20px] font-bold leading-snug text-slate-900">
+                  <h3 className="mb-2 text-[20px] leading-snug font-bold text-slate-900">
                     {item.title}
                   </h3>
                   <p className="text-[14px] leading-relaxed text-slate-600">
@@ -135,7 +139,7 @@ export function HomeHowWeWork({
           </div>
 
           {/* Spacer for desktop grid layout */}
-          <div className="hidden lg:block z-0 pointer-events-none w-full" />
+          <div className="pointer-events-none z-0 hidden w-full lg:block" />
 
           {/* RIGHT STEPS COLUMN */}
           <div className="z-20 flex flex-col gap-6 lg:gap-12">
@@ -149,7 +153,12 @@ export function HomeHowWeWork({
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{
                     opacity: { duration: 0.4, delay: (idx + 2) * 0.15 },
-                    x: { type: "spring", stiffness: 70, damping: 16, delay: (idx + 2) * 0.15 },
+                    x: {
+                      type: "spring",
+                      stiffness: 70,
+                      damping: 16,
+                      delay: (idx + 2) * 0.15,
+                    },
                     y: { type: "spring", stiffness: 350, damping: 22 },
                   }}
                   className="group relative flex w-full cursor-pointer flex-col rounded-[20px] border border-slate-200 bg-white/95 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-sm transition-all duration-300 hover:border-blue-600 hover:shadow-[0_12px_30px_rgba(37,99,235,0.12)]"
@@ -159,10 +168,10 @@ export function HomeHowWeWork({
                     <div className="absolute top-1/2 left-0 h-[8px] w-[8px] -translate-y-1/2 rounded-full bg-blue-600 shadow-[0_0_0_4px_rgba(37,99,235,0.15)]" />
                   </div>
 
-                  <div className="mb-3 border-b border-slate-100 pb-3 text-[11px] font-bold tracking-wider text-slate-400 uppercase group-hover:text-blue-600 transition-colors">
+                  <div className="mb-3 border-b border-slate-100 pb-3 text-[11px] font-bold tracking-wider text-slate-400 uppercase transition-colors group-hover:text-blue-600">
                     STEP {item.step}
                   </div>
-                  <h3 className="mb-2 text-[20px] font-bold leading-snug text-slate-900">
+                  <h3 className="mb-2 text-[20px] leading-snug font-bold text-slate-900">
                     {item.title}
                   </h3>
                   <p className="text-[14px] leading-relaxed text-slate-600">
@@ -172,7 +181,6 @@ export function HomeHowWeWork({
               );
             })}
           </div>
-
         </div>
       </div>
     </section>
