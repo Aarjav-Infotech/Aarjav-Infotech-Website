@@ -85,7 +85,7 @@
 
 /* Design Tokens — Light Theme */
 :root {
---radius: 0.625rem;
+  --radius: 0.625rem;
   /* Updated --font-sans-stack to include Urbanist */
   --font-sans-stack: "Urbanist", "IBM Plex Sans", system-ui, sans-serif;
   --font-ui-stack: "IBM Plex Sans", system-ui, sans-serif;
@@ -114,7 +114,7 @@
   --success: oklch(0.55 0.15 145);
   --warning: oklch(0.75 0.15 85);
   --info: oklch(0.55 0.15 240);
-  margin:0 16px;
+  margin: 0 16px;
 }
 
 /* Design Tokens — Dark Theme */
@@ -181,7 +181,11 @@
     }
   }
 }
-
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
 @layer utilities {
   .section-padding {
     @apply py-16 md:py-20 lg:py-24;

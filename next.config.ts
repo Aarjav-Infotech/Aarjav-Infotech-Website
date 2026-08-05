@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [],
+    qualities: [75, 90],
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],

@@ -145,6 +145,45 @@ interface HomeIndustriesProps {
   industries?: IndustrySolution[];
 }
 
+// Card Skeleton Fallback Component
+function _IndustryCardSkeleton() {
+  return (
+    <div className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]">
+      <div className="relative flex flex-col items-center lg:flex-row">
+        {/* Left Side: Shimmer Image Skeleton */}
+        <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200 sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2">
+          <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+        </div>
+
+        {/* Right Side: Shimmer Content Skeleton */}
+        <div className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:p-8 lg:mt-0 lg:-ml-28 lg:h-[477px] lg:w-[58%] lg:p-11">
+          <div>
+            <div className="h-6 w-3/4 animate-pulse rounded-md bg-slate-200 sm:h-8" />
+            <div className="mt-4 space-y-2">
+              <div className="h-4 w-full animate-pulse rounded-md bg-slate-200" />
+              <div className="h-4 w-5/6 animate-pulse rounded-md bg-slate-200" />
+              <div className="h-4 w-2/3 animate-pulse rounded-md bg-slate-200" />
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="size-2 animate-pulse rounded-full bg-slate-200" />
+                  <div className="h-4 w-4/5 animate-pulse rounded-md bg-slate-200" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 sm:mt-8">
+            <div className="h-10 w-32 animate-pulse rounded-full bg-slate-200" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function HomeIndustries({
   eyebrow = "Digital Solutions",
   title = "Built for your industry",
@@ -157,11 +196,19 @@ export function HomeIndustries({
   const [activeTab, setActiveTab] = useState<string>(
     activeIndustries[0]?.id ?? "banking",
   );
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
 
   const currentIndustry: IndustrySolution =
     activeIndustries.find((item) => item.id === activeTab) ??
     activeIndustries[0] ??
     defaultIndustries[0]!;
+
+  const handleTabChange = (tabId: string) => {
+    if (tabId !== activeTab) {
+      setIsImageLoading(true);
+      setActiveTab(tabId);
+    }
+  };
 
   return (
     <section className="relative w-full py-8 sm:py-4">
@@ -187,7 +234,7 @@ export function HomeIndustries({
           )}
         </div>
 
-        {/* Full-Width Tab Switcher Bar */}
+        {/* Tab Switcher Bar */}
         <div className="no-scrollbar mx-auto mb-8 w-full max-w-full overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2 shadow-[0_4px_20px_rgba(0,0,0,0.04)] sm:mb-14 sm:p-2.5">
           <div className="flex min-w-max items-center justify-between gap-1 px-1 sm:gap-2 sm:px-2">
             {activeIndustries.map((ind) => {
@@ -196,7 +243,7 @@ export function HomeIndustries({
               return (
                 <button
                   key={ind.id}
-                  onClick={() => setActiveTab(ind.id)}
+                  onClick={() => handleTabChange(ind.id)}
                   className={`relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-xs font-semibold transition-all duration-100 sm:px-8 sm:py-3 sm:text-base ${
                     isActive ? "font-bold text-white" : "text-slate-900"
                   }`}
@@ -219,7 +266,7 @@ export function HomeIndustries({
           </div>
         </div>
 
-        {/* Dynamic Card Container with Stacking Slide & Scale Animation */}
+        {/* Card Content Container with Image Skeleton */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndustry.id}
@@ -233,7 +280,7 @@ export function HomeIndustries({
             className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
           >
             <div className="relative flex flex-col items-center lg:flex-row">
-              {/* Left Side: Image Container */}
+              {/* Image Container with Integrated Skeleton Loader */}
               <motion.div
                 initial={{ opacity: 0, x: -40, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -242,18 +289,28 @@ export function HomeIndustries({
                   delay: 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="relative h-[220px] w-full overflow-hidden rounded-[20px] shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
+                className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200/80 shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
               >
+                {/* Shimmer Overlay while loading */}
+                {isImageLoading && (
+                  <div className="absolute inset-0 z-20 overflow-hidden bg-slate-200">
+                    <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-slate-100/60 to-transparent" />
+                  </div>
+                )}
+
                 <Image
                   src={currentIndustry.image}
                   alt={currentIndustry.title}
                   fill
-                  className="object-cover object-center sm:object-left"
+                  className={`object-cover object-center transition-opacity duration-500 sm:object-left ${
+                    isImageLoading ? "opacity-0" : "opacity-100"
+                  }`}
+                  onLoad={() => setIsImageLoading(false)}
                   priority
                 />
               </motion.div>
 
-              {/* Right Side: Card Content */}
+              {/* Right Side: Content Box */}
               <motion.div
                 initial={{ opacity: 0, x: 60, scale: 0.92 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -265,17 +322,14 @@ export function HomeIndustries({
                 className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-28 lg:h-[477px] lg:w-[58%] lg:p-11"
               >
                 <div>
-                  {/* Title */}
                   <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-2xl">
                     {currentIndustry.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="mt-2 text-sm leading-relaxed text-slate-700 sm:mt-3 sm:text-base">
                     {currentIndustry.description}
                   </p>
 
-                  {/* Features List */}
                   <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
                     {currentIndustry.features.map((feature, idx) => (
                       <motion.div
@@ -294,7 +348,6 @@ export function HomeIndustries({
                   </div>
                 </div>
 
-                {/* Read More Pill Button */}
                 <div className="mt-6 flex justify-start sm:mt-8">
                   <Link
                     href={currentIndustry.link}
