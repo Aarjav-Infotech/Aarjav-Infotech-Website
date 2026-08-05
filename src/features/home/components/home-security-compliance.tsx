@@ -32,9 +32,9 @@ export function HomeSecurityCompliance({
   bgImage = "/images/home-security-bg.svg",
 }: HomeSecurityComplianceProps) {
   return (
-    <section className="w-full px-0 py-10">
+    <section className="w-full px-2 py-6 sm:px-6 sm:py-8 md:px-8 lg:py-10">
       {/* Outer Card */}
-      <div className="relative mx-auto max-w-full overflow-hidden rounded-[40px] px-6 py-16 shadow-2xl sm:px-12 md:py-20">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[28px] px-4 py-12 shadow-2xl sm:rounded-[36px] sm:px-8 sm:py-16 md:rounded-[40px] md:px-12 md:py-20">
         {/* Next.js Background Image Layer */}
         {bgImage && (
           <Image
@@ -47,8 +47,8 @@ export function HomeSecurityCompliance({
           />
         )}
 
-        {/* Top & Bottom Slot Pill Cutouts */}
-        <div className="absolute top-0 left-1/2 z-10 h-4 w-[240px] -translate-x-1/2 rounded-b-2xl bg-[#e2e8f0]/90 shadow-inner sm:w-[320px]" />
+        {/* Top Slot Pill Cutout */}
+        <div className="absolute top-0 left-1/2 z-10 h-3.5 w-[180px] -translate-x-1/2 rounded-b-xl bg-[#e2e8f0]/90 shadow-inner sm:h-4 sm:w-[280px] sm:rounded-b-2xl md:w-[320px]" />
 
         {/* Content Wrapper */}
         <div className="relative z-10 flex flex-col items-center text-center">
@@ -57,9 +57,9 @@ export function HomeSecurityCompliance({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-10 inline-flex items-center gap-1.5 rounded bg-[#18181B] px-3.5 py-1 text-[14px] font-semibold text-[#FFFFFF] shadow-md"
+            className="mb-6 inline-flex items-center gap-1.5 rounded bg-[#18181B] px-3.5 py-1 text-xs font-semibold text-white shadow-md sm:mb-8 sm:text-sm"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-[#FFFFFF]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white" />
             {eyebrow}
           </motion.div>
 
@@ -68,7 +68,7 @@ export function HomeSecurityCompliance({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+            className="mb-3 text-3xl font-bold tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {title}
           </motion.h2>
@@ -79,7 +79,7 @@ export function HomeSecurityCompliance({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-[720px] text-lg leading-relaxed text-slate-300 md:text-lg"
+              className="max-w-[720px] text-base leading-relaxed text-slate-300 sm:text-lg"
             >
               {subtitle}
             </motion.p>
@@ -91,23 +91,27 @@ export function HomeSecurityCompliance({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-16 grid w-full grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6 lg:gap-6"
+            className="mt-10 grid w-full grid-cols-2 gap-6 sm:mt-12 sm:grid-cols-3 sm:gap-8 md:mt-16 lg:grid-cols-6 lg:gap-6"
           >
             {items.map((item, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="group flex cursor-pointer items-center justify-center p-2 text-center"
+                className="group flex cursor-pointer items-center justify-center p-1 text-center sm:p-2"
               >
-                {/* Expanded container size to 100px width/height */}
-                <div className="relative flex h-[150px] w-[150px] items-center justify-center transition-all duration-300">
+                {/* 
+                  MOBILE ICON ENHANCEMENTS:
+                  - Increased container bounds to 130px on small screens (h-[130px] w-[130px]).
+                  - Switched to Next.js fill layout with object-contain for maximum clarity and scaling.
+                */}
+                <div className="relative flex h-[130px] w-[130px] items-center justify-center transition-all duration-300 sm:h-[150px] sm:w-[150px] lg:h-[150px] lg:w-[150px]">
                   <Image
                     src={item.iconSrc}
                     alt="Compliance Icon"
-                    width={100}
-                    height={100}
-                    className="h-full w-full object-contain opacity-90 transition-opacity group-hover:opacity-100"
+                    fill
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15vw"
+                    className="object-contain opacity-95 transition-opacity group-hover:opacity-100"
                   />
                 </div>
               </motion.div>
