@@ -1,201 +1,179 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface Testimonial {
+export interface TestimonialItem {
   id: string;
-  name: string;
-  title: string;
-  review: string;
-  avatar: string;
-  rating: number;
+  quote: string;
+  author: string;
+  role: string;
+  company: string;
+  image: string;
 }
 
-const testimonials: Testimonial[] = [
+const defaultTestimonials: TestimonialItem[] = [
   {
-    id: "01",
-    name: "Kevin W.",
-    title: "Delfa Innovators",
-    review:
-      '"We deal with a huge volume of sales data. This dashboard is fast, reliable, and handles real-time metrics across a million records without any lag. The S3 integration is seamless."',
-    avatar: "/images/testimonial-avatar.png",
-    rating: 5,
+    id: "1",
+    quote:
+      "Integrating AI agents into our pipeline cut operational costs dramatically. The system processes thousands of incoming tasks daily without missing a beat.",
+    author: "Sarah Jenkins",
+    role: "VP of Product",
+    company: "FinScale",
+    image: "/images/testimonial-image.svg",
   },
   {
-    id: "02",
-    name: "Ted S.",
-    title: "Project Manager",
-    review:
-      '"Construction finance is complex, but this ERP handles audits, approvals, and reporting in one place. It has brought a new level of control and clarity to our financials."',
-    avatar: "/images/testimonial-avatar.png",
-    rating: 4,
+    id: "2",
+    quote:
+      "We deal with a huge volume of sales data. This dashboard is fast, reliable, and handles real-time metrics across a million records without any lag. The S3 integration is seamless.",
+    author: "Marcus Tan",
+    role: "CTO",
+    company: "VectorPay",
+    image: "/images/testimonial-image.svg",
   },
   {
-    id: "03",
-    name: "Ralph D.",
-    title: "Grade Construction",
-    review:
-      '"The role-based flow means the right people see the right documents at the right time. It\'s reduced delays and added massive accountability across departments."',
-    avatar: "/images/testimonial-avatar.png",
-    rating: 3,
-  },
-  {
-    id: "04",
-    name: "Emily Watson",
-    title: "FOUNDER, GROWTH AI",
-    review:
-      '"Working with them has been a game-changer for our business. The custom integrations saved us hundreds of hours each month."',
-    avatar: "/images/testimonial-avatar.png",
-    rating: 5,
+    id: "3",
+    quote:
+      "The custom AI models transformed our document review workflows completely. What used to take days now finishes in minutes with near-perfect accuracy.",
+    author: "Elena Rostova",
+    role: "Head of Operations",
+    company: "AeroData",
+    image: "/images/testimonial-image.svg",
   },
 ];
 
-export function HomeTestimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(2); // Default to 2 for tablet/desktop
+interface TestimonialsProps {
+  eyebrow?: string;
+  title?: string;
+  testimonials?: TestimonialItem[];
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setCardsToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setCardsToShow(2);
-      } else {
-        setCardsToShow(3);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+export function HomeTestimonials({
+  eyebrow = "Testimonials",
+  title = "What Our Clients Says",
+  testimonials = defaultTestimonials,
+}: TestimonialsProps) {
+  const [currentIndex, setCurrentIndex] = useState(1); // Default to index 1 (2/3) to match screenshot
+
+  const current = (testimonials[currentIndex] ??
+    testimonials[0] ??
+    defaultTestimonials[0]) as TestimonialItem;
 
   const handleNext = () => {
-    if (currentIndex < Math.ceil(testimonials.length - cardsToShow)) {
-      setCurrentIndex((prev) => prev + 1);
-    }
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
+    );
   };
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-4 pt-16 md:px-[80px]">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <h2 className="mb-[40px] text-center text-[34px] leading-[44.2px] font-medium tracking-tight text-black md:mb-[60px]">
-          What clients say
-        </h2>
-      </motion.div>
+    <section className="relative w-full px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1280px] rounded-[32px] bg-white p-6 sm:p-10 lg:p-14">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Left Column: Content & Navigation */}
+          <div className="flex min-h-[420px] flex-col justify-between py-2 lg:col-span-6">
+            <div>
+              {/* Pill Badge */}
+              <div className="boder-slate-200 mb-10 inline-flex items-center gap-1.5 rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+                {eyebrow}
+              </div>
 
-      <div className="relative w-full overflow-hidden pb-4">
-        {/* Track */}
-        <div
-          className="flex gap-[30px] transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(calc(-${currentIndex} * (100% / ${cardsToShow} + ${30 / cardsToShow}px)))`,
-          }}
-        >
-          {testimonials.map((testimonial, _idx) => (
-            <div
-              key={testimonial.id}
-              className="flex-shrink-0"
-              style={{
-                width: `calc(${100 / cardsToShow}% - ${(30 * (cardsToShow - 1)) / cardsToShow}px)`,
-              }}
-            >
-              <div className="flex h-[307px] flex-col">
-                <div className="relative h-[237px] w-full overflow-hidden rounded-[28px] bg-[#F0F6FF] px-[30px] pt-[30px] pb-[35px]">
-                  {/* 66 Watermark */}
-                  <div className="absolute top-0 right-0 z-0 opacity-80 mix-blend-multiply">
-                    <Image
-                      src="/svg/66.svg"
-                      alt="Quote watermark"
-                      width={191}
-                      height={192}
-                      className="object-contain"
-                    />
-                  </div>
+              {/* Section Heading */}
+              <h2 className="text-3xl leading-[1.15] font-bold tracking-tight text-slate-900 sm:text-7xl lg:text-[72px]">
+                {title}
+              </h2>
 
-                  <div className="relative z-10 flex flex-col gap-[16px]">
-                    {/* Stars */}
-                    <div className="flex gap-[4px]">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <div key={i} className="relative h-[16px] w-[16px]">
-                          <Image
-                            src="/svg/star.svg"
-                            alt="Star"
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                      ))}
+              {/* Dynamic Animated Quote Card */}
+              <div className="mt-8 min-h-[160px] sm:mt-10">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={current.id}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 15 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Blue Double Quote Icon */}
+                    <Quote className="mb-3 size-6 rotate-180 fill-blue-700 text-blue-700" />
+
+                    {/* Quote Text */}
+                    <p className="text-sm leading-relaxed font-medium text-slate-800 sm:text-base">
+                      {current.quote}
+                    </p>
+
+                    {/* Author Metadata with Vertical Accent Line */}
+                    <div className="mt-6 flex items-center gap-3 border-l-2 border-slate-300 pl-3">
+                      <p className="text-xs font-medium text-slate-500 sm:text-sm">
+                        <span className="font-semibold text-slate-700">
+                          {current.author}
+                        </span>
+                        {" | "}
+                        {"current.company"}'s {"current.role"}
+                      </p>
                     </div>
-
-                    {/* Review text */}
-                    <p className="text-[16px] leading-[28px] font-medium text-black">
-                      {testimonial.review}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Avatar and Name */}
-                <div className="relative flex h-[70px] items-center px-[30px]">
-                  <div className="absolute top-[-20px] left-[30px] h-[70px] w-[70px] shrink-0 overflow-hidden rounded-[24px] bg-black/10">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      fill
-                      className="object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = "none";
-                      }}
-                    />
-                  </div>
-                  <div className="ml-[90px] flex flex-col justify-center gap-[2px]">
-                    <h4 className="text-[16px] leading-[24px] font-bold text-black">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-[14px] leading-[20px] font-normal text-black/70">
-                      {testimonial.title}
-                    </p>
-                  </div>
-                </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Navigation Arrows */}
-      <div className="mt-[40px] flex items-center justify-center gap-4">
-        <button
-          onClick={handlePrev}
-          disabled={currentIndex === 0}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black transition-colors hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
-          aria-label="Previous testimonial"
-        >
-          <ArrowLeft className="h-4 w-4" />
-        </button>
-        <button
-          onClick={handleNext}
-          disabled={
-            currentIndex >= Math.ceil(testimonials.length - cardsToShow)
-          }
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black transition-colors hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
-          aria-label="Next testimonial"
-        >
-          <ArrowRight className="h-4 w-4" />
-        </button>
+            {/* Bottom Controls Row: Arrows & Pagination counter */}
+            <div className="mt-10 flex items-center justify-between pt-4">
+              {/* Blue Pill Arrow Buttons */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handlePrev}
+                  aria-label="Previous testimonial"
+                  className="flex size-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95"
+                >
+                  <ChevronLeft className="size-5" />
+                </button>
+
+                <button
+                  onClick={handleNext}
+                  aria-label="Next testimonial"
+                  className="flex size-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95"
+                >
+                  <ChevronRight className="size-5" />
+                </button>
+              </div>
+
+              {/* Number Pagination Counter (e.g., 2 / 3) */}
+              <div className="text-xl font-bold tracking-tight text-slate-400">
+                <span className="text-slate-800">{currentIndex + 1}</span>
+                <span className="mx-0.5 text-slate-300">/</span>
+                <span>{testimonials.length}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Rounded Image Frame */}
+          <div className="relative lg:col-span-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+                className="relative h-[360px] w-full overflow-hidden rounded-[40px] border-[14px] border-slate-100 shadow-xl sm:h-[460px] lg:h-[500px]"
+              >
+                <Image
+                  src={current.image}
+                  alt={current.author}
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
     </section>
   );

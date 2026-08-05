@@ -5,122 +5,116 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-const articles = [
+export interface ArticleItem {
+  id: string | number;
+  date: string;
+  title: string;
+  image: string;
+  link: string;
+}
+
+const defaultArticles: ArticleItem[] = [
   {
-    tag: "DELIVERY & OPS",
-    title: "Build vs Buy",
-    desc: "A clear decision framework for when a micro-tool is enough - and when reliable automation needs custom integration.",
-    image: "/images/blog_placeholder.png",
+    id: 1,
+    date: "June 7, 2026",
+    title: "LLM Agnostic Solutions: The 2026 Enterprise AI Guide",
+    image: "/images/article-1.svg",
     link: "#",
   },
   {
-    tag: "SECURITY & COMPLIANCE",
-    title: "Security Checklist",
-    desc: "What to verify before connecting tools - access scopes, secrets, logging, retention, and where sensitive data is allowed to flow.",
-    image: "/images/blog_placeholder.png",
+    id: 2,
+    date: "May 16, 2026",
+    title: "Snowflake Cortex Alternative: 2026 Evaluation Framework",
+    image: "/images/article-2.svg",
     link: "#",
   },
   {
-    tag: "OUTCOMES & MEASUREMENT",
-    title: "Measure What Matters",
-    desc: "How to track automation impact using cycle time, quality, and error-rate signals instead of vanity metrics.",
-    image: "/images/blog_placeholder.png",
+    id: 3,
+    date: "April 7, 2026",
+    title: "Multi-agent vs single-agent AI systems: 2026 decision guide",
+    image: "/images/article-3.svg",
     link: "#",
   },
 ];
 
-export function HomeArticles() {
+interface HomeArticlesProps {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  articles?: ArticleItem[];
+}
+
+export function HomeArticles({
+  eyebrow = "Blogs",
+  title = "Articles & Insights",
+  subtitle = "Exploring the intersection of artificial intelligence, industrial automation, and the future of professional workflows.",
+  articles = defaultArticles,
+}: HomeArticlesProps) {
   return (
-    <section className="relative max-h-[1053px] w-full bg-transparent">
-      <div className="max-h-auto relative w-full overflow-hidden rounded-bl-[80px]">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0 h-full w-full">
-          <Image
-            src="/images/white_bg.png"
-            alt="Articles Background"
-            fill
-            // className="object-cover object-top"
-            priority
-          />
+    <section className="relative w-full bg-white py-10 md:py-10">
+      <div className="mx-auto max-w-[1404px] px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center">
+          {eyebrow && (
+            <div className="boder-slate-200 mb-4 inline-flex items-center gap-1.5 rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+              {eyebrow}
+            </div>
+          )}
+
+          <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-[52px]">
+            {title}
+          </h2>
+
+          {subtitle && (
+            <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-lg">
+              {subtitle}
+            </p>
+          )}
         </div>
 
-        <div className="relative z-10 flex w-full flex-col gap-[10px] px-4 pt-[100px] pb-[60px] md:px-[80px] lg:pt-[199px] lg:pb-[99px]">
-          {/* Header */}
-          <div className="flex flex-col items-start justify-between gap-6 pb-[20px] md:flex-row md:items-end">
-            <div className="flex w-full flex-col gap-[20px] lg:w-[630px]">
-              <p
-                className="text-[12px] leading-[15.6px] font-normal tracking-[1px] text-black uppercase"
-                style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
-              >
-                FROM OUR BLOG
-              </p>
-              <h2 className="text-[46px] leading-[46px] font-medium text-black">
-                Articles & insights
-              </h2>
-            </div>
-            <Link
-              href="#"
-              className="inline-flex shrink-0 items-center justify-center rounded-[60px] border border-black/20 px-[25px] pt-[16px] pb-[17px] text-[16px] font-medium text-black shadow-sm transition-colors hover:bg-black hover:text-white"
+        {/* 3-Column Grid */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {articles.map((article, i) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group flex flex-col items-start"
             >
-              All articles
-            </Link>
-          </div>
+              <Link href={article.link} className="flex w-full flex-col">
+                {/* Image Container with Rounded Corners */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-[20px]">
-            {articles.map((article, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group flex w-full cursor-pointer flex-col"
-              >
-                <Link href={article.link} className="flex h-full flex-col">
-                  {/* Image Container */}
-                  <div className="relative mb-[20px] aspect-[413/450] w-full overflow-hidden rounded-[20px] rounded-bl-[80px] bg-gray-200">
-                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20" />
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute top-[10px] left-[10px] z-10 flex items-center justify-center rounded-[20px] bg-white px-[8px] py-[6px] shadow-sm">
-                      <span
-                        className="text-[12px] leading-[15.6px] font-medium tracking-[1px] text-black uppercase"
-                        style={{ fontFamily: "'IBM Plex Sans', sans-serif" }}
-                      >
-                        {article.tag}
-                      </span>
-                    </div>
-                  </div>
+                {/* Date */}
+                <span className="text-basic mt-4 font-medium text-slate-400">
+                  {article.date}
+                </span>
 
-                  {/* Content */}
-                  <div className="flex grow flex-col">
-                    <h3 className="mb-[10px] text-[24px] leading-[32px] font-medium text-black transition-colors group-hover:text-black/70">
-                      {article.title}
-                    </h3>
-                    <p className="mb-[10px] line-clamp-3 text-[16px] leading-[22.4px] font-normal text-black/60">
-                      {article.desc}
-                    </p>
-                    <div className="mt-auto pt-[20px]">
-                      <div className="inline-flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] border border-transparent bg-white px-[25px] text-black shadow-sm transition-all duration-300 [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]">
-                        <span className="text-[16px] leading-[17.6px] font-medium">
-                          Read more
-                        </span>
-                        <ArrowRight
-                          className="h-[19px] w-[19px]"
-                          strokeWidth={2}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                {/* Article Title */}
+                <h3 className="mt-2 text-lg leading-snug font-bold text-slate-900 transition-colors group-hover:text-[#2b2bad] sm:text-xl">
+                  {article.title}
+                </h3>
+
+                {/* Compact Read More Pill Button */}
+                <div className="mt-5 inline-flex">
+                  <span className="text-basic inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-[#f3f4f6] px-4 py-2 font-semibold text-slate-900 shadow-sm transition-all duration-200 group-hover:bg-slate-200">
+                    Read more
+                    <ArrowRight className="size-3.5" />
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

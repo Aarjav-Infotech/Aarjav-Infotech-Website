@@ -10,14 +10,17 @@ import { HomeProvenResults } from "./home-proven-results";
 import { HomeWhatWeDo } from "./home-what-we-do";
 import { HomeProducts } from "./home-products";
 import { HomeTechnologies } from "./home-technologies";
+import { HomeSecurityCompliance } from "./home-security-compliance";
+import { HomeIndustries } from "./home-industries";
+// import {HomeCaseStudies} from "./home-casestudy";
+
+// import { HomeWhyChooseUs } from "./home-why-choose-us";
 
 // import { HomeHowWeWork } from "./home-how-we-work";
 // import { HomeTestimonials } from "./home-testimonials";
-// import { HomeSecurity } from "./home-security";
 // import { HomeContact } from "./home-contact";
-// import { HomeFaq } from "./home-faq";
+import { HomeFaq } from "./home-faq";
 // import { HomeArticles } from "./home-articles";
-// import { HomeWhyChooseUs } from "./home-why-choose-us";
 
 export function HomeContent() {
   return (
@@ -26,7 +29,7 @@ export function HomeContent() {
         align="center"
         layout="centered"
         eyebrow="AI-Native Agency"
-        eyebrowClassName=" rounded text-[14px] font-semibold tracking-wide inline-block shadow-sm border bg-[#F5F5F5] px-3.5 py-1  font-bold text-[#2b2bad] shadow-xl/20"
+        eyebrowClassName="rounded text-[14px] font-semibold tracking-wide inline-block border-b-4 boder-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-[#2b2bad] shadow-xl/20"
         title={
           <span className="relative inline-block leading-[1.08] tracking-[-2px] md:tracking-[-3px]">
             Power Your Enterprise with <br className="hidden md:inline" />
@@ -58,13 +61,18 @@ export function HomeContent() {
       <HomeWhatWeDo />
       <HomeProducts />
       <HomeTechnologies />
+      <HomeSecurityCompliance />
+      <HomeIndustries />
+      {/* <HomeCaseStudies /> */}
+      {/* < HomeWhyChooseUs /> */}
 
       {/* <HomeHowWeWork /> */}
       {/* <HomeTestimonials /> */}
-      {/* <HomeSecurity /> */}
       {/* <HomeContact /> */}
-      {/* <HomeFaq /> */}
+      <HomeFaq />
       {/* <HomeArticles /> */}
     </>
   );
 }
+
+export default HomeContent;

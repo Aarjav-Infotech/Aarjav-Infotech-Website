@@ -18,7 +18,7 @@ const stats: StatItem[] = [
   },
   {
     value: "500+",
-    label: "ENTERPRISES BUILDING ON ARJAV INFOTECH",
+    label: "ENTERPRISES BUILDING ON AARJAV INFOTECH",
   },
   {
     value: "4 Weeks",
@@ -32,8 +32,8 @@ const stats: StatItem[] = [
 
 export function HomeProvenResults() {
   return (
-    <section className="w-full py-20 ">
-      <div className="mx-auto bg-white border-y border-gray-200 py-1 max-w-[1440px] px-4 md:px-1">
+    <section className="w-full py-10">
+      <div className="mx-auto max-w-[1440px] border-y border-gray-200 bg-white px-4 py-1 md:px-1">
         <div className="grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-2 lg:grid-cols-5 lg:divide-x lg:divide-y-0">
           {stats.map((stat, index) => (
             <motion.div
@@ -44,14 +44,14 @@ export function HomeProvenResults() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center justify-center p-4 text-center"
             >
-              <span 
-                className="text-[32px] font-bold leading-tight tracking-tight text-black md:text-[36px]"
+              <span
+                className="text-[32px] leading-tight font-bold tracking-tight text-black md:text-[36px]"
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
               >
                 {stat.value}
               </span>
-              <span 
-                className="mt-2 text-[11px] font-semibold leading-relaxed tracking-[0.05em] text-gray-500 uppercase max-w-[180px]"
+              <span
+                className="mt-2 max-w-[160px] text-[11px] leading-relaxed font-semibold tracking-[0.05em] text-gray-500 uppercase"
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
               >
                 {stat.label}

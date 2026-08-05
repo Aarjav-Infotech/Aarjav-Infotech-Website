@@ -34,7 +34,9 @@ export function InlineCapsule() {
             <Image
               src="/icons/icon_1.svg"
               alt="Top Icon"
-              className="h-auto w-full rotate-[10deg] drop-shadow-md"
+              width={50}
+              height={50}
+              className="h-auto w-full rotate-[10deg] object-contain drop-shadow-md"
             />
           </motion.div>
         </span>
@@ -47,7 +49,9 @@ export function InlineCapsule() {
           <Image
             src="/icons/icon_2.svg"
             alt="Center Right Icon"
-            className="h-auto w-full rotate-[20deg] drop-shadow-2xl"
+            width={60}
+            height={60}
+            className="h-auto w-full rotate-[20deg] object-contain drop-shadow-2xl"
           />
         </motion.div>
 
@@ -59,7 +63,9 @@ export function InlineCapsule() {
           <Image
             src="/icons/icon_1.svg"
             alt="Bottom Icon"
-            className="h-auto w-full -rotate-[45deg] drop-shadow-2xl"
+            width={60}
+            height={60}
+            className="h-auto w-full -rotate-[45deg] object-contain drop-shadow-2xl"
           />
         </motion.div>
       </span>
@@ -89,7 +95,7 @@ export function HeroFloatingIcons() {
       ref={containerRef}
       className="pointer-events-none absolute inset-0 z-20 h-full w-full overflow-hidden"
     >
-      {/* Left Tube / Cylinder Asset (Hidden on mobile, visible on md screens and up) */}
+      {/* Left Tube / Cylinder Asset */}
       <motion.div
         className="absolute bottom-[25%] left-[10%] z-30 hidden w-[65px] transform-gpu [will-change:transform] md:bottom-[28%] md:left-[16%] md:block md:w-[90px]"
         style={{ y: tubeY }}
@@ -97,22 +103,29 @@ export function HeroFloatingIcons() {
         <Image
           src="/icons/cylinder.svg"
           alt="Decoration Tube"
+          width={90}
+          height={90}
           className="h-auto w-full object-contain drop-shadow-2xl"
         />
       </motion.div>
 
-      {/* Right Pinwheel Asset (Hidden on mobile, visible on md screens and up) */}
+      {/* Right Pinwheel Asset */}
       <motion.div
         className="absolute right-[8%] bottom-[10%] z-30 hidden w-[120px] md:right-[12%] md:bottom-[15%] md:block md:w-[170px]"
         style={{ y: pinwheelY }}
       >
-        <motion.img
-          src="/icons/Visual.svg"
-          alt="Decoration Pinwheel"
-          className="h-auto w-full object-contain drop-shadow-2xl"
+        <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-        />
+        >
+          <Image
+            src="/icons/Visual.svg"
+            alt="Decoration Pinwheel"
+            width={170}
+            height={170}
+            className="h-auto w-full object-contain drop-shadow-2xl"
+          />
+        </motion.div>
       </motion.div>
     </div>
   );
