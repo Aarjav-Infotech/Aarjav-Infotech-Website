@@ -1,298 +1,313 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { MoveRight } from "lucide-react";
 
-interface IndustryCard {
+export interface IndustrySolution {
+  id: string;
+  name: string;
   title: string;
   description: string;
-  imageSrc: string;
+  image: string;
+  features: string[];
+  link: string;
 }
 
-const industries: IndustryCard[] = [
+const defaultIndustries: IndustrySolution[] = [
   {
-    title: "FinTech",
+    id: "banking",
+    name: "Banking",
+    title: "Finance and Banking Solutions",
     description:
-      "In the rapidly evolving world of financial technology, staying competitive means embracing cutting-edge innovation. From payment solutions to data security, our Salesforce development capabilities ensure secure, scalable, and seamless operations for your financial services.",
-    imageSrc: "/images/fintech_card.png",
+      "Empower your financial institution with secure, innovative, and scalable digital solutions. From AI-driven fraud detection to blockchain-enabled transactions, we deliver technology that enhances efficiency and builds trust. Transform customer experiences and streamline operations with our cutting-edge banking platforms.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Digital Banking Platforms",
+      "Blockchain Security Solutions",
+      "Mobile and Web Banking Applications",
+      "AI-Enhanced Fraud Detection",
+      "Real-Time Payment Processing",
+      "Regulatory Compliance Automation",
+    ],
+    link: "/solutions/banking",
   },
   {
-    title: "Pharmaceuticals",
+    id: "insurance",
+    name: "Insurance",
+    title: "Insurance & Risk Solutions",
     description:
-      "Accelerate drug discovery, manage clinical trial data, and maintain strict regulatory compliance. Our tailor-made IT solutions enable secure data tracking and smooth workflow orchestration for pharmaceutical enterprises.",
-    imageSrc: "/images/pharma_card.png",
+      "Automate claims processing, underwriting workflows, and policy management with intelligent automation to boost speed and accuracy.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Automated Claims Processing",
+      "AI Underwriting Models",
+      "Policy Management Systems",
+      "Customer Self-Service Portals",
+      "Fraud Pattern Analytics",
+      "Regulatory Auditing Tools",
+    ],
+    link: "/solutions/insurance",
   },
   {
-    title: "Manufacturing",
+    id: "government",
+    name: "Government",
+    title: "Government & Public Sector",
     description:
-      "Optimize factory production, schedule predictive maintenance, and automate inventory management. We deploy custom smart factory integrations that connect legacy ERP systems with modern IoT platforms.",
-    imageSrc: "/images/manufacturing_card.png",
+      "Deploy sovereign, air-gapped ready AI architectures and secure citizen services designed for high security and compliance demands.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Sovereign Data Environments",
+      "Air-Gapped AI Deployments",
+      "Citizen Portal Automation",
+      "Secure Identity Systems",
+      "Audit & Compliance Tracking",
+      "Document Intelligence",
+    ],
+    link: "/solutions/government",
   },
   {
-    title: "Insurance Automation",
+    id: "healthcare",
+    name: "Healthcare",
+    title: "Healthcare & Life Sciences",
     description:
-      "Transform claims processing, automate policy underwriting, and improve customer satisfaction. Our AI-driven OCR document extraction and workflow tools reduce manual processing time by up to 80%.",
-    imageSrc: "/images/sec_6_1.png",
+      "Streamline clinical data workflows, patient management systems, and medical AI models while maintaining strict HIPAA compliance.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "HIPAA-Compliant AI Workflows",
+      "Patient Data Processing",
+      "EHR Automation & Insights",
+      "Clinical Trial Analytics",
+      "Telehealth Extensions",
+      "Diagnostic Assistant Tools",
+    ],
+    link: "/solutions/healthcare",
   },
   {
-    title: "Retail & E-commerce",
+    id: "real-estate",
+    name: "Real Estate",
+    title: "Real Estate & PropTech",
     description:
-      "Engage customers with personalized shopping experiences, synchronize stock across multiple marketplaces, and leverage predictive logistics. Our automated sales pipelines drive higher conversions.",
-    imageSrc: "/images/retail_card.png",
+      "Accelerate property valuation, lease management, and customer acquisition with predictive analytics and smart automation.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Automated Lease Processing",
+      "Predictive Valuation Models",
+      "Virtual Property Showcases",
+      "Tenant Portal Automation",
+      "Portfolio Risk Analytics",
+      "CRM & Lead Intelligence",
+    ],
+    link: "/solutions/real-estate",
   },
   {
-    title: "Logistics & Supply Chain",
+    id: "industrial",
+    name: "Industrial",
+    title: "Industrial & Manufacturing",
     description:
-      "Track fleets in real-time, optimize warehouse space utilization, and streamline vendor communication. Our custom-built routing algorithms ensure on-time delivery while reducing operation costs.",
-    imageSrc: "/images/logistics_card.png",
+      "Optimize supply chains, automate quality inspection, and enable predictive maintenance using domain-specific machine learning.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Predictive Equipment Maintenance",
+      "Automated Quality Control",
+      "Supply Chain Optimization",
+      "IoT Sensor Data Analytics",
+      "Factory Floor Insights",
+      "Inventory Forecasting",
+    ],
+    link: "/solutions/industrial",
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    title: "Enterprise Systems",
+    description:
+      "Scalable digital infrastructure built to unify complex enterprise software, reduce operational overhead, and drive growth.",
+    image: "/images/tabbing-1.svg",
+    features: [
+      "Enterprise Service Bus",
+      "Custom Microservices",
+      "Workflow Automation",
+      "Multi-Cloud Management",
+      "Data Warehouse Integration",
+      "Legacy System Modernization",
+    ],
+    link: "/solutions/enterprise",
   },
 ];
 
-export function HomeIndustries() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(4);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const viewportRef = useRef<HTMLDivElement>(null);
+interface HomeIndustriesProps {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  industries?: IndustrySolution[];
+}
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+export function HomeIndustries({
+  eyebrow = "Digital Solutions",
+  title = "Built for your industry",
+  subtitle = "Explore our suite of AI-powered products designed to automate operations, improve accuracy, and drive growth across industries.",
+  industries = defaultIndustries,
+}: HomeIndustriesProps) {
+  const activeIndustries =
+    industries && industries.length > 0 ? industries : defaultIndustries;
 
-  // Responsive breakpoints
-  useEffect(() => {
-    const checkResponsive = () => {
-      const width = window.innerWidth;
-      if (width >= 1024) {
-        setVisibleCount(4);
-      } else if (width >= 768) {
-        setVisibleCount(2);
-      } else {
-        setVisibleCount(1);
-      }
-    };
+  const [activeTab, setActiveTab] = useState<string>(
+    activeIndustries[0]?.id ?? "banking",
+  );
 
-    // Initial check
-    checkResponsive();
-
-    window.addEventListener("resize", checkResponsive);
-    return () => window.removeEventListener("resize", checkResponsive);
-  }, []);
-
-  // Measure container width for precise pixel math
-  useEffect(() => {
-    if (!viewportRef.current) return;
-    const observer = new ResizeObserver((entries) => {
-      if (entries[0]) {
-        setContainerWidth(entries[0].contentRect.width);
-      }
-    });
-    observer.observe(viewportRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const totalCards = industries.length;
-  const maxIndex = Math.max(0, totalCards - visibleCount);
-
-  // Ensure currentIndex stays within bounds on resize (e.g. going from mobile to desktop)
-  useEffect(() => {
-    if (currentIndex > maxIndex) {
-      setCurrentIndex(maxIndex);
-    }
-  }, [maxIndex, currentIndex]);
-
-  const handleNext = () =>
-    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
-  const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
-
-  // Math for exact translation to prevent track shifting on hover
-  const gap = 30; // 30px gap
-
-  const getCardWidth = (index: number) => {
-    if (visibleCount === 1) return containerWidth;
-
-    const W = containerWidth - (visibleCount - 1) * gap;
-    if (hoveredIndex === null) return W / visibleCount;
-
-    if (visibleCount === 4) {
-      if (index === hoveredIndex) return W * 0.45;
-      return W * (0.55 / 3);
-    }
-
-    if (visibleCount === 2) {
-      if (index === hoveredIndex) return W * 0.65;
-      return W * 0.35;
-    }
-
-    return W / visibleCount;
-  };
-
-  const getTrackTranslateX = () => {
-    if (containerWidth === 0) return 0;
-    let translate = 0;
-    for (let i = 0; i < currentIndex; i++) {
-      translate += getCardWidth(i) + gap;
-    }
-    return -translate;
-  };
+  const currentIndustry: IndustrySolution =
+    activeIndustries.find((item) => item.id === activeTab) ??
+    activeIndustries[0] ??
+    defaultIndustries[0]!;
 
   return (
-    <section className="relative flex w-full flex-col justify-center px-4 py-20 md:h-[971px] md:px-8">
-      {/* Background Graphic Box */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src="/images/section_6.png"
-          fill
-          // className="object-cover"
-          alt="Built for your industry background grid"
-          priority
-          sizes="100vw"
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-col px-4 md:px-0">
+    <section className="relative w-full py-8 sm:py-4">
+      {/* Outer Gradient Container */}
+      <div className="mx-auto max-w-full overflow-hidden rounded-[24px] bg-gradient-to-b from-[#f4f7fc] via-[#e6eeeb]/50 to-[#92b4f2] p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14">
         {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-[30px] flex flex-col gap-[10px] px-4 md:px-[50px]"
-        >
-          <h2 className="text-[48px] leading-[49px] font-normal tracking-tight text-white">
-            Built for your industry
-          </h2>
-          <p className="text-[16px] leading-[22.4px] font-normal text-white">
-            We tailor to your data + compliance needs
-          </p>
-        </motion.div>
-
-        {/* Carousel Viewport */}
-        <div className="relative h-[513px] w-full overflow-hidden">
-          <div
-            ref={viewportRef}
-            className="h-full w-full"
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <div
-              className="flex h-full gap-[30px] transition-transform duration-500 ease-in-out"
-              style={{
-                transform:
-                  containerWidth > 0
-                    ? `translateX(${getTrackTranslateX()}px)`
-                    : `translateX(0px)`,
-              }}
-            >
-              {industries.map((card, index) => {
-                // Calculate precise widths based on hover math
-                let widthStyle = {};
-                if (containerWidth > 0) {
-                  widthStyle = { width: `${getCardWidth(index)}px` };
-                }
-
-                return (
-                  <div
-                    key={card.title}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    className={cn(
-                      "group relative h-full shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-white/10 shadow-lg transition-all duration-500 ease-in-out",
-                      containerWidth === 0 &&
-                        "w-full md:w-[calc((100%-30px)/2)] lg:w-[calc((100%-90px)/4)]",
-                    )}
-                    style={widthStyle}
-                  >
-                    {/* Background image */}
-                    <Image
-                      src={card.imageSrc}
-                      fill
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      alt={`${card.title} Background image`}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
-
-                    {/* Card Content Panel */}
-                    <div
-                      className={cn(
-                        "absolute bottom-0 left-0 z-20 flex flex-col overflow-hidden rounded-tr-[20px] bg-white transition-all duration-500 ease-in-out",
-                        hoveredIndex === index
-                          ? "w-full p-[20px]"
-                          : "w-max p-[20px]",
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          "flex items-center transition-all duration-500",
-                          hoveredIndex === index ? "mb-[14px]" : "mb-0",
-                        )}
-                      >
-                        <h3
-                          className={cn(
-                            "leading-none whitespace-nowrap text-black transition-all duration-500",
-                            hoveredIndex === index
-                              ? "text-[24px] font-bold"
-                              : "text-[16px] font-medium",
-                          )}
-                        >
-                          {card.title}
-                        </h3>
-                      </div>
-                      <div
-                        className={cn(
-                          "grid w-full transition-all duration-500 ease-in-out",
-                          hoveredIndex === index
-                            ? "relative grid-rows-[1fr] opacity-100"
-                            : "absolute grid-rows-[0fr] opacity-0",
-                        )}
-                      >
-                        <div className="flex min-w-[200px] flex-col gap-[14px] overflow-hidden">
-                          <p className="line-clamp-4 text-[14px] leading-relaxed text-[#475467]">
-                            {card.description}
-                          </p>
-                          <a
-                            href="#read-more"
-                            className="text-[14px] font-semibold text-[#08388D] hover:underline"
-                          >
-                            Read More
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+        <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
+          {eyebrow && (
+            <div className="boder-slate-200 mb-10 inline-flex items-center gap-1.5 rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+              {eyebrow}
             </div>
+          )}
+
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-[46px] lg:leading-tight">
+            {title}
+          </h2>
+
+          {subtitle && (
+            <p className="mt-2 overflow-hidden text-lg leading-relaxed text-ellipsis whitespace-nowrap text-slate-600 sm:mt-3 sm:text-lg">
+              {subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Full-Width Exact Match Tab Switcher Bar */}
+        <div className="no-scrollbar mx-auto mb-10 w-full max-w-full overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] sm:mb-14 sm:p-2">
+          <div className="flex min-w-max items-center justify-between gap-1 px-2 sm:gap-2">
+            {activeIndustries.map((ind) => {
+              const isActive = activeTab === ind.id;
+
+              return (
+                <button
+                  key={ind.id}
+                  onClick={() => setActiveTab(ind.id)}
+                  className={`text-basic sm:text-basic relative flex-1 rounded-[50px] px-6 py-3 text-center font-semibold transition-all duration-100 sm:px-8 ${
+                    isActive ? "font-bold text-white" : "text-slate-900"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndustryTab"
+                      className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] shadow-[0_8px_16px_rgba(0,38,136,0.35)]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10">{ind.name}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Navigation Arrow Controls */}
-        <div className="mt-[45px] flex items-center justify-end gap-4 px-4 md:px-[50px]">
-          <button
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            className={cn(
-              "flex h-[44px] w-[44px] items-center justify-center rounded-[50px] transition-all duration-300",
-              currentIndex === 0
-                ? "cursor-not-allowed bg-white/5 text-white/30"
-                : "cursor-pointer bg-white/20 text-white hover:scale-105 hover:bg-white hover:text-black",
-            )}
-            aria-label="Previous slide"
+        {/* Dynamic Card Container with Stacking Slide & Scale Animation */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndustry.id}
+            initial={{ opacity: 0, x: 100, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -100, scale: 0.95 }}
+            transition={{
+              duration: 0.5,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+            className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
           >
-            <ArrowLeft className="h-[14px] w-[14px]" />
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentIndex >= maxIndex}
-            className={cn(
-              "flex h-[44px] w-[44px] items-center justify-center rounded-[50px] transition-all duration-300",
-              currentIndex >= maxIndex
-                ? "cursor-not-allowed bg-white/5 text-white/30"
-                : "cursor-pointer bg-white/20 text-white hover:scale-105 hover:bg-white hover:text-black",
-            )}
-            aria-label="Next slide"
-          >
-            <ArrowRight className="h-[14px] w-[14px]" />
-          </button>
-        </div>
+            <div className="relative flex flex-col items-center lg:flex-row">
+              {/* Left Side: Taller Image Container */}
+              <motion.div
+                initial={{ opacity: 0, x: -40, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="relative h-[280px] w-full overflow-hidden rounded-[20px] shadow-2xl sm:h-[380px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
+              >
+                <Image
+                  src={currentIndustry.image}
+                  alt={currentIndustry.title}
+                  fill
+                  className="object-cover object-center sm:object-left"
+                  priority
+                />
+              </motion.div>
+
+              {/* Right Side: Exact Hugging White Card */}
+              <motion.div
+                initial={{ opacity: 0, x: 60, scale: 0.92 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-28 lg:h-[477px] lg:w-[58%] lg:p-11"
+              >
+                <div>
+                  {/* Title */}
+                  <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-2xl">
+                    {currentIndustry.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-basic sm:text-basic mt-2 leading-[30] leading-relaxed text-black sm:mt-3">
+                    {currentIndustry.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
+                    {currentIndustry.features.map((feature, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.2 + idx * 0.05 }}
+                        className="flex items-center gap-2 sm:gap-2.5"
+                      >
+                        <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
+                        <span className="text-basic sm:text-basic font-semibold text-slate-900">
+                          {feature}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Read More Pill Button */}
+                <div className="mt-6 flex justify-start sm:mt-8">
+                  <Link
+                    href={currentIndustry.link}
+                    className="text-basic sm:text-basic inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5"
+                  >
+                    Read More
+                    <MoveRight className="size-3.5 sm:size-4" />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

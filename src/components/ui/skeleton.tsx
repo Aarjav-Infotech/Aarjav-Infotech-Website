@@ -1,19 +1,17 @@
-import type { ComponentProps } from "react";
-
+// src/components/ui/skeleton.tsx
 import { cn } from "@/lib/utils";
 
-/**
- * Loading placeholder with pulse animation.
- */
-function Skeleton({ className, ...props }: ComponentProps<"div">) {
+export function Skeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      data-slot="skeleton"
-      className={cn("bg-muted animate-pulse rounded-md", className)}
-      aria-hidden="true"
+      className={cn(
+        "animate-pulse rounded-md bg-slate-200 dark:bg-slate-800",
+        className,
+      )}
       {...props}
     />
   );
 }
-
-export { Skeleton };

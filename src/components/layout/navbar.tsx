@@ -44,32 +44,21 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1.0, ease: "easeOut" }}
-      className="z-sticky group fixed top-[30px] right-0 left-0 flex w-full justify-center"
+      className="z-sticky fixed top-[30px] right-0 left-0 flex w-full justify-center"
     >
       <div className="w-full px-4 md:px-8">
         <nav
           className={cn(
             "mx-auto flex h-[72px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-[30px] py-[10px] shadow-sm ring-1 ring-black/5 transition-all duration-300",
-            isScrolled
-              ? "bg-white/60 backdrop-blur-md "
-              : "bg-white",
+            isScrolled ? "bg-white/60 backdrop-blur-md" : "bg-white",
           )}
           aria-label="Main navigation"
         >
-          {/* <Link
-            href={ROUTES.home}
-            className="text-lg font-bold tracking-tight transition-opacity hover:opacity-80"
-            onClick={closeMenu}
-          >
-            {APP_NAME}
-          </Link> */}
-
           <Link
             href={ROUTES.home}
             className="flex items-center transition-opacity hover:opacity-80"
             onClick={closeMenu}
           >
-            {/* {APP_NAME}  */}
             <Image
               src="/svg/logo.svg"
               alt={APP_NAME}
@@ -87,12 +76,24 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-foreground hover:text-primary flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    /* Added 'group/link' scoped strictly to this anchor tag */
+                    "group/link text-basic text-foreground hover:text-primary relative flex items-center gap-1 rounded-md px-3 py-2 font-medium transition-colors",
                     pathname === link.href && "text-primary font-semibold",
                   )}
                   aria-current={pathname === link.href ? "page" : undefined}
                 >
-                  {link.label}
+                  {/* Text Container */}
+                  <span className="relative inline-block">
+                    {link.label}
+                    {/* Underline only triggers when THIS specific link is hovered */}
+                    <span
+                      className={cn(
+                        "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
+                        pathname === link.href && "scale-x-100",
+                      )}
+                    />
+                  </span>
+
                   {"hasDropdown" in link && link.hasDropdown && (
                     <ChevronDown className="size-4 opacity-50" />
                   )}
@@ -104,7 +105,8 @@ export function Navbar() {
           <div className="hidden md:block">
             <Button
               asChild
-              className="px-7 py-6 rounded-full text-white shadow-md border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] gap-3 hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] bg-[length:200%_200%] hover:px-7.5 transition-all ease-in-out duration-500">
+              className="gap-3 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-7 py-6 text-white shadow-md transition-all duration-500 ease-in-out hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] hover:px-7.5"
+            >
               <Link href={ROUTES.contact}>
                 Book a discovery call <ArrowRight className="ml-1 size-4" />
               </Link>
@@ -129,8 +131,8 @@ export function Navbar() {
         {isOpen && (
           <nav
             id="mobile-menu"
-            className="border-t py-4 md:hidden"
-            aria-label="Mobile navigation"
+            className="border-t bg-white/90 py-4 backdrop-blur-md md:hidden"
+            aria-label="Mobile navigation "
           >
             <ul className="space-y-1" role="list">
               {NAV_LINKS.map((link) => (
