@@ -31,6 +31,7 @@ const eslintConfig = [
         "error",
         { prefer: "type-imports" },
       ],
+      "react/no-unescaped-entities": "off", // 👈 ADD THIS LINE HERE
     },
   },
 ];

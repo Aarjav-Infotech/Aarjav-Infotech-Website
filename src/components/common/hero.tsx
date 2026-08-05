@@ -94,7 +94,7 @@ export function Hero({
           className={cn(
             "relative z-10",
             layout === "split"
-              ? "grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] site-container"
+              ? "site-container grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
               : cn("max-w-[953px]", align === "center" && "mx-auto"),
           )}
         >
@@ -201,19 +201,12 @@ export function Hero({
                     size="lg"
                     asChild
                     className={cn(
-                      (action.variant ?? "default") !== "outline" &&
-                        "px-7 py-6 rounded-full text-white shadow-md border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)]  gap-3 hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] bg-[length:200%_200%] hover:px-7.5 transition-all ease-in-out duration-500",
                       (action.variant ?? "default") === "outline" &&
                         "border border-transparent bg-white text-black [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]",
                       "flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] px-[25px] text-[16px] leading-[17.6px] font-medium transition-all duration-300",
                     )}
                   >
-                    <Link
-                      href={action.href}
-                      className="flex items-center gap-[19px]"
-                    >
-                      {action.label}
-                    </Link>
+                    <Link href={action.href}>{action.label}</Link>
                   </Button>
                 ))}
               </motion.div>
