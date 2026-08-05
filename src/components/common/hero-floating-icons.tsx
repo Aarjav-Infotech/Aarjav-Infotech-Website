@@ -102,10 +102,11 @@ export function HeroFloatingIcons() {
       >
         <Image
           src="/icons/cylinder.svg"
-          alt="Decoration Tube"
-          width={90}
-          height={90}
-          className="h-auto w-full object-contain drop-shadow-2xl"
+          alt="Cylinder Icon"
+          width={70}
+          height={70}
+          className="h-full w-full object-contain"
+          style={{ height: "auto", width: "auto" }}
         />
       </motion.div>
 
