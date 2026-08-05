@@ -111,7 +111,7 @@ export function Hero({
               },
             }}
             className={cn(
-              "flex flex-col space-y-6",
+              "mt-15 flex flex-col space-y-6",
               layout === "centered" && "items-center text-center",
               align === "left" && "items-start text-left",
               align === "center" && "items-center text-center",
