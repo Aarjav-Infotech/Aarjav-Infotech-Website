@@ -166,11 +166,11 @@ export function HomeIndustries({
   return (
     <section className="relative w-full py-8 sm:py-4">
       {/* Outer Gradient Container */}
-      <div className="mx-auto max-w-full overflow-hidden rounded-[24px] bg-gradient-to-b from-[#f4f7fc] via-[#e6eeeb]/50 to-[#92b4f2] p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-gradient-to-b from-[#f4f7fc] via-[#e6eeeb]/50 to-[#92b4f2] p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14">
         {/* Header Section */}
         <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
           {eyebrow && (
-            <div className="boder-slate-200 mb-10 inline-flex items-center gap-1.5 rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold text-[#2b2bad] shadow-sm">
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>
@@ -181,15 +181,15 @@ export function HomeIndustries({
           </h2>
 
           {subtitle && (
-            <p className="mt-2 overflow-hidden text-lg leading-relaxed text-ellipsis whitespace-nowrap text-slate-600 sm:mt-3 sm:text-lg">
+            <p className="mt-2 text-sm leading-relaxed whitespace-normal text-slate-600 sm:mt-3 sm:text-base md:text-lg">
               {subtitle}
             </p>
           )}
         </div>
 
-        {/* Full-Width Exact Match Tab Switcher Bar */}
-        <div className="no-scrollbar mx-auto mb-10 w-full max-w-full overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] sm:mb-14 sm:p-2">
-          <div className="flex min-w-max items-center justify-between gap-1 px-2 sm:gap-2">
+        {/* Full-Width Tab Switcher Bar */}
+        <div className="no-scrollbar mx-auto mb-8 w-full max-w-full overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2 shadow-[0_4px_20px_rgba(0,0,0,0.04)] sm:mb-14 sm:p-2.5">
+          <div className="flex min-w-max items-center justify-between gap-1 px-1 sm:gap-2 sm:px-2">
             {activeIndustries.map((ind) => {
               const isActive = activeTab === ind.id;
 
@@ -197,7 +197,7 @@ export function HomeIndustries({
                 <button
                   key={ind.id}
                   onClick={() => setActiveTab(ind.id)}
-                  className={`text-basic sm:text-basic relative flex-1 rounded-[50px] px-6 py-3 text-center font-semibold transition-all duration-100 sm:px-8 ${
+                  className={`relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-xs font-semibold transition-all duration-100 sm:px-8 sm:py-3 sm:text-base ${
                     isActive ? "font-bold text-white" : "text-slate-900"
                   }`}
                 >
@@ -233,7 +233,7 @@ export function HomeIndustries({
             className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
           >
             <div className="relative flex flex-col items-center lg:flex-row">
-              {/* Left Side: Taller Image Container */}
+              {/* Left Side: Image Container */}
               <motion.div
                 initial={{ opacity: 0, x: -40, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -242,7 +242,7 @@ export function HomeIndustries({
                   delay: 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="relative h-[280px] w-full overflow-hidden rounded-[20px] shadow-2xl sm:h-[380px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
+                className="relative h-[220px] w-full overflow-hidden rounded-[20px] shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
               >
                 <Image
                   src={currentIndustry.image}
@@ -253,7 +253,7 @@ export function HomeIndustries({
                 />
               </motion.div>
 
-              {/* Right Side: Exact Hugging White Card */}
+              {/* Right Side: Card Content */}
               <motion.div
                 initial={{ opacity: 0, x: 60, scale: 0.92 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -271,12 +271,12 @@ export function HomeIndustries({
                   </h3>
 
                   {/* Description */}
-                  <p className="text-basic sm:text-basic mt-2 leading-[30] leading-relaxed text-black sm:mt-3">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700 sm:mt-3 sm:text-base">
                     {currentIndustry.description}
                   </p>
 
                   {/* Features List */}
-                  <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
+                  <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
                     {currentIndustry.features.map((feature, idx) => (
                       <motion.div
                         key={idx}
@@ -286,7 +286,7 @@ export function HomeIndustries({
                         className="flex items-center gap-2 sm:gap-2.5"
                       >
                         <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
-                        <span className="text-basic sm:text-basic font-semibold text-slate-900">
+                        <span className="text-xs font-semibold text-slate-900 sm:text-sm">
                           {feature}
                         </span>
                       </motion.div>
@@ -298,7 +298,7 @@ export function HomeIndustries({
                 <div className="mt-6 flex justify-start sm:mt-8">
                   <Link
                     href={currentIndustry.link}
-                    className="text-basic sm:text-basic inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5"
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 text-xs font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
                   >
                     Read More
                     <MoveRight className="size-3.5 sm:size-4" />
