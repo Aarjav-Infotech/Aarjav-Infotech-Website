@@ -51,7 +51,7 @@ export function HomeArticles({
   articles = defaultArticles,
 }: HomeArticlesProps) {
   return (
-    <section className="relative w-full bg-white py-10 md:py-10">
+    <section className="relative w-full bg-white py-10 md:py-12">
       <div className="mx-auto max-w-[1404px] px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center">

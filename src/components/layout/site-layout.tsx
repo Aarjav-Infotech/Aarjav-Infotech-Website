@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-// import { Footer } from "@/components/layout/footer";
+import { LenisProvider } from "@/components/common/lenis-provider";
+import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
 interface SiteLayoutProps {
@@ -12,10 +13,12 @@ interface SiteLayoutProps {
  */
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="flex-1">{children}</div>
-      {/* <Footer /> */}
-    </div>
+    <LenisProvider>
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <div className="flex-1">{children}</div>
+        <Footer />
+      </div>
+    </LenisProvider>
   );
 }

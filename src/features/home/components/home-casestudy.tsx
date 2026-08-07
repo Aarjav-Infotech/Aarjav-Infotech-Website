@@ -4,16 +4,24 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { Heading } from "@/components/common/heading";
 import { FadeIn } from "@/components/common/motion";
 import { Button } from "@/components/ui/button";
 
 export interface CaseStudyItem {
   id: string;
+  number: string;
   title: string;
+  subtitle: string;
   description: string;
-  industry: string;
+  tags: string[];
+  metrics: { value: string; label: string }[];
   image: string;
   link: string;
 }
@@ -21,28 +29,49 @@ export interface CaseStudyItem {
 const defaultProjects: CaseStudyItem[] = [
   {
     id: "sahaj-construction",
+    number: "01",
     title: "Sahaj Construction",
+    subtitle: "Full-Stack Construction Website",
     description:
-      "A complete full-stack construction company website built with Vite, React, Tailwind CSS, and Node.js.",
-    industry: "SaaS",
+      "A complete full-stack construction company website built with Vite, React, Tailwind CSS, and Node.js. Designed to showcase projects, services, and company credentials with a modern, responsive layout optimised for mobile, tablet, and desktop.",
+    tags: ["REACT", "NODE.JS", "POSTGRESQL", "TAILWIND CSS", "UI/UX DESIGN"],
+    metrics: [
+      { value: "On-time", label: "Delivery" },
+      { value: "100%", label: "Responsive" },
+      { value: "Full", label: "Stack" },
+    ],
     image: "/images/case-study-1.svg",
     link: "/case-studies/sahaj-construction",
   },
   {
     id: "glamora-jewels",
+    number: "02",
     title: "Glamora Jewels",
+    subtitle: "High-Converting Jewelry Store",
     description:
-      "A high-converting landing page for a fine jewelry brand focused on showcasing 18K, 14K & 10K gold with lab-grown diamonds.",
-    industry: "SaaS",
+      "A high-converting landing page for a fine jewelry brand focused on showcasing 18K, 14K & 10K gold with lab-grown diamonds, built with scalable frontend tools.",
+    tags: ["REACT", "NODE.JS", "POSTGRESQL", "CONTENT SEO"],
+    metrics: [
+      { value: "2.4x", label: "Conversion" },
+      { value: "100%", label: "Responsive" },
+      { value: "Fast", label: "Checkout" },
+    ],
     image: "/images/case-study-2.svg",
     link: "/case-studies/glamora-jewels",
   },
   {
     id: "delfa-pattern-generator",
+    number: "03",
     title: "Delfa Pattern Generator",
+    subtitle: "AI Textile Pattern Platform",
     description:
       "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets.",
-    industry: "SaaS",
+    tags: ["PYTHON", "REACT", "FASTAPI", "TAILWIND CSS"],
+    metrics: [
+      { value: "10k+", label: "Patterns Generated" },
+      { value: "99.9%", label: "Uptime" },
+      { value: "AI", label: "Powered" },
+    ],
     image: "/images/case-study-3.svg",
     link: "/case-studies/delfa-pattern-generator",
   },
@@ -63,51 +92,19 @@ export function HomeCaseStudies({
 }: HomeCaseStudiesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll timeline across sticky track
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Card 1: Starts perfectly centered (50%), holds until heading scrolls away, then shifts left (0%)
-  const card1Left = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.45],
-    ["50%", "50%", "0%"],
-  );
-  const card1X = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.45],
-    ["-50%", "-50%", "0%"],
-  );
-
-  // Card 2: Starts offscreen (100% y), slides UP as Card 1 shifts
-  const card2Y = useTransform(
-    scrollYProgress,
-    [0, 0.25, 0.6],
-    ["100%", "100%", "0%"],
-  );
-  const card2Left = useTransform(
-    scrollYProgress,
-    [0, 0.6, 0.75],
-    ["8%", "8%", "8%"],
-  );
-
-  // Card 3: Slides UP over Card 2 on further scroll
-  const card3Y = useTransform(
-    scrollYProgress,
-    [0, 0.65, 0.95],
-    ["100%", "100%", "0%"],
-  );
-
   return (
-    <div className="bg-background w-full">
-      {/* 1. HEADER SECTION (Scrolls UP naturally and moves off-screen first) */}
-      <div className="mx-auto w-full max-w-[1364px] px-4 pt-12 pb-8 sm:px-6">
+    <section className="bg-background relative w-full pt-12 pb-12 sm:pt-16">
+      {/* 1. Header Section */}
+      <div className="mx-auto w-full max-w-[1364px] px-4 pb-8 sm:px-6 sm:pb-12">
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
             {badge && (
-              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-blue-600 shadow-sm">
+              <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1 text-xs font-semibold text-blue-600 shadow-xs">
                 <span className="size-1.5 rounded-full bg-blue-600" />
                 {badge}
               </div>
@@ -119,7 +116,7 @@ export function HomeCaseStudies({
               {title}
             </Heading>
             {subtitle && (
-              <p className="mt-2 text-center text-sm text-slate-600 sm:text-base">
+              <p className="mt-3 text-center text-sm font-medium text-slate-600 sm:text-base">
                 {subtitle}
               </p>
             )}
@@ -127,56 +124,35 @@ export function HomeCaseStudies({
         </FadeIn>
       </div>
 
-      {/* 2. STICKY CARDS TRACK (Only the card container stays pinned in screen) */}
-      <div ref={containerRef} className="relative w-full lg:h-[350vh]">
-        {/* Sticky viewport frame pinned directly below top navbar */}
-        <div className="flex min-h-[calc(100vh-100px)] w-full flex-col items-center justify-between overflow-hidden pb-6 lg:sticky lg:top-[100px]">
-          {/* --- MOBILE & TABLET LAYOUT --- */}
-          <div className="my-6 flex w-full flex-col gap-8 px-4 lg:hidden">
-            {projects.map((project, idx) => (
-              <CaseStudyCard key={project.id} project={project} index={idx} />
+      {/* 2. Scroll Track Container */}
+      <div ref={containerRef} className="relative w-full lg:h-[260vh]">
+        <div className="flex w-full flex-col items-center justify-start lg:sticky lg:top-[100px] lg:pb-12">
+          {/* Mobile & Tablet Layout */}
+          <div className="my-4 flex w-full flex-col gap-6 px-4 lg:hidden">
+            {projects.map((project) => (
+              <CaseStudyCard key={project.id} project={project} />
             ))}
           </div>
 
-          {/* --- DESKTOP LAYOUT: ONLY THE CARD IS PINNED & FULLY VISIBLE --- */}
-          <div className="relative mx-auto my-auto hidden h-[901px] max-h-[calc(100vh-180px)] w-full max-w-[1200px] overflow-hidden lg:block">
-            {/* Card 1 (Initially Centered) */}
-            {projects[0] && (
-              <motion.div
-                style={{ left: card1Left, x: card1X }}
-                className="absolute inset-y-0 z-10 flex w-full max-w-[999px] justify-center"
-              >
-                <CaseStudyCard project={projects[0]} index={0} />
-              </motion.div>
-            )}
-
-            {/* Card 2 (Slides UP as Card 1 shifts left) */}
-            {projects[1] && (
-              <motion.div
-                style={{ y: card2Y, left: card2Left }}
-                className="absolute inset-y-0 z-20 flex w-full max-w-[999px] justify-center"
-              >
-                <CaseStudyCard project={projects[1]} index={1} />
-              </motion.div>
-            )}
-
-            {/* Card 3 (Slides UP over Card 2) */}
-            {projects[2] && (
-              <motion.div
-                style={{ y: card3Y }}
-                className="absolute inset-y-0 left-[16%] z-30 flex w-full max-w-[999px] justify-center"
-              >
-                <CaseStudyCard project={projects[2]} index={2} />
-              </motion.div>
-            )}
+          {/* Desktop Fixed Viewport Container */}
+          <div className="relative mx-auto hidden h-[580px] w-full max-w-[1240px] items-center px-4 lg:flex">
+            {projects.map((project, index) => (
+              <StackingCard
+                key={project.id}
+                project={project}
+                index={index}
+                total={projects.length}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
           </div>
 
-          {/* Bottom CTA Button */}
-          <FadeIn className="flex w-full shrink-0 justify-center py-4">
+          {/* Bottom Button */}
+          <FadeIn className="relative z-40 flex w-full shrink-0 justify-center pt-6 sm:pt-10">
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] px-8 font-bold text-white shadow-[0_6px_20px_rgba(0,49,165,0.35)] hover:opacity-95"
+              className="rounded-full bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] px-6 font-bold text-white shadow-[0_6px_20px_rgba(0,49,165,0.35)] hover:opacity-95 sm:px-8"
             >
               <Link href="/case-studies" className="flex items-center gap-2">
                 View all Case studies
@@ -186,80 +162,123 @@ export function HomeCaseStudies({
           </FadeIn>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-// Card Component with Figma Specs (999px width, 901px height, 959px x 597px image bounds)
-function CaseStudyCard({
-  project,
-  index,
-}: {
+interface StackingCardProps {
   project: CaseStudyItem;
   index: number;
-}) {
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}
+
+function StackingCard({
+  project,
+  index,
+  total,
+  scrollYProgress,
+}: StackingCardProps) {
+  const leftPeekOffset = index * 80;
+
+  const start = index === 0 ? 0 : (index - 0.5) / (total - 0.5);
+  const end = index === 0 ? 0 : index / (total - 0.5);
+
+  const y = useTransform(
+    scrollYProgress,
+    [start, end],
+    [index === 0 ? "0%" : "100%", "0%"],
+  );
+
   return (
-    <div className="group flex h-full max-h-[901px] w-full max-w-[999px] flex-col justify-between overflow-hidden rounded-[40px] border border-slate-200/80 bg-[#f4f6f8] p-[20px_20px_12px_20px] shadow-[0_12px_36px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-2xl">
-      {/* Website Preview Container (Figma: 959px x 597px) */}
-      <div className="relative mx-auto h-[597px] max-h-[62%] w-full max-w-[959px] shrink-0 overflow-hidden rounded-[32px] border border-slate-200/50 bg-white shadow-sm">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
-        />
+    <motion.div
+      style={{
+        left: `${leftPeekOffset}px`,
+        width: `calc(100% - ${leftPeekOffset}px)`,
+        y: index === 0 ? 0 : y,
+        zIndex: index + 10,
+      }}
+      className="absolute top-0 h-[580px]"
+    >
+      <CaseStudyCard project={project} />
+    </motion.div>
+  );
+}
+
+function CaseStudyCard({ project }: { project: CaseStudyItem }) {
+  return (
+    <div className="group relative flex h-auto min-h-[500px] w-full flex-col overflow-hidden rounded-[24px] border border-slate-200/80 bg-[#EAEAEA] p-5 shadow-[-10px_0_30px_rgba(0,0,0,0.06)] sm:rounded-[32px] sm:p-8 lg:h-[580px] lg:rounded-[36px] lg:p-10">
+      {/* Top Header Row */}
+      <div className="relative mb-4 flex shrink-0 items-center justify-between sm:mb-6">
+        <span className="text-xs font-semibold text-slate-800 sm:text-sm">
+          {project.number}
+        </span>
+        <h3 className="absolute left-[65%] w-full -translate-x-1/2 text-lg font-bold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
+          {project.title}
+        </h3>
+        <div className="w-6" />
       </div>
 
-      {/* Slide Dots Indicator */}
-      <div className="mt-3 flex shrink-0 items-center justify-start gap-2 px-2">
-        {[0, 1, 2].map((dotIndex) => (
+      {/* Tech Tags Row */}
+      <div className="mb-5 flex shrink-0 flex-wrap items-center gap-1.5 sm:mb-8 sm:gap-2.5">
+        {project.tags.map((tag) => (
           <span
-            key={dotIndex}
-            className={`size-2.5 rounded-full transition-colors duration-200 ${
-              index === dotIndex ? "bg-blue-600" : "bg-slate-300"
-            }`}
-          />
+            key={tag}
+            className="rounded-full border border-slate-200/60 bg-white px-2.5 py-1 text-[9px] font-bold tracking-wider text-slate-800 uppercase shadow-2xs sm:px-3.5 sm:py-1.5 sm:text-[11px]"
+          >
+            {tag}
+          </span>
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="mt-2 w-full shrink-0 border-b border-slate-200/80" />
-
-      {/* Card Details Bottom Layout */}
-      <div className="mt-3 grid shrink-0 gap-6 px-2 md:grid-cols-12 md:items-end">
-        {/* Title & Read More Button */}
-        <div className="flex flex-col items-start justify-between gap-3 md:col-span-5">
-          <h3 className="line-clamp-1 text-left text-xl font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-            {project.title}
-          </h3>
-
-          <Link
-            href={project.link}
-            className="inline-flex items-center gap-2 rounded-full bg-[#003db8] px-6 py-2.5 text-xs font-bold text-white shadow-[0_8px_20px_rgba(0,61,184,0.35)] transition-all hover:bg-[#0031a5] sm:text-sm"
-          >
-            Read More
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
-
-        {/* Description & Industry Metadata */}
-        <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2 md:col-span-7">
-          <div>
-            <span className="text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-              DESCRIPTION
-            </span>
-            <p className="mt-1 line-clamp-2 text-xs leading-relaxed font-medium text-slate-700 sm:text-sm">
+      {/* Main Figma Content Grid */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+        {/* Left Column */}
+        <div className="flex flex-col justify-between space-y-4 lg:col-span-5 lg:h-full lg:space-y-6">
+          <div className="border-l-[4px] border-white pl-4 sm:border-l-[7px] sm:pl-[24px] lg:pl-[30px]">
+            <h4 className="text-base font-bold text-slate-900 sm:text-lg lg:text-xl">
+              {project.subtitle}
+            </h4>
+            <p className="mt-2 text-xs leading-relaxed font-normal text-slate-600 sm:text-sm">
               {project.description}
             </p>
           </div>
 
+          {/* Metrics White Card */}
+          <div className="grid grid-cols-3 divide-x divide-slate-200/80 rounded-xl border border-slate-100 bg-white px-2 py-3 text-center shadow-2xs sm:rounded-2xl sm:py-4">
+            {project.metrics.map((metric, idx) => (
+              <div key={idx} className="px-1">
+                <div className="text-xs font-bold text-slate-900 sm:text-sm lg:text-base">
+                  {metric.value}
+                </div>
+                <div className="mt-0.5 text-[9px] font-medium text-slate-500 sm:text-[11px]">
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Read More Pill Button */}
           <div>
-            <span className="text-[11px] font-bold tracking-wider text-slate-400 uppercase">
-              INDUSTRY
-            </span>
-            <p className="mt-1 text-xs font-semibold text-slate-900 sm:text-sm">
-              {project.industry}
-            </p>
+            <Link
+              href={project.link}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-2 text-xs font-bold text-slate-900 shadow-2xs transition-all hover:bg-slate-50 sm:px-6 sm:py-2.5"
+            >
+              Read More
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Column Image Container */}
+        <div className="relative flex items-center justify-center lg:col-span-7">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-2xs sm:rounded-2xl">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-top"
+            />
           </div>
         </div>
       </div>

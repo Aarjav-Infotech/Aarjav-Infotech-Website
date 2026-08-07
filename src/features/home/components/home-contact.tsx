@@ -1,166 +1,205 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import Image from "next/image";
+import { Mail, Headphones, Paperclip } from "lucide-react";
 
-const NAV_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
-  { name: "Services", href: "/services" },
-  { name: "Technologies", href: "/technologies" },
-  { name: "Security & Compliance", href: "/security" },
-  { name: "FAQs", href: "/faqs" },
-];
+export function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    emailOrPhone: "",
+    projectDetails: "",
+  });
+  const [fileName, setFileName] = useState<string | null>(null);
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
-
-  // 1. Lock/Unlock background body scroll when mobile menu opens/closes
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
     }
+  };
 
-    // Cleanup on unmount or navigation
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
-
-  // 2. Automatically close menu when navigating to a new route
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData, fileName);
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-xl font-bold tracking-tight text-slate-900"
-        >
-          AARJAV<span className="text-[#2b2bad]">.</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-[#2b2bad] ${
-                pathname === link.href
-                  ? "font-semibold text-[#2b2bad]"
-                  : "text-slate-600"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Desktop Call To Action */}
-        <div className="hidden md:block">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-[#2b2bad] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#1a1a8c]"
-          >
-            Contact Us
-          </Link>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition-colors hover:bg-slate-100 md:hidden"
-          aria-label={isOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      {/* Mobile Drawer Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop Layer */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-xs md:hidden"
+    <section className="w-full bg-white px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="relative overflow-hidden rounded-[24px] bg-slate-900 p-5 sm:rounded-[36px] sm:p-8 md:p-12 lg:p-16">
+          <div className="pointer-events-none absolute inset-0 size-full select-none">
+            <Image
+              src="/images/contact-bg.svg"
+              alt="Contact Background"
+              fill
+              className="object-cover object-center"
+              priority
             />
+            <div className="absolute inset-0 bg-black/10" />
+          </div>
 
-            {/* Scrollable Mobile Menu Container */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              /* 
-                CRITICAL SCROLL FIXES:
-                - h-dvh: Sets dynamic viewport height to fit mobile browsers with URL bars.
-                - overflow-y-auto: Allows internal vertical scrolling if menu items exceed screen height.
-                - touch-pan-y: Ensures touch drag gestures allow native vertical scrolling.
-              */
-              className="fixed top-0 right-0 z-40 flex h-dvh w-full max-w-xs touch-pan-y flex-col justify-between overflow-y-auto bg-white px-6 pt-24 pb-8 shadow-2xl md:hidden"
-            >
-              {/* Menu Navigation Links */}
-              <div className="flex flex-col gap-5">
-                <p className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
-                  Navigation
-                </p>
-                <nav className="flex flex-col gap-4">
-                  {NAV_LINKS.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-lg font-semibold transition-colors ${
-                        pathname === link.href
-                          ? "text-[#2b2bad]"
-                          : "text-slate-800 hover:text-[#2b2bad]"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Menu Bottom Action Card */}
-              <div className="mt-8 flex flex-col gap-4 border-t border-slate-100 pt-6">
-                <div className="rounded-2xl bg-slate-50 p-4">
-                  <p className="text-xs font-medium text-slate-500">
-                    Ready to automate?
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-slate-900">
-                    Let's build your workflow.
-                  </p>
+          {/* Grid Layout */}
+          <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center lg:gap-8">
+            {/* Left Column: Heading & Contact Info */}
+            <div className="flex flex-col justify-between lg:col-span-6 lg:min-h-[500px]">
+              <div>
+                {/* Contact Us Pill Badge */}
+                <div className="text-basic inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1.5 font-semibold text-[#002688] shadow-sm backdrop-blur sm:px-4">
+                  <span className="size-2 rounded-full bg-[#002688]" />
+                  Contact Us
                 </div>
 
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#2b2bad] text-sm font-semibold text-white shadow-md transition-all active:scale-98"
-                >
-                  Book Discovery Call
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                {/* Main Heading */}
+                <h2 className="mt-5 text-3xl leading-tight font-extrabold tracking-tight text-slate-950 sm:mt-8 sm:text-5xl lg:text-[56px]">
+                  Let&apos;s Build <br className="hidden sm:inline" />
+                  Intelligent Things
+                </h2>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </header>
+
+              {/* Direct Contact Info Cards */}
+              <div className="mt-8 flex flex-col gap-4 sm:mt-12 sm:gap-5">
+                {/* Email Info */}
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/90 text-[#002688] shadow-md backdrop-blur sm:size-14 sm:rounded-2xl">
+                    <Mail className="size-5 sm:size-6" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="sm:text-basic text-[11px] font-semibold text-slate-800">
+                      E-mail address
+                    </p>
+                    <a
+                      href="mailto:business@aarjavinfotech.com"
+                      className="text-basic block truncate font-bold text-slate-950 transition hover:underline sm:text-base"
+                    >
+                      business@aarjavinfotech.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* Phone Info */}
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/90 text-[#002688] shadow-md backdrop-blur sm:size-14 sm:rounded-2xl">
+                    <Headphones className="size-5 sm:size-6" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="sm:text-basic text-[11px] font-semibold text-slate-800">
+                      Phone number
+                    </p>
+                    <a
+                      href="tel:+919964919000"
+                      className="text-basic block truncate font-bold text-slate-950 transition hover:underline sm:text-base"
+                    >
+                      +91 9964919000
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Form Card */}
+            <div className="lg:col-span-6">
+              <div className="rounded-[24px] bg-[#f2f4f7] p-6 shadow-2xl sm:rounded-[32px] sm:p-10 lg:p-12">
+                <h3 className="text-xl font-bold tracking-tight text-slate-950 sm:text-2xl lg:text-3xl">
+                  Fill this form below
+                </h3>
+
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-6 flex flex-col gap-5 sm:mt-8 sm:gap-6"
+                >
+                  {/* Name Input */}
+                  <div className="flex flex-col gap-1 sm:gap-1.5">
+                    <label
+                      htmlFor="name"
+                      className="text-basic font-bold text-slate-900"
+                    >
+                      Your Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2"
+                    />
+                  </div>
+
+                  {/* Phone / Email Input */}
+                  <div className="flex flex-col gap-1 sm:gap-1.5">
+                    <label
+                      htmlFor="phone"
+                      className="text-basic font-bold text-slate-900"
+                    >
+                      Your Phone
+                    </label>
+                    <input
+                      id="phone"
+                      type="text"
+                      placeholder="Enter the e-mail"
+                      value={formData.emailOrPhone}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          emailOrPhone: e.target.value,
+                        })
+                      }
+                      className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2"
+                    />
+                  </div>
+
+                  {/* Project Details Input */}
+                  <div className="flex flex-col gap-1 sm:gap-1.5">
+                    <label
+                      htmlFor="project"
+                      className="text-basic font-bold text-slate-900"
+                    >
+                      More About The Project
+                    </label>
+                    <input
+                      id="project"
+                      type="text"
+                      value={formData.projectDetails}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          projectDetails: e.target.value,
+                        })
+                      }
+                      className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 focus:border-slate-900 focus:outline-none sm:py-2"
+                    />
+                  </div>
+
+                  {/* Attachment Button */}
+                  <div className="mt-1">
+                    <label className="text-basic inline-flex cursor-pointer items-center gap-2 font-bold text-slate-900 transition hover:opacity-80">
+                      <Paperclip className="size-4 shrink-0" />
+                      <span className="truncate">
+                        {fileName ? fileName : "Add an Attachment"}
+                      </span>
+                      <input
+                        type="file"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="text-basic sm:text-basic mt-4 w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] py-3.5 font-semibold text-white shadow-[0_12px_24px_rgba(0,38,136,0.4)] transition-transform hover:scale-[1.01] active:scale-[0.99] sm:mt-6 sm:py-4"
+                  >
+                    Submit Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
