@@ -19,15 +19,15 @@ interface FadeInProps extends HTMLMotionProps<"div"> {
 }
 
 const directionOffset = {
-  up: { y: 24 },
-  down: { y: -24 },
-  left: { x: 24 },
-  right: { x: -24 },
+  up: { y: 12 }, // Reduced transform offset from 24 to 12 for smoother mobile rendering
+  down: { y: -12 },
+  left: { x: 12 },
+  right: { x: -12 },
   none: {},
 } as const;
 
 /**
- * Fade and slide entrance animation that respects reduced motion preferences.
+ * Fade and slide entrance animation optimized for mobile hardware acceleration.
  */
 export function FadeIn({
   children,
@@ -50,7 +50,7 @@ export function FadeIn({
           x: 0,
           y: 0,
           transition: {
-            duration: MOTION.duration.normal,
+            duration: MOTION.duration.fast || 0.3, // Faster duration prevents lag
             delay,
             ease: MOTION.easing.standard,
           },
@@ -59,10 +59,11 @@ export function FadeIn({
 
   return (
     <motion.div
-      className={cn(className)}
+      className={cn("will-change-[opacity,transform]", className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      // margin: "0px" triggers animations immediately as elements touch the mobile screen
+      viewport={{ once: true, margin: "0px", amount: 0.1 }}
       variants={variants}
       {...props}
     >
@@ -89,10 +90,10 @@ export function StaggerContainer({
 
   return (
     <motion.div
-      className={cn(className)}
+      className={cn("will-change-[opacity,transform]", className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: "0px", amount: 0.1 }}
       variants={{
         hidden: {},
         visible: {
@@ -118,14 +119,14 @@ export function StaggerItem({
 
   return (
     <motion.div
-      className={cn(className)}
+      className={cn("will-change-[opacity,transform]", className)}
       variants={{
-        hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 20 },
+        hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 10 },
         visible: {
           opacity: 1,
           y: 0,
           transition: {
-            duration: MOTION.duration.normal,
+            duration: MOTION.duration.fast || 0.3,
             ease: MOTION.easing.standard,
           },
         },
@@ -151,9 +152,9 @@ export function PageTransition({ children, className }: PageTransitionProps) {
     <AnimatePresence mode="wait">
       <motion.main
         className={cn(className)}
-        initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }}
+        exit={prefersReducedMotion ? undefined : { opacity: 0, y: -4 }}
         transition={{
           duration: MOTION.duration.fast,
           ease: MOTION.easing.standard,

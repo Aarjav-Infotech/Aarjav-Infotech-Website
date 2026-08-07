@@ -169,10 +169,9 @@ export function Footer() {
 
               {/* Social Section */}
               <div className="col-span-2 flex flex-col gap-2 sm:col-span-1">
-                <h4 className="text-basic font-semibold text-slate-300 sm:text-lg">
-                  Social
-                </h4>
-                <div className="mt-2 grid w-[75px] grid-cols-2 gap-y-3.5 text-white sm:mt-3">
+                <h4 className="text-lg font-semibold text-slate-300">Social</h4>
+                {/* Responsive Social Container */}
+                <div className="mt-2 flex flex-wrap items-center gap-4 text-white sm:mt-3 sm:grid sm:w-[75px] sm:grid-cols-2 sm:gap-y-3.5">
                   <Link
                     href="#"
                     aria-label="X"
