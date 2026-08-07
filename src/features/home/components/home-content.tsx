@@ -12,15 +12,12 @@ import { HomeProducts } from "./home-products";
 import { HomeTechnologies } from "./home-technologies";
 import { HomeSecurityCompliance } from "./home-security-compliance";
 import { HomeIndustries } from "./home-industries";
-// import {HomeCaseStudies} from "./home-casestudy";
-
-// import { HomeWhyChooseUs } from "./home-why-choose-us";
-
-// import { HomeHowWeWork } from "./home-how-we-work";
-// import { HomeTestimonials } from "./home-testimonials";
-// import { HomeContact } from "./home-contact";
+import { AgenticStackSection } from "./home-agentic-stack";
+import { HomeCaseStudies } from "./home-casestudy";
+import { HomeTestimonials } from "./home-testimonials";
+import { ContactSection } from "./home-contact";
 import { HomeFaq } from "./home-faq";
-// import { HomeArticles } from "./home-articles";
+import { HomeArticles } from "./home-articles";
 
 export function HomeContent() {
   return (
@@ -58,19 +55,17 @@ export function HomeContent() {
       />
 
       <HomeProvenResults />
+      <AgenticStackSection />
       <HomeWhatWeDo />
       <HomeProducts />
+      <HomeIndustries />
+      <HomeCaseStudies />
       <HomeTechnologies />
       <HomeSecurityCompliance />
-      <HomeIndustries />
-      {/* <HomeCaseStudies /> */}
-      {/* < HomeWhyChooseUs /> */}
-
-      {/* <HomeHowWeWork /> */}
-      {/* <HomeTestimonials /> */}
-      {/* <HomeContact /> */}
+      <HomeTestimonials />
       <HomeFaq />
-      {/* <HomeArticles /> */}
+      <ContactSection />
+      <HomeArticles />
     </>
   );
 }

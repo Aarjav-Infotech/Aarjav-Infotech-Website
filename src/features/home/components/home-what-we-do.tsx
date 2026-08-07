@@ -90,7 +90,7 @@ export function HomeWhatWeDo({
   };
 
   return (
-    <section className="relative w-full px-0 py-16 sm:px-6 lg:px-0">
+    <section className="relative w-full p-5 px-2 py-12 sm:px-6 lg:px-0">
       {/* Outer Elevated Canvas Frame */}
       <div className="relative mx-auto max-w-full overflow-hidden rounded-[40px] border-b-[12px] border-b-transparent sm:rounded-[40px] sm:p-10 lg:p-12">
         {/* SVG Background Layer */}
@@ -142,7 +142,7 @@ export function HomeWhatWeDo({
             {/* 1. AI Workflow Automation (Left Big Card) */}
             <motion.div
               variants={itemVariants}
-              className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:p-8 lg:col-span-6"
+              className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:p-8 lg:col-span-6"
             >
               <div>
                 <div className="relative mb-6 h-[220px] w-full overflow-hidden rounded-[14px] sm:h-[280px]">

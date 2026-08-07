@@ -49,14 +49,14 @@ export function Navbar() {
       <div className="relative w-full px-4 md:px-8">
         <nav
           className={cn(
-            "mx-auto flex h-[64px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-5 py-2 shadow-sm ring-1 ring-black/5 transition-all duration-300 sm:h-[72px] sm:px-[30px] sm:py-[10px]",
+            "mx-auto flex h-[64px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-4 py-2 shadow-sm ring-1 ring-black/5 transition-all duration-300 sm:h-[72px] sm:px-6 sm:py-[10px] lg:px-[30px]",
             isScrolled ? "bg-white/80 backdrop-blur-md" : "bg-white",
           )}
           aria-label="Main navigation"
         >
           <Link
             href={ROUTES.home}
-            className="flex items-center transition-opacity hover:opacity-80"
+            className="flex shrink-0 items-center transition-opacity hover:opacity-80"
             onClick={closeMenu}
           >
             <Image
@@ -64,26 +64,29 @@ export function Navbar() {
               alt={APP_NAME}
               width={180}
               height={48}
-              className="h-9 w-auto sm:h-12"
+              className="h-8 w-auto sm:h-10 lg:h-12"
               style={{ width: "auto" }}
               priority
             />
           </Link>
 
           {/* Desktop navigation */}
-          <ul className="hidden items-center gap-1 md:flex" role="list">
+          <ul
+            className="hidden items-center gap-0.5 lg:flex xl:gap-1"
+            role="list"
+          >
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   className={cn(
-                    "group/link text-basic text-foreground hover:text-primary relative flex items-center gap-1 rounded-md px-3 py-2 font-medium transition-colors",
+                    "group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
                     pathname === link.href && "text-primary font-semibold",
                   )}
                   aria-current={pathname === link.href ? "page" : undefined}
                 >
                   {/* Text Container */}
-                  <span className="relative inline-block">
+                  <span className="relative inline-block whitespace-nowrap">
                     {link.label}
                     <span
                       className={cn(
@@ -94,20 +97,21 @@ export function Navbar() {
                   </span>
 
                   {"hasDropdown" in link && link.hasDropdown && (
-                    <ChevronDown className="size-4 opacity-50" />
+                    <ChevronDown className="size-3.5 shrink-0 opacity-50 xl:size-4" />
                   )}
                 </Link>
               </li>
             ))}
           </ul>
 
-          <div className="hidden md:block">
+          <div className="hidden shrink-0 lg:block">
             <Button
               asChild
-              className="gap-3 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-7 py-6 text-white shadow-md transition-all duration-500 ease-in-out hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] hover:px-7.5"
+              className="gap-2 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-5 py-5 text-xs whitespace-nowrap text-white shadow-md transition-all duration-500 ease-in-out hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] xl:gap-3 xl:px-7 xl:py-6 xl:text-sm"
             >
               <Link href={ROUTES.contact}>
-                Book a discovery call <ArrowRight className="ml-1 size-4" />
+                Book a discovery call{" "}
+                <ArrowRight className="ml-1 size-4 shrink-0" />
               </Link>
             </Button>
           </div>
@@ -116,7 +120,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full md:hidden"
+            className="rounded-full lg:hidden"
             onClick={toggleMenu}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -137,7 +141,7 @@ export function Navbar() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={closeMenu}
-                className="fixed inset-0 -z-10 bg-slate-900/40 backdrop-blur-xs md:hidden"
+                className="fixed inset-0 -z-10 bg-slate-900/40 backdrop-blur-xs lg:hidden"
               />
 
               {/* Floating Menu Card */}
@@ -147,7 +151,7 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.96 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="mx-auto mt-3 max-h-[calc(100dvh-120px)] w-full max-w-[1380px] overflow-y-auto rounded-[28px] border border-slate-200/80 bg-white/95 p-5 shadow-2xl backdrop-blur-xl md:hidden"
+                className="mx-auto mt-3 max-h-[calc(100dvh-120px)] w-full max-w-[1380px] overflow-y-auto rounded-[28px] border border-slate-200/80 bg-white/95 p-5 shadow-2xl backdrop-blur-xl lg:hidden"
                 aria-label="Mobile navigation"
               >
                 <div className="flex flex-col gap-0">
@@ -167,8 +171,10 @@ export function Navbar() {
                             pathname === link.href ? "page" : undefined
                           }
                         >
-                          <span>{link.label}</span>
-                          <ArrowRight className="size-4 opacity-40" />
+                          <span className="whitespace-nowrap">
+                            {link.label}
+                          </span>
+                          <ArrowRight className="size-4 shrink-0 opacity-40" />
                         </Link>
                       </li>
                     ))}
@@ -181,7 +187,7 @@ export function Navbar() {
                     >
                       <Link href={ROUTES.contact} onClick={closeMenu}>
                         Book a discovery call{" "}
-                        <ArrowRight className="ml-1 size-4" />
+                        <ArrowRight className="ml-1 size-4 shrink-0" />
                       </Link>
                     </Button>
                   </div>

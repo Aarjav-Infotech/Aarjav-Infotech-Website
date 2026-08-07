@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -143,19 +143,16 @@ interface HomeIndustriesProps {
   title?: string;
   subtitle?: string;
   industries?: IndustrySolution[];
+  sectionBackgroundImage?: string;
 }
 
-// Card Skeleton Fallback Component
-function _IndustryCardSkeleton() {
+export function _IndustryCardSkeleton() {
   return (
     <div className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]">
       <div className="relative flex flex-col items-center lg:flex-row">
-        {/* Left Side: Shimmer Image Skeleton */}
-        <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200 sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2">
+        <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200 sm:h-[340px] sm:rounded-[40px] lg:h-[540px] lg:w-1/2">
           <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
         </div>
-
-        {/* Right Side: Shimmer Content Skeleton */}
         <div className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:p-8 lg:mt-0 lg:-ml-28 lg:h-[477px] lg:w-[58%] lg:p-11">
           <div>
             <div className="h-6 w-3/4 animate-pulse rounded-md bg-slate-200 sm:h-8" />
@@ -164,7 +161,6 @@ function _IndustryCardSkeleton() {
               <div className="h-4 w-5/6 animate-pulse rounded-md bg-slate-200" />
               <div className="h-4 w-2/3 animate-pulse rounded-md bg-slate-200" />
             </div>
-
             <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="flex items-center gap-2">
@@ -174,7 +170,6 @@ function _IndustryCardSkeleton() {
               ))}
             </div>
           </div>
-
           <div className="mt-6 sm:mt-8">
             <div className="h-10 w-32 animate-pulse rounded-full bg-slate-200" />
           </div>
@@ -189,6 +184,7 @@ export function HomeIndustries({
   title = "Built for your industry",
   subtitle = "Explore our suite of AI-powered products designed to automate operations, improve accuracy, and drive growth across industries.",
   industries = defaultIndustries,
+  sectionBackgroundImage = "/images/common-blue-background.svg",
 }: HomeIndustriesProps) {
   const activeIndustries =
     industries && industries.length > 0 ? industries : defaultIndustries;
@@ -197,6 +193,8 @@ export function HomeIndustries({
     activeIndustries[0]?.id ?? "banking",
   );
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+
+  const tabsRef = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const currentIndustry: IndustrySolution =
     activeIndustries.find((item) => item.id === activeTab) ??
@@ -210,157 +208,181 @@ export function HomeIndustries({
     }
   };
 
+  useEffect(() => {
+    const activeNode = tabsRef.current[activeTab];
+    if (activeNode) {
+      activeNode.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [activeTab]);
+
   return (
     <section className="relative w-full py-8 sm:py-4">
-      {/* Outer Gradient Container */}
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-gradient-to-b from-[#f4f7fc] via-[#e6eeeb]/50 to-[#92b4f2] p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14">
-        {/* Header Section */}
-        <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
-          {eyebrow && (
-            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
-              {eyebrow}
-            </div>
-          )}
+      {/* Outer Container with Constant CSS Background Image */}
+      <div
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#f4f7fc] bg-cover bg-center bg-no-repeat p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14"
+        style={{
+          backgroundImage: `url(${sectionBackgroundImage})`,
+        }}
+      >
+        {/* Content Container Above Background */}
+        <div className="relative z-10 pb-10 sm:pb-0">
+          {/* Header Section */}
+          <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
+            {eyebrow && (
+              <div className="sm:text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+                {eyebrow}
+              </div>
+            )}
 
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-[46px] lg:leading-tight">
-            {title}
-          </h2>
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-[46px] lg:leading-tight">
+              {title}
+            </h2>
 
-          {subtitle && (
-            <p className="mt-2 text-sm leading-relaxed whitespace-normal text-slate-600 sm:mt-3 sm:text-base md:text-lg">
-              {subtitle}
-            </p>
-          )}
-        </div>
-
-        {/* Tab Switcher Bar */}
-        <div className="no-scrollbar mx-auto mb-8 w-full max-w-full overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2 shadow-[0_4px_20px_rgba(0,0,0,0.04)] sm:mb-14 sm:p-2.5">
-          <div className="flex min-w-max items-center justify-between gap-1 px-1 sm:gap-2 sm:px-2">
-            {activeIndustries.map((ind) => {
-              const isActive = activeTab === ind.id;
-
-              return (
-                <button
-                  key={ind.id}
-                  onClick={() => handleTabChange(ind.id)}
-                  className={`relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-xs font-semibold transition-all duration-100 sm:px-8 sm:py-3 sm:text-base ${
-                    isActive ? "font-bold text-white" : "text-slate-900"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndustryTab"
-                      className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] shadow-[0_8px_16px_rgba(0,38,136,0.35)]"
-                      transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                  <span className="relative z-10">{ind.name}</span>
-                </button>
-              );
-            })}
+            {subtitle && (
+              <p className="sm:text-basic mt-2 text-sm leading-relaxed whitespace-normal text-slate-600 sm:mt-3 md:text-lg">
+                {subtitle}
+              </p>
+            )}
           </div>
-        </div>
 
-        {/* Card Content Container with Image Skeleton */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndustry.id}
-            initial={{ opacity: 0, x: 100, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -100, scale: 0.95 }}
-            transition={{
-              duration: 0.5,
-              ease: [0.25, 1, 0.5, 1],
-            }}
-            className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
-          >
-            <div className="relative flex flex-col items-center lg:flex-row">
-              {/* Image Container with Integrated Skeleton Loader */}
-              <motion.div
-                initial={{ opacity: 0, x: -40, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200/80 shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
-              >
-                {/* Shimmer Overlay while loading */}
-                {isImageLoading && (
-                  <div className="absolute inset-0 z-20 overflow-hidden bg-slate-200">
-                    <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-slate-100/60 to-transparent" />
-                  </div>
-                )}
+          {/* Tab Switcher Bar - Hidden Scrollbar & Auto Centered */}
+          <div className="mx-auto mb-8 w-full max-w-full [scrollbar-width:none] overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2 shadow-[0_4px_20px_rgba(0,0,0,0.04)] [-ms-overflow-style:none] sm:mb-14 sm:p-2.5 [&::-webkit-scrollbar]:hidden">
+            <div className="flex min-w-max items-center justify-between gap-1 px-1 sm:gap-2 sm:px-2">
+              {activeIndustries.map((ind) => {
+                const isActive = activeTab === ind.id;
 
-                <Image
-                  src={currentIndustry.image}
-                  alt={currentIndustry.title}
-                  fill
-                  className={`object-cover object-center transition-opacity duration-500 sm:object-left ${
-                    isImageLoading ? "opacity-0" : "opacity-100"
-                  }`}
-                  onLoad={() => setIsImageLoading(false)}
-                  priority
-                />
-              </motion.div>
-
-              {/* Right Side: Content Box */}
-              <motion.div
-                initial={{ opacity: 0, x: 60, scale: 0.92 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.15,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-28 lg:h-[477px] lg:w-[58%] lg:p-11"
-              >
-                <div>
-                  <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-2xl">
-                    {currentIndustry.title}
-                  </h3>
-
-                  <p className="mt-2 text-sm leading-relaxed text-slate-700 sm:mt-3 sm:text-base">
-                    {currentIndustry.description}
-                  </p>
-
-                  <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
-                    {currentIndustry.features.map((feature, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: 0.2 + idx * 0.05 }}
-                        className="flex items-center gap-2 sm:gap-2.5"
-                      >
-                        <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
-                        <span className="text-xs font-semibold text-slate-900 sm:text-sm">
-                          {feature}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-6 flex justify-start sm:mt-8">
-                  <Link
-                    href={currentIndustry.link}
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 text-xs font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
+                return (
+                  <button
+                    key={ind.id}
+                    ref={(el) => {
+                      tabsRef.current[ind.id] = el;
+                    }}
+                    onClick={() => handleTabChange(ind.id)}
+                    className={`sm:text-basic relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-xs font-semibold transition-all duration-100 sm:px-8 sm:py-3 ${
+                      isActive ? "font-bold text-white" : "text-slate-900"
+                    }`}
                   >
-                    Read More
-                    <MoveRight className="size-3.5 sm:size-4" />
-                  </Link>
-                </div>
-              </motion.div>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndustryTab"
+                        className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] whitespace-nowrap shadow-[0_8px_16px_rgba(0,38,136,0.35)]"
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10">{ind.name}</span>
+                  </button>
+                );
+              })}
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
+
+          {/* Card Content Container */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndustry.id}
+              initial={{ opacity: 0, x: 100, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -100, scale: 0.95 }}
+              transition={{
+                duration: 0.5,
+                ease: [0.25, 1, 0.5, 1],
+              }}
+              className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
+            >
+              <div className="relative flex flex-col items-center lg:flex-row">
+                {/* Image Container with Integrated Skeleton Loader */}
+                <motion.div
+                  initial={{ opacity: 0, x: -40, scale: 0.9 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200/80 shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
+                >
+                  {isImageLoading && (
+                    <div className="absolute inset-0 z-20 overflow-hidden bg-slate-200">
+                      <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-slate-100/60 to-transparent" />
+                    </div>
+                  )}
+
+                  <Image
+                    src={currentIndustry.image}
+                    alt={currentIndustry.title}
+                    fill
+                    className={`object-cover object-center transition-opacity duration-500 sm:object-left ${
+                      isImageLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => setIsImageLoading(false)}
+                    priority
+                  />
+                </motion.div>
+
+                {/* Right Side: Content Box */}
+                <motion.div
+                  initial={{ opacity: 0, x: 60, scale: 0.92 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.15,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-20 lg:h-[477px] lg:w-[58%] lg:p-11"
+                >
+                  <div>
+                    <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-2xl">
+                      {currentIndustry.title}
+                    </h3>
+
+                    <p className="sm:text-basic mt-2 text-sm leading-relaxed text-slate-700 sm:mt-3">
+                      {currentIndustry.description}
+                    </p>
+
+                    <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
+                      {currentIndustry.features.map((feature, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: 0.2 + idx * 0.05,
+                          }}
+                          className="flex items-center gap-2 sm:gap-2.5"
+                        >
+                          <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
+                          <span className="text-basic font-semibold text-slate-900 sm:text-sm">
+                            {feature}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 flex justify-start sm:mt-8">
+                    <Link
+                      href={currentIndustry.link}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 text-sm font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
+                    >
+                      Read More
+                      <MoveRight className="size-3.5 sm:size-4" />
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
