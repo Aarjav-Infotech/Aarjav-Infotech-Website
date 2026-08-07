@@ -169,7 +169,7 @@ export function AgenticStackSection() {
   }, [activeLayer, isMounted]);
 
   // Fallback assignment prevents TypeScript "possibly undefined" errors
-  const currentData: LayerData = LAYERS[activeLayer] ?? LAYERS[0]!;
+  const currentData = (LAYERS[activeLayer] ?? LAYERS[0]) as LayerData;
   return (
     <section
       ref={containerRef}
