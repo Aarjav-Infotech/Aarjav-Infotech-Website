@@ -236,7 +236,7 @@ export function HomeIndustries({
           {/* Header Section */}
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
             {eyebrow && (
-              <div className="sm:text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4">
+              <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-lg">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
                 {eyebrow}
               </div>
@@ -266,7 +266,7 @@ export function HomeIndustries({
                       tabsRef.current[ind.id] = el;
                     }}
                     onClick={() => handleTabChange(ind.id)}
-                    className={`sm:text-basic relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-xs font-semibold transition-all duration-100 sm:px-8 sm:py-3 ${
+                    className={`lg:text-basic relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-sm font-semibold transition-all duration-100 sm:px-8 sm:py-3 ${
                       isActive ? "font-bold text-white" : "text-slate-900"
                     }`}
                   >
@@ -364,7 +364,7 @@ export function HomeIndustries({
                           className="flex items-center gap-2 sm:gap-2.5"
                         >
                           <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
-                          <span className="text-basic font-semibold text-slate-900 sm:text-sm">
+                          <span className="text-basic sm:text-basic font-semibold text-slate-900">
                             {feature}
                           </span>
                         </motion.div>
