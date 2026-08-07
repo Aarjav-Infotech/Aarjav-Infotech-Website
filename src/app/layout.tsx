@@ -46,11 +46,29 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${urbanist.variable} ${hubotSans.variable}`}>
+      <head>
+        {/* Force scroll position to top BEFORE Next.js hydrates on mobile */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined') {
+                if ('scrollRestoration' in history) {
+                  history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+              }
+            `,
+          }}
+        />
+      </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
-          href="#main-content"
+          href="#"
+          tabIndex={-1}
           className="bg-primary text-primary-foreground focus:z-toast sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-full focus:px-4 focus:py-2"
-        ></a>
+        >
+          Skip to main content
+        </a>
         <SiteLayout>{children}</SiteLayout>
       </body>
     </html>

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-// import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/common/container";
@@ -43,9 +42,6 @@ const toneClasses = {
   gradient: "from-primary/5 via-background to-primary/10",
 } as const;
 
-/**
- * Full-width hero section for page headers.
- */
 export function Hero({
   align = "center",
   eyebrow,
@@ -68,9 +64,8 @@ export function Hero({
   return (
     <section
       className={cn(
-        "section-padding relative w-full overflow-hidden",
-        (bgImage || bgVideo) &&
-          "flex flex-col justify-center rounded-b-[40px] pt-32 lg:h-[724px] lg:pt-24",
+        "section-padding relative flex min-h-[80vh] w-full flex-col justify-center overflow-hidden sm:min-h-screen",
+        (bgImage || bgVideo) && "rounded-b-[40px] pt-28 lg:h-[724px] lg:pt-24",
         !(bgImage || bgVideo) && "bg-gradient-to-b",
         !(bgImage || bgVideo) && (toneClasses as Record<string, string>)[tone],
         bgImage && "bg-cover bg-center bg-no-repeat",
@@ -92,7 +87,7 @@ export function Hero({
       <Container>
         <div
           className={cn(
-            "relative z-10",
+            "relative z-10 w-full",
             layout === "split"
               ? "site-container grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
               : cn("max-w-[953px]", align === "center" && "mx-auto"),
@@ -101,17 +96,18 @@ export function Hero({
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            // FIX 1: Set once: true so the animation doesn't collapse the layout on refresh
+            viewport={{ once: true, amount: 0.1 }}
             variants={{
               hidden: {},
               visible: {
                 transition: {
-                  staggerChildren: 0.1,
+                  staggerChildren: 0.08,
                 },
               },
             }}
             className={cn(
-              "mt-15 flex flex-col space-y-6",
+              "mt-6 flex flex-col space-y-4 sm:mt-12 sm:space-y-6",
               layout === "centered" && "items-center text-center",
               align === "left" && "items-start text-left",
               align === "center" && "items-center text-center",
@@ -120,15 +116,15 @@ export function Hero({
             {eyebrow && (
               <motion.p
                 variants={{
-                  hidden: { opacity: 0, y: -20 },
+                  hidden: { opacity: 0, y: -10 },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.2, ease: "easeOut" },
+                    transition: { duration: 0.6, ease: "easeOut" },
                   },
                 }}
                 className={cn(
-                  "mb-4 text-[18px] font-medium text-[#08388D]",
+                  "mb-2 text-[14px] font-medium text-[#08388D] sm:text-[18px]",
                   eyebrowClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -138,11 +134,11 @@ export function Hero({
             )}
             <motion.div
               variants={{
-                hidden: { opacity: 0, y: 20 },
+                hidden: { opacity: 0, y: 15 },
                 visible: {
                   opacity: 1,
                   y: 0,
-                  transition: { duration: 1.2, ease: "easeOut" },
+                  transition: { duration: 0.6, ease: "easeOut" },
                 },
               }}
             >
@@ -151,8 +147,9 @@ export function Hero({
                 align={align}
                 id="hero-heading"
                 subtitle={subtitle}
+                // FIX 2: Added responsive text sizing (text-3xl -> sm:text-5xl -> lg:text-[74px])
                 className={cn(
-                  "text-[74px] leading-[81.4px] font-medium tracking-[-3px] text-[#000000]",
+                  "text-3xl leading-tight font-medium tracking-tight text-[#000000] sm:text-5xl lg:text-[74px] lg:leading-[81.4px]",
                   titleClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -163,15 +160,15 @@ export function Hero({
             {description && (
               <motion.p
                 variants={{
-                  hidden: { opacity: 0, y: 20 },
+                  hidden: { opacity: 0, y: 15 },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.2, ease: "easeOut" },
+                    transition: { duration: 0.6, ease: "easeOut" },
                   },
                 }}
                 className={cn(
-                  "text-[20px] leading-[1.4] font-medium text-[#000000]",
+                  "text-base leading-relaxed font-medium text-[#000000] sm:text-[20px]",
                   descriptionClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -182,15 +179,15 @@ export function Hero({
             {actions && actions.length > 0 && (
               <motion.div
                 variants={{
-                  hidden: { opacity: 0, y: 20 },
+                  hidden: { opacity: 0, y: 15 },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 1.2, ease: "easeOut" },
+                    transition: { duration: 0.6, ease: "easeOut" },
                   },
                 }}
                 className={cn(
-                  "flex flex-wrap gap-4",
+                  "flex flex-wrap gap-4 pt-2",
                   align === "center" ? "justify-center" : "justify-start",
                 )}
               >
@@ -203,7 +200,7 @@ export function Hero({
                     className={cn(
                       (action.variant ?? "default") === "outline" &&
                         "border border-transparent bg-white text-black [background:linear-gradient(white,white)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box] hover:text-white hover:[background:linear-gradient(90deg,#091E46_1%,#075FF3_100%)_padding-box,linear-gradient(90deg,#091E46_1%,#075FF3_100%)_border-box]",
-                      "flex h-[52px] items-center justify-center gap-[19px] rounded-[60px] px-[25px] text-[16px] leading-[17.6px] font-medium transition-all duration-300",
+                      "flex h-[48px] items-center justify-center gap-[19px] rounded-[60px] px-[20px] text-[15px] font-medium transition-all duration-300 sm:h-[52px] sm:px-[25px] sm:text-[16px]",
                     )}
                   >
                     <Link href={action.href}>{action.label}</Link>
@@ -214,11 +211,11 @@ export function Hero({
             {children && (
               <motion.div
                 variants={{
-                  hidden: { opacity: 0, y: 20 },
+                  hidden: { opacity: 0, y: 15 },
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 0.6, ease: "easeOut" },
+                    transition: { duration: 0.5, ease: "easeOut" },
                   },
                 }}
               >

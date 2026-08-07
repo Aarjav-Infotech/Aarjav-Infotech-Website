@@ -1,18 +1,29 @@
-import type { Metadata } from "next";
+"use client";
 
+import { useEffect } from "react";
 import { HomeContent } from "@/features/home/components/home-content";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Home",
-  description:
-    "Aarjav Infotech delivers innovative technology solutions for modern businesses.",
-  path: "/",
-});
 
 export default function HomePage() {
+  useEffect(() => {
+    // Force active element to blur on mount so no section can pull focus
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
+    window.scrollTo(0, 0);
+
+    const timer = setTimeout(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      window.scrollTo(0, 0);
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main id="main-content">
+    <main id="main-content" className="w-full">
       <HomeContent />
     </main>
   );
