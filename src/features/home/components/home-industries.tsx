@@ -15,7 +15,6 @@ export interface IndustrySolution {
   features: string[];
   link: string;
 }
-
 const defaultIndustries: IndustrySolution[] = [
   {
     id: "banking",
@@ -208,14 +207,18 @@ export function HomeIndustries({
     }
   };
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
+    // Prevent scrolling into view on initial mount/refresh
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+
     const activeNode = tabsRef.current[activeTab];
     if (activeNode) {
-      activeNode.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      activeNode.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [activeTab]);
 
