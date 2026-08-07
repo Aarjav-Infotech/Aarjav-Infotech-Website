@@ -120,6 +120,9 @@ export function AgenticStackSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
+  // Guard ref to track manual user tab clicks on mobile
+  const isUserClicked = useRef<boolean>(false);
+
   useEffect(() => {
     setIsMounted(true);
 
@@ -147,16 +150,15 @@ export function AgenticStackSection() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Scroll active tab into view center when clicked on mobile
+  // FIX: Only trigger scrollIntoView on mobile when user explicitly clicks a tab
   useEffect(() => {
-    if (isMounted && window.innerWidth < 1024) {
+    if (isMounted && isUserClicked.current && window.innerWidth < 1024) {
       const activeTab = mobileTabRefs.current[activeLayer];
       if (activeTab) {
         activeTab.scrollIntoView({
@@ -165,11 +167,18 @@ export function AgenticStackSection() {
           block: "nearest",
         });
       }
+      // Reset user click flag
+      isUserClicked.current = false;
     }
   }, [activeLayer, isMounted]);
 
-  // Fallback assignment prevents TypeScript "possibly undefined" errors
+  const handleTabClick = (index: number) => {
+    isUserClicked.current = true;
+    setActiveLayer(index);
+  };
+
   const currentData = (LAYERS[activeLayer] ?? LAYERS[0]) as LayerData;
+
   return (
     <section
       ref={containerRef}
@@ -200,7 +209,9 @@ export function AgenticStackSection() {
                     ref={(el) => {
                       mobileTabRefs.current[index] = el;
                     }}
-                    onClick={() => setActiveLayer(index)}
+                    type="button"
+                    tabIndex={isMounted ? 0 : -1}
+                    onClick={() => handleTabClick(index)}
                     className={`flex items-center justify-center rounded-full px-3.5 py-1 font-bold whitespace-nowrap transition-all ${
                       isActive
                         ? "scale-105 bg-[#0052FF] text-white shadow-md"
