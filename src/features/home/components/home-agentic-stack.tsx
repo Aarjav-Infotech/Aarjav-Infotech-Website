@@ -191,7 +191,7 @@ export function AgenticStackSection() {
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
             <div className="text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
-              7-LAYER STACK
+              7-Layer Stack
             </div>
             <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
               Layer of the agentic stack
