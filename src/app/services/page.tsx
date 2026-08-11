@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ServicesContent } from "@/features/services/components/services-content";
+import AiContent from "@/features/services/ai-workflow-page/ai-workflow-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
@@ -13,7 +13,7 @@ export const metadata: Metadata = createMetadata({
 export default function ServicesPage() {
   return (
     <main id="main-content">
-      <ServicesContent />
+      <AiContent />
     </main>
   );
 }
