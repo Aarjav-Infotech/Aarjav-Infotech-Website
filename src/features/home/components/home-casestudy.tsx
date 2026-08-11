@@ -40,7 +40,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "100%", label: "Responsive" },
       { value: "Full", label: "Stack" },
     ],
-    image: "/images/case-study-1.svg",
+    image: "/images/case-studys-1.svg",
     link: "/case-studies/sahaj-construction",
   },
   {
@@ -56,7 +56,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "100%", label: "Responsive" },
       { value: "Fast", label: "Checkout" },
     ],
-    image: "/images/case-study-2.svg",
+    image: "/images/case-studys-2.svg",
     link: "/case-studies/glamora-jewels",
   },
   {
@@ -65,19 +65,20 @@ const defaultProjects: CaseStudyItem[] = [
     title: "Delfa Pattern Generator",
     subtitle: "AI Textile Pattern Platform",
     description:
-      "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets.",
+      "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
     tags: ["PYTHON", "REACT", "FASTAPI", "TAILWIND CSS"],
     metrics: [
-      { value: "10k+", label: "Patterns Generated" },
-      { value: "99.9%", label: "Uptime" },
-      { value: "AI", label: "Powered" },
+      { value: "AI-Powered", label: "Generation" },
+      { value: "3 Core", label: "Features" },
+      { value: "Infinite", label: "Patterns" },
     ],
-    image: "/images/case-study-3.svg",
+    image: "/images/case-studys-3.svg",
     link: "/case-studies/delfa-pattern-generator",
   },
 ];
 
 interface HomeCaseStudiesProps {
+  eyebrow?: string;
   badge?: string;
   title?: string;
   subtitle?: string;
@@ -85,7 +86,7 @@ interface HomeCaseStudiesProps {
 }
 
 export function HomeCaseStudies({
-  badge = "Case Study",
+  eyebrow = "Case Studies",
   title = "Projects That Inspire Innovation.",
   subtitle = "Real results from real engagements. We measure success by outcomes, not activity.",
   projects = defaultProjects,
@@ -102,13 +103,15 @@ export function HomeCaseStudies({
       {/* 1. Header Section */}
       <div className="mx-auto w-full max-w-[1364px] px-4 pb-8 sm:px-6 sm:pb-12">
         <FadeIn>
-          <div className="mx-auto max-w-3xl text-center">
-            {badge && (
-              <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-4 py-1 text-xs font-semibold text-blue-600 shadow-xs">
-                <span className="size-1.5 rounded-full bg-blue-600" />
-                {badge}
+          <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+            {/* Eyebrow Pill Badge */}
+            {eyebrow && (
+              <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+                {eyebrow}
               </div>
             )}
+
             <Heading
               as="h2"
               className="text-center text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
@@ -277,7 +280,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover object-top"
+              className="rounder-xl object-cover object-top"
             />
           </div>
         </div>
@@ -285,3 +288,5 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
     </div>
   );
 }
+
+export default HomeCaseStudies;
