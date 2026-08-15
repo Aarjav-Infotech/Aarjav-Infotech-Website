@@ -6,11 +6,17 @@ import {
   ChevronDown,
   ArrowRight,
   GitFork,
-  LayoutGrid,
   Ticket,
-  Database,
+  Network,
   Mic,
   FileText,
+  Landmark,
+  ShieldCheck,
+  Building2,
+  HeartPulse,
+  Building,
+  Factory,
+  Briefcase,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,22 +26,26 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
-import { APP_NAME, NAV_LINKS, ROUTES } from "@/lib/constants";
+import { APP_NAME, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-// Mega Menu Items Data
-const MEGA_MENU_ITEMS = [
+// Navigation Links Configuration
+const NAV_LINKS = [
+  { label: "Home", href: ROUTES.home || "/" },
+  { label: "About", href: "/about" },
+  { label: "AI Services", href: "/services" },
+  { label: "Industries", href: "/industries" },
+  { label: "Case Study", href: "/case-study" },
+  { label: "Contact", href: ROUTES.contact || "/contact" },
+];
+
+// Mega Menu Items - AI Services
+const AI_SERVICES_ITEMS = [
   {
     icon: GitFork,
     title: "AI Workflow Automation",
     description: "Use insight to improve marketing strategy",
     href: "/services/ai-workflow-automation",
-  },
-  {
-    icon: LayoutGrid,
-    title: "AI Tools & Agents",
-    description: "Never miss calls with relevant routing",
-    href: "/services/ai-tools-agents",
   },
   {
     icon: Ticket,
@@ -44,10 +54,10 @@ const MEGA_MENU_ITEMS = [
     href: "/services/support-triage-ticketing",
   },
   {
-    icon: Database,
-    title: "Data Orchestration",
-    description: "Analyze call data to boost conversion",
-    href: "/services/data-orchestration",
+    icon: Network,
+    title: "Enterprise AI Ecosystem",
+    description: "Connect disconnected tools so data flows where you need it",
+    href: "/services/enterprise-ai-page",
   },
   {
     icon: Mic,
@@ -63,6 +73,52 @@ const MEGA_MENU_ITEMS = [
   },
 ];
 
+// Mega Menu Items - Industries
+const INDUSTRIES_ITEMS = [
+  {
+    icon: Landmark,
+    title: "Banking",
+    description: "AI solutions powering modern financial institutions",
+    href: "/industries/banking",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Insurance",
+    description: "Automated underwriting, claims, and risk management",
+    href: "/industries/insurance",
+  },
+  {
+    icon: Building2,
+    title: "Government",
+    description: "Smart public services and administrative AI transformation",
+    href: "/industries/government",
+  },
+  {
+    icon: HeartPulse,
+    title: "Healthcare",
+    description: "Connected clinical workflows and patient triage AI",
+    href: "/industries/healthcare",
+  },
+  {
+    icon: Building,
+    title: "Real Estate",
+    description: "Automated property management and lead engagement",
+    href: "/industries/real-estate",
+  },
+  {
+    icon: Factory,
+    title: "Industrial",
+    description: "Predictive maintenance and supply chain intelligence",
+    href: "/industries/industrial",
+  },
+  {
+    icon: Briefcase,
+    title: "Enterprise",
+    description: "Scalable AI architecture across core business divisions",
+    href: "/industries/enterprise",
+  },
+];
+
 export function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +126,9 @@ export function Navbar() {
 
   // State tracking open mega menu on click
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(
+    null,
+  );
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -99,7 +157,7 @@ export function Navbar() {
   const closeMenu = useCallback((): void => {
     setIsOpen(false);
     setActiveMegaMenu(null);
-    setMobileServicesOpen(false);
+    setMobileSubmenuOpen(null);
   }, []);
 
   const toggleMenu = useCallback((): void => {
@@ -109,6 +167,10 @@ export function Navbar() {
   // Toggle mega menu state strictly on click
   const handleMegaMenuToggle = (label: string) => {
     setActiveMegaMenu((prev) => (prev === label ? null : label));
+  };
+
+  const toggleMobileSubmenu = (label: string) => {
+    setMobileSubmenuOpen((prev) => (prev === label ? null : label));
   };
 
   return (
@@ -127,7 +189,7 @@ export function Navbar() {
           aria-label="Main navigation"
         >
           <Link
-            href={ROUTES.home}
+            href={ROUTES.home || "/"}
             className="flex shrink-0 items-center transition-opacity hover:opacity-80"
             onClick={closeMenu}
           >
@@ -148,20 +210,19 @@ export function Navbar() {
             role="list"
           >
             {NAV_LINKS.map((link) => {
-              const isAiServices = link.label === "AI Services";
-              const isDropdownActive =
-                activeMegaMenu === "AI Services" && isAiServices;
+              const isHasDropdown =
+                link.label === "AI Services" || link.label === "Industries";
+              const isDropdownActive = activeMegaMenu === link.label;
 
               return (
                 <li key={link.href} className="static lg:relative">
-                  {isAiServices ? (
-                    /* Interactive Button for AI Services Mega Menu Toggle */
+                  {isHasDropdown ? (
                     <button
                       type="button"
-                      onClick={() => handleMegaMenuToggle("AI Services")}
+                      onClick={() => handleMegaMenuToggle(link.label)}
                       className={cn(
-                        "group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
-                        (pathname === link.href || isDropdownActive) &&
+                        "group/link text-foreground hover:text-primary lg:text-basic relative flex cursor-pointer items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
+                        (pathname.startsWith(link.href) || isDropdownActive) &&
                           "text-primary font-semibold",
                       )}
                     >
@@ -170,7 +231,8 @@ export function Navbar() {
                         <span
                           className={cn(
                             "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
-                            (pathname === link.href || isDropdownActive) &&
+                            (pathname.startsWith(link.href) ||
+                              isDropdownActive) &&
                               "scale-x-100",
                           )}
                         />
@@ -184,7 +246,6 @@ export function Navbar() {
                       />
                     </button>
                   ) : (
-                    /* Standard Direct Links */
                     <Link
                       href={link.href}
                       onClick={closeMenu}
@@ -214,7 +275,7 @@ export function Navbar() {
               asChild
               className="gap-2 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-5 py-5 text-xs whitespace-nowrap text-white shadow-md transition-all duration-500 ease-in-out hover:bg-[linear-gradient(180deg,#091E46_0%,#0053FA_50%,#075FF3_100%)] xl:gap-3 xl:px-7 xl:py-6 xl:text-sm"
             >
-              <Link href={ROUTES.contact}>
+              <Link href={ROUTES.contact || "/contact"}>
                 Book a discovery call{" "}
                 <ArrowRight className="ml-1 size-4 shrink-0" />
               </Link>
@@ -235,9 +296,9 @@ export function Navbar() {
           </Button>
         </nav>
 
-        {/* Centered Mega Menu Overlay Panel (Opens On Click) */}
+        {/* Desktop Mega Menu Overlay Panel */}
         <AnimatePresence>
-          {activeMegaMenu === "AI Services" && (
+          {activeMegaMenu && (
             <motion.div
               initial={{ opacity: 0, y: 15, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -247,14 +308,17 @@ export function Navbar() {
             >
               <div className="w-[1100px] max-w-[calc(100vw-2rem)] rounded-[28px] border border-slate-100 bg-white/95 p-8 shadow-2xl ring-1 ring-slate-900/5 backdrop-blur-2xl">
                 <div className="grid grid-cols-12 gap-8">
-                  {/* Service Grid Options */}
+                  {/* Service / Industries Grid Options */}
                   <div className="col-span-8 flex flex-col justify-between">
                     <div className="mb-4 text-xs font-semibold tracking-wider text-slate-400 uppercase">
-                      AI Services
+                      {activeMegaMenu}
                     </div>
 
                     <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                      {MEGA_MENU_ITEMS.map((item) => {
+                      {(activeMegaMenu === "AI Services"
+                        ? AI_SERVICES_ITEMS
+                        : INDUSTRIES_ITEMS
+                      ).map((item) => {
                         const Icon = item.icon;
                         return (
                           <Link
@@ -287,24 +351,32 @@ export function Navbar() {
                         Explore
                       </div>
                       <Link
-                        href="/platform-overview"
+                        href={
+                          activeMegaMenu === "AI Services"
+                            ? "/platform-overview"
+                            : "/case-study"
+                        }
                         onClick={closeMenu}
                         className="group/preview block overflow-hidden rounded-2xl"
                       >
                         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
                           <Image
                             src="/images/ai-megamenu.svg"
-                            alt="Platform Overview"
+                            alt="Overview"
                             fill
                             className="object-cover transition-transform duration-500 group-hover/preview:scale-105"
                           />
                         </div>
                         <div className="mt-3">
                           <h4 className="text-sm font-bold text-slate-900 group-hover/preview:text-blue-600">
-                            Platform Overview
+                            {activeMegaMenu === "AI Services"
+                              ? "Platform Overview"
+                              : "Industry Success Stories"}
                           </h4>
                           <p className="mt-0.5 text-xs text-slate-500">
-                            Take a free tour of our platform features
+                            {activeMegaMenu === "AI Services"
+                              ? "Take a free tour of our platform features"
+                              : "See how we empower diverse global sectors"}
                           </p>
                         </div>
                       </Link>
@@ -316,11 +388,11 @@ export function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Floating Mobile Navigation Drawer */}
+        {/* Mobile Navigation Drawer */}
         <AnimatePresence>
           {isOpen && (
             <>
-              {/* Darkened Backdrop Overlay */}
+              {/* Darkened Overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -343,30 +415,35 @@ export function Navbar() {
                 <div className="flex flex-col gap-0">
                   <ul className="space-y-1" role="list">
                     {NAV_LINKS.map((link) => {
-                      const isAiServices = link.label === "AI Services";
+                      const isDropdown =
+                        link.label === "AI Services" ||
+                        link.label === "Industries";
+                      const isSubmenuOpen = mobileSubmenuOpen === link.label;
 
-                      if (isAiServices) {
+                      if (isDropdown) {
+                        const items =
+                          link.label === "AI Services"
+                            ? AI_SERVICES_ITEMS
+                            : INDUSTRIES_ITEMS;
+
                         return (
                           <li key={link.href} className="flex flex-col">
                             <button
-                              onClick={() =>
-                                setMobileServicesOpen((prev) => !prev)
-                              }
+                              onClick={() => toggleMobileSubmenu(link.label)}
                               className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-[#0053FA]"
                             >
                               <span>{link.label}</span>
                               <ChevronDown
                                 className={cn(
                                   "size-4 shrink-0 transition-transform duration-200",
-                                  mobileServicesOpen &&
-                                    "rotate-180 text-[#0053FA]",
+                                  isSubmenuOpen && "rotate-180 text-[#0053FA]",
                                 )}
                               />
                             </button>
 
                             {/* Mobile Accordion Submenu */}
                             <AnimatePresence>
-                              {mobileServicesOpen && (
+                              {isSubmenuOpen && (
                                 <motion.div
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: "auto" }}
@@ -375,7 +452,7 @@ export function Navbar() {
                                   className="overflow-hidden pr-2 pl-4"
                                 >
                                   <div className="flex flex-col gap-1 py-2">
-                                    {MEGA_MENU_ITEMS.map((item) => {
+                                    {items.map((item) => {
                                       const Icon = item.icon;
                                       return (
                                         <Link
@@ -410,9 +487,6 @@ export function Navbar() {
                                 : "text-slate-800 hover:bg-slate-50 hover:text-[#0053FA]",
                             )}
                             onClick={closeMenu}
-                            aria-current={
-                              pathname === link.href ? "page" : undefined
-                            }
                           >
                             <span className="whitespace-nowrap">
                               {link.label}
@@ -429,7 +503,10 @@ export function Navbar() {
                       asChild
                       className="w-full gap-3 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] px-6 py-6 text-white shadow-md"
                     >
-                      <Link href={ROUTES.contact} onClick={closeMenu}>
+                      <Link
+                        href={ROUTES.contact || "/contact"}
+                        onClick={closeMenu}
+                      >
                         Book a discovery call{" "}
                         <ArrowRight className="ml-1 size-4 shrink-0" />
                       </Link>

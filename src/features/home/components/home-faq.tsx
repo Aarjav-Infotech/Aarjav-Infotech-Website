@@ -37,7 +37,7 @@ export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative w-full bg-white px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8">
+    <section className="relative w-full bg-white px-4 py-8 sm:px-6 sm:py-12 md:py-12">
       <div className="mx-auto max-w-4xl">
         {/* Header Section */}
         <div className="relative z-20 mx-auto mb-8 flex max-w-xl flex-col items-center text-center sm:mb-12 lg:mb-14">
