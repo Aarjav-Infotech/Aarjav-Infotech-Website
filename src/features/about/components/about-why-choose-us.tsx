@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare,
@@ -172,15 +172,54 @@ const REASONS_DATA: FeatureTab[] = [
 ];
 
 export function AboutWhyChooseUs() {
-  const defaultTab = REASONS_DATA[0]!;
-  const [activeTab, setActiveTab] = useState<string>(defaultTab.id);
+  const [activeIdx, setActiveIdx] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
 
-  const currentTab =
-    REASONS_DATA.find((tab) => tab.id === activeTab) ?? defaultTab;
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth < 1024 || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const totalScrollHeight =
+        containerRef.current.clientHeight - window.innerHeight;
+
+      if (totalScrollHeight <= 0) return;
+
+      const rawProgress = -rect.top / totalScrollHeight;
+      const scrollProgress = Math.min(Math.max(rawProgress, 0), 0.9999);
+
+      const calculatedIndex = Math.floor(scrollProgress * REASONS_DATA.length);
+      const nextIndex = Math.min(
+        Math.max(calculatedIndex, 0),
+        REASONS_DATA.length - 1,
+      );
+
+      setActiveIdx((prev) => (prev !== nextIndex ? nextIndex : prev));
+    };
+
+    const onScroll = () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+    };
+  }, []);
+
+  const currentTab = REASONS_DATA[activeIdx] ?? REASONS_DATA[0]!;
 
   return (
-    <section className="w-full bg-[#FAFAFC] py-12 sm:py-12">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+    <section
+      ref={containerRef}
+      className="relative w-full bg-[#FAFAFC] px-4 py-12 sm:px-6 lg:h-[350vh] lg:px-8 lg:py-0"
+    >
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col justify-center lg:sticky lg:top-8 lg:min-h-[calc(100vh-4rem)]">
         {/* Header Badge & Title */}
         <div className="flex flex-col items-center text-center">
           <div className="text-basic inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 font-semibold text-[#002688] shadow-sm">
@@ -197,16 +236,15 @@ export function AboutWhyChooseUs() {
         <div className="mt-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Side: Menu List */}
           <div className="flex flex-col gap-5 lg:col-span-4">
-            {REASONS_DATA.map((tab) => {
-              const isActive = tab.id === activeTab;
+            {REASONS_DATA.map((tab, index) => {
+              const isActive = index === activeIdx;
               return (
-                <button
+                <div
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
                   className={`group relative flex items-center justify-between rounded-full px-6 py-4 text-left transition-all duration-300 ${
                     isActive
                       ? "bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_10px_25px_rgba(0,38,136,0.35)]"
-                      : "bg-transparent text-slate-900 hover:bg-slate-100"
+                      : "bg-transparent text-slate-900"
                   }`}
                 >
                   <span className="text-base font-bold sm:text-lg">
@@ -219,21 +257,21 @@ export function AboutWhyChooseUs() {
                   >
                     {tab.number}
                   </span>
-                </button>
+                </div>
               );
             })}
           </div>
 
           {/* Right Side: Tab Details Card */}
           <div className="lg:col-span-8">
-            <div className="rounded-[28px] border border-slate-200/80 bg-[#F2F4F7] p-6 shadow-xl sm:rounded-[36px] sm:p-8 lg:p-8">
+            <div className="rounded-[28px] border border-slate-200/80 bg-[#F2F4F7] p-6 shadow-xl sm:rounded-[36px] sm:p-8 lg:min-h-[460px] lg:p-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentTab.id}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
                 >
                   {/* Headline */}
                   <h3 className="text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">

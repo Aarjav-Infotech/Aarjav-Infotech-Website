@@ -222,8 +222,7 @@ export function Navbar() {
                       onClick={() => handleMegaMenuToggle(link.label)}
                       className={cn(
                         "group/link text-foreground hover:text-primary lg:text-basic relative flex cursor-pointer items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
-                        (pathname.startsWith(link.href) || isDropdownActive) &&
-                          "text-primary font-semibold",
+                        isDropdownActive && "text-primary font-semibold",
                       )}
                     >
                       <span className="relative inline-block whitespace-nowrap">
@@ -231,9 +230,7 @@ export function Navbar() {
                         <span
                           className={cn(
                             "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
-                            (pathname.startsWith(link.href) ||
-                              isDropdownActive) &&
-                              "scale-x-100",
+                            isDropdownActive && "scale-x-100",
                           )}
                         />
                       </span>
@@ -249,19 +246,11 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className={cn(
-                        "group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
-                        pathname === link.href && "text-primary font-semibold",
-                      )}
+                      className="group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm"
                     >
                       <span className="relative inline-block whitespace-nowrap">
                         {link.label}
-                        <span
-                          className={cn(
-                            "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
-                            pathname === link.href && "scale-x-100",
-                          )}
-                        />
+                        <span className="bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100" />
                       </span>
                     </Link>
                   )}
