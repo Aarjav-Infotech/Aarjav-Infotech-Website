@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import {
   motion,
   useScroll,
+  useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
@@ -98,6 +99,13 @@ export function HomeCaseStudies({
     offset: ["start start", "end end"],
   });
 
+  // Smooth out raw scroll progression to eliminate skipping and jitter
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <section className="bg-background relative w-full pt-12 pb-12 sm:pt-16">
       {/* 1. Header Section */}
@@ -128,7 +136,7 @@ export function HomeCaseStudies({
       </div>
 
       {/* 2. Scroll Track Container */}
-      <div ref={containerRef} className="relative w-full lg:h-[260vh]">
+      <div ref={containerRef} className="relative w-full lg:h-[300vh]">
         <div className="flex w-full flex-col items-center justify-start lg:sticky lg:top-[100px] lg:pb-12">
           {/* Mobile & Tablet Layout */}
           <div className="my-4 flex w-full flex-col gap-6 px-4 lg:hidden">
@@ -145,7 +153,7 @@ export function HomeCaseStudies({
                 project={project}
                 index={index}
                 total={projects.length}
-                scrollYProgress={scrollYProgress}
+                scrollYProgress={smoothProgress}
               />
             ))}
           </div>
@@ -184,13 +192,15 @@ function StackingCard({
 }: StackingCardProps) {
   const leftPeekOffset = index * 80;
 
-  const start = index === 0 ? 0 : (index - 0.5) / (total - 0.5);
-  const end = index === 0 ? 0 : index / (total - 0.5);
+  // Stagger start and end ranges smoothly across total scroll progress
+  const step = 1 / total;
+  const start = index === 0 ? 0 : (index - 1) * step + 0.05;
+  const end = index === 0 ? 0 : index * step;
 
   const y = useTransform(
     scrollYProgress,
     [start, end],
-    [index === 0 ? "0%" : "100%", "0%"],
+    [index === 0 ? "0%" : "105%", "0%"],
   );
 
   return (
@@ -234,7 +244,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
         ))}
       </div>
 
-      {/* Main Figma Content Grid */}
+      {/* Main Content Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
         {/* Left Column */}
         <div className="flex flex-col justify-between space-y-4 lg:col-span-5 lg:h-full lg:space-y-6">
@@ -280,7 +290,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
               src={project.image}
               alt={project.title}
               fill
-              className="rounder-xl object-cover object-top"
+              className="rounded-xl object-cover object-top"
             />
           </div>
         </div>
