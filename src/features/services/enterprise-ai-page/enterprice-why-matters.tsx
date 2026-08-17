@@ -33,26 +33,18 @@ export default function WhyItMattersSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-12 sm:py-12 md:py-12">
-      <div className="mx-auto max-w-full">
-        {/* Main Background Container */}
-        <div className="relative w-full overflow-hidden rounded-[24px] border border-neutral-800 bg-black py-10 text-white sm:rounded-[32px] sm:py-14 md:rounded-[40px] md:py-20">
-          {/* Background Image Layer */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/images/matter-bg.svg"
-              alt="Background Lightburst"
-              className="h-full w-full object-cover object-left"
-            />
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0" />
-          </div>
+    <section className="w-full bg-white py-12">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+        {/* Main Container with Direct CSS Background */}
+        <div className="relative w-full overflow-hidden rounded-[24px] border border-neutral-800/80 bg-black bg-[url('/images/matter-bg.svg')] bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:rounded-[32px] sm:px-10 sm:py-16 md:rounded-[40px] md:py-20 lg:px-12">
+          {/* Subtle Dark Overlay to Ensure High Contrast & Hide Bottom Boundary */}
+          <div className="pointer-events-none absolute inset-0 bg-black/30" />
 
           {/* Foreground Content */}
           <div className="relative z-10 flex flex-col items-center">
             {/* Eyebrow Badge */}
             {eyebrow && (
-              <div className="text-basic mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-bold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
+              <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
                 <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
                 {eyebrow}
               </div>

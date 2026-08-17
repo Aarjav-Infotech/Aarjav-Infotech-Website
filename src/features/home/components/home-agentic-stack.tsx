@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface LayerData {
+export interface LayerData {
   id: string;
   layerNumber: string;
   title: string;
@@ -119,15 +120,13 @@ export function AgenticStackSection() {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  // Guard ref to track manual user tab clicks on mobile
   const isUserClicked = useRef<boolean>(false);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
 
-    const handleScroll = () => {
-      // Strictly target Desktop (1024px and wider) for scroll calculations
+    const updateScrollProgress = () => {
       if (window.innerWidth < 1024 || !containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
@@ -136,27 +135,32 @@ export function AgenticStackSection() {
 
       if (totalScrollHeight <= 0) return;
 
-      const scrollProgress = Math.min(
-        Math.max(-rect.top / totalScrollHeight, 0),
-        1,
-      );
+      const rawProgress = -rect.top / totalScrollHeight;
+      const scrollProgress = Math.min(Math.max(rawProgress, 0), 0.9999);
 
+      const calculatedIndex = Math.floor(scrollProgress * LAYERS.length);
       const nextIndex = Math.min(
-        Math.floor(scrollProgress * LAYERS.length),
+        Math.max(calculatedIndex, 0),
         LAYERS.length - 1,
       );
 
-      setActiveLayer(nextIndex);
+      setActiveLayer((prev) => (prev !== nextIndex ? nextIndex : prev));
+    };
+
+    const handleScroll = () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(updateScrollProgress);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    updateScrollProgress();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
     };
   }, []);
 
-  // FIX: Only trigger scrollIntoView on mobile when user explicitly clicks a tab
   useEffect(() => {
     if (isMounted && isUserClicked.current && window.innerWidth < 1024) {
       const activeTab = mobileTabRefs.current[activeLayer];
@@ -167,7 +171,6 @@ export function AgenticStackSection() {
           block: "nearest",
         });
       }
-      // Reset user click flag
       isUserClicked.current = false;
     }
   }, [activeLayer, isMounted]);
@@ -182,12 +185,12 @@ export function AgenticStackSection() {
   return (
     <section
       ref={containerRef}
-      className="relative h-auto w-full px-4 py-8 sm:px-6 lg:h-[420vh] lg:px-12"
+      className="relative h-auto w-full px-4 py-8 sm:px-6 lg:h-[480vh] lg:px-12"
     >
       <div className="relative mx-auto flex w-full max-w-full flex-col justify-center lg:sticky lg:top-8 lg:min-h-[calc(100vh-4rem)]">
         {/* Outer Container */}
         <div className="relative overflow-hidden rounded-[24px] bg-[url('/images/layersection-bg.svg')] bg-cover bg-center bg-no-repeat p-5 sm:rounded-[32px] sm:p-8 lg:p-12">
-          {/* Header with Custom Eyebrow */}
+          {/* Header */}
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
             <div className="text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
@@ -198,7 +201,7 @@ export function AgenticStackSection() {
             </h2>
           </div>
 
-          {/* Mobile Selector Container (< lg): Pure Click Mode */}
+          {/* Mobile Selector Container (< lg) */}
           <div className="mt-4 flex w-full scrollbar-none overflow-x-auto scroll-smooth pb-2 lg:hidden">
             <div className="flex gap-2">
               {LAYERS.map((layer, index) => {
@@ -212,7 +215,7 @@ export function AgenticStackSection() {
                     type="button"
                     tabIndex={isMounted ? 0 : -1}
                     onClick={() => handleTabClick(index)}
-                    className={`flex items-center justify-center rounded-full px-3.5 py-1 font-bold whitespace-nowrap transition-all ${
+                    className={`flex items-center justify-center rounded-full px-3.5 py-1 font-bold whitespace-nowrap transition-all duration-200 ${
                       isActive
                         ? "scale-105 bg-[#0052FF] text-white shadow-md"
                         : "bg-slate-100 text-slate-700 active:scale-95"
@@ -227,6 +230,7 @@ export function AgenticStackSection() {
 
           {/* Grid Content */}
           <div className="mt-6 grid grid-cols-1 items-center gap-6 lg:mt-8 lg:grid-cols-12 lg:gap-10">
+            {/* Left 3D Isometric Stack Diagram */}
             <div className="relative hidden flex-col items-center justify-center lg:col-span-5 lg:flex">
               <div className="relative flex w-[200px] flex-col items-center lg:h-[445px]">
                 <div className="absolute top-4 bottom-4 left-1/2 -z-0 w-px -translate-x-1/2 border-r-2 border-dotted border-slate-300" />
@@ -243,11 +247,10 @@ export function AgenticStackSection() {
                       }`}
                       style={{ zIndex: strictZIndex }}
                     >
+                      {/* Fully Opaque Solid Container: Only translates up on active */}
                       <div
-                        className={`relative size-full transition-all duration-300 ease-out ${
-                          isActive
-                            ? "-translate-y-1.5 opacity-100 drop-shadow-[0_10px_20px_rgba(59,130,246,0.5)]"
-                            : "translate-y-0 opacity-100"
+                        className={`relative size-full opacity-100 transition-transform duration-300 ease-out ${
+                          isActive ? "-translate-y-2.5" : "translate-y-0"
                         }`}
                       >
                         <Image
@@ -259,11 +262,20 @@ export function AgenticStackSection() {
                         />
                       </div>
 
+                      {/* Active Indicator Line & Dot */}
                       {isActive && (
-                        <div className="pointer-events-none absolute top-1/2 left-[95%] z-40 flex -translate-y-1/2 items-center transition-all duration-300">
-                          <div className="size-2.5 rounded-full bg-[#002688] shadow-sm ring-4 ring-blue-50" />
+                        <motion.div
+                          layoutId="activePointer"
+                          transition={{
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 30,
+                          }}
+                          className="pointer-events-none absolute top-1/2 left-[95%] z-40 flex -translate-y-1/2 items-center"
+                        >
+                          <div className="size-2.5 rounded-full bg-[#002688] shadow-sm ring-4 ring-blue-100" />
                           <div className="h-[2px] w-40 border-t-2 border-dotted border-[#002688]" />
-                        </div>
+                        </motion.div>
                       )}
                     </div>
                   );
@@ -273,43 +285,54 @@ export function AgenticStackSection() {
 
             {/* Right Active Card Details */}
             <div className="lg:col-span-7">
-              <div className="flex flex-col rounded-[20px] border border-slate-200/10 bg-white p-5 shadow-lg transition-all duration-300 sm:rounded-[28px] sm:p-8 lg:min-h-[545px]">
-                <div>
-                  <div className="flex items-center gap-2.5 font-extrabold tracking-widest text-[#002688]">
-                    <span className="h-4 w-1 rounded-full bg-[#002688]" />
-                    {currentData.layerNumber}
-                  </div>
+              <div className="relative overflow-hidden rounded-[20px] border border-slate-200/20 bg-white p-5 shadow-lg sm:rounded-[28px] sm:p-8 lg:min-h-[545px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentData.id}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2.5 font-extrabold tracking-widest text-[#002688]">
+                        <span className="h-4 w-1 rounded-full bg-[#002688]" />
+                        {currentData.layerNumber}
+                      </div>
 
-                  <h3 className="text-basic mt-3 font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-                    {currentData.title}
-                  </h3>
+                      <h3 className="text-basic mt-3 font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+                        {currentData.title}
+                      </h3>
 
-                  <p className="sm:text-basic mt-3 text-sm leading-relaxed text-slate-500">
-                    {currentData.description}
-                  </p>
+                      <p className="sm:text-basic mt-3 text-sm leading-relaxed text-slate-500">
+                        {currentData.description}
+                      </p>
 
-                  <ul className="sm:text-basic mt-5 space-y-2 text-sm text-slate-700 sm:mt-6 sm:space-y-2.5">
-                    {currentData.bullets.map((bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <span className="mt-2 size-1 shrink-0 rounded-full bg-slate-800" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                      <ul className="sm:text-basic mt-5 space-y-2 text-sm text-slate-700 sm:mt-6 sm:space-y-2.5">
+                        {currentData.bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5">
+                            <span className="mt-2 size-1 shrink-0 rounded-full bg-slate-800" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                <div className="mt-6 flex flex-wrap gap-2 sm:gap-2.5">
-                  {currentData.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="inline-block rounded-full bg-gradient-to-b from-[#0031a5] to-[#0052e0] p-[3px]"
-                    >
-                      <span className="block rounded-full bg-white px-2.5 py-1 font-semibold text-[#2B2BAD] sm:px-4 sm:py-1.5">
-                        {tag}
-                      </span>
-                    </span>
-                  ))}
-                </div>
+                    <div className="mt-6 flex flex-wrap gap-2 sm:gap-2.5">
+                      {currentData.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-block rounded-full bg-gradient-to-b from-[#0031a5] to-[#0052e0] p-[3px]"
+                        >
+                          <span className="block rounded-full bg-white px-2.5 py-1 font-semibold text-[#2B2BAD] sm:px-4 sm:py-1.5">
+                            {tag}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
           </div>
