@@ -178,6 +178,7 @@ export function AboutWhyChooseUs() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Strictly run scroll logic on desktop (>= 1024px)
       if (window.innerWidth < 1024 || !containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
@@ -212,6 +213,13 @@ export function AboutWhyChooseUs() {
     };
   }, []);
 
+  const handleTabClick = (index: number) => {
+    // Only allow click selection on mobile/tablet screens (< 1024px)
+    if (window.innerWidth < 1024) {
+      setActiveIdx(index);
+    }
+  };
+
   const currentTab = REASONS_DATA[activeIdx] ?? REASONS_DATA[0]!;
 
   return (
@@ -235,16 +243,18 @@ export function AboutWhyChooseUs() {
         {/* Interactive Layout Grid */}
         <div className="mt-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Side: Menu List */}
-          <div className="flex flex-col gap-5 lg:col-span-4">
+          <div className="flex flex-col gap-3 sm:gap-5 lg:col-span-4">
             {REASONS_DATA.map((tab, index) => {
               const isActive = index === activeIdx;
               return (
-                <div
+                <button
+                  type="button"
                   key={tab.id}
-                  className={`group relative flex items-center justify-between rounded-full px-6 py-4 text-left transition-all duration-300 ${
+                  onClick={() => handleTabClick(index)}
+                  className={`group relative flex w-full items-center justify-between rounded-full px-6 py-4 text-left transition-all duration-300 lg:cursor-default ${
                     isActive
                       ? "bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_10px_25px_rgba(0,38,136,0.35)]"
-                      : "bg-transparent text-slate-900"
+                      : "bg-transparent text-slate-900 hover:bg-slate-100/80 lg:hover:bg-transparent"
                   }`}
                 >
                   <span className="text-base font-bold sm:text-lg">
@@ -257,7 +267,7 @@ export function AboutWhyChooseUs() {
                   >
                     {tab.number}
                   </span>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -283,7 +293,7 @@ export function AboutWhyChooseUs() {
                     {currentTab.description}
                   </p>
 
-                  <div className="my-2 h-[1px] w-full bg-slate-300/60" />
+                  <div className="my-4 h-[1px] w-full bg-slate-300/60" />
 
                   {/* Bullet / Icon List */}
                   <div className="flex flex-col gap-4">
