@@ -1,19 +1,11 @@
-import type { Metadata } from "next";
+import ContactFeature from "@/features/contact/contect-content";
 
-import { ContactSection } from "@/features/contact/components/contact-section";
-import { createMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createMetadata({
-  title: "Contact",
+export const metadata = {
+  title: "Contact Us | Arjav Infotech",
   description:
-    "Get in touch with Aarjav Infotech. We'd love to hear about your project.",
-  path: "/contact",
-});
+    "Connect with our AI solution engineers to automate and scale your enterprise workflows.",
+};
 
 export default function ContactPage() {
-  return (
-    <main id="main-content">
-      <ContactSection />
-    </main>
-  );
+  return <ContactFeature />;
 }

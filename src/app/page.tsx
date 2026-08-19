@@ -1,34 +1,52 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import HomeContent from "@/features/home/components/home-content";
-// import AboutContent from "@/features/about/components/about-content";
-// import AiContent from "@/features/services/ai-workflow-page/ai-workflow-content";
+import { HomeSkeleton } from "@/features/home/components/home-skeleton";
 
 export default function HomePage() {
-  useEffect(() => {
-    // Force active element to blur on mount so no section can pull focus
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Disable browser memory scroll
+  if (typeof window !== "undefined") {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }
+
+  useEffect(() => {
+    // Force top on load
     window.scrollTo(0, 0);
 
     const timer = setTimeout(() => {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-      window.scrollTo(0, 0);
-    }, 10);
+      setIsLoading(false);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, []);
 
+  useLayoutEffect(() => {
+    if (!isLoading) {
+      // Loop over next few animation frames to kill any delayed scroll-into-view calls
+      let count = 0;
+      const forceTop = () => {
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        count++;
+        if (count < 10) {
+          requestAnimationFrame(forceTop);
+        }
+      };
+
+      forceTop();
+    }
+  }, [isLoading]);
+
   return (
     <main id="main-content" className="w-full">
-      <HomeContent />
-      {/* <AboutContent /> */}
-      {/* <AiContent /> */}
+      {isLoading ? <HomeSkeleton /> : <HomeContent />}
     </main>
   );
 }
