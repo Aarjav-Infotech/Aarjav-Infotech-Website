@@ -282,12 +282,12 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
 
         {/* Right Column Image Container */}
         <div className="relative flex items-center justify-center lg:col-span-7">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-2xs sm:rounded-2xl">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-2xs sm:rounded-4xl">
             <Image
               src={project.image}
               alt={project.title}
               fill
-              className="rounded-xl object-cover object-top"
+              className="rounded-2xl object-cover"
             />
           </div>
         </div>
