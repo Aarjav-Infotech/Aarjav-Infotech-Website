@@ -99,7 +99,6 @@ export function HomeCaseStudies({
     offset: ["start start", "end end"],
   });
 
-  // Smooth out raw scroll progression to eliminate skipping and jitter
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -112,7 +111,6 @@ export function HomeCaseStudies({
       <div className="mx-auto w-full max-w-[1364px] px-4 pb-8 sm:px-6 sm:pb-12">
         <FadeIn>
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            {/* Eyebrow Pill Badge */}
             {eyebrow && (
               <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
@@ -145,8 +143,8 @@ export function HomeCaseStudies({
             ))}
           </div>
 
-          {/* Desktop Fixed Viewport Container */}
-          <div className="relative mx-auto hidden h-[580px] w-full max-w-[1240px] items-center px-4 lg:flex">
+          {/* Desktop Fixed Viewport Container (Added overflow-hidden) */}
+          <div className="relative mx-auto hidden h-[580px] w-full max-w-[1240px] items-center overflow-hidden px-4 lg:flex">
             {projects.map((project, index) => (
               <StackingCard
                 key={project.id}
@@ -192,7 +190,6 @@ function StackingCard({
 }: StackingCardProps) {
   const leftPeekOffset = index * 80;
 
-  // Stagger start and end ranges smoothly across total scroll progress
   const step = 1 / total;
   const start = index === 0 ? 0 : (index - 1) * step + 0.05;
   const end = index === 0 ? 0 : index * step;
