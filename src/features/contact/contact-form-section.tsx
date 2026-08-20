@@ -57,7 +57,6 @@ export function ContactFormSection({
   return (
     <section className="relative w-full bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-full space-y-12">
-        {/* ================= TOP 3 CONTACT INFO CARDS ================= */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {topCards.map((card, idx) => {
             const Icon = card.icon;
@@ -82,12 +81,10 @@ export function ContactFormSection({
           })}
         </div>
 
-        {/* ================= MAIN SPLIT SECTION ================= */}
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
           {/* LEFT COLUMN: Text & Social Pills */}
           <div className="flex flex-col justify-between self-stretch lg:col-span-6">
             <div className="space-y-6">
-              {/* Eyebrow Pill Badge */}
               {eyebrow && (
                 <div>
                   <div className="inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-sm sm:border-b-4 sm:text-[14px]">
