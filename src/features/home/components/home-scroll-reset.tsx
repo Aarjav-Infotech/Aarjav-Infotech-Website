@@ -1,0 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
+
+/**
+ * Preserves prior homepage scroll-restoration behavior without blocking SSR content.
+ */
+export function HomeScrollReset() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  return null;
+}

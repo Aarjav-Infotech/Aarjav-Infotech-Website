@@ -106,28 +106,43 @@ export function Footer() {
                 </h4>
                 <ul className="text-basic mt-1 space-y-2 text-slate-200">
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/ai-workflow-automation"
+                      className="transition hover:text-white"
+                    >
                       AI Workflow Automation
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/support-triage-ticketing"
+                      className="transition hover:text-white"
+                    >
                       Support Triage & Ticketing
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/enterprise-ai-page"
+                      className="transition hover:text-white"
+                    >
                       Internal Tools & Agents
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
-                      Data Pipelines
+                    <Link
+                      href="/services/ai-document-processing"
+                      className="transition hover:text-white"
+                    >
+                      Document Processing
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
-                      Support & Monitoring
+                    <Link
+                      href="/services/ai-voice-agent"
+                      className="transition hover:text-white"
+                    >
+                      AI Voice Agents
                     </Link>
                   </li>
                 </ul>
@@ -140,27 +155,36 @@ export function Footer() {
                 </h4>
                 <ul className="text-basic mt-1 space-y-2 text-slate-200">
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link href="/about" className="transition hover:text-white">
                       Who we are
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/case-study"
+                      className="transition hover:text-white"
+                    >
                       Case Studies
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
-                      Industries
+                    <Link href="/docs" className="transition hover:text-white">
+                      Developer docs
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
-                      Workflow
+                    <Link
+                      href="/privacy"
+                      className="transition hover:text-white"
+                    >
+                      Privacy
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/contact"
+                      className="transition hover:text-white"
+                    >
                       Contact
                     </Link>
                   </li>
@@ -233,14 +257,14 @@ export function Footer() {
               2026 © Aarjav Infotech. All rights reserved
             </p>
             <div className="order-1 flex flex-wrap items-center justify-center gap-4 sm:order-2 sm:gap-5">
-              <Link href="#" className="transition hover:text-white">
-                Terms of service
+              <Link href="/docs" className="transition hover:text-white">
+                Developer resources
               </Link>
-              <Link href="#" className="transition hover:text-white">
+              <Link href="/privacy" className="transition hover:text-white">
                 Privacy policy
               </Link>
-              <Link href="#" className="transition hover:text-white">
-                Cookie Policy
+              <Link href="/llms.txt" className="transition hover:text-white">
+                llms.txt
               </Link>
             </div>
           </div>
