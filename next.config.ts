@@ -16,6 +16,16 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
     optimizeCss: false,
   },
+  async headers() {
+    // Ensure Accept is always part of Vary for content negotiation caches.
+    // Next may also set RSC vary tokens; CDNs typically merge Vary values.
+    return [
+      {
+        source: "/:path*",
+        headers: [{ key: "Vary", value: "Accept, Accept-Encoding" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
