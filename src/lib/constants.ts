@@ -33,19 +33,21 @@ export const NAV_LINKS = [
 ] as const;
 
 export const CONTACT_INFO = {
-  email: "hello@aarjavinfotech.com",
-  phone: "+91 98765 43210",
-  address: "Ahmedabad, Gujarat, India",
-  streetAddress: "Ahmedabad",
-  addressLocality: "Ahmedabad",
+  email: "business@aarjavinfotech.com",
+  phone: "+91 99649 19000",
+  address:
+    "526, Mahek IT Park, Kshanagar, Old GIDC, Katargam, Surat, Gujarat 395004, India",
+  streetAddress: "526, Mahek IT Park, Kshanagar, Old GIDC, Katargam",
+  addressLocality: "Surat",
   addressRegion: "Gujarat",
-  postalCode: "380001",
+  postalCode: "395004",
   addressCountry: "IN",
 } as const;
 
+/** Social profiles — update when official URLs are confirmed. */
 export const SOCIAL_LINKS = {
-  linkedin: "https://www.linkedin.com/company/aarjav-infotech",
-  twitter: "https://x.com/aarjavinfotech",
+  linkedin: "",
+  twitter: "",
 } as const;
 
 export const ANIMATION = {
@@ -55,7 +57,7 @@ export const ANIMATION = {
 } as const;
 
 export const API_ROUTES = {
-  contact: "/api/contact",
+  web3forms: "https://api.web3forms.com/submit",
   newsletter: "/api/newsletter",
 } as const;
 

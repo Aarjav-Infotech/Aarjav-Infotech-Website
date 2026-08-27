@@ -11,7 +11,7 @@ export function HomeSsrContent() {
       aria-label="Aarjav Infotech company overview"
       data-agent-content="true"
     >
-      <h1>{HOME_SSR_COPY.h1}</h1>
+      <p className="font-semibold">{HOME_SSR_COPY.h1}</p>
       <p>{HOME_SSR_COPY.lead}</p>
       <p>{HOME_SSR_COPY.body}</p>
       <h2>Aarjav Infotech services</h2>

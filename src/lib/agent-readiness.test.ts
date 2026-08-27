@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { preferredType, parseAccept } from "./accept.ts";
-import { HOME_SSR_COPY } from "./constants.ts";
+import { CONTACT_INFO, HOME_SSR_COPY } from "./constants.ts";
+import { contactPhoneHref, formatContactAddress } from "./contact.ts";
 import { getOrganizationJsonLd } from "./json-ld.ts";
 import {
   getLlmsTxt,
@@ -42,6 +43,16 @@ describe("accept negotiation", () => {
     const entries = parseAccept("text/markdown;q=0.5, text/html");
     assert.equal(entries[0]?.q, 0.5);
     assert.equal(entries[1]?.q, 1);
+  });
+});
+
+describe("contact info", () => {
+  it("uses verified business NAP values", () => {
+    assert.equal(CONTACT_INFO.email, "business@aarjavinfotech.com");
+    assert.equal(CONTACT_INFO.phone, "+91 99649 19000");
+    assert.ok(CONTACT_INFO.address.includes("Surat"));
+    assert.ok(formatContactAddress().includes("395004"));
+    assert.ok(contactPhoneHref().startsWith("tel:+919964919000"));
   });
 });
 
@@ -147,10 +158,11 @@ describe("MCP discovery", () => {
 });
 
 describe("OpenAPI", () => {
-  it("is titled for Aarjav Infotech and documents contact + mcp", () => {
+  it("documents MCP and does not advertise missing first-party contact API", () => {
     const doc = getOpenApiDocument();
     assert.equal(doc.info.title, "Aarjav Infotech API");
-    assert.ok(doc.paths["/api/contact"]);
     assert.ok(doc.paths["/mcp"]);
+    assert.equal(doc.paths["/api/contact"], undefined);
+    assert.equal(doc.info.contact?.email, "business@aarjavinfotech.com");
   });
 });

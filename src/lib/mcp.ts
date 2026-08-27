@@ -1,4 +1,10 @@
-import { APP_DESCRIPTION, APP_NAME, APP_URL, ROUTES } from "./constants";
+import {
+  APP_DESCRIPTION,
+  APP_NAME,
+  APP_URL,
+  CONTACT_INFO,
+  ROUTES,
+} from "./constants";
 
 export const MCP_PROTOCOL_VERSION = "2025-03-26";
 export const MCP_SERVER_VERSION = "1.0.0";
@@ -47,7 +53,7 @@ export function getMcpManifest() {
     },
     security: {
       tls_required: true,
-      security_contact: "mailto:hello@aarjavinfotech.com",
+      security_contact: `mailto:${CONTACT_INFO.email}`,
     },
     rate_limits: {
       requests_per_minute: 120,
@@ -97,56 +103,16 @@ export function getOpenApiDocument() {
     info: {
       title: "Aarjav Infotech API",
       description:
-        "Public HTTP API for Aarjav Infotech developer integrations (contact intake). Product APIs for customer deployments are provided under separate contracts.",
+        "Public HTTP surfaces for Aarjav Infotech developer integrations and agent discovery. Contact submissions are handled via Web3Forms from the website contact form.",
       version: "1.0.0",
       contact: {
         name: "Aarjav Infotech",
-        email: "hello@aarjavinfotech.com",
+        email: CONTACT_INFO.email,
         url: APP_URL,
       },
     },
     servers: [{ url: APP_URL, description: "Aarjav Infotech production" }],
     paths: {
-      "/api/contact": {
-        post: {
-          operationId: "submitContact",
-          summary: "Submit a discovery / contact request to Aarjav Infotech",
-          tags: ["Contact"],
-          requestBody: {
-            required: true,
-            content: {
-              "application/json": {
-                schema: {
-                  type: "object",
-                  required: ["name", "email", "message"],
-                  properties: {
-                    name: { type: "string" },
-                    email: { type: "string", format: "email" },
-                    company: { type: "string" },
-                    message: { type: "string" },
-                  },
-                },
-              },
-            },
-          },
-          responses: {
-            "200": {
-              description: "Inquiry accepted",
-              content: {
-                "application/json": {
-                  schema: {
-                    type: "object",
-                    properties: {
-                      ok: { type: "boolean" },
-                    },
-                  },
-                },
-              },
-            },
-            "400": { description: "Validation error" },
-          },
-        },
-      },
       "/mcp": {
         post: {
           operationId: "mcpJsonRpc",

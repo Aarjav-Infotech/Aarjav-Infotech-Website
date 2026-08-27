@@ -3,6 +3,13 @@
 import React, { useState, useRef } from "react";
 import { Mail, Headphones, MapPin, Paperclip, X, FileText } from "lucide-react";
 
+import { CONTACT_INFO } from "@/lib/constants";
+import {
+  contactMapsHref,
+  contactPhoneHref,
+  submitContactForm,
+} from "@/lib/contact";
+
 interface ContactFormSectionProps {
   eyebrow?: string;
 }
@@ -12,9 +19,14 @@ export function ContactFormSection({
 }: ContactFormSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     phone: "",
     projectDetails: "",
   });
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -22,20 +34,20 @@ export function ContactFormSection({
   const topCards = [
     {
       title: "E-mail address",
-      value: "hello@youraiagency.com",
-      href: "mailto:hello@youraiagency.com",
+      value: CONTACT_INFO.email,
+      href: `mailto:${CONTACT_INFO.email}`,
       icon: Mail,
     },
     {
       title: "Phone number",
-      value: "+1 (647) 555 0172",
-      href: "tel:+16475550172",
+      value: CONTACT_INFO.phone,
+      href: contactPhoneHref(),
       icon: Headphones,
     },
     {
       title: "Our Location",
-      value: "USA, New York – 1060 Str.",
-      href: "#",
+      value: CONTACT_INFO.address,
+      href: contactMapsHref(),
       icon: MapPin,
     },
   ];
@@ -54,6 +66,65 @@ export function ContactFormSection({
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("idle");
+    setStatusMessage("");
+
+    if (attachments.length > 0) {
+      setStatus("error");
+      setStatusMessage(
+        `File attachments are not supported in the online form yet. Please email ${CONTACT_INFO.email} directly with your files.`,
+      );
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus("error");
+      setStatusMessage(
+        "Contact form is not configured yet. Please email us directly.",
+      );
+      return;
+    }
+
+    setStatus("loading");
+
+    try {
+      const result = await submitContactForm(
+        {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || undefined,
+          message: formData.projectDetails.trim(),
+        },
+        accessKey,
+      );
+
+      if (result.success) {
+        setStatus("success");
+        setStatusMessage(
+          result.message ??
+            "Thank you! Your message has been sent successfully.",
+        );
+        setFormData({ name: "", email: "", phone: "", projectDetails: "" });
+        setAttachments([]);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+        return;
+      }
+
+      setStatus("error");
+      setStatusMessage(
+        result.message ?? "Something went wrong. Please try again later.",
+      );
+    } catch {
+      setStatus("error");
+      setStatusMessage("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <section className="relative w-full bg-white px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-full space-y-12">
@@ -64,6 +135,12 @@ export function ContactFormSection({
               <a
                 key={idx}
                 href={card.href}
+                target={card.title === "Our Location" ? "_blank" : undefined}
+                rel={
+                  card.title === "Our Location"
+                    ? "noopener noreferrer"
+                    : undefined
+                }
                 className="group hover:shadow-3xl flex flex-col items-center justify-center rounded-[32px] border border-white/90 bg-[#F4F4F5] px-6 py-10 text-center shadow-2xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="relative mb-5 flex h-18 w-18 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white shadow-[0_8px_18px_rgba(0,82,204,0.35)] transition-transform duration-300 group-hover:scale-105">
@@ -144,34 +221,64 @@ export function ContactFormSection({
               Fill this form below
             </h3>
 
-            <form
-              className="mt-8 space-y-6"
-              onSubmit={(e) => e.preventDefault()}
-            >
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               {/* Name Field */}
               <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+                <label
+                  htmlFor="contact-name"
+                  className="text-sm font-semibold text-slate-800"
+                >
                   Your Name
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
+                  name="name"
                   placeholder="Enter your full name"
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
+                  required
                   className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
                 />
               </div>
 
-              {/* Phone / Email Field */}
+              {/* Email Field */}
               <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+                <label
+                  htmlFor="contact-email"
+                  className="text-sm font-semibold text-slate-800"
+                >
+                  Your Email
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  required
+                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                />
+              </div>
+
+              {/* Phone Field */}
+              <div className="space-y-1">
+                <label
+                  htmlFor="contact-phone"
+                  className="text-sm font-semibold text-slate-800"
+                >
                   Your Phone
                 </label>
                 <input
-                  type="text"
-                  placeholder="Enter the e-mail"
+                  id="contact-phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="Enter your phone number (optional)"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
@@ -182,18 +289,34 @@ export function ContactFormSection({
 
               {/* Project Details */}
               <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+                <label
+                  htmlFor="contact-message"
+                  className="text-sm font-semibold text-slate-800"
+                >
                   More About The Project
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
                   rows={3}
                   value={formData.projectDetails}
                   onChange={(e) =>
                     setFormData({ ...formData, projectDetails: e.target.value })
                   }
+                  required
                   className="w-full resize-none border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
                 />
               </div>
+
+              {/* Hidden honeypot for Web3Forms spam protection */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
 
               {/* Hidden File Input */}
               <input
@@ -240,13 +363,29 @@ export function ContactFormSection({
                 </div>
               )}
 
+              {statusMessage && (
+                <p
+                  role="status"
+                  className={`text-sm ${
+                    status === "success"
+                      ? "text-green-600"
+                      : status === "error"
+                        ? "text-red-600"
+                        : "text-slate-600"
+                  }`}
+                >
+                  {statusMessage}
+                </p>
+              )}
+
               {/* Submit Button */}
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-4 text-base font-semibold text-white shadow-[0_12px_24px_rgba(0,82,204,0.3)] transition-all hover:bg-[#0043a8] hover:shadow-[0_14px_28px_rgba(0,82,204,0.4)] active:scale-[0.99]"
+                  disabled={status === "loading"}
+                  className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-4 text-base font-semibold text-white shadow-[0_12px_24px_rgba(0,82,204,0.3)] transition-all hover:bg-[#0043a8] hover:shadow-[0_14px_28px_rgba(0,82,204,0.4)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Submit Message
+                  {status === "loading" ? "Sending..." : "Submit Message"}
                 </button>
               </div>
             </form>
