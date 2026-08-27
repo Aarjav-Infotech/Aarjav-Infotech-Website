@@ -4,11 +4,10 @@ export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Aarjav Infotech";
 
 /** Canonical public origin used in sitemap, robots, Open Graph, and JSON-LD. */
 export const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL ??
-  "https://aarjav-infotech-website.vercel.app";
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://aarjavinfotech.com";
 
 export const APP_DESCRIPTION =
-  "Aarjav Infotech is an AI-native agency that designs and deploys secure enterprise AI agents, workflow automation, document processing, and voice AI for regulated industries.";
+  "Aarjav Infotech is an AI-native agency in Surat, India that designs and deploys secure enterprise AI agents, workflow automation, document processing, and voice AI for regulated industries.";
 
 export const ROUTES = {
   home: "/",

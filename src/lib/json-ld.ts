@@ -5,11 +5,21 @@ import {
   CONTACT_INFO,
   SOCIAL_LINKS,
 } from "./constants";
+import { SITE_FAQS } from "./faqs";
+
+const postalAddress = {
+  "@type": "PostalAddress",
+  streetAddress: CONTACT_INFO.streetAddress,
+  addressLocality: CONTACT_INFO.addressLocality,
+  addressRegion: CONTACT_INFO.addressRegion,
+  postalCode: CONTACT_INFO.postalCode,
+  addressCountry: CONTACT_INFO.addressCountry,
+};
 
 export function getOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "ProfessionalService"],
     name: APP_NAME,
     legalName: "Aarjav Infotech",
     url: APP_URL,
@@ -23,13 +33,10 @@ export function getOrganizationJsonLd() {
           sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter].filter(Boolean),
         }
       : {}),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: CONTACT_INFO.streetAddress,
-      addressLocality: CONTACT_INFO.addressLocality,
-      addressRegion: CONTACT_INFO.addressRegion,
-      postalCode: CONTACT_INFO.postalCode,
-      addressCountry: CONTACT_INFO.addressCountry,
+    address: postalAddress,
+    areaServed: {
+      "@type": "Country",
+      name: "India",
     },
     contactPoint: [
       {
@@ -64,10 +71,26 @@ export function getWebSiteJsonLd() {
     name: APP_NAME,
     url: APP_URL,
     description: APP_DESCRIPTION,
+    inLanguage: "en-IN",
     publisher: {
       "@type": "Organization",
       name: APP_NAME,
       url: APP_URL,
     },
+  };
+}
+
+export function getFaqJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: SITE_FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }

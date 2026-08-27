@@ -4,7 +4,7 @@ import { describe, it } from "node:test";
 import { preferredType, parseAccept } from "./accept.ts";
 import { CONTACT_INFO, HOME_SSR_COPY } from "./constants.ts";
 import { contactPhoneHref, formatContactAddress } from "./contact.ts";
-import { getOrganizationJsonLd } from "./json-ld.ts";
+import { getFaqJsonLd, getOrganizationJsonLd } from "./json-ld.ts";
 import {
   getLlmsTxt,
   getMarkdownForPath,
@@ -101,18 +101,42 @@ describe("llms.txt", () => {
 describe("JSON-LD organization", () => {
   it("includes contactPoint and PostalAddress", () => {
     const org = getOrganizationJsonLd();
-    assert.equal(org["@type"], "Organization");
+    assert.ok(
+      Array.isArray(org["@type"])
+        ? org["@type"].includes("Organization")
+        : org["@type"] === "Organization",
+    );
     assert.equal(org.name, "Aarjav Infotech");
     assert.ok(Array.isArray(org.contactPoint));
     assert.ok(org.contactPoint[0]?.email);
     assert.equal(org.address["@type"], "PostalAddress");
-    assert.ok(org.address.addressLocality);
+    assert.ok(org.address.addressLocality === "Surat");
+  });
+
+  it("includes FAQPage markup matching on-site FAQs", () => {
+    const faq = getFaqJsonLd();
+    assert.equal(faq["@type"], "FAQPage");
+    assert.ok(Array.isArray(faq.mainEntity) && faq.mainEntity.length >= 4);
+  });
+});
+
+describe("indexable sitemap paths", () => {
+  it("includes service and industry URLs", async () => {
+    const { INDEXABLE_PATHS } = await import("./site-pages.ts");
+    assert.ok(INDEXABLE_PATHS.includes("/services/ai-workflow-automation"));
+    assert.ok(INDEXABLE_PATHS.includes("/industries/banking"));
+    assert.ok(INDEXABLE_PATHS.includes("/case-study"));
   });
 });
 
 describe("metadata", () => {
   it("includes canonical, og:type, and og:image", () => {
     const meta = createMetadata({ path: "/" });
+    assert.ok(
+      String(meta.alternates?.canonical).startsWith(
+        "https://aarjavinfotech.com",
+      ),
+    );
     assert.equal(meta.alternates?.canonical, meta.openGraph?.url);
     const og = meta.openGraph as { type?: string; images?: unknown[] };
     assert.equal(og.type, "website");

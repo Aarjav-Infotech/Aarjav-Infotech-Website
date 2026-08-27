@@ -4,34 +4,11 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
+import { SITE_FAQS } from "@/lib/faqs";
+
 export interface HomeFaqProps {
   eyebrow?: string;
 }
-
-const faqs = [
-  {
-    question: "Why should we trust our mission-critical data with you?",
-    answer:
-      "We treat security as a foundational architecture, not an afterthought. For government and enterprise projects, we deploy air-gapped ready systems and sovereign data environments that ensure your proprietary intelligence never touches the public internet. Our code is built to be audited, and our infrastructure is built to be impenetrable.",
-  },
-  {
-    question:
-      "How does your engineering approach differ from standard agencies?",
-    answer:
-      "We don't just build software — we engineer systems designed for longevity, compliance, and scale. Every project follows a structured methodology rooted in enterprise-grade architecture, rigorous testing, and future-proof design principles.",
-  },
-  {
-    question:
-      "Can you handle projects at government or global enterprise scale?",
-    answer:
-      "Absolutely. We've built and deployed solutions for government bodies, defense-adjacent programs, and multinational enterprises. Our team understands procurement cycles, regulatory compliance, and the operational rigor these environments demand.",
-  },
-  {
-    question: "How do you ensure long-term system evolution?",
-    answer:
-      "We design modular, well-documented systems that evolve with your needs. Our architecture supports iterative upgrades, version-controlled deployments, and seamless integration of emerging technologies without costly rewrites.",
-  },
-];
 
 export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -54,7 +31,7 @@ export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
 
         {/* FAQ List */}
         <div className="flex flex-col gap-3.5 sm:gap-5">
-          {faqs.map((faq, i) => {
+          {SITE_FAQS.map((faq, i) => {
             const isOpen = openIndex === i;
 
             return (

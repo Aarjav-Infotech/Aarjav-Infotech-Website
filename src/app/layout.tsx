@@ -63,7 +63,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
-          href="#"
+          href="#main-content"
           tabIndex={-1}
           className="bg-primary text-primary-foreground focus:z-toast sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-full focus:px-4 focus:py-2"
         >

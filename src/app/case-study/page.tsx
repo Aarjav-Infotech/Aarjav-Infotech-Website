@@ -1,10 +1,19 @@
-import CaseStudyFeature from "@/features/case-study/case-study-content";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Case Study | Project Showcase",
-  description: "Detailed breakdown of engineering and design solutions.",
-};
+import CaseStudyFeature from "@/features/case-study/case-study-content";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Case Studies",
+  description:
+    "Aarjav Infotech case studies — how we delivered AI and software projects such as Sahaj Construction and Glamora Jewels.",
+  path: "/case-study",
+});
 
 export default function CaseStudyPage() {
-  return <CaseStudyFeature />;
+  return (
+    <main id="main-content">
+      <CaseStudyFeature />
+    </main>
+  );
 }

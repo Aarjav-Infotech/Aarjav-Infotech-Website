@@ -1,10 +1,19 @@
-import BankingContent from "@/features/Industry/banking-content";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "AI That Powers Modern Banking | Aarjav Infotech",
-  description: "One intelligent layer across your banking operations.",
-};
+import BankingContent from "@/features/Industry/banking-content";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "AI for Banking",
+  description:
+    "Aarjav Infotech builds an intelligent AI layer across banking operations — automation, document processing, and secure agents for regulated financial workflows.",
+  path: "/industries/banking",
+});
 
 export default function BankingPage() {
-  return <BankingContent />;
+  return (
+    <main id="main-content">
+      <BankingContent />
+    </main>
+  );
 }
