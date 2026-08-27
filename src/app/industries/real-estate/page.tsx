@@ -1,11 +1,19 @@
-import RealEstateContent from "@/features/Industry/real-estate-content";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "AI That Powers Smarter Real Estate | Aarjav Infotech",
+import RealEstateContent from "@/features/Industry/real-estate-content";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "AI for Real Estate",
   description:
-    "Connect AI agents, property data, customer interactions, and real-estate workflows to automate operations, accelerate transactions, and deliver better experiences.",
-};
+    "Aarjav Infotech connects AI agents, property data, and real-estate workflows to automate operations and accelerate transactions.",
+  path: "/industries/real-estate",
+});
 
 export default function RealEstatePage() {
-  return <RealEstateContent />;
+  return (
+    <main id="main-content">
+      <RealEstateContent />
+    </main>
+  );
 }

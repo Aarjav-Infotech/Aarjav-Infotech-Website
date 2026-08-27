@@ -27,7 +27,9 @@ export function createMetadata({
   };
 
   return {
-    title: pageTitle,
+    title: {
+      absolute: pageTitle,
+    },
     description,
     metadataBase: new URL(APP_URL),
     alternates: {
