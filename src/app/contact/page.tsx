@@ -20,8 +20,7 @@ export default function ContactPage() {
           Connect with Aarjav Infotech solution engineers to automate and scale
           enterprise workflows with secure AI agents, document processing, and
           voice AI. Email {CONTACT_INFO.email}, phone {CONTACT_INFO.phone},
-          address {CONTACT_INFO.streetAddress}, {CONTACT_INFO.addressLocality},{" "}
-          {CONTACT_INFO.addressRegion} {CONTACT_INFO.postalCode}, India. Book a
+          address {CONTACT_INFO.address}. Book a discovery call when you have a
           discovery call when you have a concrete workflow to automate, a
           compliance constraint to satisfy, or an existing AI pilot that needs
           to harden for production. Please include your industry, systems of

@@ -18,7 +18,11 @@ export function getOrganizationJsonLd() {
     image: `${APP_URL}/images/hero-background.png`,
     email: CONTACT_INFO.email,
     telephone: CONTACT_INFO.phone,
-    sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter],
+    ...(SOCIAL_LINKS.linkedin || SOCIAL_LINKS.twitter
+      ? {
+          sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter].filter(Boolean),
+        }
+      : {}),
     address: {
       "@type": "PostalAddress",
       streetAddress: CONTACT_INFO.streetAddress,

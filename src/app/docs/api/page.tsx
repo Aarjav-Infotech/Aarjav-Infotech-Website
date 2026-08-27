@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/common/container";
-import { APP_URL, ROUTES } from "@/lib/constants";
+import { APP_URL, CONTACT_INFO, ROUTES } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata({
   title: "Aarjav Infotech API Documentation",
   description:
-    "Aarjav Infotech API documentation — contact intake, OpenAPI, and MCP tool surfaces for developers and agents.",
+    "Aarjav Infotech developer documentation — MCP tools, OpenAPI, and Web3Forms contact intake.",
   path: ROUTES.docsApi,
 });
 
@@ -21,27 +21,40 @@ export default function DocsApiPage() {
           Aarjav Infotech API Documentation
         </h1>
         <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
-          The Aarjav Infotech public API currently exposes contact intake for
-          discovery calls. Authenticated product APIs for customer deployments
-          are provided under separate contracts with dedicated auth docs.
+          Public developer surfaces for agents include MCP discovery, markdown
+          negotiation, and OpenAPI metadata. Human contact submissions use
+          Web3Forms from the website contact form.
         </p>
 
-        <h2 className="mt-10 text-xl font-semibold">Contact intake</h2>
+        <h2 className="mt-10 text-xl font-semibold">
+          Contact form (Web3Forms)
+        </h2>
+        <p className="mt-3 text-base leading-relaxed">
+          Visitors submit inquiries at{" "}
+          <Link href={ROUTES.contact} className="text-primary underline">
+            /contact
+          </Link>
+          , which POSTs to:
+        </p>
         <p className="mt-3 text-base leading-relaxed">
           <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm">
-            POST {APP_URL}/api/contact
+            POST https://api.web3forms.com/submit
           </code>
         </p>
         <p className="text-muted-foreground mt-3 text-base leading-relaxed">
-          Accepts JSON with name, email, company, and message fields. Returns
-          200 on success or 4xx on validation errors. Full schema:{" "}
-          <Link
-            href={ROUTES.openApi}
-            className="text-primary underline-offset-2 hover:underline"
+          JSON fields: <code className="text-sm">access_key</code>,{" "}
+          <code className="text-sm">name</code>,{" "}
+          <code className="text-sm">email</code>, optional{" "}
+          <code className="text-sm">phone</code>, and{" "}
+          <code className="text-sm">message</code>. Agents should direct users
+          to the contact page or email{" "}
+          <a
+            href={`mailto:${CONTACT_INFO.email}`}
+            className="text-primary underline"
           >
-            Aarjav Infotech OpenAPI
-          </Link>
-          .
+            {CONTACT_INFO.email}
+          </a>{" "}
+          rather than calling Web3Forms directly.
         </p>
 
         <h2 className="mt-10 text-xl font-semibold">MCP tools</h2>
@@ -54,8 +67,12 @@ export default function DocsApiPage() {
           <Link href="/.well-known/mcp" className="text-primary underline">
             /.well-known/mcp
           </Link>
-          . Tools include company info, services, contact NAP, and developer
-          resource URLs.
+          . Machine-readable schema:{" "}
+          <Link href={ROUTES.openApi} className="text-primary underline">
+            {APP_URL}
+            {ROUTES.openApi}
+          </Link>
+          .
         </p>
 
         <p className="mt-10 text-sm">
