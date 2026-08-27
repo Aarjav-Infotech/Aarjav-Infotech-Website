@@ -1,11 +1,14 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
+import { motion, useInView, type Variants } from "framer-motion";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { cn } from "@/lib/utils";
 
 export interface BentoItem {
-  imageSrc: string;
+  videoSrc: string;
   title: string;
   description: string;
   features?: string[];
@@ -42,6 +45,37 @@ const itemVariants: Variants = {
   },
 };
 
+interface BentoVideoProps {
+  src: string;
+  label: string;
+  className?: string;
+}
+
+function BentoVideo({ src, label, className }: BentoVideoProps) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  // Section sits below the fold, so hold off fetching until it is nearly visible.
+  const isNearView = useInView(ref, { once: true, margin: "300px" });
+
+  return (
+    <video
+      ref={ref}
+      src={isNearView ? src : undefined}
+      // A still frame is enough when the user has asked for less motion.
+      preload={prefersReducedMotion ? "metadata" : "none"}
+      autoPlay={!prefersReducedMotion}
+      loop
+      muted
+      playsInline
+      aria-label={label}
+      className={cn(
+        "h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]",
+        className,
+      )}
+    />
+  );
+}
+
 export function HomeWhatWeDo({
   eyebrow = "Services",
   title = "End-to-End AI Services",
@@ -50,7 +84,7 @@ export function HomeWhatWeDo({
   items = {},
 }: HomeWhatWeDoProps) {
   const workflow = items.workflow || {
-    imageSrc: "/Animation/1.gif",
+    videoSrc: "/Animation/1.webm",
     title: "AI Workflow Automation",
     description:
       "Transform repetitive business processes into intelligent AI-powered workflows that eliminate bottlenecks and drive exponential efficiency.",
@@ -62,28 +96,28 @@ export function HomeWhatWeDo({
   };
 
   const triage = items.triage || {
-    imageSrc: "/Animation/2.gif",
+    videoSrc: "/Animation/2.webm",
     title: "Support Triage & AI Ticketing",
     description:
       "Connect emails, WhatsApp, and websites to a unified AI system that triages, responds, and resolves customer inquiries instantly.",
   };
 
   const ecosystem = items.ecosystem || {
-    imageSrc: "/Animation/4.gif",
+    videoSrc: "/Animation/4.webm",
     title: "Enterprise AI Ecosystem",
     description:
       "Connect AI agents, enterprise applications, data pipelines, and custom ERP solutions into one intelligent business ecosystem.",
   };
 
   const voice = items.voice || {
-    imageSrc: "/Animation/5.gif",
+    videoSrc: "/Animation/5.webm",
     title: "AI Voice Agent Deployment",
     description:
       "Deploy multilingual AI voice agents that handle high-volume calls with human-like natural language processing and zero latency.",
   };
 
   const documentItem = items.document || {
-    imageSrc: "/Animation/6.gif",
+    videoSrc: "/Animation/6.webm",
     title: "AI Document Processing",
     description:
       "Automatically extract, classify, and validate data from invoices, contracts, and IDs with 99% accuracy using proprietary OCR models.",
@@ -146,14 +180,7 @@ export function HomeWhatWeDo({
             >
               <div>
                 <div className="relative mb-6 h-[220px] w-full overflow-hidden rounded-[14px] sm:h-[280px]">
-                  <Image
-                    src={workflow.imageSrc}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                    alt={workflow.title}
-                    unoptimized
-                  />
+                  <BentoVideo src={workflow.videoSrc} label={workflow.title} />
                 </div>
 
                 <h3 className="mb-2.5 text-2xl font-bold text-slate-900 sm:text-3xl">
@@ -188,14 +215,7 @@ export function HomeWhatWeDo({
                 className="group flex flex-col justify-between rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:p-7"
               >
                 <div className="relative mb-5 h-[190px] w-full overflow-hidden rounded-[14px] sm:h-[210px]">
-                  <Image
-                    src={triage.imageSrc}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                    alt={triage.title}
-                    unoptimized
-                  />
+                  <BentoVideo src={triage.videoSrc} label={triage.title} />
                 </div>
                 <div>
                   <h3 className="mb-2 text-xl font-bold text-slate-900 sm:text-2xl">
@@ -213,13 +233,9 @@ export function HomeWhatWeDo({
                 className="group flex flex-col items-center justify-between gap-6 rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:flex-row sm:p-7"
               >
                 <div className="relative h-[150px] w-full shrink-0 overflow-hidden rounded-[14px] sm:w-[220px] lg:w-[240px]">
-                  <Image
-                    src={ecosystem.imageSrc}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 240px"
-                    className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                    alt={ecosystem.title}
-                    unoptimized
+                  <BentoVideo
+                    src={ecosystem.videoSrc}
+                    label={ecosystem.title}
                   />
                 </div>
                 <div className="flex-1">
@@ -250,14 +266,7 @@ export function HomeWhatWeDo({
                 </p>
               </div>
               <div className="relative h-[150px] w-full shrink-0 overflow-hidden rounded-[14px] sm:w-[200px]">
-                <Image
-                  src={voice.imageSrc}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 200px"
-                  className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                  alt={voice.title}
-                  unoptimized
-                />
+                <BentoVideo src={voice.videoSrc} label={voice.title} />
               </div>
             </motion.div>
 
@@ -267,13 +276,9 @@ export function HomeWhatWeDo({
               className="group flex flex-col items-center justify-between gap-6 rounded-[28px] border border-white/90 bg-white/90 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md sm:flex-row sm:p-7"
             >
               <div className="relative order-2 h-[150px] w-full shrink-0 overflow-hidden rounded-[14px] sm:order-1 sm:w-[200px]">
-                <Image
-                  src={documentItem.imageSrc}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 200px"
-                  className="object-cover p-0 transition-transform duration-500 group-hover:scale-[1.02]"
-                  alt={documentItem.title}
-                  unoptimized
+                <BentoVideo
+                  src={documentItem.videoSrc}
+                  label={documentItem.title}
                 />
               </div>
               <div className="order-1 flex-1 sm:order-2">
