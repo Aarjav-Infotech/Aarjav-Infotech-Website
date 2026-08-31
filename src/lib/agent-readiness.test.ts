@@ -13,6 +13,7 @@ import {
 import { getMcpManifest, getMcpServerCard, getOpenApiDocument } from "./mcp.ts";
 import { handleMcpJsonRpc } from "./mcp-handler.ts";
 import { createMetadata } from "./metadata.ts";
+import { getOpenGraphImageForPath } from "./opengraph-images.ts";
 
 describe("accept negotiation", () => {
   it("prefers markdown when listed first", () => {
@@ -138,9 +139,41 @@ describe("metadata", () => {
       ),
     );
     assert.equal(meta.alternates?.canonical, meta.openGraph?.url);
-    const og = meta.openGraph as { type?: string; images?: unknown[] };
+    const og = meta.openGraph as {
+      type?: string;
+      images?: { url?: string; width?: number; height?: number }[];
+    };
     assert.equal(og.type, "website");
     assert.ok(Array.isArray(og.images) && og.images.length > 0);
+    assert.equal(og.images[0]?.url, "/images/opengraph/home-opengraph.png");
+    assert.equal(og.images[0]?.width, 1200);
+    assert.equal(og.images[0]?.height, 600);
+  });
+
+  it("uses page-specific opengraph images when available", () => {
+    const contact = createMetadata({ path: "/contact" });
+    const contactOg = contact.openGraph as {
+      images?: { url?: string }[];
+    };
+    assert.equal(
+      contactOg.images?.[0]?.url,
+      "/images/opengraph/Contact%20Us.png",
+    );
+
+    const voice = createMetadata({ path: "/services/ai-voice-agent" });
+    const voiceOg = voice.openGraph as { images?: { url?: string }[] };
+    assert.equal(
+      voiceOg.images?.[0]?.url,
+      "/images/opengraph/AI%20Voice%20Agent%20Deployment.png",
+    );
+  });
+
+  it("falls back to home opengraph for pages without a dedicated asset", () => {
+    const banking = getOpenGraphImageForPath("/industries/banking");
+    assert.equal(banking.url, "/images/opengraph/home-opengraph.png");
+
+    const services = getOpenGraphImageForPath("/services");
+    assert.equal(services.url, "/images/opengraph/home-opengraph.png");
   });
 });
 
