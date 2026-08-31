@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { APP_DESCRIPTION, APP_NAME, APP_URL } from "./constants";
+import { getOpenGraphImageForPath } from "./opengraph-images";
 
 export interface PageMetadataOptions {
   title?: string;
@@ -19,12 +20,7 @@ export function createMetadata({
 }: PageMetadataOptions = {}): Metadata {
   const pageTitle = title ? `${title} | ${APP_NAME}` : APP_NAME;
   const url = `${APP_URL}${path}`;
-  const ogImage = {
-    url: "/images/hero-background.png",
-    width: 1200,
-    height: 630,
-    alt: `${APP_NAME} — enterprise AI automation`,
-  };
+  const ogImage = getOpenGraphImageForPath(path);
 
   return {
     title: {
