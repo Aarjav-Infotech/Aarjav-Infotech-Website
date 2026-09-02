@@ -101,7 +101,7 @@ export function Footer() {
                 <h4 className="text-sm font-semibold text-slate-300 sm:text-base">
                   Services
                 </h4>
-                <ul className="text-xs sm:text-sm mt-1 space-y-2 text-slate-200">
+                <ul className="mt-1 space-y-2 text-xs text-slate-200 sm:text-sm">
                   <li>
                     <Link href="#" className="transition hover:text-white">
                       AI Workflow Automation
@@ -135,7 +135,7 @@ export function Footer() {
                 <h4 className="text-sm font-semibold text-slate-300 sm:text-base">
                   Our Products
                 </h4>
-                <ul className="text-xs sm:text-sm mt-1 space-y-2 text-slate-200">
+                <ul className="mt-1 space-y-2 text-xs text-slate-200 sm:text-sm">
                   <li>
                     <Link href="#" className="transition hover:text-white">
                       AI Voice Agent Deployment
@@ -171,10 +171,10 @@ export function Footer() {
 
               {/* Social Section */}
               <div className="col-span-2 flex flex-col gap-2 sm:col-span-1">
-                <h4 className="text-center text-sm font-semibold text-slate-300 sm:text-center sm:text-base">
+                <h4 className="text-center text-sm font-semibold text-slate-300 sm:text-left sm:text-base">
                   Social
                 </h4>
-                <div className="mt-2 flex flex-wrap items-center align-center justify-center gap-4 text-white sm:mt-3 sm:grid sm:w-[75px] sm:grid-cols-2 sm:gap-y-3.5">
+                <div className="align-center mt-2 flex flex-wrap items-center justify-center gap-4 text-white sm:mt-3 sm:grid sm:w-[75px] sm:grid-cols-2 sm:gap-y-3.5">
                   <Link
                     href="#"
                     aria-label="X"

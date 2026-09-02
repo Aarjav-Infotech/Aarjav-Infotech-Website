@@ -79,13 +79,15 @@ const DIGITAL_PRODUCTS_ITEMS = [
   {
     icon: Bot,
     title: "Vani Sahay",
-    description: "Multilingual AI companion for digital financial security and fraud defense",
+    description:
+      "Multilingual AI companion for digital financial security and fraud defense",
     href: "/our-products/vani-sahay",
   },
   {
     icon: Gem,
     title: "Diamond Stock Management",
-    description: "Intelligent ERP platform for diamond manufacturing and global sales",
+    description:
+      "Intelligent ERP platform for diamond manufacturing and global sales",
     href: "/our-products/diamond-stock",
   },
 ];
@@ -147,7 +149,8 @@ const ABOUT_ITEMS = [
   {
     icon: ShieldCheck,
     title: "Security & Governance",
-    description: "Enterprise compliance, zero-trust architectures, and protocols",
+    description:
+      "Enterprise compliance, zero-trust architectures, and protocols",
     href: "/about#security",
   },
 ];
@@ -159,7 +162,9 @@ export function Navbar() {
 
   // State tracking open mega menu on click
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(
+    null,
+  );
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -351,7 +356,7 @@ export function Navbar() {
               <div className="w-[1100px] max-w-[calc(100vw-2rem)] rounded-[28px] border border-slate-100 bg-white/95 p-8 shadow-2xl ring-1 ring-slate-900/5 backdrop-blur-2xl">
                 <div className="grid grid-cols-12 gap-8">
                   {/* Grid Options */}
-                  <div className="col-span-8 flex flex-col justify-between">
+                  <div className="col-span-8 flex flex-col">
                     <div className="mb-4 text-xs font-semibold tracking-wider text-slate-400 uppercase">
                       {activeMegaMenu}
                     </div>
@@ -359,7 +364,8 @@ export function Navbar() {
                     <div
                       className={cn(
                         "grid gap-x-4 gap-y-3",
-                        activeMegaMenu === "Digital Products" || activeMegaMenu === "About"
+                        activeMegaMenu === "Digital Products" ||
+                          activeMegaMenu === "About"
                           ? "grid-cols-1"
                           : "grid-cols-2",
                       )}
@@ -547,7 +553,7 @@ export function Navbar() {
                   <div className="mt-2 border-t border-slate-100 pt-4">
                     <Button
                       asChild
-                      className="w-full gap-3 rounded-full border-b-4 border-black pill-slot px-6 py-6 text-white shadow-md"
+                      className="pill-slot w-full gap-3 rounded-full border-b-4 border-black px-6 py-6 text-white shadow-md"
                     >
                       <Link
                         href={ROUTES.contact || "/contact"}
