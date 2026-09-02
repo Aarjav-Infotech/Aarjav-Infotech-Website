@@ -39,7 +39,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Insurance & Risk Solutions",
     description:
       "Automate claims processing, underwriting workflows, and policy management with intelligent automation to boost speed and accuracy.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/insurance.svg",
     features: [
       "Automated Claims Processing",
       "AI Underwriting Models",
@@ -56,7 +56,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Government & Public Sector",
     description:
       "Deploy sovereign, air-gapped ready AI architectures and secure citizen services designed for high security and compliance demands.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/Government.svg",
     features: [
       "Sovereign Data Environments",
       "Air-Gapped AI Deployments",
@@ -73,7 +73,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Healthcare & Life Sciences",
     description:
       "Streamline clinical data workflows, patient management systems, and medical AI models while maintaining strict HIPAA compliance.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/healthcare.svg",
     features: [
       "HIPAA-Compliant AI Workflows",
       "Patient Data Processing",
@@ -90,7 +90,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Real Estate & PropTech",
     description:
       "Accelerate property valuation, lease management, and customer acquisition with predictive analytics and smart automation.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/real-estate.svg",
     features: [
       "Automated Lease Processing",
       "Predictive Valuation Models",
@@ -107,7 +107,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Industrial & Manufacturing",
     description:
       "Optimize supply chains, automate quality inspection, and enable predictive maintenance using domain-specific machine learning.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/industrial.svg",
     features: [
       "Predictive Equipment Maintenance",
       "Automated Quality Control",
@@ -124,7 +124,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Enterprise Systems",
     description:
       "Scalable digital infrastructure built to unify complex enterprise software, reduce operational overhead, and drive growth.",
-    image: "/images/tabbing-1.svg",
+    image: "/images/enterprise.svg",
     features: [
       "Enterprise Service Bus",
       "Custom Microservices",
@@ -147,7 +147,7 @@ interface HomeIndustriesProps {
 
 export function _IndustryCardSkeleton() {
   return (
-    <div className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]">
+    <div className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[40px]">
       <div className="relative flex flex-col items-center lg:flex-row">
         <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200 sm:h-[340px] sm:rounded-[40px] lg:h-[540px] lg:w-1/2">
           <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
@@ -218,7 +218,11 @@ export function HomeIndustries({
 
     const activeNode = tabsRef.current[activeTab];
     if (activeNode) {
-      activeNode.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      activeNode.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   }, [activeTab]);
 
@@ -226,7 +230,7 @@ export function HomeIndustries({
     <section className="relative w-full py-8 sm:py-4">
       {/* Outer Container with Constant CSS Background Image */}
       <div
-        className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#f4f7fc] bg-cover bg-center bg-no-repeat p-4 shadow-lg sm:rounded-[36px] sm:p-8 lg:p-14"
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#f4f7fc] bg-cover bg-center bg-no-repeat p-4 sm:rounded-[36px] sm:p-8 lg:p-14"
         style={{
           backgroundImage: `url(${sectionBackgroundImage})`,
         }}
@@ -273,7 +277,7 @@ export function HomeIndustries({
                     {isActive && (
                       <motion.div
                         layoutId="activeIndustryTab"
-                        className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] whitespace-nowrap shadow-[0_8px_16px_rgba(0,38,136,0.35)]"
+                        className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] whitespace-nowrap shadow-[0_8px_16px_rgba(0,38,136,0.35)] border-b-3 border-black"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -299,7 +303,7 @@ export function HomeIndustries({
                 duration: 0.5,
                 ease: [0.25, 1, 0.5, 1],
               }}
-              className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
+              className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[40px]"
             >
               <div className="relative flex flex-col items-center lg:flex-row">
                 {/* Image Container with Integrated Skeleton Loader */}
@@ -375,10 +379,10 @@ export function HomeIndustries({
                   <div className="mt-6 flex justify-start sm:mt-8">
                     <Link
                       href={currentIndustry.link}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200/60 bg-[#f3f4f6] px-4 py-2 text-sm font-bold text-slate-900 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-all hover:bg-slate-200 sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
+                      className="group inline-flex items-center gap-2 border-b-1 rounded-full bg-[#f8f9fa] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
                     >
-                      Read More
-                      <MoveRight className="size-3.5 sm:size-4" />
+                      <span>Read More</span>
+                      <MoveRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 sm:size-4" />
                     </Link>
                   </div>
                 </motion.div>

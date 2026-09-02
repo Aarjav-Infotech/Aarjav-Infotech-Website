@@ -4,6 +4,33 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const governmentFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for government and how is it different from standard citizen portals or RPA?",
+    answer:
+      "Citizen portals only display static forms, and RPA handles simple automated entries. An Agentic OS orchestrates multi-agency workflows, cross-references records, validates submitted documentation, and automates public service triage with full regulatory oversight.",
+  },
+  {
+    question:
+      "Do we need to replace our existing case management, ERP, or legacy government databases?",
+    answer:
+      "No. The platform deploys as an orchestration and intelligence plane directly over your existing infrastructure, connecting through secure APIs and FedRAMP-grade connectors without altering core agency systems of record.",
+  },
+  {
+    question:
+      "How does the system ensure statutory compliance and maintain public accountability?",
+    answer:
+      "Every workflow produces an immutable, time-stamped audit trail tracking data provenance and decisions. Critical actions involving benefit allocations, citizen rights, or legal interpretations require explicit human-in-the-loop authorization.",
+  },
+  {
+    question:
+      "Who controls the sovereign data, agency policies, and deployed agents?",
+    answer:
+      "Your agency retains 100% data ownership. Systems run inside isolated, sovereign government cloud enclaves or on-premise infrastructure. Citizen records and public intelligence never cross institutional boundaries or train commercial models.",
+  },
+];
+
 const governmentConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: "AI That Makes Government Operations Smarter",
@@ -118,6 +145,11 @@ const governmentConfig: IndustryConfig = {
         capabilities: ["APIs", "ERP/CRM Integration", "Data Syncing"],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About AI in Government",
+    faqs: governmentFaqs,
   },
 };
 

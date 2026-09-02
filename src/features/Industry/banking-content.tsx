@@ -4,6 +4,31 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+export const bankingFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for banking and how is it different from RPA or point AI tools?",
+    answer:
+      "RPA automates clicks. Point AI tools solve one task. An Agentic OS coordinates onboarding, KYC, fraud, credit, servicing, and compliance as one system, governed end-to-end.",
+  },
+  {
+    question:
+      "Do I need to replace our core banking, CRM or fraud systems to run this platform?",
+    answer:
+      "No. It integrates directly with your core (Temenos, Finacle, FIS, Fiserv), CRM, fraud, AML, and case management systems. It sits as an intelligent control plane above them.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated banking workflow in production?",
+    answer:
+      "Regulated workflows go live in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow risk teams to validate and sign off rapidly.",
+  },
+  {
+    question: "How does the platform handle model risk and regulator scrutiny?",
+    answer:
+      "Every agent action, prompt, and API payload produces an immutable audit trail with full lineage. We enforce deterministic guardrails before transactions execute to prevent hallucinations.",
+  },
+];
 const bankingConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: "AI That Powers Modern Banking",
@@ -136,6 +161,11 @@ const bankingConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About AI in Banking",
+    faqs: bankingFaqs,
   },
 };
 

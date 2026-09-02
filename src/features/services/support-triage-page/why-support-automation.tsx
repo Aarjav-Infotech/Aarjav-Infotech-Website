@@ -1,17 +1,11 @@
 "use client";
 
 import React from "react";
-import {
-  Clock,
-  ShieldCheck,
-  DollarSign,
-  Headphones,
-  type LucideIcon,
-} from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export interface FeatureCard {
-  icon: LucideIcon;
+  iconSrc: string;
   title: string;
   description: string;
 }
@@ -27,22 +21,22 @@ export interface WhySupportAutomationProps {
 
 const defaultCards: FeatureCard[] = [
   {
-    icon: Clock,
+    iconSrc: "/images/matter-1.svg",
     title: "Faster Response Times",
     description: "Automatically prioritize and route tickets.",
   },
   {
-    icon: ShieldCheck,
+    iconSrc: "/images/matter-2.svg",
     title: "Higher Resolution Accuracy",
     description: "AI understands context for right routing.",
   },
   {
-    icon: DollarSign,
+    iconSrc: "/images/matter-3.svg",
     title: "Reduced Support Costs",
     description: "Automate repetitive tasks effortlessly.",
   },
   {
-    icon: Headphones,
+    iconSrc: "/images/matter-4.svg",
     title: "Scalable Customer Support",
     description: "AI understands context for right routing.",
   },
@@ -53,18 +47,18 @@ export function WhySupportAutomation({
   title = "Why Enterprises Choose AI Support Automation",
   description = "Reduce response times, improve customer satisfaction, and empower support teams with intelligent automation that scales effortlessly.",
   cards = defaultCards,
-  bgImage = "/images/why-it-matters-bg.svg", // Replace with your image path
+  bgImage = "/images/why-it-matters-bg.svg",
   className,
 }: WhySupportAutomationProps) {
   return (
     <section
-      className={cn("w-full bg-white py-8 sm:py-12 lg:py-16", className)}
+      className={cn("w-full bg-white py-8 sm:py-12 lg:py-16 " , className)}
     >
       <div className="mx-auto max-w-full">
         {/* Main Section Card Container with Background Image */}
         <div
           className={cn(
-            "relative w-full overflow-hidden rounded-[28px] bg-slate-900 bg-cover bg-center bg-no-repeat p-6 shadow-xl sm:rounded-[36px] sm:p-10 lg:p-14",
+            "relative w-full overflow-hidden rounded-[40px] bg-blue bg-cover bg-center bg-no-repeat p-6 shadow-xl sm:rounded-[40px] sm:p-10 lg:p-14 border-b-9 border-[#ffffff]",
           )}
           style={bgImage ? { backgroundImage: `url(${bgImage})` } : undefined}
         >
@@ -77,12 +71,12 @@ export function WhySupportAutomation({
                 </div>
               )}
 
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl lg:leading-[1.15]">
+              <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl lg:text-5xl lg:leading-[1.15]">
                 {title}
               </h2>
 
               {description && (
-                <p className="mt-4 max-w-xl text-sm leading-relaxed font-medium text-slate-200 sm:text-base sm:leading-relaxed">
+                <p className="mt-4 max-w-xl text-sm leading-relaxed font-medium  sm:text-basic sm:leading-relaxed">
                   {description}
                 </p>
               )}
@@ -90,32 +84,35 @@ export function WhySupportAutomation({
 
             {/* Right Column: 2x2 Feature Grid */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:col-span-6">
-              {cards.map((card, idx) => {
-                const Icon = card.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="flex flex-col justify-between rounded-[22px] bg-white/95 p-6 shadow-md backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 sm:rounded-[24px] sm:p-7"
-                  >
-                    <div>
-                      {/* Icon Container */}
-                      <div className="flex size-12 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50 text-blue-600">
-                        <Icon className="size-6" />
-                      </div>
-
-                      {/* Card Heading */}
-                      <h3 className="mt-5 text-lg font-bold tracking-tight text-slate-950 sm:text-xl">
-                        {card.title}
-                      </h3>
-
-                      {/* Card Description */}
-                      <p className="mt-2 text-xs leading-relaxed font-normal text-slate-600 sm:text-sm">
-                        {card.description}
-                      </p>
+              {cards.map((card, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col justify-between rounded-[22px] bg-white/95 p-6 shadow-md backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 sm:rounded-[24px] sm:p-7"
+                >
+                  <div>
+                    {/* Image Container */}
+                    <div className="relative flex size-12 items-center justify-center rounded-2xl p-2.5">
+                      <Image
+                        src={card.iconSrc}
+                        alt={card.title}
+                        fill
+                        className="object-contain p-2"
+                        priority
+                      />
                     </div>
+
+                    {/* Card Heading */}
+                    <h3 className="mt-5 text-lg font-bold tracking-tight text-slate-950 sm:text-xl">
+                      {card.title}
+                    </h3>
+
+                    {/* Card Description */}
+                    <p className="mt-2 text-xs leading-relaxed font-normal text-slate-600 sm:text-sm">
+                      {card.description}
+                    </p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </div>

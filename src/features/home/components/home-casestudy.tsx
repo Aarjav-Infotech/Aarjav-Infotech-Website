@@ -48,14 +48,14 @@ const defaultProjects: CaseStudyItem[] = [
     id: "glamora-jewels",
     number: "02",
     title: "Glamora Jewels",
-    subtitle: "High-Converting Jewelry Store",
+    subtitle: "Luxury Jewelry Landing Page",
     description:
-      "A high-converting landing page for a fine jewelry brand focused on showcasing 18K, 14K & 10K gold with lab-grown diamonds, built with scalable frontend tools.",
+      "A high-converting landing page for a fine jewelry brand focused on showcasing 10K, 14K & 18K gold with lab-grown diamonds. Delivered with fast load performance, optimised SEO, and a conversion-driven UI/UX across all devices.",
     tags: ["REACT", "NODE.JS", "POSTGRESQL", "CONTENT SEO"],
     metrics: [
-      { value: "2.4x", label: "Conversion" },
-      { value: "100%", label: "Responsive" },
-      { value: "Fast", label: "Checkout" },
+      { value: "<1s", label: "Load Time" },
+      { value: "+40%", label: "Conversion" },
+      { value: "Optimised", label: "SEO" },
     ],
     image: "/images/case-studys-2.svg",
     link: "/case-studies/glamora-jewels",
@@ -66,8 +66,8 @@ const defaultProjects: CaseStudyItem[] = [
     title: "Delfa Pattern Generator",
     subtitle: "AI Textile Pattern Platform",
     description:
-      "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
-    tags: ["PYTHON", "REACT", "FASTAPI", "TAILWIND CSS"],
+      "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. ",
+    tags: ["NEXT.JS", "MACHINE LEARNING", "GAN", "PYTHON","AI PLATFORM"],
     metrics: [
       { value: "AI-Powered", label: "Generation" },
       { value: "3 Core", label: "Features" },
@@ -106,7 +106,7 @@ export function HomeCaseStudies({
   });
 
   return (
-    <section className="bg-background relative w-full pt-12 pb-12 sm:pt-16">
+    <section className="bg-background relative w-full pt-12 pb-12 sm:pt-16 ">
       {/* 1. Header Section */}
       <div className="mx-auto w-full max-w-[1364px] px-4 pb-8 sm:px-6 sm:pb-12">
         <FadeIn>
@@ -120,7 +120,7 @@ export function HomeCaseStudies({
 
             <Heading
               as="h2"
-              className="text-center text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
+              className="text-center text-3xl font-normal tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
             >
               {title}
             </Heading>
@@ -208,7 +208,7 @@ function StackingCard({
         y: index === 0 ? 0 : y,
         zIndex: index + 10,
       }}
-      className="absolute top-0 h-[580px]"
+      className="absolute top-0 h-[580px] "
     >
       <CaseStudyCard project={project} />
     </motion.div>
@@ -217,13 +217,13 @@ function StackingCard({
 
 function CaseStudyCard({ project }: { project: CaseStudyItem }) {
   return (
-    <div className="group relative flex h-auto min-h-[500px] w-full flex-col overflow-hidden rounded-[24px] border border-slate-200/80 bg-[#EAEAEA] p-5 shadow-[-10px_0_30px_rgba(0,0,0,0.06)] sm:rounded-[32px] sm:p-8 lg:h-[580px] lg:rounded-[36px] lg:p-10">
+    <div className="group relative flex h-auto min-h-[500px] w-full flex-col overflow-hidden rounded-[24px]  bg-[#F4F4F5] p-5 border-b-7 border-[#c1c1c1a1] sm:rounded-[32px] sm:p-8 lg:h-[580px] lg:rounded-[36px] lg:p-10">
       {/* Top Header Row */}
-      <div className="relative mb-4 flex shrink-0 items-center justify-between sm:mb-6">
-        <span className="text-xs font-semibold text-slate-800 sm:text-sm">
+      <div className="relative mb-4 flex shrink-0 items-center sm:mb-6">
+        <span className="text-xs font-semibold text-slate-800 sm:text-xl">
           {project.number}
         </span>
-        <h3 className="absolute left-[65%] w-full -translate-x-1/2 text-lg font-bold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
+        <h3 className="absolute left-[85%] w-full -translate-x-1/2 text-lg font-semibold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
           {project.title}
         </h3>
         <div className="w-6" />
@@ -244,24 +244,24 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
         {/* Left Column */}
-        <div className="flex flex-col justify-between space-y-4 lg:col-span-5 lg:h-full lg:space-y-6">
-          <div className="border-l-[4px] border-white pl-4 sm:border-l-[7px] sm:pl-[24px] lg:pl-[30px]">
-            <h4 className="text-base font-bold text-slate-900 sm:text-lg lg:text-xl">
+        <div className="flex flex-col  space-y-1 lg:col-span-5 lg:h-full lg:space-y-6">
+          <div className="border-l-[5px] border-white pl-4 sm:border-l-[5px] sm:pl-[24px] lg:pl-[14px]">
+            <h4 className="text-base font-medium text-black sm:text-lg lg:text-xl">
               {project.subtitle}
             </h4>
-            <p className="mt-2 text-xs leading-relaxed font-normal text-slate-600 sm:text-sm">
+            <p className="mt-2 text-xs leading-relaxed font-normal text-black sm:text-base">
               {project.description}
             </p>
           </div>
 
           {/* Metrics White Card */}
-          <div className="grid grid-cols-3 divide-x divide-slate-200/80 rounded-xl border border-slate-100 bg-white px-2 py-3 text-center shadow-2xs sm:rounded-2xl sm:py-4">
+          <div className="grid grid-cols-3 divide-x divide-slate-200/80 rounded-xl border border-slate-100 bg-white px-2 py-3 text-center shadow-2xs sm:rounded-2xl sm:py-4 mt-4">
             {project.metrics.map((metric, idx) => (
               <div key={idx} className="px-1">
-                <div className="text-xs font-bold text-slate-900 sm:text-sm lg:text-base">
+                <div className="text-xs font-bold text-slate-900 sm:text-sm lg:text-lg">
                   {metric.value}
                 </div>
-                <div className="mt-0.5 text-[9px] font-medium text-slate-500 sm:text-[11px]">
+                <div className="mt-0.5 text-[9px] font-medium text-black sm:text-[14px]">
                   {metric.label}
                 </div>
               </div>
@@ -272,7 +272,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
           <div>
             <Link
               href={project.link}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-5 py-2 text-xs font-bold text-slate-900 shadow-2xs transition-all hover:bg-slate-50 sm:px-6 sm:py-2.5"
+              className="inline-flex items-center gap-2 border-b-1 rounded-full bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
             >
               Read More
               <ArrowRight className="size-3.5" />

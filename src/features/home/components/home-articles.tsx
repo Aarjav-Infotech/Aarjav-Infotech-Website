@@ -107,7 +107,7 @@ export function HomeArticles({
 
                 {/* Compact Read More Pill Button */}
                 <div className="mt-5 inline-flex">
-                  <span className="text-basic inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-[#f3f4f6] px-4 py-2 font-semibold text-slate-900 shadow-sm transition-all duration-200 group-hover:bg-slate-200">
+                  <span className="group inline-flex items-center gap-2 border-b-1 rounded-full bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm">
                     Read more
                     <ArrowRight className="size-3.5" />
                   </span>

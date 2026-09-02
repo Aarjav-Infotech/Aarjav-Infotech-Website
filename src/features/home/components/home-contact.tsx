@@ -16,7 +16,7 @@ export interface MetricTag {
 }
 
 export interface ContactSectionProps {
-  badgeText?: string;
+  eyebrow?: string;
   heading?: ReactNode;
   bgImage?: string;
 
@@ -45,11 +45,26 @@ export interface ContactSectionProps {
   variant?: "form" | "cards";
 }
 
+const defaultContactInfo: ContactInfoItem[] = [
+  {
+    icon: "mail",
+    label: "E-mail address",
+    value: "business@aarjavinfotech.com",
+    href: "mailto:business@aarjavinfotech.com",
+  },
+  {
+    icon: "phone",
+    label: "Phone number",
+    value: "+91 9964919000",
+    href: "tel:+919964919000",
+  },
+];
+
 export function ContactSection({
-  badgeText = "Contact Us",
+  eyebrow = "Contact Us",
   heading = "Let's Build Intelligent Things",
   bgImage = "/images/contact-bg.svg",
-  contactInfo,
+  contactInfo = defaultContactInfo,
   visionCard,
   metricsCard,
   locationCard,
@@ -74,7 +89,7 @@ export function ContactSection({
   };
 
   return (
-    <section className="w-full bg-white px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+    <section className="w-full bg-white px-3 py-6 sm:px-6 sm:py-10 lg:px-8 font-sans">
       <div className="mx-auto max-w-[1280px]">
         <div className="relative overflow-hidden rounded-[24px] bg-slate-900 p-5 sm:rounded-[36px] sm:p-8 md:p-12 lg:p-16">
           <div className="pointer-events-none absolute inset-0 size-full select-none">
@@ -93,14 +108,16 @@ export function ContactSection({
             {/* Left Column */}
             <div className="flex flex-col justify-between lg:col-span-6 lg:min-h-[500px]">
               <div>
-                {/* Pill Badge */}
-                <div className="text-basic inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1.5 font-semibold text-[#002688] shadow-sm backdrop-blur sm:px-4">
-                  <span className="size-2 rounded-full bg-[#002688]" />
-                  {badgeText}
-                </div>
+                {/* Consistent Eyebrow Tag */}
+                {eyebrow && (
+                  <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-lg">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+                    {eyebrow}
+                  </div>
+                )}
 
                 {/* Main Heading */}
-                <h2 className="mt-5 text-3xl leading-tight font-extrabold tracking-tight text-slate-950 sm:mt-8 sm:text-5xl lg:text-[56px]">
+                <h2 className="text-3xl leading-[1.1] font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-[72px]">
                   {heading}
                 </h2>
               </div>
@@ -121,12 +138,12 @@ export function ContactSection({
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="sm:text-basic text-[11px] font-semibold text-slate-800">
+                        <p className="text-[18px] font-bold text-slate-800 sm:text-basic">
                           {item.label}
                         </p>
                         <a
                           href={item.href}
-                          className="text-basic block truncate font-bold text-slate-950 transition hover:underline sm:text-base"
+                          className="block truncate font-normal text-slate-950 transition hover:underline text-sm sm:text-md"
                         >
                           {item.value}
                         </a>
@@ -174,7 +191,7 @@ export function ContactSection({
                     <div className="flex flex-col gap-1 sm:gap-1.5">
                       <label
                         htmlFor="name"
-                        className="text-basic font-bold text-slate-900"
+                        className="text-xs font-bold text-slate-900 sm:text-sm"
                       >
                         Your Name
                       </label>
@@ -186,21 +203,21 @@ export function ContactSection({
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2"
+                        className="w-full border-b border-slate-300 bg-transparent py-1.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2 sm:text-basic"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1 sm:gap-1.5">
                       <label
                         htmlFor="phone"
-                        className="text-basic font-bold text-slate-900"
+                        className="text-xs font-bold text-slate-900 sm:text-sm"
                       >
                         Your Phone
                       </label>
                       <input
                         id="phone"
                         type="text"
-                        placeholder="Enter the e-mail"
+                        placeholder="Enter your e-mail or Phone"
                         value={formData.emailOrPhone}
                         onChange={(e) =>
                           setFormData({
@@ -208,14 +225,14 @@ export function ContactSection({
                             emailOrPhone: e.target.value,
                           })
                         }
-                        className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2"
+                        className="w-full border-b border-slate-300 bg-transparent py-1.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none sm:py-2 sm:text-base"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1 sm:gap-1.5">
                       <label
                         htmlFor="project"
-                        className="text-basic font-bold text-slate-900"
+                        className="text-xs font-bold text-slate-900 sm:text-sm"
                       >
                         More About The Project
                       </label>
@@ -229,12 +246,12 @@ export function ContactSection({
                             projectDetails: e.target.value,
                           })
                         }
-                        className="text-basic sm:text-basic w-full border-b border-slate-300 bg-transparent py-1.5 text-slate-900 focus:border-slate-900 focus:outline-none sm:py-2"
+                        className="w-full border-b border-slate-300 bg-transparent py-1.5 text-sm text-slate-900 focus:border-slate-900 focus:outline-none sm:py-2 sm:text-base"
                       />
                     </div>
 
                     <div className="mt-1">
-                      <label className="text-basic inline-flex cursor-pointer items-center gap-2 font-bold text-slate-900 transition hover:opacity-80">
+                      <label className="inline-flex cursor-pointer items-center gap-2 text-xs font-bold text-slate-900 transition hover:opacity-80 sm:text-sm">
                         <Paperclip className="size-4 shrink-0" />
                         <span className="truncate">
                           {fileName ? fileName : "Add an Attachment"}
@@ -247,12 +264,12 @@ export function ContactSection({
                       </label>
                     </div>
 
-                    <button
-                      type="submit"
-                      className="text-basic sm:text-basic mt-4 w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] py-3.5 font-semibold text-white shadow-[0_12px_24px_rgba(0,38,136,0.4)] transition-transform hover:scale-[1.01] active:scale-[0.99] sm:mt-6 sm:py-4"
-                    >
-                      Submit Message
-                    </button>
+                   <button
+  type="submit"
+  className="mt-4 w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] border-b-4 border-black py-3.5 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(0,38,136,0.4)] transition-all hover:scale-[1.01] hover:shadow-[0_16px_32px_rgba(0,56,255,0.45)] active:scale-[0.99] cursor-pointer sm:mt-6 sm:py-4 sm:text-base"
+>
+  Submit Message
+</button>
                   </form>
                 </div>
               ) : (

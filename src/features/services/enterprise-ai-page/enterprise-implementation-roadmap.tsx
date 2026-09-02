@@ -33,7 +33,7 @@ export default function AIProcessSection() {
           {/* 1. BADGES ARC */}
           <div className="absolute top-[8%] left-[18%] z-10 h-[45%] w-[64%]">
             {/* Badge 1: Moon */}
-            <div className="absolute top-[0%] left-[3%] transition-transform hover:scale-105">
+            <div className="absolute top-[0%] left-[3%] transition-transform ">
               <img
                 src="/images/badge-1.svg"
                 alt="Assess & Plan"
@@ -42,7 +42,7 @@ export default function AIProcessSection() {
             </div>
 
             {/* Badge 2: Sparkle */}
-            <div className="absolute top-[40%] left-[14%] transition-transform hover:scale-105">
+            <div className="absolute top-[40%] left-[14%] transition-transform ">
               <img
                 src="/images/badge-2.svg"
                 alt="Design Architecture"
@@ -51,7 +51,7 @@ export default function AIProcessSection() {
             </div>
 
             {/* Badge 3: Main Blue Stack */}
-            <div className="absolute top-[0%] left-[44%] z-20 -translate-x-1/2 transition-transform hover:scale-105">
+            <div className="absolute top-[0%] left-[44%] z-20 -translate-x-1/2 transition-transform ">
               <img
                 src="/images/middel-badge.svg"
                 alt="AI Ecosystem Core"
@@ -60,7 +60,7 @@ export default function AIProcessSection() {
             </div>
 
             {/* Badge 4: Upward Arrows */}
-            <div className="absolute top-[58%] left-[44.5%] z-10 -translate-x-1/2 transition-transform hover:scale-105">
+            <div className="absolute top-[58%] left-[44.5%] z-10 -translate-x-1/2 transition-transform ">
               <img
                 src="/images/badge-3.svg"
                 alt="Connect & Integrate"
@@ -69,7 +69,7 @@ export default function AIProcessSection() {
             </div>
 
             {/* Badge 5: Headset */}
-            <div className="absolute top-[40%] right-[25.5%] transition-transform hover:scale-105">
+            <div className="absolute top-[40%] right-[25.5%] transition-transform ">
               <img
                 src="/images/badge-4.svg"
                 alt="Automate & Orchestrate"
@@ -78,7 +78,7 @@ export default function AIProcessSection() {
             </div>
 
             {/* Badge 6: Star */}
-            <div className="absolute top-[0%] right-[15%] transition-transform hover:scale-105">
+            <div className="absolute top-[0%] right-[15%] transition-transform ">
               <img
                 src="/images/badge-5.svg"
                 alt="Monitor & Scale"

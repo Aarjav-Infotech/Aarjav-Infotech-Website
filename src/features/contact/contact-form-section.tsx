@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Mail, Headphones, MapPin, Paperclip, X, FileText } from "lucide-react";
+import Image from "next/image";
+import {
+  Mail,
+  Paperclip,
+  X,
+  FileText,
+} from "lucide-react";
 
 interface ContactFormSectionProps {
   eyebrow?: string;
@@ -19,24 +25,25 @@ export function ContactFormSection({
   const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const topCards = [
+  const locations = [
     {
-      title: "E-mail address",
-      value: "hello@youraiagency.com",
-      href: "mailto:hello@youraiagency.com",
-      icon: Mail,
+      country: "India",
+      iconSrc: "/images/office.svg",
+      phoneIconSrc: "/images/call.svg",
+      locationIconSrc: "/images/location.svg",
+      phone: "+91 99649 19000 (Call & what's app)",
+      phoneHref: "tel:+919964919000",
+      address:
+        "526, Mahek IT Park, Kshanagar, Old GIDC, Katargam, Surat, Gujarat 395004.",
     },
     {
-      title: "Phone number",
-      value: "+1 (647) 555 0172",
-      href: "tel:+16475550172",
-      icon: Headphones,
-    },
-    {
-      title: "Our Location",
-      value: "USA, New York – 1060 Str.",
-      href: "#",
-      icon: MapPin,
+      country: "USA",
+      iconSrc: "/images/office.svg",
+      phoneIconSrc: "/images/whatsapp.svg",
+      locationIconSrc: "/images/location.svg",
+      phone: "+1 (551) 208-0596",
+      phoneHref: "tel:+15512080596",
+      address: "204 Lawson Pl, Paramus, NJ 07652, USA",
     },
   ];
 
@@ -55,102 +62,153 @@ export function ContactFormSection({
   };
 
   return (
-    <section className="relative w-full bg-white px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-full space-y-12">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {topCards.map((card, idx) => {
-            const Icon = card.icon;
-            return (
-              <a
-                key={idx}
-                href={card.href}
-                className="group hover:shadow-3xl flex flex-col items-center justify-center rounded-[32px] border border-white/90 bg-[#F4F4F5] px-6 py-10 text-center shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="relative mb-5 flex h-18 w-18 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white shadow-[0_8px_18px_rgba(0,82,204,0.35)] transition-transform duration-300 group-hover:scale-105">
-                  <Icon className="h-6 w-6 stroke-[2]" />
+    <section className="relative w-full bg-[#FFFFFF] px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8">
+      <div className="mx-auto max-w-[1240px] space-y-8 sm:space-y-12">
+        {/* TOP ROW: Two Location Cards (India & USA) */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:gap-8">
+          {locations.map((loc, idx) => (
+            <div
+              key={idx}
+              className="relative flex flex-col justify-between rounded-[24px] bg-[#f4f5f7] p-6 shadow-[0_12px_32px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] sm:rounded-[32px] sm:p-8 md:rounded-[36px] md:p-6 border-b-7 border-grey"
+            >
+              <div>
+                {/* 3D Location Building Image */}
+                <div className="relative mb-4 flex size-10 rounded-[15px] items-center justify-center transition-transform bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] duration-300 hover:scale-105 sm:mb-6 sm:size-14 md:size-16">
+                  <Image
+                    src={loc.iconSrc}
+                    alt={`${loc.country} Office`}
+                    fill
+                    className="object-contain drop-shadow-md p-4"
+                    priority
+                  />
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900">
-                  {card.title}
+                {/* Country Name */}
+                <h3 className="text-lg font-bold tracking-tight text-neutral-900 sm:text-xl md:text-2xl">
+                  {loc.country}
                 </h3>
-                <p className="mt-1.5 text-base font-medium text-slate-600">
-                  {card.value}
-                </p>
-              </a>
-            );
-          })}
+
+                {/* Phone & Address Details */}
+                <div className="mt-3 space-y-2 text-xs text-neutral-700 sm:mt-4 sm:space-y-2.5 sm:text-sm">
+                  <div className="flex items-center gap-2 sm:gap-2">
+                    <div className="relative size-4 shrink-0">
+                      <Image
+                        src={loc.phoneIconSrc}
+                        alt="Phone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <a
+                      href={loc.phoneHref}
+                      className="break-all font-medium transition-colors text-base hover:text-[#0053FA]"
+                    >
+                      {loc.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-start gap-2 sm:gap-2">
+                    <div className="relative mt-0.5 size-4 shrink-0">
+                      <Image
+                        src={loc.locationIconSrc}
+                        alt="Location"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <span className="leading-relaxed text-base">{loc.address}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
-          {/* LEFT COLUMN: Text & Social Pills */}
-          <div className="flex flex-col justify-between self-stretch lg:col-span-6">
-            <div className="space-y-6">
+        {/* BOTTOM SECTION: Left Info/Pills & Right Form */}
+        <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
+          {/* LEFT COLUMN: Eyebrow, Heading, Description, Email & Social Pills */}
+          <div className="flex flex-col justify-between  lg:col-span-6">
+            <div>
+              {/* Eyebrow Badge */}
               {eyebrow && (
-                <div>
-                  <div className="inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-sm sm:border-b-4 sm:text-[14px]">
-                    <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
-                    {eyebrow}
-                  </div>
+                <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#002688] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
+                  <span className="size-1.5 rounded-full bg-[#002688]" />
+                  {eyebrow}
                 </div>
               )}
 
-              {/* Title */}
-              <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[56px] lg:leading-[1.12]">
-                Let&apos;s Build <br />
+              <h2 className="text-[3xl] font-semibold tracking-tight text-neutral-950 sm:text-4xl md:text-5xl lg:text-[72px] lg:leading-[1.12]">
+                Let&apos;s Build <br className="hidden sm:inline" />
                 Intelligent Things
               </h2>
 
-              {/* Description */}
-              <p className="max-w-[480px] text-base leading-relaxed text-slate-600">
-                combining creativity, technology, and strategy to craft
-                solutions that think, adapt, and inspire. Connect with us to
-                turn visionary ideas into meaningful, data-driven realities.
+              <p className="mt-4 max-w-full text-sm leading-relaxed text-black sm:mt-6 sm:text-base sm:leading-relaxed">
+                combining creativity, technology, and strategy to craft solutions that think, adapt, and inspire. Connect with us to turn visionary ideas into meaningful, data-driven realities.
               </p>
             </div>
 
-            {/* Social Buttons */}
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              {/* Twitter / X */}
+            {/* Floating Action Pills */}
+            <div className="mt-8 space-y-3 sm:mt-12 sm:space-y-4 lg:mt-16">
+              {/* Email Pill */}
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:shadow-3xl flex items-center gap-3 rounded-full border-b-[7px] border-[#eaeaf2] bg-white py-2.5 pr-2.5 pl-6 text-base font-semibold text-slate-800 shadow-xl transition-all"
+                href="mailto:business@aarjavinfotech.com"
+                className="inline-flex w-full max-w-full items-center justify-between rounded-full bg-[#f4f5f7] py-2.5 pr-3 pl-4 border-b-7 border-grey shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] hover:shadow-[0_12px_24px_rgba(0,0,0,0.1)] sm:max-w-[340px] sm:py-3 sm:pr-3.5 sm:pl-6"
               >
-                <span>Twitter / X</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0052cc] text-sm font-bold text-white shadow-sm">
-                  𝕏
+                <span className="truncate text-xs font-semibold text-neutral-900 sm:text-lg ">
+                  business@aarjavinfotech.com
+                </span>
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-xs">
+                  <Mail className="size-3.5" />
                 </span>
               </a>
 
-              {/* Facebook */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:shadow-3xl flex items-center gap-3 rounded-full border-b-[7px] border-[#eaeaf2] bg-white py-2.5 pr-2.5 pl-6 text-base font-semibold text-slate-800 shadow-xl transition-all"
-              >
-                <span>Facebook</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0052cc] text-sm font-bold text-white shadow-sm">
-                  f
-                </span>
-              </a>
+              {/* Social Pills */}
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 ">
+                {/* Twitter / X */}
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex border-b-7 border-grey min-w-[130px] flex-1 items-center justify-between rounded-full bg-[#f4f5f7] py-2 pr-2.5 pl-4 shadow-[0_8px_18px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] sm:min-w-[155px] sm:flex-initial sm:py-2.5 sm:pr-3 sm:pl-5"
+                >
+                  <span className="text-xs font-semibold text-neutral-900 sm:text-lg">
+                    Twitter / X
+                  </span>
+                  <span className="flex size-6 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-xs font-bold text-white shadow-xs sm:size-7">
+                    𝕏
+                  </span>
+                </a>
+
+                {/* Facebook */}
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-w-[130px] border-b-7 border-grey flex-1 items-center justify-between rounded-full bg-[#f4f5f7] py-2 pr-2.5 pl-4 shadow-[0_8px_18px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] sm:min-w-[155px] sm:flex-initial sm:py-2.5 sm:pr-3 sm:pl-5"
+                >
+                  <span className="text-xs font-semibold text-neutral-900 sm:text-lg">
+                    Facebook
+                  </span>
+                  <span className="flex size-6 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-xs font-bold text-white shadow-xs sm:size-7">
+                    f
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
           {/* RIGHT COLUMN: Contact Form Card */}
-          <div className="relative rounded-[36px] border border-white/90 bg-[#F4F4F5] p-8 shadow-2xl sm:p-12 lg:col-span-6">
-            <h3 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+          <div className="relative rounded-[24px] bg-[#F4F4F5] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.06)] sm:rounded-[32px] sm:p-8 md:rounded-[36px] md:p-10 lg:col-span-6 lg:p-12 border-b-7 border-grey">
+            <h3 className="text-xl font-bold tracking-tight text-neutral-950 sm:text-2xl lg:text-3xl">
               Fill this form below
             </h3>
 
             <form
-              className="mt-8 space-y-6"
+              className="mt-6 space-y-5 sm:mt-8 sm:space-y-6"
               onSubmit={(e) => e.preventDefault()}
             >
               {/* Name Field */}
-              <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-xs font-bold text-neutral-900 sm:text-sm">
                   Your Name
                 </label>
                 <input
@@ -160,38 +218,38 @@ export function ContactFormSection({
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  className="w-full border-b border-neutral-300 bg-transparent py-1.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-[#002688] focus:outline-hidden sm:py-2 sm:text-base"
                 />
               </div>
 
-              {/* Phone / Email Field */}
-              <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+              {/* Phone Field */}
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-xs font-bold text-neutral-900 sm:text-sm">
                   Your Phone
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter the e-mail"
+                  placeholder="Enter the phone number"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  className="w-full border-b border-neutral-300 bg-transparent py-1.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-[#002688] focus:outline-hidden sm:py-2 sm:text-base"
                 />
               </div>
 
-              {/* Project Details */}
-              <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-800">
+              {/* More About The Project */}
+              <div className="space-y-1 sm:space-y-1.5">
+                <label className="text-xs font-bold text-neutral-900 sm:text-sm">
                   More About The Project
                 </label>
-                <textarea
-                  rows={3}
+                <input
+                  type="text"
                   value={formData.projectDetails}
                   onChange={(e) =>
                     setFormData({ ...formData, projectDetails: e.target.value })
                   }
-                  className="w-full resize-none border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  className="w-full border-b border-neutral-300 bg-transparent py-2 text-sm text-neutral-900 focus:border-[#002688] focus:outline-hidden sm:py-2 sm:text-base"
                 />
               </div>
 
@@ -204,36 +262,36 @@ export function ContactFormSection({
                 multiple
               />
 
-              {/* Add Attachment Button */}
-              <div className="pt-2">
+              {/* Attachment Trigger */}
+              <div className="pt-1">
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 transition-colors hover:text-[#0052cc]"
+                  className="inline-flex cursor-pointer items-center gap-2 text-xs font-bold text-neutral-900 transition-opacity hover:opacity-80 sm:text-sm"
                 >
-                  <Paperclip className="h-4 w-4" />
+                  <Paperclip className="size-3.5 shrink-0 rotate-45 sm:size-4" />
                   <span>Add an Attachment</span>
                 </button>
               </div>
 
-              {/* Attached Files List */}
+              {/* Uploaded Attachments Badge List */}
               {attachments.length > 0 && (
                 <div className="flex flex-wrap gap-2 pt-1">
                   {attachments.map((file, index) => (
                     <div
                       key={index}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-2.5 py-1 text-xs font-medium text-neutral-700 shadow-xs sm:gap-2 sm:px-3"
                     >
-                      <FileText className="h-3.5 w-3.5 text-blue-600" />
-                      <span className="max-w-[140px] truncate">
+                      <FileText className="size-3 text-blue-600 sm:size-3.5" />
+                      <span className="max-w-[120px] truncate sm:max-w-[140px]">
                         {file.name}
                       </span>
                       <button
                         type="button"
                         onClick={() => removeAttachment(index)}
-                        className="rounded-full p-0.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                        className="cursor-pointer rounded-full p-0.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700"
                       >
-                        <X className="h-3 w-3" />
+                        <X className="size-3" />
                       </button>
                     </div>
                   ))}
@@ -241,10 +299,10 @@ export function ContactFormSection({
               )}
 
               {/* Submit Button */}
-              <div className="pt-4">
+              <div className="pt-4 sm:pt-6">
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-4 text-base font-semibold text-white shadow-[0_12px_24px_rgba(0,82,204,0.3)] transition-all hover:bg-[#0043a8] hover:shadow-[0_14px_28px_rgba(0,82,204,0.4)] active:scale-[0.99]"
+                  className="w-full cursor-pointer rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] py-3.5 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(0,38,136,0.4)] transition-all hover:scale-[1.01] hover:shadow-[0_16px_32px_rgba(0,38,136,0.5)] active:scale-[0.99] sm:py-4 sm:text-base"
                 >
                   Submit Message
                 </button>

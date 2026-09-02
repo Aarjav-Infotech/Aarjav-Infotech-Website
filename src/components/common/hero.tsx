@@ -64,8 +64,8 @@ export function Hero({
   return (
     <section
       className={cn(
-        "section-padding relative flex min-h-[80vh] w-full flex-col justify-center overflow-hidden sm:min-h-screen",
-        (bgImage || bgVideo) && "rounded-b-[40px] pt-28 lg:h-[724px] lg:pt-24",
+        "section-padding relative flex h-full w-full min-w-0 flex-col justify-center overflow-hidden",
+        (bgImage || bgVideo) && "rounded-b-[40px] pt-24 pb-16 lg:pt-28 lg:pb-20",
         !(bgImage || bgVideo) && "bg-gradient-to-b",
         !(bgImage || bgVideo) && (toneClasses as Record<string, string>)[tone],
         bgImage && "bg-cover bg-center bg-no-repeat",
@@ -84,19 +84,18 @@ export function Hero({
           className="absolute inset-0 z-[-1] h-full w-full object-cover object-right lg:object-center"
         />
       )}
-      <Container>
+      <Container className="w-full min-w-0">
         <div
           className={cn(
-            "relative z-10 w-full",
+            "relative z-10 w-full min-w-0 mt-20",
             layout === "split"
               ? "site-container grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
-              : cn("max-w-[953px]", align === "center" && "mx-auto"),
+              : cn("max-w-full", align === "center" && "mx-auto"),
           )}
         >
           <motion.div
             initial="hidden"
             whileInView="visible"
-            // FIX 1: Set once: true so the animation doesn't collapse the layout on refresh
             viewport={{ once: true, amount: 0.1 }}
             variants={{
               hidden: {},
@@ -107,7 +106,7 @@ export function Hero({
               },
             }}
             className={cn(
-              "mt-6 flex flex-col space-y-4 sm:mt-12 sm:space-y-6",
+              "flex w-full min-w-0 flex-col space-y-4 sm:space-y-6",
               layout === "centered" && "items-center text-center",
               align === "left" && "items-start text-left",
               align === "center" && "items-center text-center",
@@ -133,6 +132,7 @@ export function Hero({
               </motion.p>
             )}
             <motion.div
+              className="w-full min-w-0"
               variants={{
                 hidden: { opacity: 0, y: 15 },
                 visible: {
@@ -147,9 +147,8 @@ export function Hero({
                 align={align}
                 id="hero-heading"
                 subtitle={subtitle}
-                // FIX 2: Added responsive text sizing (text-3xl -> sm:text-5xl -> lg:text-[74px])
                 className={cn(
-                  "text-3xl leading-tight font-medium tracking-tight text-[#000000] sm:text-5xl lg:text-[74px] lg:leading-[81.4px]",
+                  "w-full text-3xl font-semibold tracking-tight text-[#000000] sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[82px] leading-tight lg:leading-[1.1]",
                   titleClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -168,7 +167,7 @@ export function Hero({
                   },
                 }}
                 className={cn(
-                  "text-base leading-relaxed font-medium text-[#000000] sm:text-[20px]",
+                  "max-w-3xl text-base font-medium leading-relaxed text-[#000000] sm:text-[20px]",
                   descriptionClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -210,6 +209,7 @@ export function Hero({
             )}
             {children && (
               <motion.div
+                className="w-full min-w-0"
                 variants={{
                   hidden: { opacity: 0, y: 15 },
                   visible: {

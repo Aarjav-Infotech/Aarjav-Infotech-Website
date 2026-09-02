@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface TestimonialItem {
@@ -99,17 +99,37 @@ export function HomeTestimonials({
                     exit={{ opacity: 0, x: 15 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {/* Blue Double Quote Icon */}
-                    <Quote className="mb-3 size-5 rotate-180 fill-[#2b2bad] stroke-none sm:size-6" />
+                    {/* Gradient Double Quote Icon */}
+                    <div className="mb-4">
+                      <svg
+                        width="23"
+                        height="20"
+                        viewBox="0 0 23 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <linearGradient id="blueLin" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="rgba(9, 30, 70, 1)" />
+                            <stop offset="100%" stopColor="rgba(7, 95, 243, 1)" />
+                          </linearGradient>
+                        </defs>
+                        <path
+                          d="M0 11.4286C0 5.11429 4.14 0 10.35 0V4.57143C7.245 4.57143 5.175 6.62857 5.175 9.14286H10.35V20H0V11.4286ZM12.65 11.4286C12.65 5.11429 16.79 0 23 0V4.57143C19.895 4.57143 17.825 6.62857 17.825 9.14286H23V20H12.65V11.4286Z"
+                          fill="url(#blueLin)"
+                        />
+                      </svg>
+                    </div>
+
                     {/* Quote Text */}
-                    <p className="text-basic sm:text-basic leading-relaxed font-medium text-slate-800">
-                      {current.quote}
+                    <p className="text-base sm:text-lg leading-relaxed font-medium text-[#000000]">
+                      "{current.quote}"
                     </p>
 
                     {/* Author Metadata */}
                     <div className="mt-6 flex items-center gap-3 border-l-2 border-slate-300 pl-3">
-                      <p className="text-basic sm:text-basic font-medium text-slate-500">
-                        <span className="font-semibold text-slate-700">
+                      <p className="text-sm font-medium text-slate-500">
+                        <span className="font-semibold text-slate-800">
                           {current.author}
                         </span>
                         {" | "}
@@ -126,17 +146,19 @@ export function HomeTestimonials({
               {/* Arrow Buttons */}
               <div className="flex items-center gap-3">
                 <button
+                  type="button"
                   onClick={handlePrev}
                   aria-label="Previous testimonial"
-                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15"
+                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15 cursor-pointer"
                 >
                   <ChevronLeft className="size-5" />
                 </button>
 
                 <button
+                  type="button"
                   onClick={handleNext}
                   aria-label="Next testimonial"
-                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15"
+                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15 cursor-pointer"
                 >
                   <ChevronRight className="size-5" />
                 </button>

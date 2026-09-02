@@ -4,8 +4,35 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const enterpriseFaqs = [
+  {
+    question:
+      "What exactly is an Enterprise Agentic OS and how is it different from standard RPA or point AI tools?",
+    answer:
+      "RPA automates repetitive clicks on fixed UIs. Point AI tools solve single, isolated prompts. An Enterprise Agentic OS coordinates cross-departmental operations—from ERP data sync and invoice processing to multi-agent approvals—governed by unified enterprise security.",
+  },
+  {
+    question:
+      "Do we need to replace our current ERP, CRM, or data warehouse infrastructure?",
+    answer:
+      "No. The platform deploys as an intelligent orchestration plane directly above your existing systems (SAP, Oracle, Salesforce, Microsoft Dynamics, Snowflake), connecting them via bi-directional, authenticated APIs without disrupting business continuity.",
+  },
+  {
+    question:
+      "How quickly can we deploy and run an enterprise AI workflow in production?",
+    answer:
+      "Production-ready workflows deploy in 4 to 6 weeks. Standardized pre-built enterprise connectors and role-based validation checkpoints allow IT and security teams to review, audit, and sign off rapidly.",
+  },
+  {
+    question:
+      "Who owns the enterprise data, custom agents, and fine-tuned models?",
+    answer:
+      "Your organization retains 100% data and model ownership. Everything runs in your sovereign VPC or private cloud environment. Proprietary records and internal communications never leave your perimeter or train public third-party models.",
+  },
+];
+
 const enterpriseConfig: IndustryConfig = {
-  eyebrow: "Industries - Enterprise",
+  eyebrow: "",
   heroTitle: (
     <>
       AI That Powers the <br /> Modern Enterprise
@@ -142,6 +169,11 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About Enterprise AI",
+    faqs: enterpriseFaqs,
   },
 };
 

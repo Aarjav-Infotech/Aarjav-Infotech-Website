@@ -24,7 +24,7 @@ const caseStudyHeroProps = {
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
   description:
     "Discover how our AI-powered solutions have helped organizations streamline operations, accelerate decision-making, and solve real business challenges across industries.",
   descriptionClassName:

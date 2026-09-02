@@ -28,8 +28,8 @@ export function HomeContent() {
         eyebrow="AI-Native Agency"
         eyebrowClassName="rounded text-[14px] font-semibold tracking-wide inline-block border-b-4 boder-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-[#2b2bad] shadow-xl/20"
         title={
-          <span className="relative inline-block leading-[1.08] tracking-[-2px] md:tracking-[-3px]">
-            Power Your Enterprise with <br className="hidden md:inline" />
+          <span className="relative inline-block leading-[1.08] tracking-[-2px] ">
+            Power Your Enterprise with 
             Next-Generation AI.
             <InlineCapsule />
           </span>
