@@ -34,7 +34,7 @@ export function HomeSecurityCompliance({
   return (
     <section className="w-full px-2 py-6 sm:px-6 sm:py-8 md:px-8 lg:py-10">
       {/* Outer Card */}
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[28px] px-4 py-12 shadow-2xl sm:rounded-[36px] sm:px-8 sm:py-16 md:rounded-[40px] md:px-12 md:py-20">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[28px] px-4 py-20 shadow-2xl sm:rounded-[36px] sm:px-8 sm:py-16 md:rounded-[40px] md:px-12 md:py-20">
         {/* Next.js Background Image Layer */}
         {bgImage && (
           <Image
@@ -79,19 +79,19 @@ export function HomeSecurityCompliance({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-[720px] text-base leading-relaxed text-slate-300 sm:text-lg"
+              className="max-w-[720px] text-sm leading-relaxed text-slate-300 sm:text-lg"
             >
               {subtitle}
             </motion.p>
           )}
 
-          {/* Compliance Icons Grid */}
+          {/* Compliance Icons Grid: 1 column on mobile, 3 on tablet, 6 on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 grid w-full grid-cols-2 gap-6 sm:mt-12 sm:grid-cols-3 sm:gap-8 md:mt-16 lg:grid-cols-6 lg:gap-6"
+            className="mt-10 grid w-full grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-8 md:mt-16 lg:grid-cols-6 lg:gap-6"
           >
             {items.map((item, index) => (
               <motion.div
@@ -100,17 +100,12 @@ export function HomeSecurityCompliance({
                 transition={{ type: "spring", stiffness: 300 }}
                 className="group flex cursor-pointer items-center justify-center p-1 text-center sm:p-2"
               >
-                {/* 
-                  MOBILE ICON ENHANCEMENTS:
-                  - Increased container bounds to 130px on small screens (h-[130px] w-[130px]).
-                  - Switched to Next.js fill layout with object-contain for maximum clarity and scaling.
-                */}
-                <div className="relative flex h-[130px] w-[130px] items-center justify-center transition-all duration-300 sm:h-[150px] sm:w-[150px] lg:h-[150px] lg:w-[150px]">
+                <div className="relative flex h-[110px] w-full max-w-[200px] items-center justify-center transition-all duration-300 sm:h-[150px] sm:w-[150px] lg:h-[110px] lg:w-[150px]">
                   <Image
                     src={item.iconSrc}
                     alt="Compliance Icon"
                     fill
-                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 15vw"
+                    sizes="(max-width: 640px) 80vw, (max-width: 1024px) 30vw, 15vw"
                     className="object-contain opacity-95 transition-opacity group-hover:opacity-100"
                   />
                 </div>

@@ -4,6 +4,33 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const realEstateFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for real estate and how is it different from standard chatbots or listing portals?",
+    answer:
+      "Listing portals display static inventories and simple bots answer basic queries. A Real Estate Agentic OS coordinates cross-channel buyer qualification, schedule sync for site viewings, lease documentation parsing, and CRM updates as one unified, governed operational system.",
+  },
+  {
+    question:
+      "Do we need to replace our existing MLS feeds, PropTech platforms, or CRM systems?",
+    answer:
+      "No. It connects directly over your existing platforms (Salesforce, HubSpot, Yardi, RealPage, Buildium, and localized MLS IDX feeds) via secure APIs without migrating or disrupting your source records.",
+  },
+  {
+    question:
+      "How quickly can we deploy AI agents for lead qualification and tour scheduling?",
+    answer:
+      "Production-ready agents deploy in 3 to 6 weeks. Pre-built connectors for WhatsApp, email, SMS, and portal webhooks allow sales and leasing teams to automate lead triage rapidly with immediate pipeline visibility.",
+  },
+  {
+    question:
+      "How does the platform handle lease compliance, pricing data, and transaction privacy?",
+    answer:
+      "All proprietary valuation models, title documents, and tenant PII operate within isolated, enterprise-grade cloud environments. Deterministic rules ensure pricing and contract terms strictly mirror approved brokerage guidelines without hallucinated commitments.",
+  },
+];
+
 const realEstateConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: (
@@ -144,6 +171,11 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Real Estate FAQs",
+    title: "Frequently Asked Questions About Real Estate AI",
+    faqs: realEstateFaqs,
   },
 };
 

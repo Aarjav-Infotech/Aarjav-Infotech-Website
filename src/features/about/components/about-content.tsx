@@ -22,13 +22,13 @@ const aboutHeroProps = {
     "rounded text-[14px] font-semibold tracking-wide inline-block border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-[#2b2bad] shadow-xl/20",
   title: (
     <span className="relative inline-block leading-[1.08] tracking-[-2px] md:tracking-[-3px]">
-      Aarjav Infotech Empowering <br className="hidden md:inline" />
+      Aarjav Infotech Empowering 
       Industries
       <InlineCapsule />
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
   description:
     "We build human-centered AI solutions that transform workflows, enhance decision-making, and accelerate innovation across diverse global industries.",
   descriptionClassName:

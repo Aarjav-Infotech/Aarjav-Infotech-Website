@@ -10,7 +10,17 @@ import {
 import { HomeFaq } from "@/features/home/components/home-faq";
 import { ContactSection } from "@/features/home/components/home-contact";
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface IndustryConfig {
+  HomeFaq?: {
+    eyebrow?: string;
+    title?: string | React.ReactNode;
+    faqs?: FaqItem[];
+  };
   eyebrow?: string;
   heroTitle?: React.ReactNode;
   heroDescription?: string;
@@ -206,7 +216,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
             <InlineCapsule />
           </span>
         }
-        titleClassName="text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center"
+        titleClassName="text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold mx-auto text-center"
         description={data.heroDescription}
         descriptionClassName="text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-8 md:mt-12"
         bgImage="/images/hero-background.png"
@@ -248,7 +258,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
               </div>
             </div>
 
-            <h2 className="mx-auto max-w-[960px] text-2xl font-bold tracking-tight text-[#0B0F19] sm:text-3xl md:text-4xl lg:text-[40px] lg:leading-[1.15]">
+            <h2 className="mx-auto text-2xl font-bold tracking-tight text-[#0B0F19] sm:text-3xl md:text-4xl lg:text-[40px] lg:leading-[1.15]">
               {data.platformSection.title}
             </h2>
 
@@ -451,7 +461,11 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
       )}
 
       {/* SECTION 7: FAQS & CONTACT CTA */}
-      <HomeFaq />
+      <HomeFaq
+        eyebrow={data.HomeFaq?.eyebrow}
+        title={data.HomeFaq?.title}
+        faqs={data.HomeFaq?.faqs}
+      />
       <ContactSection />
     </>
   );

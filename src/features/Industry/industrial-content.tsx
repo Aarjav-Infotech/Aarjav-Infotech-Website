@@ -4,8 +4,35 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const industrialFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for industrial operations and how does it differ from traditional SCADA or MES?",
+    answer:
+      "SCADA and MES monitor signals and log shop-floor states. An Industrial Agentic OS coordinates multi-system execution across SCADA, MES, ERP, and supply chain layers—orchestrating predictive work orders, automated inventory refills, and shift reporting under unified operational governance.",
+  },
+  {
+    question:
+      "Do we need to replace our current SCADA, PLC controllers, or ERP software?",
+    answer:
+      "No. It connects on top of your existing industrial control systems, historians, and enterprise resource platforms (SAP, Siemens, Rockwell Automation, Oracle) using secure edge gateways and standard industrial protocols (OPC UA, MQTT, REST APIs) without line shutdowns.",
+  },
+  {
+    question:
+      "How quickly can we deploy and validate an industrial AI workflow on our line?",
+    answer:
+      "Standard predictive maintenance and workflow automation agents go live within 4 to 8 weeks. Pre-built connectors and simulated test runs allow plant engineering and safety leads to validate performance before production rollout.",
+  },
+  {
+    question:
+      "What failsafes ensure AI actions do not compromise physical plant safety or machinery?",
+    answer:
+      "All automated operations enforce deterministic hard limits aligned with machine OEM safety specs and ISO/OSHA standards. Autonomous agents only execute within bounded operational envelopes, requiring mandatory floor-supervisor sign-off for critical setpoint alterations or shutdowns.",
+  },
+];
+
 const industrialConfig: IndustryConfig = {
-  eyebrow: "Industries - Industrial",
+  eyebrow: "",
   heroTitle: (
     <>
       AI That Powers Smarter <br /> Industrial Operations
@@ -142,6 +169,11 @@ const industrialConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Industrial FAQs",
+    title: "Frequently Asked Questions About Industrial AI",
+    faqs: industrialFaqs,
   },
 };
 

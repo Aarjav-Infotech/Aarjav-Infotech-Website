@@ -4,6 +4,33 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const insuranceFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for insurance and how does it differ from traditional claims RPA or point AI?",
+    answer:
+      "RPA only automates mechanical form submissions, and point AI tools merely parse isolated PDFs. An Insurance Agentic OS coordinates the entire policy and claims lifecycle—orchestrating FNOL intake, medical record synthesis, fraud pattern cross-referencing, and adjustor triage under uniform regulatory governance.",
+  },
+  {
+    question:
+      "Do we need to replace our current policy administration or core claims systems?",
+    answer:
+      "No. It connects as an intelligent orchestration plane directly over Guidewire, Duck Creek, Applied Systems, Salesforce Financial Services Cloud, and on-premise mainframe policy databases via secure, bi-directional APIs without rewriting core policy records.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated underwriting or claims workflow in production?",
+    answer:
+      "Regulated insurance workflows deploy in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow underwriting leads, actuarial teams, and legal counsel to audit and approve processes rapidly.",
+  },
+  {
+    question:
+      "What safeguards prevent AI hallucinations and ungrounded claim denials?",
+    answer:
+      "Agents operate with deterministic rule boundaries and strictly require human authorization before executing any adverse coverage decision, claim denial, or fraud escalation. Every recommendation links to exact policy clause citations with a complete tamper-proof audit trail.",
+  },
+];
+
 const insuranceConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: "AI That Moves Insurance Forward",
@@ -137,6 +164,11 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Insurance FAQs",
+    title: "Frequently Asked Questions About Insurance AI",
+    faqs: insuranceFaqs,
   },
 };
 

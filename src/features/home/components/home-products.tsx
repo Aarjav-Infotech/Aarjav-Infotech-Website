@@ -209,9 +209,9 @@ export function HomeProducts({
                 </div>
 
                 {/* Result Text */}
-                <p className="line-clamp-2 text-sm font-bold tracking-[0.5px] text-[#2b2bad] sm:text-[16px] sm:leading-[1.45] sm:tracking-[0.7px]">
-                  {product.result}
-                </p>
+             <p className="line-clamp-2 text-[#183ecf] text-sm font-semibold tracking-[0.5px] sm:text-[16px] sm:leading-[1.45] sm:tracking-[0.7px]">
+  {product.result}
+</p>
               </div>
             </motion.div>
           ))}

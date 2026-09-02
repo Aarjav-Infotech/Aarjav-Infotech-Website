@@ -24,7 +24,7 @@ export function ContactFeature() {
       </span>
     ),
     titleClassName:
-      "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+      "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
     description:
       "Have a question or looking to transform your enterprise operations with AI? Connect with our solution engineering team.",
     descriptionClassName:
@@ -40,7 +40,6 @@ export function ContactFeature() {
       <Hero {...contactHeroProps} />
       <ContactFormSection />
       <HomeFaq />
-      <ContactSection />
     </div>
   );
 }

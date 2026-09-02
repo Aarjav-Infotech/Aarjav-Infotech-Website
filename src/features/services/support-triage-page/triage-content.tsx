@@ -26,7 +26,7 @@ const triageHeroProps = {
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
   description:
     "Categorize, prioritize, and resolve incoming customer tickets instantly with intelligent AI triage models. Reduce response times and free your support team for complex inquiries.",
   descriptionClassName:

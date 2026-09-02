@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-// Custom SVG components to match exact icon variants
 function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -69,7 +68,6 @@ export function Footer() {
           <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-8">
             {/* Left Column: Brand & Tagline */}
             <div className="lg:col-span-5">
-              {/* Logo Image */}
               <div className="flex items-center gap-2.5 pb-2">
                 <Link
                   href="/"
@@ -86,7 +84,6 @@ export function Footer() {
                 </Link>
               </div>
 
-              {/* Title & Description */}
               <h3 className="mt-5 text-xl leading-snug font-bold tracking-tight text-white sm:mt-7 sm:text-2xl lg:text-3xl">
                 Automations that ship & keep <br className="hidden sm:inline" />
                 running.
@@ -98,13 +95,13 @@ export function Footer() {
             </div>
 
             {/* Right Column: Navigation Columns */}
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 lg:col-span-7 lg:pl-6">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-20 lg:col-span-7 lg:pl-0">
               {/* Services */}
               <div className="flex flex-col gap-2">
-                <h4 className="text-lg font-semibold text-slate-300 sm:text-lg">
+                <h4 className="text-sm font-semibold text-slate-300 sm:text-base">
                   Services
                 </h4>
-                <ul className="text-basic mt-1 space-y-2 text-slate-200">
+                <ul className="text-xs sm:text-sm mt-1 space-y-2 text-slate-200">
                   <li>
                     <Link href="#" className="transition hover:text-white">
                       AI Workflow Automation
@@ -117,51 +114,56 @@ export function Footer() {
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Internal Tools & Agents
+                      AI Voice Agent Deployment
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Data Pipelines
+                      Enterprise AI Ecosystem
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Support & Monitoring
+                      AI Document Processing
                     </Link>
                   </li>
                 </ul>
               </div>
 
-              {/* Company */}
+              {/* Our Products */}
               <div className="flex flex-col gap-2">
-                <h4 className="text-lg font-semibold text-slate-300 sm:text-lg">
-                  Company
+                <h4 className="text-sm font-semibold text-slate-300 sm:text-base">
+                  Our Products
                 </h4>
-                <ul className="text-basic mt-1 space-y-2 text-slate-200">
+                <ul className="text-xs sm:text-sm mt-1 space-y-2 text-slate-200">
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Who we are
+                      AI Voice Agent Deployment
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Case Studies
+                      AI Diamond Stock Market Management
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Industries
+                      AI Textile Management
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Workflow
+                      AI Construction
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="transition hover:text-white">
-                      Contact
+                      AI BOQ Estimation Agent
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="transition hover:text-white">
+                      AI Document Processing
                     </Link>
                   </li>
                 </ul>
@@ -169,11 +171,10 @@ export function Footer() {
 
               {/* Social Section */}
               <div className="col-span-2 flex flex-col gap-2 sm:col-span-1">
-                <h4 className="text-center text-lg font-semibold text-slate-300 sm:text-left">
+                <h4 className="text-center text-sm font-semibold text-slate-300 sm:text-center sm:text-base">
                   Social
                 </h4>
-                {/* Responsive Social Container */}
-                <div className="mt-2 flex flex-wrap items-center justify-center gap-4 text-white sm:mt-3 sm:grid sm:w-[75px] sm:grid-cols-2 sm:gap-y-3.5">
+                <div className="mt-2 flex flex-wrap items-center align-center justify-center gap-4 text-white sm:mt-3 sm:grid sm:w-[75px] sm:grid-cols-2 sm:gap-y-3.5">
                   <Link
                     href="#"
                     aria-label="X"

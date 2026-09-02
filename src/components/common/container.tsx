@@ -23,7 +23,7 @@ export function Container({
       className={cn(
         "site-container",
         size === "full" && "max-w-none",
-        size === "narrow" && "max-w-[48rem]", // Keep some overrides if needed
+        size === "narrow" && "max-w-full", // Keep some overrides if needed
         className,
       )}
       style={style}

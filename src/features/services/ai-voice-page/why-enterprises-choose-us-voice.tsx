@@ -1,35 +1,35 @@
 "use client";
 
 import React from "react";
-import { Award, TrendingUp, DollarSign, Globe } from "lucide-react";
+import Image from "next/image";
 
 export default function WhyEnterprisesChooseUsVoice() {
   const eyebrow = "Why It Matters";
 
   const features = [
     {
-      icon: Award,
+      iconSrc: "/images/ai-matter-1.svg",
       title: "Years of Expertise",
       description:
         "Never miss a customer call with intelligent AI agents that provide instant assistance anytime.",
       offset: "lg:translate-y-8",
     },
     {
-      icon: TrendingUp,
+      iconSrc: "/images/ai-matter-4.svg",
       title: "Faster Response Times",
       description:
         "Reduce customer wait times by answering calls immediately and routing requests intelligently.",
       offset: "lg:-translate-y-2",
     },
     {
-      icon: DollarSign,
+      iconSrc: "/images/ai-matter-3.svg",
       title: "Reduced Operational Costs",
       description:
         "Improve customer experiences, automate repetitive conversations, and scale your support operations with enterprise-ready conversational AI.",
       offset: "lg:translate-y-8",
     },
     {
-      icon: Globe,
+      iconSrc: "/images/ai-matter-2.svg",
       title: "Personalized Customer Experience",
       description:
         "Deliver contextual, natural conversations using customer history, business data, and AI-driven insights.",
@@ -66,27 +66,30 @@ export default function WhyEnterprisesChooseUsVoice() {
 
           {/* Staggered Floating Cards Grid */}
           <div className="grid grid-cols-1 gap-6 pb-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {features.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={index}
-                  className={`flex flex-col justify-between rounded-[2.5rem] bg-white p-8 shadow-[0_15px_35px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-2xl ${item.offset}`}
-                >
-                  <div>
-                    <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50/80 text-[#004ce6]">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <h3 className="mb-3 text-xl font-bold tracking-tight text-neutral-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-basic leading-relaxed text-neutral-500">
-                      {item.description}
-                    </p>
+            {features.map((item, index) => (
+              <div
+                key={index}
+                className={`flex flex-col justify-between rounded-[2.5rem] bg-white p-8 shadow-[0_15px_35px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-2xl ${item.offset}`}
+              >
+                <div>
+                  <div className="relative mb-8 flex h-20 w-20 items-center justify-center rounded-2xl  p-3">
+                    <Image
+                      src={item.iconSrc}
+                      alt={item.title}
+                      fill
+                      className="object-contain p-2"
+                      priority
+                    />
                   </div>
+                  <h3 className="mb-3 text-xl font-bold tracking-tight text-neutral-900">
+                    {item.title}
+                  </h3>
+                  <p className="text-basic leading-relaxed text-neutral-500">
+                    {item.description}
+                  </p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>

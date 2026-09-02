@@ -13,7 +13,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
         <div className="mb-16 text-center">
           <div className="flex flex-col items-center text-center">
             {eyebrow && (
-              <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-sm sm:mb-10 sm:border-b-4 sm:text-[14px]">
+              <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200  px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-sm sm:mb-10 sm:border-b-4 sm:text-[14px]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
                 {eyebrow}
               </div>
@@ -32,7 +32,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
         {/* Top 4 Cards Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* CARD 1: Natural Voice Conversations */}
-          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
+          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300 ">
             <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
               <Image
                 src="/images/voice-agent-1.png"
@@ -54,8 +54,8 @@ export default function AiVoiceCoreCapabilitiesSection() {
           </div>
 
           {/* CARD 2: Intelligent Call Automation */}
-          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
-            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
+          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 p-8 shadow-xl transition-all duration-300 ">
+            <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
               <Image
                 src="/images/voice-agent-2.png"
                 alt="Intelligent Call Automation"
@@ -76,7 +76,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           </div>
 
           {/* CARD 3: Live Agent Handoff */}
-          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5 lg:row-span-2">
+          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300   lg:row-span-2">
             <div className="relative mb-6 min-h-[300px] w-full flex-1 overflow-hidden rounded-2xl border border-neutral-100 bg-white">
               <Image
                 src="/images/voice-agent-5.png"
@@ -98,7 +98,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           </div>
 
           {/* CARD 4: CRM & Business Integration */}
-          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5 md:col-span-2">
+          <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300  md:col-span-2">
             <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
               <div>
                 <h3 className="mb-3 text-2xl font-bold tracking-tight text-neutral-900">
@@ -125,7 +125,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
         {/* Bottom 50/50 Row - Cards 5 & 6 with Horizontal Internal Layout */}
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* CARD 5: Analytics & Call Insights */}
-          <div className="flex flex-col justify-center rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
+          <div className="flex flex-col justify-center rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
             <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
               <div>
                 <h3 className="mb-3 text-2xl font-bold tracking-tight text-neutral-900">
@@ -136,7 +136,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
                   response times, and performance through real-time dashboards.
                 </p>
               </div>
-              <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
+              <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
                 <Image
                   src="/images/voice-agent-6.png"
                   alt="Analytics & Call Insights"
@@ -148,7 +148,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           </div>
 
           {/* CARD 6: Secure Enterprise Deployment */}
-          <div className="flex flex-col justify-center rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
+          <div className="flex flex-col justify-center rounded-[2.5rem] border border-neutral-100 shadow-xl  p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
             <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2">
               <div>
                 <h3 className="mb-3 text-2xl font-bold tracking-tight text-neutral-900">
@@ -160,7 +160,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
                   continuous optimization.
                 </p>
               </div>
-              <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
+              <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
                 <Image
                   src="/images/voice-agent-3.png"
                   alt="Secure Enterprise Deployment"

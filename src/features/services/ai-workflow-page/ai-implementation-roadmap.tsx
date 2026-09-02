@@ -1,20 +1,14 @@
 "use client";
 
 import React from "react";
-import {
-  Search,
-  Menu,
-  ShieldCheck,
-  Cloud,
-  type LucideIcon,
-} from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export interface RoadmapStep {
   stepNumber: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  iconSrc: string;
 }
 
 export interface AiImplementationRoadmapProps {
@@ -32,28 +26,28 @@ const defaultSteps: RoadmapStep[] = [
     title: "Discovery & Analysis",
     description:
       "We map your current workflows, identify bottlenecks, and define clear metrics for success.",
-    icon: Search,
+    iconSrc: "/images/process-step-1.svg",
   },
   {
     stepNumber: "STEP 02",
     title: "Architecture Design",
     description:
       "We document every step, identify bottlenecks, and determine what data and systems need to connect. No surprises down the road.",
-    icon: Menu,
+    iconSrc: "/images/process-step-2.svg",
   },
   {
     stepNumber: "STEP 03",
     title: "AI Integration + Rigorous Testing",
     description:
       "We build incrementally, test thoroughly, and review security at every stage. You see progress weekly and can give feedback early.",
-    icon: ShieldCheck,
+    iconSrc: "/images/process-step-3.svg",
   },
   {
     stepNumber: "STEP 04",
     title: "Full Deployment",
     description:
       "Go live confidently. We monitor performance, catch issues, and optimise based on data.",
-    icon: Cloud,
+    iconSrc: "/images/process-step-4.svg",
   },
 ];
 
@@ -106,35 +100,40 @@ export function AiImplementationRoadmap({
             <div className="absolute top-8 bottom-8 left-1/2 hidden -translate-x-1/2 border-l-2 border-dashed border-blue-600/30" />
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-              {steps.map((step, idx) => {
-                const Icon = step.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="relative flex flex-col items-center text-center"
-                  >
-                    {/* Blue Icon Button */}
-                    <div className="relative z-10 flex size-14 items-center justify-center rounded-2xl border border-blue-400/30 bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white transition-transform hover:scale-105 sm:size-16 lg:size-18">
-                      <Icon className="size-6 sm:size-7 lg:size-8" />
+              {steps.map((step, idx) => (
+                <div
+                  key={idx}
+                  className="relative flex flex-col items-center text-center"
+                >
+                  {/* Image Step Badge Container */}
+                  <div className="relative z-10 flex size-14 items-center justify-center rounded-2xl border border-blue-400/30 bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] p-3 text-white transition-transform hover:scale-105 sm:size-16 sm:p-3.5 lg:size-18 lg:p-4 shadow-md">
+                    <div className="relative size-full">
+                      <Image
+                        src={step.iconSrc}
+                        alt={step.title}
+                        fill
+                        className="object-cover"
+                        priority
+                      />
                     </div>
-
-                    {/* Step Label */}
-                    <span className="mt-4 text-[11px] font-bold tracking-widest text-slate-900 uppercase sm:mt-5 sm:text-xs">
-                      {step.stepNumber}
-                    </span>
-
-                    {/* Step Title */}
-                    <h3 className="mt-1 text-base font-bold tracking-tight text-slate-950 sm:text-lg">
-                      {step.title}
-                    </h3>
-
-                    {/* Step Description */}
-                    <p className="mt-1.5 text-xs leading-relaxed font-normal text-slate-600 sm:mt-2 sm:text-sm">
-                      {step.description}
-                    </p>
                   </div>
-                );
-              })}
+
+                  {/* Step Label */}
+                  <span className="mt-4 text-[11px] font-bold tracking-widest text-slate-900 uppercase sm:mt-5 sm:text-xs">
+                    {step.stepNumber}
+                  </span>
+
+                  {/* Step Title */}
+                  <h3 className="mt-1 text-base font-bold tracking-tight text-slate-950 sm:text-lg">
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="mt-1.5 text-xs leading-relaxed font-normal text-slate-600 sm:mt-2 sm:text-sm">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

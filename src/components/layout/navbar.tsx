@@ -17,6 +17,8 @@ import {
   Building,
   Factory,
   Briefcase,
+  Gem,
+  Bot,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,12 +33,11 @@ import { cn } from "@/lib/utils";
 
 // Navigation Links Configuration
 const NAV_LINKS = [
-  { label: "Home", href: ROUTES.home || "/" },
-  { label: "About", href: "/about" },
-  { label: "AI Services", href: "/services" },
-  { label: "Industries", href: "/industries" },
-  { label: "Case Study", href: "/case-study" },
-  { label: "Contact", href: ROUTES.contact || "/contact" },
+  { label: "AI Services", href: "/services", hasDropdown: true },
+  { label: "Digital Products", href: "/our-products", hasDropdown: true },
+  { label: "Industries", href: "/industries", hasDropdown: true },
+  { label: "Case Studies", href: "/case-study", hasDropdown: false },
+  { label: "About", href: "/about", hasDropdown: true },
 ];
 
 // Mega Menu Items - AI Services
@@ -70,6 +71,22 @@ const AI_SERVICES_ITEMS = [
     title: "AI Document Processing",
     description: "Launch pay-per-call campaigns and monitor commission",
     href: "/services/ai-document-processing",
+  },
+];
+
+// Mega Menu Items - Digital Products
+const DIGITAL_PRODUCTS_ITEMS = [
+  {
+    icon: Bot,
+    title: "Vani Sahay",
+    description: "Multilingual AI companion for digital financial security and fraud defense",
+    href: "/our-products/vani-sahay",
+  },
+  {
+    icon: Gem,
+    title: "Diamond Stock Management",
+    description: "Intelligent ERP platform for diamond manufacturing and global sales",
+    href: "/our-products/diamond-stock",
   },
 ];
 
@@ -119,6 +136,22 @@ const INDUSTRIES_ITEMS = [
   },
 ];
 
+// Mega Menu Items - About
+const ABOUT_ITEMS = [
+  {
+    icon: Building2,
+    title: "Company Overview",
+    description: "Learn about our vision, leadership, and enterprise mission",
+    href: "/about",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security & Governance",
+    description: "Enterprise compliance, zero-trust architectures, and protocols",
+    href: "/about#security",
+  },
+];
+
 export function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -126,9 +159,7 @@ export function Navbar() {
 
   // State tracking open mega menu on click
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(
-    null,
-  );
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -164,13 +195,27 @@ export function Navbar() {
     setIsOpen((prev) => !prev);
   }, []);
 
-  // Toggle mega menu state strictly on click
   const handleMegaMenuToggle = (label: string) => {
     setActiveMegaMenu((prev) => (prev === label ? null : label));
   };
 
   const toggleMobileSubmenu = (label: string) => {
     setMobileSubmenuOpen((prev) => (prev === label ? null : label));
+  };
+
+  const getActiveMenuItems = (label: string | null) => {
+    switch (label) {
+      case "AI Services":
+        return AI_SERVICES_ITEMS;
+      case "Digital Products":
+        return DIGITAL_PRODUCTS_ITEMS;
+      case "Industries":
+        return INDUSTRIES_ITEMS;
+      case "About":
+        return ABOUT_ITEMS;
+      default:
+        return [];
+    }
   };
 
   return (
@@ -188,6 +233,7 @@ export function Navbar() {
           )}
           aria-label="Main navigation"
         >
+          {/* Brand Logo */}
           <Link
             href={ROUTES.home || "/"}
             className="flex shrink-0 items-center transition-opacity hover:opacity-80"
@@ -206,17 +252,15 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <ul
-            className="hidden items-center gap-0.5 lg:flex xl:gap-1"
+            className="hidden items-center gap-0.5 lg:flex xl:gap-2"
             role="list"
           >
             {NAV_LINKS.map((link) => {
-              const isHasDropdown =
-                link.label === "AI Services" || link.label === "Industries";
               const isDropdownActive = activeMegaMenu === link.label;
 
               return (
-                <li key={link.href} className="static lg:relative">
-                  {isHasDropdown ? (
+                <li key={link.label} className="static lg:relative">
+                  {link.hasDropdown ? (
                     <button
                       type="button"
                       onClick={() => handleMegaMenuToggle(link.label)}
@@ -246,11 +290,19 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className="group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm"
+                      className={cn(
+                        "group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
+                        pathname === link.href && "text-primary font-semibold",
+                      )}
                     >
                       <span className="relative inline-block whitespace-nowrap">
                         {link.label}
-                        <span className="bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100" />
+                        <span
+                          className={cn(
+                            "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
+                            pathname === link.href && "scale-x-100",
+                          )}
+                        />
                       </span>
                     </Link>
                   )}
@@ -259,6 +311,7 @@ export function Navbar() {
             })}
           </ul>
 
+          {/* Desktop CTA Button */}
           <div className="hidden shrink-0 lg:block">
             <Button
               asChild
@@ -297,17 +350,21 @@ export function Navbar() {
             >
               <div className="w-[1100px] max-w-[calc(100vw-2rem)] rounded-[28px] border border-slate-100 bg-white/95 p-8 shadow-2xl ring-1 ring-slate-900/5 backdrop-blur-2xl">
                 <div className="grid grid-cols-12 gap-8">
-                  {/* Service / Industries Grid Options */}
+                  {/* Grid Options */}
                   <div className="col-span-8 flex flex-col justify-between">
                     <div className="mb-4 text-xs font-semibold tracking-wider text-slate-400 uppercase">
                       {activeMegaMenu}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                      {(activeMegaMenu === "AI Services"
-                        ? AI_SERVICES_ITEMS
-                        : INDUSTRIES_ITEMS
-                      ).map((item) => {
+                    <div
+                      className={cn(
+                        "grid gap-x-4 gap-y-3",
+                        activeMegaMenu === "Digital Products" || activeMegaMenu === "About"
+                          ? "grid-cols-1"
+                          : "grid-cols-2",
+                      )}
+                    >
+                      {getActiveMenuItems(activeMegaMenu).map((item) => {
                         const Icon = item.icon;
                         return (
                           <Link
@@ -341,9 +398,11 @@ export function Navbar() {
                       </div>
                       <Link
                         href={
-                          activeMegaMenu === "AI Services"
-                            ? "/platform-overview"
-                            : "/case-study"
+                          activeMegaMenu === "Digital Products"
+                            ? "/our-products/vani-sahay"
+                            : activeMegaMenu === "AI Services"
+                              ? "/services"
+                              : "/case-study"
                         }
                         onClick={closeMenu}
                         className="group/preview block overflow-hidden rounded-2xl"
@@ -358,14 +417,18 @@ export function Navbar() {
                         </div>
                         <div className="mt-3">
                           <h4 className="text-sm font-bold text-slate-900 group-hover/preview:text-blue-600">
-                            {activeMegaMenu === "AI Services"
-                              ? "Platform Overview"
-                              : "Industry Success Stories"}
+                            {activeMegaMenu === "Digital Products"
+                              ? "Vani Sahay Overview"
+                              : activeMegaMenu === "AI Services"
+                                ? "Platform Overview"
+                                : "Industry Success Stories"}
                           </h4>
                           <p className="mt-0.5 text-xs text-slate-500">
-                            {activeMegaMenu === "AI Services"
-                              ? "Take a free tour of our platform features"
-                              : "See how we empower diverse global sectors"}
+                            {activeMegaMenu === "Digital Products"
+                              ? "See how our financial AI agent shields users from scams"
+                              : activeMegaMenu === "AI Services"
+                                ? "Take a free tour of our platform features"
+                                : "See how we empower diverse global sectors"}
                           </p>
                         </div>
                       </Link>
@@ -404,19 +467,13 @@ export function Navbar() {
                 <div className="flex flex-col gap-0">
                   <ul className="space-y-1" role="list">
                     {NAV_LINKS.map((link) => {
-                      const isDropdown =
-                        link.label === "AI Services" ||
-                        link.label === "Industries";
                       const isSubmenuOpen = mobileSubmenuOpen === link.label;
 
-                      if (isDropdown) {
-                        const items =
-                          link.label === "AI Services"
-                            ? AI_SERVICES_ITEMS
-                            : INDUSTRIES_ITEMS;
+                      if (link.hasDropdown) {
+                        const items = getActiveMenuItems(link.label);
 
                         return (
-                          <li key={link.href} className="flex flex-col">
+                          <li key={link.label} className="flex flex-col">
                             <button
                               onClick={() => toggleMobileSubmenu(link.label)}
                               className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-[#0053FA]"
@@ -466,7 +523,7 @@ export function Navbar() {
                       }
 
                       return (
-                        <li key={link.href}>
+                        <li key={link.label}>
                           <Link
                             href={link.href}
                             className={cn(
@@ -490,7 +547,7 @@ export function Navbar() {
                   <div className="mt-2 border-t border-slate-100 pt-4">
                     <Button
                       asChild
-                      className="w-full gap-3 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] px-6 py-6 text-white shadow-md"
+                      className="w-full gap-3 rounded-full border-b-4 border-black pill-slot px-6 py-6 text-white shadow-md"
                     >
                       <Link
                         href={ROUTES.contact || "/contact"}

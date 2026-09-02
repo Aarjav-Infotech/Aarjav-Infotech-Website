@@ -4,6 +4,33 @@ import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
 
+const healthcareFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for healthcare and how is it different from RPA or point AI tools?",
+    answer:
+      "RPA automates clicks on screens. Point AI tools solve one task like transcribing notes. A Healthcare Agentic OS coordinates patient intake, scheduling, documentation synthesis, prior authorization, and denial management as one system, governed end-to-end.",
+  },
+  {
+    question:
+      "Do I need to replace our EHR, CRM, or revenue cycle systems to run this platform?",
+    answer:
+      "No. It integrates directly with your core EHR (Epic, Cerner, Athenahealth, Allscripts), billing engines, CRMs, and payer portals via FHIR/HL7 standards and secure APIs. It sits as an intelligent control plane above them.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated healthcare workflow in production?",
+    answer:
+      "Regulated clinical and administrative workflows go live in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow risk, clinical, and compliance teams to validate and sign off rapidly.",
+  },
+  {
+    question:
+      "How does the platform ensure HIPAA compliance and prevent model hallucinations?",
+    answer:
+      "The system runs inside your sovereign, HIPAA-compliant VPC with strict BAA safeguards and zero data retention for model training. Deterministic guardrails enforce that human clinicians retain final sign-off on any outputs affecting diagnosis, treatment, or coverage.",
+  },
+];
+
 const healthcareConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: "AI That Powers Smarter Healthcare Operations",
@@ -138,6 +165,11 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Healthcare FAQs",
+    title: "Frequently Asked Questions About AI in Healthcare",
+    faqs: healthcareFaqs,
   },
 };
 

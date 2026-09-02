@@ -26,7 +26,7 @@ const documentHeroProps = {
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
   description:
     "Our AI Document Processing solution combines OCR, Natural Language Processing, and machine learning to automate document-heavy workflows with speed.",
   descriptionClassName:

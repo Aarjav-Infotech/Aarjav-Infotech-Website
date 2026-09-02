@@ -1,14 +1,22 @@
+// src/features/home/components/home-faq.tsx
 "use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 
-export interface HomeFaqProps {
-  eyebrow?: string;
+export interface FaqItem {
+  question: string;
+  answer: string;
 }
 
-const faqs = [
+export interface HomeFaqProps {
+  eyebrow?: string;
+  title?: React.ReactNode;
+  faqs?: FaqItem[];
+}
+
+const defaultFaqs: FaqItem[] = [
   {
     question: "Why should we trust our mission-critical data with you?",
     answer:
@@ -33,7 +41,15 @@ const faqs = [
   },
 ];
 
-export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
+export function HomeFaq({
+  eyebrow = "FAQs",
+  title = (
+    <>
+      Frequently Asked <br /> Questions
+    </>
+  ),
+  faqs = defaultFaqs,
+}: HomeFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -48,7 +64,7 @@ export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
             </div>
           )}
           <h2 className="xs:text-3xl text-2xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-[56px] lg:leading-[1.1]">
-            Frequently Asked <br /> Questions
+            {title}
           </h2>
         </div>
 
@@ -64,8 +80,9 @@ export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
               >
                 {/* Accordion Row */}
                 <button
+                  type="button"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-3 text-left sm:gap-6"
+                  className="flex w-full cursor-pointer items-center justify-between gap-3 text-left sm:gap-6"
                   aria-expanded={isOpen}
                 >
                   <span className="text-base font-bold text-slate-900 sm:text-xl">
@@ -92,7 +109,6 @@ export function HomeFaq({ eyebrow = "FAQs" }: HomeFaqProps) {
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      {/* Tapered Gradient Line */}
                       <div className="my-3.5 h-[1.5px] w-full bg-gradient-to-r from-transparent via-slate-300/80 to-transparent sm:my-5" />
 
                       <p className="pr-2 text-sm leading-relaxed text-slate-700 sm:pr-12 sm:text-base">

@@ -311,11 +311,11 @@ export function FeaturedWorksSection() {
                   </div>
 
                   {/* Summary */}
-                  <div className="space-y-2 border-l-2 border-slate-300 pt-2 pl-4">
-                    <h4 className="text-base font-bold text-slate-900 md:text-lg">
+                  <div className="space-y-2 border-l-5 border-white pt-2 pl-4">
+                    <h4 className="text-base font-bold text-black md:text-xl">
                       {item.subtitle}
                     </h4>
-                    <p className="text-basic sm:text-basic leading-relaxed text-slate-600">
+                    <p className="text-basic sm:text-basic leading-relaxed text-black">
                       {item.description}
                     </p>
                   </div>
@@ -326,7 +326,7 @@ export function FeaturedWorksSection() {
                   <button
                     type="button"
                     onClick={() => setSelectedCase(item)}
-                    className="group text-basic inline-flex cursor-pointer items-center gap-2 rounded-full bg-slate-200/80 px-6 py-2.5 font-semibold text-slate-900 transition-colors hover:bg-slate-300"
+                    className="inline-flex items-center gap-2 border-b-1 rounded-full bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
                   >
                     <span>Read More</span>
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
