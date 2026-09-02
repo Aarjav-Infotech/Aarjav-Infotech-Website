@@ -7,7 +7,6 @@ import {
 } from "@/components/common/hero-floating-icons";
 import { ContactFormSection } from "./contact-form-section";
 import { HomeFaq } from "@/features/home/components/home-faq";
-import { ContactSection } from "@/features/home/components/home-contact";
 
 export function ContactFeature() {
   const contactHeroProps = {
