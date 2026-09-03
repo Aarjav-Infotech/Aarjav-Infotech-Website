@@ -223,7 +223,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
         <span className="text-xs font-semibold text-slate-800 sm:text-xl">
           {project.number}
         </span>
-        <h3 className="absolute left-[85%] w-full -translate-x-1/2 text-lg font-semibold tracking-tight text-slate-900 sm:text-2xl md:text-3xl">
+        <h3 className="absolute left-[65%] w-full -translate-x-1/2 text-lg font-semibold tracking-tight text-slate-900 sm:left-[85%] sm:text-2xl md:text-3xl">
           {project.title}
         </h3>
         <div className="w-6" />
