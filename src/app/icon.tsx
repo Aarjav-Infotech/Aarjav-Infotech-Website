@@ -1,8 +1,10 @@
+// src/app/icon.tsx
 import { ImageResponse } from "next/og";
 
-import { BRAND } from "@/lib/theme";
-
-export const size = { width: 32, height: 32 };
+export const size = {
+  width: 96,
+  height: 96,
+};
 export const contentType = "image/png";
 
 export default function Icon() {
@@ -14,15 +16,17 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: BRAND.primary,
-        borderRadius: 6,
-        color: BRAND.foreground,
-        fontSize: 18,
-        fontWeight: 700,
+        background: "#0053FA", // Your brand blue
+        borderRadius: "20px",
+        color: "white",
+        fontSize: 54,
+        fontWeight: 800,
       }}
     >
       A
     </div>,
-    { ...size },
+    {
+      ...size,
+    },
   );
 }

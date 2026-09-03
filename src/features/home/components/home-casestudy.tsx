@@ -67,7 +67,7 @@ const defaultProjects: CaseStudyItem[] = [
     subtitle: "AI Textile Pattern Platform",
     description:
       "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. ",
-    tags: ["NEXT.JS", "MACHINE LEARNING", "GAN", "PYTHON","AI PLATFORM"],
+    tags: ["NEXT.JS", "MACHINE LEARNING", "GAN", "PYTHON", "AI PLATFORM"],
     metrics: [
       { value: "AI-Powered", label: "Generation" },
       { value: "3 Core", label: "Features" },
@@ -106,7 +106,7 @@ export function HomeCaseStudies({
   });
 
   return (
-    <section className="bg-background relative w-full pt-12 pb-12 sm:pt-16 ">
+    <section className="bg-background relative w-full sm:py-12">
       {/* 1. Header Section */}
       <div className="mx-auto w-full max-w-[1364px] px-4 pb-8 sm:px-6 sm:pb-12">
         <FadeIn>
@@ -208,7 +208,7 @@ function StackingCard({
         y: index === 0 ? 0 : y,
         zIndex: index + 10,
       }}
-      className="absolute top-0 h-[580px] "
+      className="absolute top-0 h-[580px]"
     >
       <CaseStudyCard project={project} />
     </motion.div>
@@ -217,7 +217,7 @@ function StackingCard({
 
 function CaseStudyCard({ project }: { project: CaseStudyItem }) {
   return (
-    <div className="group relative flex h-auto min-h-[500px] w-full flex-col overflow-hidden rounded-[24px]  bg-[#F4F4F5] p-5 border-b-7 border-[#c1c1c1a1] sm:rounded-[32px] sm:p-8 lg:h-[580px] lg:rounded-[36px] lg:p-10">
+    <div className="group relative flex h-auto min-h-[500px] w-full flex-col overflow-hidden rounded-[24px] border-b-7 border-[#c1c1c1a1] bg-[#F4F4F5] p-5 sm:rounded-[32px] sm:p-8 lg:h-[580px] lg:rounded-[36px] lg:p-10">
       {/* Top Header Row */}
       <div className="relative mb-4 flex shrink-0 items-center sm:mb-6">
         <span className="text-xs font-semibold text-slate-800 sm:text-xl">
@@ -244,7 +244,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
         {/* Left Column */}
-        <div className="flex flex-col  space-y-1 lg:col-span-5 lg:h-full lg:space-y-6">
+        <div className="flex flex-col space-y-1 lg:col-span-5 lg:h-full lg:space-y-6">
           <div className="border-l-[5px] border-white pl-4 sm:border-l-[5px] sm:pl-[24px] lg:pl-[14px]">
             <h4 className="text-base font-medium text-black sm:text-lg lg:text-xl">
               {project.subtitle}
@@ -255,7 +255,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
           </div>
 
           {/* Metrics White Card */}
-          <div className="grid grid-cols-3 divide-x divide-slate-200/80 rounded-xl border border-slate-100 bg-white px-2 py-3 text-center shadow-2xs sm:rounded-2xl sm:py-4 mt-4">
+          <div className="mt-4 grid grid-cols-3 divide-x divide-slate-200/80 rounded-xl border border-slate-100 bg-white px-2 py-3 text-center shadow-2xs sm:rounded-2xl sm:py-4">
             {project.metrics.map((metric, idx) => (
               <div key={idx} className="px-1">
                 <div className="text-xs font-bold text-slate-900 sm:text-sm lg:text-lg">
@@ -272,7 +272,7 @@ function CaseStudyCard({ project }: { project: CaseStudyItem }) {
           <div>
             <Link
               href={project.link}
-              className="inline-flex items-center gap-2 border-b-1 rounded-full bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
+              className="inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
             >
               Read More
               <ArrowRight className="size-3.5" />

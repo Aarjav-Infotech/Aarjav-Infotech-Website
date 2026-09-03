@@ -42,11 +42,28 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-// 3. Single RootLayout Export
+// 3. Organization Schema for Google Knowledge Graph & Brand Search
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: APP_NAME,
+  url: "https://aarjavinfotech.com",
+  logo: "https://aarjavinfotech.com/images/logo.png",
+};
+
+// 4. Single RootLayout Export
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${urbanist.variable} ${hubotSans.variable}`}>
       <head>
+        {/* Google Structured Data / Rich Snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+
         {/* Force scroll position to top BEFORE Next.js hydrates on mobile */}
         <script
           dangerouslySetInnerHTML={{

@@ -9,6 +9,9 @@ import { ContactSection } from "@/features/home/components/home-contact";
 import { HomeFaq } from "@/features/home/components/home-faq";
 import HowVaniSahayWorksSection from "./vaani-sahay-process";
 import VaniSahayAboutProductSection from "./vaani-sahay-products";
+import ComprehensiveAssistanceSection from "./vaani-sahay-features";
+import VaniSahayLanguageSupport from "./vaani-sahay-support";
+import EnterpriseTrustSection from "./vaani-sahay-security";
 
 const aiVoiceHeroProps = {
   align: "center" as const,
@@ -18,13 +21,13 @@ const aiVoiceHeroProps = {
     "rounded text-[14px] font-semibold tracking-wide inline-block border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-[#2b2bad] shadow-xl/20",
   title: (
     <span className="relative inline-block leading-[1.08] tracking-[-2px] md:tracking-[-3px]">
-     Your AI Companion for <br className="hidden md:inline" />
+      Your AI Companion for <br className="hidden md:inline" />
       Safer Digital Finance
       <InlineCapsule />
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold mx-auto text-center",
   description:
     "Empower users to identify fraud, navigate complex transactions, and escalate suspicious activities instantly with a highly secure, multilingual AI agent designed for everyday financial protection.",
   descriptionClassName:
@@ -35,14 +38,15 @@ const aiVoiceHeroProps = {
   decoration: <HeroFloatingIcons />,
 };
 
-
 export function AIVoiceContent() {
   return (
     <>
       <Hero {...aiVoiceHeroProps} />
-      <VaniSahayAboutProductSection/>
-      <HowVaniSahayWorksSection/>
-
+      <VaniSahayAboutProductSection />
+      <ComprehensiveAssistanceSection />
+      <VaniSahayLanguageSupport />
+      <HowVaniSahayWorksSection />
+      <EnterpriseTrustSection />
       <HomeFaq />
       <ContactSection />
     </>
