@@ -16,7 +16,9 @@ export default function Icon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0053FA", // Your brand blue
+        backgroundImage:
+          "linear-gradient(180deg, #002688 0%, #0053FA 60%, #3BE4FF 100%)",
+        backgroundSize: "200% 200%",
         borderRadius: "20px",
         color: "white",
         fontSize: 54,
