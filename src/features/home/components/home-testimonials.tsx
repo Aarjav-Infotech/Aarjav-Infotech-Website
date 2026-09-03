@@ -22,7 +22,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Sarah Jenkins",
     role: "VP of Product",
     company: "FinScale",
-    image: "/images/testimonial-image.svg",
+    image: "/images/testimonial-1.svg",
   },
   {
     id: "2",
@@ -31,7 +31,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Marcus Tan",
     role: "CTO",
     company: "VectorPay",
-    image: "/images/testimonial-image.svg",
+    image: "/images/testimonial-2.svg",
   },
   {
     id: "3",
@@ -40,7 +40,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Elena Rostova",
     role: "Head of Operations",
     company: "AeroData",
-    image: "/images/testimonial-image.svg",
+    image: "/images/testimonial-3.svg",
   },
 ];
 
@@ -109,9 +109,18 @@ export function HomeTestimonials({
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <defs>
-                          <linearGradient id="blueLin" x1="0" y1="0" x2="0" y2="1">
+                          <linearGradient
+                            id="blueLin"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
                             <stop offset="0%" stopColor="rgba(9, 30, 70, 1)" />
-                            <stop offset="100%" stopColor="rgba(7, 95, 243, 1)" />
+                            <stop
+                              offset="100%"
+                              stopColor="rgba(7, 95, 243, 1)"
+                            />
                           </linearGradient>
                         </defs>
                         <path
@@ -122,7 +131,7 @@ export function HomeTestimonials({
                     </div>
 
                     {/* Quote Text */}
-                    <p className="text-base sm:text-lg leading-relaxed font-medium text-[#000000]">
+                    <p className="text-base leading-relaxed font-medium text-[#000000] sm:text-lg">
                       "{current.quote}"
                     </p>
 
@@ -149,7 +158,7 @@ export function HomeTestimonials({
                   type="button"
                   onClick={handlePrev}
                   aria-label="Previous testimonial"
-                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15 cursor-pointer"
+                  className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15"
                 >
                   <ChevronLeft className="size-5" />
                 </button>
@@ -158,7 +167,7 @@ export function HomeTestimonials({
                   type="button"
                   onClick={handleNext}
                   aria-label="Next testimonial"
-                  className="flex size-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15 cursor-pointer"
+                  className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-[0_6px_16px_rgba(0,56,255,0.35)] transition-transform hover:scale-105 active:scale-95 sm:size-11 sm:w-15"
                 >
                   <ChevronRight className="size-5" />
                 </button>
@@ -182,7 +191,7 @@ export function HomeTestimonials({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="relative h-[280px] w-full overflow-hidden rounded-[24px] border-4 border-slate-100 shadow-xl sm:h-[400px] sm:rounded-[40px] sm:border-[14px] lg:h-[500px]"
+                className="relative h-[280px] w-full overflow-hidden sm:h-[400px] lg:h-[530px]"
               >
                 <Image
                   src={current.image}

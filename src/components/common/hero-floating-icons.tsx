@@ -21,14 +21,14 @@ export function InlineCapsule() {
       className="relative mx-3 my-1 inline-flex items-center align-middle"
     >
       {/* 3D Slot Pill Base Container */}
-      <span className="relative inline-flex h-[56px] w-[140px] items-center justify-center pill-slot rounded-full  md:h-[68px] md:w-[175px]">
+      <span className="pill-slot relative inline-flex h-[56px] w-[140px] items-center justify-center rounded-full md:h-[68px] md:w-[175px]">
         {/* Dark Rim Depth Overlay */}
-        <span className=" absolute inset-0 z-20 rounded-full " />
+        <span className="absolute inset-0 z-20 rounded-full" />
 
         {/* --- 1. TOP-LEFT ICON --- */}
-        <span className=" absolute inset-0 overflow-hidden rounded-full border-t-8 border-l-8 border-black/30">
+        <span className="absolute inset-0 overflow-hidden rounded-full border-t-8 border-l-8 border-black/30">
           <motion.div
-            className="absolute -top-[18px] left-[30px] z-10 w-[30px] md:w-[50px]"
+            className="absolute -top-[15px] left-[30px] z-10 w-[40px] sm:-top-[18px] md:w-[50px]"
             style={{ x: translateX, y: translateY }}
           >
             <Image
@@ -73,7 +73,6 @@ export function InlineCapsule() {
   );
 }
 
-
 export function HeroFloatingIcons() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -88,11 +87,11 @@ export function HeroFloatingIcons() {
   return (
     <div
       ref={containerRef}
-      className=" absolute inset-0 z-20 h-full w-full overflow-hidden"
+      className="absolute inset-0 z-20 h-full w-full overflow-hidden"
     >
       {/* Left Tube / Cylinder Asset */}
       <motion.div
-        className="absolute bottom-[25%] left-[10%] z-30 hidden w-[105px] transform-gpu  md:bottom-[28%] md:left-[16%] md:block md:w-[85px]"
+        className="absolute bottom-[25%] left-[10%] z-30 hidden w-[105px] transform-gpu md:bottom-[28%] md:left-[16%] md:block md:w-[85px]"
         style={{ y: tubeY }}
       >
         <Image
@@ -101,7 +100,6 @@ export function HeroFloatingIcons() {
           width={50}
           height={100}
           className="h-full w-full object-cover"
-         
         />
       </motion.div>
 

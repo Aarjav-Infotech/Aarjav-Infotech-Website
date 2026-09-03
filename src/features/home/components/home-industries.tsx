@@ -15,6 +15,7 @@ export interface IndustrySolution {
   features: string[];
   link: string;
 }
+
 const defaultIndustries: IndustrySolution[] = [
   {
     id: "banking",
@@ -191,7 +192,6 @@ export function HomeIndustries({
   const [activeTab, setActiveTab] = useState<string>(
     activeIndustries[0]?.id ?? "banking",
   );
-  const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
 
   const tabsRef = useRef<Record<string, HTMLButtonElement | null>>({});
 
@@ -202,7 +202,6 @@ export function HomeIndustries({
 
   const handleTabChange = (tabId: string) => {
     if (tabId !== activeTab) {
-      setIsImageLoading(true);
       setActiveTab(tabId);
     }
   };
@@ -210,7 +209,6 @@ export function HomeIndustries({
   const isMounted = useRef(false);
 
   useEffect(() => {
-    // Prevent scrolling into view on initial mount/refresh
     if (!isMounted.current) {
       isMounted.current = true;
       return;
@@ -227,15 +225,13 @@ export function HomeIndustries({
   }, [activeTab]);
 
   return (
-    <section className="relative w-full py-8 sm:py-4">
-      {/* Outer Container with Constant CSS Background Image */}
+    <section className="relative w-full py-8 sm:py-12">
       <div
-        className="relative mx-auto max-w-7xl overflow-hidden rounded-[24px] bg-[#f4f7fc] bg-cover bg-center bg-no-repeat p-4 sm:rounded-[36px] sm:p-8 lg:p-14"
+        className="relative mx-auto max-w-full overflow-hidden rounded-[24px] bg-[#f4f7fc] bg-cover bg-center bg-no-repeat p-4 sm:rounded-[36px] sm:p-8 lg:p-14"
         style={{
           backgroundImage: `url(${sectionBackgroundImage})`,
         }}
       >
-        {/* Content Container Above Background */}
         <div className="relative z-10 pb-10 sm:pb-0">
           {/* Header Section */}
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
@@ -257,7 +253,7 @@ export function HomeIndustries({
             )}
           </div>
 
-          {/* Tab Switcher Bar - Hidden Scrollbar & Auto Centered */}
+          {/* Tab Switcher Bar */}
           <div className="mx-auto mb-8 w-full max-w-full [scrollbar-width:none] overflow-x-auto rounded-[60px] border border-slate-100/80 bg-white p-2 shadow-[0_4px_20px_rgba(0,0,0,0.04)] [-ms-overflow-style:none] sm:mb-14 sm:p-2.5 [&::-webkit-scrollbar]:hidden">
             <div className="flex min-w-max items-center justify-between gap-1 px-1 sm:gap-2 sm:px-2">
               {activeIndustries.map((ind) => {
@@ -270,18 +266,18 @@ export function HomeIndustries({
                       tabsRef.current[ind.id] = el;
                     }}
                     onClick={() => handleTabChange(ind.id)}
-                    className={`lg:text-basic relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-sm font-semibold transition-all duration-100 sm:px-8 sm:py-3 ${
+                    className={`lg:text-basic relative flex-1 rounded-[50px] px-4 py-2.5 text-center text-sm font-semibold transition-colors duration-150 sm:px-8 sm:py-3 ${
                       isActive ? "font-bold text-white" : "text-slate-900"
                     }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="activeIndustryTab"
-                        className="absolute inset-0 rounded-[50px] bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] whitespace-nowrap shadow-[0_8px_16px_rgba(0,38,136,0.35)] border-b-3 border-black"
+                        className="absolute inset-0 rounded-[50px] border-b-3 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] whitespace-nowrap shadow-[0_8px_16px_rgba(0,38,136,0.35)]"
                         transition={{
                           type: "spring",
-                          stiffness: 400,
-                          damping: 30,
+                          stiffness: 550,
+                          damping: 35,
                         }}
                       />
                     )}
@@ -293,59 +289,34 @@ export function HomeIndustries({
           </div>
 
           {/* Card Content Container */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={currentIndustry.id}
-              initial={{ opacity: 0, x: 100, scale: 0.95 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -100, scale: 0.95 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{
-                duration: 0.5,
-                ease: [0.25, 1, 0.5, 1],
+                duration: 0.18,
+                ease: "easeOut",
               }}
               className="relative mx-auto max-w-full overflow-hidden rounded-[20px] sm:rounded-[40px]"
             >
               <div className="relative flex flex-col items-center lg:flex-row">
-                {/* Image Container with Integrated Skeleton Loader */}
-                <motion.div
-                  initial={{ opacity: 0, x: -40, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200/80 shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2"
-                >
-                  {isImageLoading && (
-                    <div className="absolute inset-0 z-20 overflow-hidden bg-slate-200">
-                      <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_infinite] bg-gradient-to-r from-transparent via-slate-100/60 to-transparent" />
-                    </div>
-                  )}
-
+                {/* Image Container */}
+                <div className="relative h-[220px] w-full overflow-hidden rounded-[20px] bg-slate-200/80 shadow-2xl sm:h-[340px] sm:rounded-[28px] lg:h-[540px] lg:w-1/2">
                   <Image
                     src={currentIndustry.image}
                     alt={currentIndustry.title}
                     fill
-                    className={`object-cover object-center transition-opacity duration-500 sm:object-left ${
-                      isImageLoading ? "opacity-0" : "opacity-100"
-                    }`}
-                    onLoad={() => setIsImageLoading(false)}
+                    quality={95}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 50vw"
+                    className="object-cover object-center sm:object-left"
                     priority
                   />
-                </motion.div>
+                </div>
 
                 {/* Right Side: Content Box */}
-                <motion.div
-                  initial={{ opacity: 0, x: 60, scale: 0.92 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.15,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-20 lg:h-[477px] lg:w-[58%] lg:p-11"
-                >
+                <div className="relative z-10 -mt-6 flex min-h-auto w-full flex-col justify-between rounded-[24px] bg-white/95 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.08)] sm:-mt-10 sm:rounded-[32px] sm:bg-white/90 sm:p-8 lg:mt-0 lg:-ml-20 lg:h-[477px] lg:w-[58%] lg:p-11">
                   <div>
                     <h3 className="text-lg font-bold tracking-tight text-slate-900 sm:text-2xl">
                       {currentIndustry.title}
@@ -357,21 +328,15 @@ export function HomeIndustries({
 
                     <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-y-4">
                       {currentIndustry.features.map((feature, idx) => (
-                        <motion.div
+                        <div
                           key={idx}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.3,
-                            delay: 0.2 + idx * 0.05,
-                          }}
                           className="flex items-center gap-2 sm:gap-2.5"
                         >
                           <span className="size-1.5 shrink-0 rounded-full bg-slate-900 sm:size-2" />
                           <span className="text-basic sm:text-basic font-semibold text-slate-900">
                             {feature}
                           </span>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -379,13 +344,13 @@ export function HomeIndustries({
                   <div className="mt-6 flex justify-start sm:mt-8">
                     <Link
                       href={currentIndustry.link}
-                      className="group inline-flex items-center gap-2 border-b-1 rounded-full bg-[#f8f9fa] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
+                      className="group inline-flex items-center gap-2 rounded-full border-b-1 bg-[#f8f9fa] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm"
                     >
                       <span>Read More</span>
                       <MoveRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 sm:size-4" />
                     </Link>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
