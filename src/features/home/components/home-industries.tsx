@@ -308,7 +308,7 @@ export function HomeIndustries({
                     src={currentIndustry.image}
                     alt={currentIndustry.title}
                     fill
-                    quality={95}
+                    unoptimized
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 50vw"
                     className="object-cover object-center sm:object-left"
                     priority
