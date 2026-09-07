@@ -91,7 +91,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Real Estate & PropTech",
     description:
       "Accelerate property valuation, lease management, and customer acquisition with predictive analytics and smart automation.",
-    image: "/images/Real-estate.svg",
+    image: "/images/Real-Estate.svg",
     features: [
       "Automated Lease Processing",
       "Predictive Valuation Models",
@@ -125,7 +125,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Enterprise Systems",
     description:
       "Scalable digital infrastructure built to unify complex enterprise software, reduce operational overhead, and drive growth.",
-    image: "/images/enterprise.svg",
+    image: "/images/Enterprise.svg",
     features: [
       "Enterprise Service Bus",
       "Custom Microservices",
