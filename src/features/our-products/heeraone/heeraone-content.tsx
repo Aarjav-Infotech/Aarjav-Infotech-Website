@@ -9,6 +9,10 @@ import {
 import { ContactSection } from "@/features/home/components/home-contact";
 import { HomeFaq } from "@/features/home/components/home-faq";
 import HeeraOneAboutSection from "@/features/our-products/heeraone/heeraone-about";
+import BusinessIntelligenceSection from "@/features/our-products/heeraone/heeraone-Business";
+import MovementProcessSection from "@/features/our-products/heeraone/heeraone-movement-section";
+import ConnectedEcosystemSection from "@/features/our-products/heeraone/heeraone-ecosystem-section";
+import AIBusinessAssistantSection from "@/features/our-products/heeraone/heeraone-ai-assistant-section";
 
 const heeraOneHeroProps = {
   align: "center" as const,
@@ -40,6 +44,10 @@ export function HeeraOneContent() {
     <div className="relative w-full bg-white">
       <Hero {...heeraOneHeroProps} />
       <HeeraOneAboutSection />
+      <BusinessIntelligenceSection />
+      <MovementProcessSection />
+      <ConnectedEcosystemSection />
+      <AIBusinessAssistantSection />
       <HomeFaq />
       <ContactSection />
     </div>

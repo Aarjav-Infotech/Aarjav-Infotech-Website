@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 
 interface HeeraOneAboutSectionProps {
+  eyebrow?: string;
   bgImageSrc?: string;
   laptopImageSrc?: string;
   stockCardImageSrc?: string;
@@ -13,37 +14,42 @@ interface HeeraOneAboutSectionProps {
 }
 
 export function HeeraOneAboutSection({
+  eyebrow = "About Product",
   bgImageSrc = "/images/product-background.svg",
   laptopImageSrc = "/images/leptop-image.svg",
   stockCardImageSrc,
   updateCardImageSrc,
 }: HeeraOneAboutSectionProps) {
   return (
-    <section className="relative w-full bg-white px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8">
-      <div className="mx-auto max-w-[1240px]">
+    <section className="relative w-full bg-white px-4 py-8 sm:py-12 md:py-12">
+      <div className="mx-auto max-w-full">
         {/* Main Card with Curved Borders */}
-        <div className="relative overflow-hidden rounded-[32px] bg-[#05070B] px-6 pt-10 pb-12 sm:px-10 sm:pt-14 sm:pb-16 md:px-14 lg:rounded-[40px] lg:pt-16 lg:pb-16">
-          {/* Background Ambient Dark Office Graphic */}
+        <div className="relative rounded-[32px] px-6 pt-10 pb-12 sm:px-10 sm:pt-14 sm:pb-16 md:px-14 lg:rounded-[40px] lg:pt-16 lg:pb-30">
+          {/* Background Ambient Graphic */}
           <div className="pointer-events-none absolute inset-0 z-0">
             {bgImageSrc && (
               <Image
                 src={bgImageSrc}
                 alt="Diamond Business Environment"
                 fill
+                unoptimized
                 priority
-                className="object-cover object-center opacity-30 mix-blend-screen"
+                className="object-fill object-center opacity-100"
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#05070B] via-[#05070B]/80 to-transparent" />
+            {/* Subtle Gradient Fade that leaves the graphic visible */}
+            <div className="absolute inset-0" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="relative z-10 mx-auto max-w-full">
             {/* Header / Pill Badge */}
             <div className="mb-10 flex flex-col items-center text-center sm:mb-14">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/40 bg-white px-4 py-1 text-xs font-semibold text-[#0053FA] shadow-sm">
-                <span className="size-1.5 rounded-full bg-[#0053FA]" />
-                About Product
-              </div>
+              {eyebrow && (
+                <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-[14px]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+                  {eyebrow}
+                </div>
+              )}
 
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-[42px] lg:leading-tight">
                 Diamond business management platform
@@ -54,7 +60,7 @@ export function HeeraOneAboutSection({
             <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-8">
               {/* Left Column Text */}
               <div className="space-y-6 pb-4 text-left lg:col-span-5 lg:pb-10">
-                <p className="text-sm leading-relaxed font-normal text-[#D6DCE7] sm:text-[15px] sm:leading-[1.7]">
+                <p className="text-sm font-semibold text-[#D6DCE7] sm:text-[24px]">
                   It is an AI-powered Platform to manage purchasing, assortment,
                   manufacturing, inventory, sales, finance, and daily operations
                   from one powerful platform built specifically for the diamond
@@ -62,7 +68,7 @@ export function HeeraOneAboutSection({
                   and make faster decisions.
                 </p>
 
-                <p className="text-xs leading-relaxed font-normal text-[#8B98AD] sm:text-[13.5px] sm:leading-[1.7]">
+                <p className="text-sm font-semibold text-[#D6DCE7] sm:text-[24px]">
                   End-to-end management for the modern diamond trade. From
                   purchase to manufacturing, assortment to sales, powered by
                   intelligent analytics and seamless workflows.
@@ -80,7 +86,7 @@ export function HeeraOneAboutSection({
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="absolute -top-10 right-2 z-20 sm:-top-12 sm:right-4 md:-top-14 md:right-6"
+                    className="absolute -top-10 right-2 z-20 sm:-top-12 sm:right-4 md:-top-5 md:right-6"
                   >
                     {stockCardImageSrc ? (
                       <div className="relative h-14 w-36 drop-shadow-2xl">
@@ -88,6 +94,7 @@ export function HeeraOneAboutSection({
                           src={stockCardImageSrc}
                           alt="Total Stock Card"
                           fill
+                          unoptimized
                           className="object-contain"
                         />
                       </div>
@@ -110,6 +117,7 @@ export function HeeraOneAboutSection({
                       alt="Diamond Management Platform on Laptop"
                       width={700}
                       height={440}
+                      unoptimized
                       priority
                       className="h-auto w-full object-contain drop-shadow-[0_24px_50px_rgba(0,0,0,0.9)]"
                     />
@@ -132,6 +140,7 @@ export function HeeraOneAboutSection({
                           src={updateCardImageSrc}
                           alt="Inventory Updated Card"
                           fill
+                          unoptimized
                           className="object-contain"
                         />
                       </div>
