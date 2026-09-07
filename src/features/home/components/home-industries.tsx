@@ -40,7 +40,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Insurance & Risk Solutions",
     description:
       "Automate claims processing, underwriting workflows, and policy management with intelligent automation to boost speed and accuracy.",
-    image: "/images/insurance.svg",
+    image: "/images/Insurance.svg",
     features: [
       "Automated Claims Processing",
       "AI Underwriting Models",
@@ -74,7 +74,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Healthcare & Life Sciences",
     description:
       "Streamline clinical data workflows, patient management systems, and medical AI models while maintaining strict HIPAA compliance.",
-    image: "/images/healthcare.svg",
+    image: "/images/Healthcare.svg",
     features: [
       "HIPAA-Compliant AI Workflows",
       "Patient Data Processing",
@@ -91,7 +91,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Real Estate & PropTech",
     description:
       "Accelerate property valuation, lease management, and customer acquisition with predictive analytics and smart automation.",
-    image: "/images/real-estate.svg",
+    image: "/images/Real-estate.svg",
     features: [
       "Automated Lease Processing",
       "Predictive Valuation Models",
@@ -108,7 +108,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Industrial & Manufacturing",
     description:
       "Optimize supply chains, automate quality inspection, and enable predictive maintenance using domain-specific machine learning.",
-    image: "/images/industrial.svg",
+    image: "/images/Industrial.svg",
     features: [
       "Predictive Equipment Maintenance",
       "Automated Quality Control",

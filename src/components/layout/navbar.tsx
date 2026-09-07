@@ -85,10 +85,10 @@ const DIGITAL_PRODUCTS_ITEMS = [
   },
   {
     icon: Gem,
-    title: "Diamond Stock Management",
+    title: "Heera One",
     description:
       "Intelligent ERP platform for diamond manufacturing and global sales",
-    href: "/our-products/diamond-stock",
+    href: "/our-products/heeraone",
   },
 ];
 
