@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { asset } from "@/lib/cdn";
 
 export interface TestimonialItem {
   id: string;
@@ -22,7 +23,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Sarah Jenkins",
     role: "VP of Product",
     company: "FinScale",
-    image: "/images/testimonial-1.svg",
+    image: asset("/images/testimonial-1.svg"),
   },
   {
     id: "2",
@@ -31,7 +32,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Marcus Tan",
     role: "CTO",
     company: "VectorPay",
-    image: "/images/testimonial-2.svg",
+    image: asset("/images/testimonial-2.svg"),
   },
   {
     id: "3",
@@ -40,7 +41,7 @@ const defaultTestimonials: TestimonialItem[] = [
     author: "Elena Rostova",
     role: "Head of Operations",
     company: "AeroData",
-    image: "/images/testimonial-3.svg",
+    image: asset("/images/testimonial-3.svg"),
   },
 ];
 

@@ -3,33 +3,35 @@
 import React from "react";
 import Image from "next/image";
 
+import { asset } from "@/lib/cdn";
+
 export default function WhyEnterprisesChooseUsVoice() {
   const eyebrow = "Why It Matters";
 
   const features = [
     {
-      iconSrc: "/images/ai-matter-1.svg",
+      iconSrc: asset("/images/ai-matter-1.svg"),
       title: "Years of Expertise",
       description:
         "Never miss a customer call with intelligent AI agents that provide instant assistance anytime.",
       offset: "lg:translate-y-8",
     },
     {
-      iconSrc: "/images/ai-matter-4.svg",
+      iconSrc: asset("/images/ai-matter-4.svg"),
       title: "Faster Response Times",
       description:
         "Reduce customer wait times by answering calls immediately and routing requests intelligently.",
       offset: "lg:-translate-y-2",
     },
     {
-      iconSrc: "/images/ai-matter-3.svg",
+      iconSrc: asset("/images/ai-matter-3.svg"),
       title: "Reduced Operational Costs",
       description:
         "Improve customer experiences, automate repetitive conversations, and scale your support operations with enterprise-ready conversational AI.",
       offset: "lg:translate-y-8",
     },
     {
-      iconSrc: "/images/ai-matter-2.svg",
+      iconSrc: asset("/images/ai-matter-2.svg"),
       title: "Personalized Customer Experience",
       description:
         "Deliver contextual, natural conversations using customer history, business data, and AI-driven insights.",
@@ -42,7 +44,9 @@ export default function WhyEnterprisesChooseUsVoice() {
       <div className="mx-auto max-w-full">
         <div
           className="relative overflow-hidden rounded-[3rem] border border-neutral-100 bg-cover bg-center bg-no-repeat p-8 shadow-sm sm:p-12 md:p-16"
-          style={{ backgroundImage: "url('/images/ai-matters-bg.svg')" }}
+          style={{
+            backgroundImage: `url(${asset("/images/ai-matters-bg.svg")})`,
+          }}
         >
           {/* Header Block */}
           <div className="mb-20 text-center">

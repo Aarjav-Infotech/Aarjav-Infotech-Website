@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 export interface ArticleItem {
   id: string | number;
@@ -18,21 +19,21 @@ const defaultArticles: ArticleItem[] = [
     id: 1,
     date: "June 7, 2026",
     title: "LLM Agnostic Solutions: The 2026 Enterprise AI Guide",
-    image: "/images/article-1.svg",
+    image: asset("/images/article-1.svg"),
     link: "#",
   },
   {
     id: 2,
     date: "May 16, 2026",
     title: "Snowflake Cortex Alternative: 2026 Evaluation Framework",
-    image: "/images/article-2.svg",
+    image: asset("/images/article-2.svg"),
     link: "#",
   },
   {
     id: 3,
     date: "April 7, 2026",
     title: "Multi-agent vs single-agent AI systems: 2026 decision guide",
-    image: "/images/article-3.svg",
+    image: asset("/images/article-3.svg"),
     link: "#",
   },
 ];

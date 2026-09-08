@@ -12,6 +12,7 @@ import VaniSahayAboutProductSection from "./vaani-sahay-products";
 import ComprehensiveAssistanceSection from "./vaani-sahay-features";
 import VaniSahayLanguageSupport from "./vaani-sahay-support";
 import EnterpriseTrustSection from "./vaani-sahay-security";
+import { asset } from "@/lib/cdn";
 
 const aiVoiceHeroProps = {
   align: "center" as const,
@@ -32,7 +33,7 @@ const aiVoiceHeroProps = {
     "Empower users to identify fraud, navigate complex transactions, and escalate suspicious activities instantly with a highly secure, multilingual AI agent designed for everyday financial protection.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

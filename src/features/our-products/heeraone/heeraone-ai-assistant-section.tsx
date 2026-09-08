@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Plus, ArrowUp } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface AIBusinessAssistantSectionProps {
   eyebrow?: string;
@@ -10,22 +11,22 @@ interface AIBusinessAssistantSectionProps {
 
 const featureCards = [
   {
-    image: "/images/ai-assistant-1.svg",
+    image: asset("/images/ai-assistant-1.svg"),
     title: "Natural Language",
     description: "Just ask questions like you would to a colleague.",
   },
   {
-    image: "/images/ai-assistant-2.svg",
+    image: asset("/images/ai-assistant-2.svg"),
     title: "Instant Insights",
     description: "Get complex data analyzed in seconds.",
   },
   {
-    image: "/images/ai-assistant-3.svg",
+    image: asset("/images/ai-assistant-3.svg"),
     title: "Predictive Analysis",
     description: "Forecast trends based on historical data.",
   },
   {
-    image: "/images/ai-assistant-4.svg",
+    image: asset("/images/ai-assistant-4.svg"),
     title: "Proactive Alerts",
     description: "AI notifies you of anomalies or opportunities.",
   },
@@ -75,7 +76,7 @@ export default function AIBusinessAssistantSection({
               <div className="flex items-start gap-3">
                 <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0038b8] p-1.5 text-white shadow-sm">
                   <Image
-                    src="/images/ai-avatar.svg"
+                    src={asset("/images/ai-avatar.svg")}
                     alt="AI Avatar"
                     width={20}
                     height={20}

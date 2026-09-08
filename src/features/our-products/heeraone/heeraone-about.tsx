@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface HeeraOneAboutSectionProps {
   eyebrow?: string;
@@ -15,8 +16,8 @@ interface HeeraOneAboutSectionProps {
 
 export function HeeraOneAboutSection({
   eyebrow = "About Product",
-  bgImageSrc = "/images/product-background.svg",
-  laptopImageSrc = "/images/leptop-image.svg",
+  bgImageSrc = asset("/images/product-background.svg"),
+  laptopImageSrc = asset("/images/leptop-image.svg"),
   stockCardImageSrc,
   updateCardImageSrc,
 }: HeeraOneAboutSectionProps) {

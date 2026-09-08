@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface CaseStudyItem {
   id: string;
@@ -30,7 +31,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Full-Stack Construction Website",
     description:
       "A complete full-stack construction company website built with Vite, React, Tailwind CSS, and Node.js. Designed to showcase projects, services, and company credentials with a modern, responsive layout optimised for mobile, tablet, and desktop.",
-    imageSrc: "/images/case-studys-1.svg",
+    imageSrc: asset("/images/case-studys-1.svg"),
     imageAlt: "Sahaj Construction Website Preview",
     industry: "Construction & Infrastructure",
     technologies: [
@@ -65,7 +66,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Luxury Jewelry Landing Page",
     description:
       "A high-converting landing page for a fine jewelry brand focused on showcasing 10K, 14K & 18K gold with lab-grown diamonds. Delivered with fast load performance, optimised SEO, and a conversion-driven UI/UX across all devices.",
-    imageSrc: "/images/case-studys-2.svg",
+    imageSrc: asset("/images/case-studys-2.svg"),
     imageAlt: "Glamora Jewels Landing Page Preview",
     industry: "Luxury Retail & E-Commerce",
     technologies: ["React", "Node.js", "PostgreSQL", "Content SEO"],
@@ -93,7 +94,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "AI-Powered Textile Design Platform",
     description:
       "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
-    imageSrc: "/images/case-studys-3.svg",
+    imageSrc: asset("/images/case-studys-3.svg"),
     imageAlt: "Delfa Pattern Generator Preview",
     industry: "AI & Textile Technology",
     technologies: [

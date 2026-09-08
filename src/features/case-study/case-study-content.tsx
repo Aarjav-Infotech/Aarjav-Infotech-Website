@@ -8,6 +8,7 @@ import {
 import { HomeFaq } from "@/features/home/components/home-faq";
 import { ContactSection } from "@/features/home/components/home-contact";
 import FeaturedWorksSection from "./featured-works-section";
+import { asset } from "@/lib/cdn";
 
 const caseStudyHeroProps = {
   align: "center" as const,
@@ -29,7 +30,7 @@ const caseStudyHeroProps = {
     "Discover how our AI-powered solutions have helped organizations streamline operations, accelerate decision-making, and solve real business challenges across industries.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

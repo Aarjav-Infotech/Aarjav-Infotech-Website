@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { Mail, Headphones, Paperclip, ArrowUpRight } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 export interface ContactInfoItem {
   icon: "mail" | "phone";
@@ -63,7 +64,7 @@ const defaultContactInfo: ContactInfoItem[] = [
 export function ContactSection({
   eyebrow = "Contact Us",
   heading = "Let's Build Intelligent Things",
-  bgImage = "/images/contact-bg.svg",
+  bgImage = asset("/images/contact-bg.svg"),
   contactInfo = defaultContactInfo,
   visionCard,
   metricsCard,

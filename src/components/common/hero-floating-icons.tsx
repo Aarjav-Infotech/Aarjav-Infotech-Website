@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 export function InlineCapsule() {
   const capsuleRef = useRef<HTMLSpanElement>(null);
@@ -32,7 +33,7 @@ export function InlineCapsule() {
             style={{ x: translateX, y: translateY }}
           >
             <Image
-              src="/icons/icon_3.svg"
+              src={asset("/icons/icon_3.svg")}
               alt="Top Icon"
               width={50}
               height={50}
@@ -47,7 +48,7 @@ export function InlineCapsule() {
           style={{ x: translateX, y: translateY }}
         >
           <Image
-            src="/icons/icon_2.svg"
+            src={asset("/icons/icon_2.svg")}
             alt="Center Right Icon"
             width={60}
             height={60}
@@ -61,7 +62,7 @@ export function InlineCapsule() {
           style={{ x: translateX, y: translateY }}
         >
           <Image
-            src="/icons/icon_1.svg"
+            src={asset("/icons/icon_1.svg")}
             alt="Bottom Icon"
             width={60}
             height={60}
@@ -95,7 +96,7 @@ export function HeroFloatingIcons() {
         style={{ y: tubeY }}
       >
         <Image
-          src="/icons/cylinder.svg"
+          src={asset("/icons/cylinder.svg")}
           alt="Cylinder Icon"
           width={50}
           height={100}
@@ -113,7 +114,7 @@ export function HeroFloatingIcons() {
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
         >
           <Image
-            src="/icons/Visual.svg"
+            src={asset("/icons/Visual.svg")}
             alt="Decoration Pinwheel"
             width={170}
             height={170}

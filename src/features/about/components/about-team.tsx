@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Linkedin, Github } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 // Custom X (Twitter) Icon Component
 function XIcon({ className = "size-4" }: { className?: string }) {
@@ -36,7 +37,7 @@ interface AboutTeamSectionProps {
 const FEATURED_LEAD: TeamMember = {
   name: "Arjav Virani",
   role: "CEO & Founder",
-  image: "/images/teams-image.svg",
+  image: asset("/images/teams-image.svg"),
   socials: {
     x: "https://x.com",
     linkedin: "https://linkedin.com",
@@ -49,7 +50,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Noah Reed",
     role: "ML/Agent Lead",
     bio: "Builds domain agents",
-    image: "/images/teams-image.svg",
+    image: asset("/images/teams-image.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -59,7 +60,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Jordan Brooks",
     role: "Data Engineer",
     bio: "Secure access policies",
-    image: "/images/teams-image.svg",
+    image: asset("/images/teams-image.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -69,7 +70,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Lucas Hayes",
     role: "Solutions Architect",
     bio: "Connects AI to your stack",
-    image: "/images/teams-image.svg",
+    image: asset("/images/teams-image.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -79,7 +80,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Erin Park",
     role: "MLOps Engineer",
     bio: "Productionizes with CI/CD",
-    image: "/images/teams-image.svg",
+    image: asset("/images/teams-image.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -96,7 +97,7 @@ export function AboutTeamSection({
       <div className="relative w-full overflow-hidden px-4 py-12 sm:px-8 sm:py-20 md:px-12 lg:px-16 xl:px-24">
         {/* Background Image Layer set to object-cover */}
         <Image
-          src="/images/team-backrground.svg"
+          src={asset("/images/team-backrground.svg")}
           alt="Team section background"
           fill
           priority

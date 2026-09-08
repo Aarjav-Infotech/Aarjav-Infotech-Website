@@ -28,6 +28,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { asset } from "@/lib/cdn";
 import { APP_NAME, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -245,7 +246,7 @@ export function Navbar() {
             onClick={closeMenu}
           >
             <Image
-              src="/svg/logo.svg"
+              src={asset("/svg/logo.svg")}
               alt={APP_NAME}
               width={180}
               height={48}
@@ -415,7 +416,7 @@ export function Navbar() {
                       >
                         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
                           <Image
-                            src="/images/ai-megamenu.svg"
+                            src={asset("/images/ai-megamenu.svg")}
                             alt="Overview"
                             fill
                             className="object-cover transition-transform duration-500 group-hover/preview:scale-105"

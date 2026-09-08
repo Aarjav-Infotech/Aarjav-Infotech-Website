@@ -13,6 +13,7 @@ import BusinessIntelligenceSection from "@/features/our-products/heeraone/heerao
 import MovementProcessSection from "@/features/our-products/heeraone/heeraone-movement-section";
 import ConnectedEcosystemSection from "@/features/our-products/heeraone/heeraone-ecosystem-section";
 import AIBusinessAssistantSection from "@/features/our-products/heeraone/heeraone-ai-assistant-section";
+import { asset } from "@/lib/cdn";
 
 const heeraOneHeroProps = {
   align: "center" as const,
@@ -33,7 +34,7 @@ const heeraOneHeroProps = {
     "Experience precision control over every facet of your operations. From purchase to retail, our multi-tenant architecture provides unparalleled visibility and control in a single, secure environment.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

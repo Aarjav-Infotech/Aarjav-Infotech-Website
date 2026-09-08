@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const governmentFaqs = [
   {
@@ -47,7 +48,7 @@ const governmentConfig: IndustryConfig = {
     title: "One Connected Platform for Every Public Service",
     description:
       "Bring AI agents, government applications, enterprise data, documents, and operational workflows together in an intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Government Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -117,28 +118,28 @@ const governmentConfig: IndustryConfig = {
       "From citizen services to internal administration, apply AI across the workflows that matter most.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Citizen Service Automation Icon",
         title: "Citizen Service Automation",
         desc: "AI voice and chat agents provide instant assistance for citizen questions, service requests, status updates, and routine inquiries.",
         capabilities: ["Citizen Support", "AI Voice & Chat Agents"],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Document & Data Processing Icon",
         title: "Document & Data Processing",
         desc: "Extract, classify, validate, and organize information from license applications, reports, and other government documents.",
         capabilities: ["OCR", "Data Extraction", "Classification"],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Workflow Automation Icon",
         title: "Workflow Automation",
         desc: "Automate approvals, routing, notifications, case management, and repetitive administrative processes across agency teams.",
         capabilities: ["Approvals", "Routing", "Case Management"],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Enterprise Integration Icon",
         title: "Enterprise Integration",
         desc: "Connect AI agents with existing government applications, CRMs, databases, ERPs, and legacy systems.",

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Urbanist, Hubot_Sans } from "next/font/google";
 
 import { SiteLayout } from "@/components/layout/site-layout";
+import { asset } from "@/lib/cdn";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/theme";
@@ -48,7 +49,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: APP_NAME,
   url: "https://aarjavinfotech.com",
-  logo: "https://aarjavinfotech.com/images/logo.png",
+  logo: asset("/images/logo.png"),
 };
 
 // 4. Single RootLayout Export
@@ -56,6 +57,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${urbanist.variable} ${hubotSans.variable}`}>
       <head>
+        <link rel="preconnect" href="https://cdn.aarjavinfotech.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
+
         {/* Google Structured Data / Rich Snippets */}
         <script
           type="application/ld+json"

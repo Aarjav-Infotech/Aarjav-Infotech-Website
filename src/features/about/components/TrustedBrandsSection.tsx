@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 interface Logo {
   name: string;
@@ -8,12 +9,12 @@ interface Logo {
 }
 
 const LOGOS: Logo[] = [
-  { name: "Brand 1", src: "/images/partner-1.svg" },
-  { name: "Brand 2", src: "/images/partner-2.svg" },
-  { name: "Brand 3", src: "/images/partner-3.svg" },
-  { name: "Brand 4", src: "/images/partner-4.svg" },
-  { name: "Brand 5", src: "/images/partner-5.svg" },
-  { name: "Brand 6", src: "/images/partner-6.svg" },
+  { name: "Brand 1", src: asset("/images/partner-1.svg") },
+  { name: "Brand 2", src: asset("/images/partner-2.svg") },
+  { name: "Brand 3", src: asset("/images/partner-3.svg") },
+  { name: "Brand 4", src: asset("/images/partner-4.svg") },
+  { name: "Brand 5", src: asset("/images/partner-5.svg") },
+  { name: "Brand 6", src: asset("/images/partner-6.svg") },
 ];
 
 export function TrustedBrandsSection() {

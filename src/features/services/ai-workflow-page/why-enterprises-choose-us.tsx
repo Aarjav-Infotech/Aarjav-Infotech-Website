@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 interface BenefitItem {
   id: string;
@@ -81,7 +82,7 @@ export function AboutWhyItMatters() {
             <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-4 shadow-xl sm:p-6">
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[22px]">
                 <Image
-                  src="/images/why-it-matters.svg"
+                  src={asset("/images/why-it-matters.svg")}
                   alt="Why Enterprises Choose Us"
                   fill
                   className="object-cover object-center"

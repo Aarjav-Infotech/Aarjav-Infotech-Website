@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 export default function AiVoiceImplementationRoadmap() {
   const eyebrow = "The process we follow";
@@ -85,7 +86,7 @@ export default function AiVoiceImplementationRoadmap() {
               <div className="pointer-events-none absolute top-1/2 -right-7 z-20 hidden -translate-y-1/2 items-center justify-center md:flex lg:-right-10">
                 <div className="relative h-6 w-8 lg:w-10">
                   <Image
-                    src="/images/the-arrow.svg"
+                    src={asset("/images/the-arrow.svg")}
                     alt="Next Step"
                     fill
                     className="object-contain"
@@ -114,7 +115,7 @@ export default function AiVoiceImplementationRoadmap() {
               <div className="pointer-events-none absolute top-1/2 -right-7 z-20 hidden -translate-y-1/2 items-center justify-center md:flex lg:-right-10">
                 <div className="relative h-6 w-8 lg:w-10">
                   <Image
-                    src="/images/the-arrow.svg"
+                    src={asset("/images/the-arrow.svg")}
                     alt="Next Step"
                     fill
                     className="object-contain"
@@ -143,7 +144,7 @@ export default function AiVoiceImplementationRoadmap() {
               <div className="pointer-events-none absolute right-[25%] -bottom-10 z-20 hidden items-center justify-center md:flex lg:-bottom-13">
                 <div className="relative h-8 w-6 rotate-90 lg:h-12 lg:w-12">
                   <Image
-                    src="/images/the-arrow.svg"
+                    src={asset("/images/the-arrow.svg")}
                     alt="Next Step"
                     fill
                     className="object-contain"
@@ -192,7 +193,7 @@ export default function AiVoiceImplementationRoadmap() {
               <div className="pointer-events-none absolute top-1/2 -left-7 z-20 hidden -translate-y-1/2 items-center justify-center md:flex lg:-left-10">
                 <div className="relative h-6 w-8 rotate-180 lg:w-10">
                   <Image
-                    src="/images/the-arrow.svg"
+                    src={asset("/images/the-arrow.svg")}
                     alt="Next Step"
                     fill
                     className="object-contain"

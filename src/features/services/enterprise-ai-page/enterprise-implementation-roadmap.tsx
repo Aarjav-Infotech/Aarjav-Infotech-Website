@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { asset } from "@/lib/cdn";
 
 export default function AIProcessSection() {
   const eyebrow = "The process we follow";
@@ -35,7 +36,7 @@ export default function AIProcessSection() {
             {/* Badge 1: Moon */}
             <div className="absolute top-[0%] left-[3%] transition-transform ">
               <img
-                src="/images/badge-1.svg"
+                src={asset("/images/badge-1.svg")}
                 alt="Assess & Plan"
                 className="h-auto w-[110px] lg:w-[150px]"
               />
@@ -44,7 +45,7 @@ export default function AIProcessSection() {
             {/* Badge 2: Sparkle */}
             <div className="absolute top-[40%] left-[14%] transition-transform ">
               <img
-                src="/images/badge-2.svg"
+                src={asset("/images/badge-2.svg")}
                 alt="Design Architecture"
                 className="h-auto w-[110px] lg:w-[150px]"
               />
@@ -53,7 +54,7 @@ export default function AIProcessSection() {
             {/* Badge 3: Main Blue Stack */}
             <div className="absolute top-[0%] left-[44%] z-20 -translate-x-1/2 transition-transform ">
               <img
-                src="/images/middel-badge.svg"
+                src={asset("/images/middel-badge.svg")}
                 alt="AI Ecosystem Core"
                 className="h-auto w-[130px] drop-shadow-xl lg:w-[155px]"
               />
@@ -62,7 +63,7 @@ export default function AIProcessSection() {
             {/* Badge 4: Upward Arrows */}
             <div className="absolute top-[58%] left-[44.5%] z-10 -translate-x-1/2 transition-transform ">
               <img
-                src="/images/badge-3.svg"
+                src={asset("/images/badge-3.svg")}
                 alt="Connect & Integrate"
                 className="h-auto w-[110px] lg:w-[150px]"
               />
@@ -71,7 +72,7 @@ export default function AIProcessSection() {
             {/* Badge 5: Headset */}
             <div className="absolute top-[40%] right-[25.5%] transition-transform ">
               <img
-                src="/images/badge-4.svg"
+                src={asset("/images/badge-4.svg")}
                 alt="Automate & Orchestrate"
                 className="h-auto w-[110px] lg:w-[150px]"
               />
@@ -80,7 +81,7 @@ export default function AIProcessSection() {
             {/* Badge 6: Star */}
             <div className="absolute top-[0%] right-[15%] transition-transform ">
               <img
-                src="/images/badge-5.svg"
+                src={asset("/images/badge-5.svg")}
                 alt="Monitor & Scale"
                 className="h-auto w-[110px] lg:w-[150px]"
               />
@@ -227,27 +228,27 @@ export default function AIProcessSection() {
             {
               title: "Assess & Plan",
               desc: "Evaluate your existing applications, business processes, data architecture, and integration requirements to identify opportunities for AI-driven transformation.",
-              img: "/images/badge-1.svg",
+              img: asset("/images/badge-1.svg"),
             },
             {
               title: "Design the Architecture",
               desc: "Create a scalable enterprise architecture that defines how AI agents, ERP systems, applications, APIs, and data pipelines communicate securely and efficiently.",
-              img: "/images/badge-2.svg",
+              img: asset("/images/badge-2.svg"),
             },
             {
               title: "Connect & Integrate",
               desc: "Integrate enterprise applications, cloud services, databases, AI models, APIs, and third-party platforms to establish a unified operational environment.",
-              img: "/images/badge-3.svg",
+              img: asset("/images/badge-3.svg"),
             },
             {
               title: "Automate & Orchestrate",
               desc: "Build intelligent workflows that coordinate AI agents, business systems, and operational processes to automate tasks, approvals, notifications, and decision-making.",
-              img: "/images/badge-4.svg",
+              img: asset("/images/badge-4.svg"),
             },
             {
               title: "Monitor & Scale",
               desc: "Continuously monitor integrations, data flows, AI performance, and system health while optimizing the ecosystem to support future growth and evolving business needs.",
-              img: "/images/badge-5.svg",
+              img: asset("/images/badge-5.svg"),
             },
           ].map((item, idx) => (
             <div

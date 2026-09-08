@@ -8,6 +8,7 @@ import {
   X,
   FileText,
 } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface ContactFormSectionProps {
   eyebrow?: string;
@@ -28,9 +29,9 @@ export function ContactFormSection({
   const locations = [
     {
       country: "India",
-      iconSrc: "/images/office.svg",
-      phoneIconSrc: "/images/call.svg",
-      locationIconSrc: "/images/location.svg",
+      iconSrc: asset("/images/office.svg"),
+      phoneIconSrc: asset("/images/call.svg"),
+      locationIconSrc: asset("/images/location.svg"),
       phone: "+91 99649 19000 (Call & what's app)",
       phoneHref: "tel:+919964919000",
       address:
@@ -38,9 +39,9 @@ export function ContactFormSection({
     },
     {
       country: "USA",
-      iconSrc: "/images/office.svg",
-      phoneIconSrc: "/images/whatsapp.svg",
-      locationIconSrc: "/images/location.svg",
+      iconSrc: asset("/images/office.svg"),
+      phoneIconSrc: asset("/images/whatsapp.svg"),
+      locationIconSrc: asset("/images/location.svg"),
       phone: "+1 (551) 208-0596",
       phoneHref: "tel:+15512080596",
       address: "204 Lawson Pl, Paramus, NJ 07652, USA",

@@ -50,3 +50,8 @@ coverage/
 
 /docs
 AGENTS.md
+
+/public/images/
+/public/icons/
+/public/Animation/
+/public/svg/

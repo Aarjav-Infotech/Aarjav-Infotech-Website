@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveRight } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 export interface IndustrySolution {
   id: string;
@@ -23,7 +24,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Finance and Banking Solutions",
     description:
       "Empower your financial institution with secure, innovative, and scalable digital solutions. From AI-driven fraud detection to blockchain-enabled transactions, we deliver technology that enhances efficiency and builds trust. Transform customer experiences and streamline operations with our cutting-edge banking platforms.",
-    image: "/images/tabbing-1.svg",
+    image: asset("/images/tabbing-1.svg"),
     features: [
       "Digital Banking Platforms",
       "Blockchain Security Solutions",
@@ -40,7 +41,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Insurance & Risk Solutions",
     description:
       "Automate claims processing, underwriting workflows, and policy management with intelligent automation to boost speed and accuracy.",
-    image: "/images/Insurance.svg",
+    image: asset("/images/Insurance.svg"),
     features: [
       "Automated Claims Processing",
       "AI Underwriting Models",
@@ -57,7 +58,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Government & Public Sector",
     description:
       "Deploy sovereign, air-gapped ready AI architectures and secure citizen services designed for high security and compliance demands.",
-    image: "/images/Government.svg",
+    image: asset("/images/Government.svg"),
     features: [
       "Sovereign Data Environments",
       "Air-Gapped AI Deployments",
@@ -74,7 +75,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Healthcare & Life Sciences",
     description:
       "Streamline clinical data workflows, patient management systems, and medical AI models while maintaining strict HIPAA compliance.",
-    image: "/images/Healthcare.svg",
+    image: asset("/images/Healthcare.svg"),
     features: [
       "HIPAA-Compliant AI Workflows",
       "Patient Data Processing",
@@ -91,7 +92,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Real Estate & PropTech",
     description:
       "Accelerate property valuation, lease management, and customer acquisition with predictive analytics and smart automation.",
-    image: "/images/Real-Estate.svg",
+    image: asset("/images/Real-Estate.svg"),
     features: [
       "Automated Lease Processing",
       "Predictive Valuation Models",
@@ -108,7 +109,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Industrial & Manufacturing",
     description:
       "Optimize supply chains, automate quality inspection, and enable predictive maintenance using domain-specific machine learning.",
-    image: "/images/Industrial.svg",
+    image: asset("/images/Industrial.svg"),
     features: [
       "Predictive Equipment Maintenance",
       "Automated Quality Control",
@@ -125,7 +126,7 @@ const defaultIndustries: IndustrySolution[] = [
     title: "Enterprise Systems",
     description:
       "Scalable digital infrastructure built to unify complex enterprise software, reduce operational overhead, and drive growth.",
-    image: "/images/Enterprise.svg",
+    image: asset("/images/Enterprise.svg"),
     features: [
       "Enterprise Service Bus",
       "Custom Microservices",
@@ -184,7 +185,7 @@ export function HomeIndustries({
   title = "Built for your industry",
   subtitle = "Explore our suite of AI-powered products designed to automate operations, improve accuracy, and drive growth across industries.",
   industries = defaultIndustries,
-  sectionBackgroundImage = "/images/common-blue-background.svg",
+  sectionBackgroundImage = asset("/images/common-blue-background.svg"),
 }: HomeIndustriesProps) {
   const activeIndustries =
     industries && industries.length > 0 ? industries : defaultIndustries;

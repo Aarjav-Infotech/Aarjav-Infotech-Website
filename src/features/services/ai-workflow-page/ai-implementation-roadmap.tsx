@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/cdn";
 
 export interface RoadmapStep {
   stepNumber: string;
@@ -26,28 +27,28 @@ const defaultSteps: RoadmapStep[] = [
     title: "Discovery & Analysis",
     description:
       "We map your current workflows, identify bottlenecks, and define clear metrics for success.",
-    iconSrc: "/images/process-step-1.svg",
+    iconSrc: asset("/images/process-step-1.svg"),
   },
   {
     stepNumber: "STEP 02",
     title: "Architecture Design",
     description:
       "We document every step, identify bottlenecks, and determine what data and systems need to connect. No surprises down the road.",
-    iconSrc: "/images/process-step-2.svg",
+    iconSrc: asset("/images/process-step-2.svg"),
   },
   {
     stepNumber: "STEP 03",
     title: "AI Integration + Rigorous Testing",
     description:
       "We build incrementally, test thoroughly, and review security at every stage. You see progress weekly and can give feedback early.",
-    iconSrc: "/images/process-step-3.svg",
+    iconSrc: asset("/images/process-step-3.svg"),
   },
   {
     stepNumber: "STEP 04",
     title: "Full Deployment",
     description:
       "Go live confidently. We monitor performance, catch issues, and optimise based on data.",
-    iconSrc: "/images/process-step-4.svg",
+    iconSrc: asset("/images/process-step-4.svg"),
   },
 ];
 
@@ -56,7 +57,7 @@ export function AiImplementationRoadmap({
   title = "Our Implementation Roadmap",
   description = "Clear milestones, constant communication, and zero hand-waving. Here’s how we get from idea to impact.",
   steps = defaultSteps,
-  bgImage = "/images/process-bg.svg",
+  bgImage = asset("/images/process-bg.svg"),
   className,
 }: AiImplementationRoadmapProps) {
   return (

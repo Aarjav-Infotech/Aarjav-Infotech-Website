@@ -9,6 +9,7 @@ import {
   Box,
   MoveRight,
 } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface ConnectedEcosystemSectionProps {
   eyebrow?: string;
@@ -24,19 +25,19 @@ interface ConnectedEcosystemSectionProps {
 
 const keyFeatures = [
   {
-    image: "/images/ecosystem-1.svg",
+    image: asset("/images/ecosystem-1.svg"),
     title: "Centralized Data",
     description:
       "Bring all your business data into one secure source of truth.",
   },
   {
-    image: "/images/ecosystem-2.svg",
+    image: asset("/images/ecosystem-2.svg"),
     title: "Connected Operations",
     description:
       "Link purchase, stock, manufacturing, inventory, and sales in one continuous flow.",
   },
   {
-    image: "/images/ecosystem-3.svg",
+    image: asset("/images/ecosystem-3.svg"),
     title: "AI-Powered Intelligence",
     description:
       "Use connected data and AI insights to make smarter decisions, faster.",
@@ -75,7 +76,7 @@ export default function ConnectedEcosystemSection({
   bannerSubtitle = "Simplify complexity. Connect everything. Grow without limits.",
   bannerButtonText = "Explore Platform",
   bannerButtonLink = "/platform",
-  serverImage = "/images/ecosystem.svg",
+  serverImage = asset("/images/ecosystem.svg"),
 }: ConnectedEcosystemSectionProps) {
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">

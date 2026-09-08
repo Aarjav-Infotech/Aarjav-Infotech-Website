@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const enterpriseFaqs = [
   {
@@ -51,7 +52,7 @@ const enterpriseConfig: IndustryConfig = {
     title: "One Business Objective. Every System Connected.",
     description:
       "Bring enterprise applications, AI agents, data pipelines, documents, business processes, and decision-making workflows together through one intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Enterprise Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -121,7 +122,7 @@ const enterpriseConfig: IndustryConfig = {
       "Deploy AI where it can create the greatest operational impact—from customer experience and finance to internal operations and decision-making.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Automate Work Across Departments Icon",
         title: "Automate Work Across Departments",
         desc: "Connect business processes and automate repetitive workflows across operations, finance, HR, sales, customer service, and administration.",
@@ -133,7 +134,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Give Every Team an Intelligent Assistant Icon",
         title: "Give Every Team an Intelligent Assistant",
         desc: "Deploy specialized AI agents that can answer questions, perform tasks, retrieve information, and support employees across business functions.",
@@ -145,7 +146,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Turn Business Data Into Action Icon",
         title: "Turn Business Data Into Action",
         desc: "Process documents, connect data sources, extract insights, and make enterprise information accessible to both people and AI systems.",
@@ -157,7 +158,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Build Around Your Enterprise Icon",
         title: "Build Around Your Enterprise",
         desc: "Extend existing ERP and business platforms with AI-powered modules, custom workflows, intelligent dashboards, and purpose-built enterprise applications.",

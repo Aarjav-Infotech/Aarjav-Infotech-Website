@@ -3,13 +3,14 @@
 import React from "react";
 import Image from "next/image";
 
-// Navigate relative to the component file
-import iconDocumentCapture from "../../../../public/images/document-core-1.png";
-import iconWorkflow from "../../../../public/images/document-core-2.png";
-import iconSmartClassification from "../../../../public/images/document-core-3.png";
-import iconDataExtraction from "../../../../public/images/document-core-4.png";
-import iconSecurity from "../../../../public/images/document-core-5.png";
-import iconAnalytics from "../../../../public/images/document-core-6.png";
+import { asset } from "@/lib/cdn";
+
+const iconDocumentCapture = asset("/images/document-core-1.png");
+const iconWorkflow = asset("/images/document-core-2.png");
+const iconSmartClassification = asset("/images/document-core-3.png");
+const iconDataExtraction = asset("/images/document-core-4.png");
+const iconSecurity = asset("/images/document-core-5.png");
+const iconAnalytics = asset("/images/document-core-6.png");
 
 export default function AiCapabilities() {
   const eyebrow = "Core Capabilities";

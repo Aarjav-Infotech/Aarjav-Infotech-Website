@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 interface MovementProcessSectionProps {
   eyebrow?: string;
@@ -78,7 +79,7 @@ export default function MovementProcessSection({
             {/* Arrow between 01 and 02 */}
             <div className="absolute top-1/2 left-[31.5%] z-10 hidden -translate-y-1/2 items-center justify-center md:flex">
               <Image
-                src="/images/the-arrow.svg"
+                src={asset("/images/the-arrow.svg")}
                 alt="arrow"
                 width={30}
                 height={20}
@@ -99,7 +100,7 @@ export default function MovementProcessSection({
             {/* Arrow between 02 and 03 */}
             <div className="absolute top-1/2 left-[65.5%] z-10 hidden -translate-y-1/2 items-center justify-center md:flex">
               <Image
-                src="/images/the-arrow.svg"
+                src={asset("/images/the-arrow.svg")}
                 alt="arrow"
                 width={30}
                 height={20}
@@ -121,7 +122,7 @@ export default function MovementProcessSection({
           {/* Vertical Turn Arrow: Step 03 Down to Step 04 (Rotated 90deg Downwards) */}
           <div className="absolute top-[85px] right-[13.5%] z-10 hidden items-center justify-center md:flex">
             <Image
-              src="/images/the-arrow.svg"
+              src={asset("/images/the-arrow.svg")}
               alt="arrow down"
               width={30}
               height={20}
@@ -144,7 +145,7 @@ export default function MovementProcessSection({
             {/* Horizontal Left Arrow between 05 and 06 */}
             <div className="absolute top-1/2 left-[31.5%] z-10 hidden -translate-y-1/2 items-center justify-center md:flex">
               <Image
-                src="/images/the-arrow.svg"
+                src={asset("/images/the-arrow.svg")}
                 alt="arrow left"
                 width={30}
                 height={20}
@@ -165,7 +166,7 @@ export default function MovementProcessSection({
             {/* Horizontal Left Arrow between 04 and 05 */}
             <div className="absolute top-1/2 left-[65.5%] z-10 hidden -translate-y-1/2 items-center justify-center md:flex">
               <Image
-                src="/images/the-arrow.svg"
+                src={asset("/images/the-arrow.svg")}
                 alt="arrow left"
                 width={30}
                 height={20}

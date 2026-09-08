@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/cdn";
 
 export interface ComplianceItem {
   iconSrc: string;
@@ -16,12 +17,12 @@ interface HomeSecurityComplianceProps {
 }
 
 const defaultCertifications: ComplianceItem[] = [
-  { iconSrc: "/icons/gdpr.svg" },
-  { iconSrc: "/icons/soc2.svg" },
-  { iconSrc: "/icons/iso27001.svg" },
-  { iconSrc: "/icons/hippa.svg" },
-  { iconSrc: "/icons/pci.svg" },
-  { iconSrc: "/icons/iso9001.svg" },
+  { iconSrc: asset("/icons/gdpr.svg") },
+  { iconSrc: asset("/icons/soc2.svg") },
+  { iconSrc: asset("/icons/iso27001.svg") },
+  { iconSrc: asset("/icons/hippa.svg") },
+  { iconSrc: asset("/icons/pci.svg") },
+  { iconSrc: asset("/icons/iso9001.svg") },
 ];
 
 export function HomeSecurityCompliance({
@@ -29,7 +30,7 @@ export function HomeSecurityCompliance({
   title = "Security. Compliance. Built In.",
   subtitle = "Our processes, infrastructure, and controls are backed by internationally recognized certifications so you can build with confidence.",
   items = defaultCertifications,
-  bgImage = "/images/home-security-bg.svg",
+  bgImage = asset("/images/home-security-bg.svg"),
 }: HomeSecurityComplianceProps) {
   return (
     <section className="w-full px-2 py-6 sm:px-6 sm:py-8 md:px-8 lg:py-10">

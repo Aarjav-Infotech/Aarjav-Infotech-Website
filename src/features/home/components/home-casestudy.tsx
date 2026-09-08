@@ -14,6 +14,7 @@ import {
 import { Heading } from "@/components/common/heading";
 import { FadeIn } from "@/components/common/motion";
 import { Button } from "@/components/ui/button";
+import { asset } from "@/lib/cdn";
 
 export interface CaseStudyItem {
   id: string;
@@ -41,7 +42,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "100%", label: "Responsive" },
       { value: "Full", label: "Stack" },
     ],
-    image: "/images/case-studys-1.svg",
+    image: asset("/images/case-studys-1.svg"),
     link: "/case-studies/sahaj-construction",
   },
   {
@@ -57,7 +58,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "+40%", label: "Conversion" },
       { value: "Optimised", label: "SEO" },
     ],
-    image: "/images/case-studys-2.svg",
+    image: asset("/images/case-studys-2.svg"),
     link: "/case-studies/glamora-jewels",
   },
   {
@@ -73,7 +74,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "3 Core", label: "Features" },
       { value: "Infinite", label: "Patterns" },
     ],
-    image: "/images/case-studys-3.svg",
+    image: asset("/images/case-studys-3.svg"),
     link: "/case-studies/delfa-pattern-generator",
   },
 ];

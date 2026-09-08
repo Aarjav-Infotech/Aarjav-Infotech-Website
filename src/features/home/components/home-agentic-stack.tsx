@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { asset } from "@/lib/cdn";
+
 export interface LayerData {
   id: string;
   layerNumber: string;
@@ -27,7 +29,7 @@ const LAYERS: LayerData[] = [
       "Competitors' agents, no lock-in required",
     ],
     tags: ["AWS Bedrock", "Azure AI", "GCP Vertex", "LangChain", "On-prem"],
-    iconSrc: "/images/layer-1.svg",
+    iconSrc: asset("/images/layer-1.svg"),
   },
   {
     id: "layer-02",
@@ -41,7 +43,7 @@ const LAYERS: LayerData[] = [
       "Zero-trust credential delegation",
     ],
     tags: ["OAuth2", "Vault", "IAM", "Compliance"],
-    iconSrc: "/images/layer-2.svg",
+    iconSrc: asset("/images/layer-2.svg"),
   },
   {
     id: "layer-03",
@@ -55,7 +57,7 @@ const LAYERS: LayerData[] = [
       "Sub-second execution speeds",
     ],
     tags: ["LlamaIndex", "AutoGPT", "FastAPI"],
-    iconSrc: "/images/layer-3.svg",
+    iconSrc: asset("/images/layer-3.svg"),
   },
   {
     id: "layer-04",
@@ -69,7 +71,7 @@ const LAYERS: LayerData[] = [
       "Real-time ETL data pipelines",
     ],
     tags: ["Pinecone", "Unstructured", "Milvus"],
-    iconSrc: "/images/layer-4.svg",
+    iconSrc: asset("/images/layer-4.svg"),
   },
   {
     id: "layer-05",
@@ -83,7 +85,7 @@ const LAYERS: LayerData[] = [
       "Privacy-first memory encryption",
     ],
     tags: ["Neo4j", "Redis", "MemGPT"],
-    iconSrc: "/images/layer-5.svg",
+    iconSrc: asset("/images/layer-5.svg"),
   },
   {
     id: "layer-06",
@@ -97,7 +99,7 @@ const LAYERS: LayerData[] = [
       "Full rollback & undo history",
     ],
     tags: ["Zapier", "REST APIs", "Playwright"],
-    iconSrc: "/images/layer-6.svg",
+    iconSrc: asset("/images/layer-6.svg"),
   },
   {
     id: "layer-07",
@@ -111,7 +113,7 @@ const LAYERS: LayerData[] = [
       "Custom telemetry webhooks",
     ],
     tags: ["Datadog", "OpenTelemetry", "PostHog"],
-    iconSrc: "/images/layer-7.svg",
+    iconSrc: asset("/images/layer-7.svg"),
   },
 ];
 
@@ -189,7 +191,12 @@ export function AgenticStackSection() {
     >
       <div className="relative mx-auto flex w-full max-w-full flex-col justify-center lg:sticky lg:top-8 lg:min-h-[calc(100vh-4rem)]">
         {/* Outer Container */}
-        <div className="relative overflow-hidden rounded-[24px] bg-[url('/images/layersection-bg.svg')] bg-cover bg-center bg-no-repeat p-5 sm:rounded-[32px] sm:p-8 lg:p-12">
+        <div
+          className="relative overflow-hidden rounded-[24px] bg-cover bg-center bg-no-repeat p-5 sm:rounded-[32px] sm:p-8 lg:p-12"
+          style={{
+            backgroundImage: `url(${asset("/images/layersection-bg.svg")})`,
+          }}
+        >
           {/* Header */}
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
             <div className="text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">

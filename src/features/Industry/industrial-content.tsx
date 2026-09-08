@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const industrialFaqs = [
   {
@@ -51,7 +52,7 @@ const industrialConfig: IndustryConfig = {
     title: "One Industrial Objective. Every Operation Connected.",
     description:
       "Bring production data, machines, enterprise applications, AI agents, documents, and operational workflows together through one intelligent industrial ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Industrial Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -121,7 +122,7 @@ const industrialConfig: IndustryConfig = {
       "Apply AI across key industrial touchpoints—from predictive maintenance and quality inspection to supply chain orchestration.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Predictive Maintenance & Health Icon",
         title: "Predictive Maintenance & Monitoring",
         desc: "Analyze machine telemetry, vibration data, and temperature logs to detect anomalies and predict equipment failure before downtime happens.",
@@ -133,7 +134,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Intelligent Supply Chain & Inventory Icon",
         title: "Intelligent Supply Chain & Inventory",
         desc: "Automate purchase orders, reorder point triggers, supplier communications, and material delivery tracking across plants.",
@@ -145,7 +146,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Automated Quality Inspection & Safety Icon",
         title: "Automated Quality Inspection & Safety",
         desc: "Extract, classify, and summarize defect logs, compliance certifications, and environmental safety audits instantly.",
@@ -157,7 +158,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Connected Plant Orchestration Icon",
         title: "Connected Plant & Shift Orchestration",
         desc: "Connect field teams, technicians, and operations managers with AI assistants for shift handovers, SOP search, and fast troubleshooting.",

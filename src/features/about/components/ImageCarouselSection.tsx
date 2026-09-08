@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface GalleryImage {
   id: number;
@@ -13,17 +14,17 @@ interface GalleryImage {
 const GALLERY_IMAGES: GalleryImage[] = [
   {
     id: 1,
-    src: "/images/gallary-1.svg",
+    src: asset("/images/gallary-1.svg"),
     alt: "Server room equipment",
   },
   {
     id: 2,
-    src: "/images/gallary-2.svg",
+    src: asset("/images/gallary-2.svg"),
     alt: "Team members collaborating in modern office",
   },
   {
     id: 3,
-    src: "/images/gallary-3.svg",
+    src: asset("/images/gallary-3.svg"),
     alt: "Person working in bright office workspace",
   },
 ];

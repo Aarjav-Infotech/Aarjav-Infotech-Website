@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 export default function AiVoiceCoreCapabilitiesSection() {
   const eyebrow = "Core Capabilities";
@@ -35,7 +36,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300 ">
             <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
               <Image
-                src="/images/voice-agent-1.png"
+                src={asset("/images/voice-agent-1.png")}
                 alt="Natural Voice Conversations"
                 fill
                 className="object-contain p-4"
@@ -57,7 +58,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 p-8 shadow-xl transition-all duration-300 ">
             <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
               <Image
-                src="/images/voice-agent-2.png"
+                src={asset("/images/voice-agent-2.png")}
                 alt="Intelligent Call Automation"
                 fill
                 className="object-contain p-4"
@@ -79,7 +80,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
           <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 shadow-xl p-8 transition-all duration-300   lg:row-span-2">
             <div className="relative mb-6 min-h-[300px] w-full flex-1 overflow-hidden rounded-2xl border border-neutral-100 bg-white">
               <Image
-                src="/images/voice-agent-5.png"
+                src={asset("/images/voice-agent-5.png")}
                 alt="Live Agent Handoff"
                 fill
                 className="object-contain p-4"
@@ -112,7 +113,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
               </div>
               <div className="relative h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                 <Image
-                  src="/images/voice-agent-4.png"
+                  src={asset("/images/voice-agent-4.png")}
                   alt="CRM & Business Integration"
                   fill
                   className="object-contain p-4"
@@ -138,7 +139,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
               </div>
               <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
                 <Image
-                  src="/images/voice-agent-6.png"
+                  src={asset("/images/voice-agent-6.png")}
                   alt="Analytics & Call Insights"
                   fill
                   className="object-contain p-4"
@@ -162,7 +163,7 @@ export default function AiVoiceCoreCapabilitiesSection() {
               </div>
               <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 ">
                 <Image
-                  src="/images/voice-agent-3.png"
+                  src={asset("/images/voice-agent-3.png")}
                   alt="Secure Enterprise Deployment"
                   fill
                   className="object-contain p-4"

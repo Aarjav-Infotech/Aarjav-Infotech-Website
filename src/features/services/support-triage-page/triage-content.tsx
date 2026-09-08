@@ -11,6 +11,7 @@ import { AiStatisticsSection } from "@/features/services/ai-workflow-page/ai-sta
 import NumberedRoadmapSection from "./numbered-roadmap-section";
 import IntelligentTicketManagement from "./intelligent-ticket-management";
 import WhySupportAutomation from "./why-support-automation";
+import { asset } from "@/lib/cdn";
 
 const triageHeroProps = {
   align: "center" as const,
@@ -31,7 +32,7 @@ const triageHeroProps = {
     "Categorize, prioritize, and resolve incoming customer tickets instantly with intelligent AI triage models. Reduce response times and free your support team for complex inquiries.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

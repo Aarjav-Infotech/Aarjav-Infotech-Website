@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const healthcareFaqs = [
   {
@@ -47,7 +48,7 @@ const healthcareConfig: IndustryConfig = {
     title: "One Healthcare Objective. Every Workflow Connected.",
     description:
       "Bring patient information, clinical systems, AI agents, documents, operational workflows, and enterprise applications together through one intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Healthcare Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -117,7 +118,7 @@ const healthcareConfig: IndustryConfig = {
       "Apply AI where it can make the biggest operational difference—from patient engagement and clinical documentation to revenue cycle and care coordination.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Make Every Patient Interaction Smarter Icon",
         title: "Make Every Patient Interaction Smarter",
         desc: "AI voice and chat agents can support appointment scheduling, patient questions, reminders, follow-ups, and routine service requests around the clock.",
@@ -129,7 +130,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Turn Healthcare Information Into Action Icon",
         title: "Turn Healthcare Information Into Action",
         desc: "Process clinical documents and unstructured information to extract, summarize, classify, and organize data for healthcare teams.",
@@ -141,7 +142,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Simplify the Healthcare Revenue Cycle Icon",
         title: "Simplify the Healthcare Revenue Cycle",
         desc: "Automate and streamline processes around coding support, claims, billing workflows, prior authorization, and denial management.",
@@ -153,7 +154,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Connect Teams Around Better Care Icon",
         title: "Connect Teams Around Better Care",
         desc: "Coordinate referrals, patient transitions, follow-ups, internal workflows, and operational tasks through intelligent AI-powered orchestration.",

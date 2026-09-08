@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 interface AssistanceCard {
   title: string;
@@ -21,9 +22,9 @@ const assistanceCards: AssistanceCard[] = [
     title: "Fraud & Scam Assistance",
     description:
       "Real-time detection, alerts, and guidance to protect you from fraud and scams.",
-    iconSrc: "/images/assistances-1p.svg",
+    iconSrc: asset("/images/assistances-1p.svg"),
     iconAlt: "Fraud and Scam Shield Icon",
-    imageSrc: "/images/feacture-1.svg",
+    imageSrc: asset("/images/feacture-1.svg"),
     imageAlt: "Fraud and Scam Shield Visualization",
     colSpan: "lg:col-span-7",
     mobileWrapperClass: "right-0 bottom-3 h-[58%] w-[48%] max-w-[170px]",
@@ -35,9 +36,9 @@ const assistanceCards: AssistanceCard[] = [
     title: "Transaction Support",
     description:
       "Get help with your transactions, failed payments, refunds, and more.",
-    iconSrc: "/images/assistances-2.svg",
+    iconSrc: asset("/images/assistances-2.svg"),
     iconAlt: "Transaction Support Icon",
-    imageSrc: "/images/feacture-2.svg",
+    imageSrc: asset("/images/feacture-2.svg"),
     imageAlt: "Digital Payment and Card Status",
     colSpan: "lg:col-span-5",
     mobileWrapperClass: "right-0 bottom-0 h-[62%] w-[52%] max-w-[190px]",
@@ -49,9 +50,9 @@ const assistanceCards: AssistanceCard[] = [
     title: "Financial Awareness",
     description:
       "Learn, plan, and make smarter financial decisions with AI insights.",
-    iconSrc: "/images/assistances-3.svg",
+    iconSrc: asset("/images/assistances-3.svg"),
     iconAlt: "Financial Awareness Icon",
-    imageSrc: "/images/feacture-3.svg",
+    imageSrc: asset("/images/feacture-3.svg"),
     imageAlt: "Financial Growth and Literacy Chart",
     colSpan: "lg:col-span-5",
     mobileWrapperClass: "right-0 bottom-0 h-[56%] w-[50%] max-w-[180px]",
@@ -63,9 +64,9 @@ const assistanceCards: AssistanceCard[] = [
     title: "Guided Assistance & Escalation",
     description:
       "Step-by-step assistance and easy escalation to human experts when needed.",
-    iconSrc: "/images/assistances-4.svg",
+    iconSrc: asset("/images/assistances-4.svg"),
     iconAlt: "Guided Assistance & Escalation Icon",
-    imageSrc: "/images/feacture-4.svg",
+    imageSrc: asset("/images/feacture-4.svg"),
     imageAlt: "Interactive Support Escalation Flow",
     colSpan: "lg:col-span-7",
     mobileWrapperClass: "right-0 bottom-2 h-[54%] w-[50%] max-w-[190px]",
@@ -77,9 +78,9 @@ const assistanceCards: AssistanceCard[] = [
     title: "Multilingual AI",
     description:
       "Communicate in your preferred language. Vani Sahay speaks multiple languages fluently.",
-    iconSrc: "/images/assistances-5.svg",
+    iconSrc: asset("/images/assistances-5.svg"),
     iconAlt: "Multilingual AI Icon",
-    imageSrc: "/images/feacture-5.svg",
+    imageSrc: asset("/images/feacture-5.svg"),
     imageAlt: "Multilingual AI Supported Languages Globe",
     colSpan: "lg:col-span-12",
     mobileWrapperClass:

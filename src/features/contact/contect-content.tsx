@@ -7,6 +7,7 @@ import {
 } from "@/components/common/hero-floating-icons";
 import { ContactFormSection } from "./contact-form-section";
 import { HomeFaq } from "@/features/home/components/home-faq";
+import { asset } from "@/lib/cdn";
 
 export function ContactFeature() {
   const contactHeroProps = {
@@ -28,7 +29,7 @@ export function ContactFeature() {
       "Have a question or looking to transform your enterprise operations with AI? Connect with our solution engineering team.",
     descriptionClassName:
       "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-    bgImage: "/images/hero-background.png",
+    bgImage: asset("/images/hero-background.png"),
     className:
       "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
     decoration: <HeroFloatingIcons />,

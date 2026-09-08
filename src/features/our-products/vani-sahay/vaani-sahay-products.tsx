@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 interface VaniSahayAboutProductProps {
   bgImageSrc?: string;
@@ -11,10 +12,10 @@ interface VaniSahayAboutProductProps {
 }
 
 export default function VaniSahayAboutProductSection({
-  bgImageSrc = "/images/vani-about-bg.svg",
-  containerImageSrc = "/images/vani-chat-container.svg",
-  phishingCardSrc = "/images/phishing-risk-card.svg",
-  autoTranslateCardSrc = "/images/auto-translate-card.svg",
+  bgImageSrc = asset("/images/vani-about-bg.svg"),
+  containerImageSrc = asset("/images/vani-chat-container.svg"),
+  phishingCardSrc = asset("/images/phishing-risk-card.svg"),
+  autoTranslateCardSrc = asset("/images/auto-translate-card.svg"),
 }: VaniSahayAboutProductProps) {
   const eyebrow = "About Product";
 

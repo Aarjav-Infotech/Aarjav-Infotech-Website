@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -74,7 +75,7 @@ export function Footer() {
                   className="relative block aspect-[4/1] h-9 w-[270px]"
                 >
                   <Image
-                    src="/images/logo-white.svg"
+                    src={asset("/images/logo-white.svg")}
                     alt="Aarjav Infotech Logo"
                     width={260}
                     height={70}

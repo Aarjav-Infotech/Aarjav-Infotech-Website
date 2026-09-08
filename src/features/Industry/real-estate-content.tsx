@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const realEstateFaqs = [
   {
@@ -53,7 +54,7 @@ const realEstateConfig: IndustryConfig = {
     title: "One Property Objective. Every Workflow Connected.",
     description:
       "Bring property data, customer interactions, AI agents, documents, CRM systems, and operational workflows together through one intelligent real-estate ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Real Estate Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -123,7 +124,7 @@ const realEstateConfig: IndustryConfig = {
       "Apply AI across the workflows that matter most—from property discovery and lead conversion to documentation and property operations.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Help Customers Find the Right Property Icon",
         title: "Help Customers Find the Right Property",
         desc: "AI agents can understand buyer and tenant preferences and help surface relevant properties based on location, budget, requirements, amenities, and availability.",
@@ -135,7 +136,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Turn More Inquiries Into Opportunities Icon",
         title: "Turn More Inquiries Into Opportunities",
         desc: "Automatically capture, qualify, route, and follow up with property leads while keeping sales teams focused on high-value conversations.",
@@ -147,7 +148,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Make Property Documentation Smarter Icon",
         title: "Make Property Documentation Smarter",
         desc: "Extract, classify, validate, summarize, and organize information from agreements, applications, verification documents, invoices, and transaction records.",
@@ -159,7 +160,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Automate the Work Behind Every Property Icon",
         title: "Automate the Work Behind Every Property",
         desc: "Connect property management workflows, tenant requests, maintenance operations, communications, and internal processes through intelligent automation.",

@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/cdn";
 
 interface LanguagePill {
   label: string;
@@ -122,7 +123,7 @@ export function VaniSahayLanguageSupport() {
             {/* Mic App Icon */}
             <div className="relative flex size-14 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] shadow-[0_8px_20px_rgba(0,38,136,0.35)]">
               <Image
-                src="/images/mic.svg"
+                src={asset("/images/mic.svg")}
                 alt="Vani Sahay Voice AI"
                 width={28}
                 height={28}

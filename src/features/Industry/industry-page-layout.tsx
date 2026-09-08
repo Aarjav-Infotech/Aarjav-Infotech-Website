@@ -9,6 +9,7 @@ import {
 } from "@/components/common/hero-floating-icons";
 import { HomeFaq } from "@/features/home/components/home-faq";
 import { ContactSection } from "@/features/home/components/home-contact";
+import { asset } from "@/lib/cdn";
 
 export interface FaqItem {
   question: string;
@@ -82,7 +83,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
       title: "One Intelligent Layer Across Your Banking Operations",
       description:
         "Connect customers, employees, data, applications, and workflows through a unified AI ecosystem designed to make banking operations faster, smarter, and more efficient.",
-      imageSrc: "/images/common-industries.svg",
+      imageSrc: asset("/images/common-industries.svg"),
       imageAlt: "Banking Agentic OS Control Plane Diagram",
     },
     strategySection: {
@@ -150,7 +151,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
         "From customer interactions to back-office operations, connect AI and automation across critical banking processes to deliver faster, safer, and more personalized experiences.",
       cards: [
         {
-          imageSrc: "/images/solution-1.svg",
+          imageSrc: asset("/images/solution-1.svg"),
           imageAlt: "AI Customer Support Icon",
           title: "AI-powered support for every customer interaction.",
           desc: "Deploy AI voice and chat agents that can handle customer queries, account assistance, service requests, and routine banking interactions 24/7.",
@@ -162,7 +163,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
           ],
         },
         {
-          imageSrc: "/images/solution-2.svg",
+          imageSrc: asset("/images/solution-2.svg"),
           imageAlt: "Workflow Automation Icon",
           title:
             "Turn repetitive banking processes into intelligent workflows.",
@@ -175,7 +176,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
           ],
         },
         {
-          imageSrc: "/images/solution-3.svg",
+          imageSrc: asset("/images/solution-3.svg"),
           imageAlt: "Security & Risk Icon",
           title: "Make financial operations more secure and proactive.",
           desc: "Use AI to identify unusual activity, support risk assessment, monitor transactions, and streamline compliance processes.",
@@ -187,7 +188,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
           ],
         },
         {
-          imageSrc: "/images/solution-4.svg",
+          imageSrc: asset("/images/solution-4.svg"),
           imageAlt: "Analytics & Intelligence Icon",
           title: "Turn banking data into actionable intelligence.",
           desc: "Connect enterprise data and AI models to help teams understand performance, identify patterns, and make faster, data-driven decisions.",
@@ -219,7 +220,7 @@ export function IndustryPageLayout({ config }: { config?: IndustryConfig }) {
         titleClassName="text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold mx-auto text-center"
         description={data.heroDescription}
         descriptionClassName="text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-8 md:mt-12"
-        bgImage="/images/hero-background.png"
+        bgImage={asset("/images/hero-background.png")}
         className="rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]"
         decoration={<HeroFloatingIcons />}
       />

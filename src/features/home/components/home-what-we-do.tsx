@@ -6,6 +6,7 @@ import { CheckCircle2 } from "lucide-react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/cdn";
 
 export interface BentoItem {
   videoSrc: string;
@@ -80,11 +81,11 @@ export function HomeWhatWeDo({
   eyebrow = "Services",
   title = "End-to-End AI Services",
   subtitle = "From workflow automation to system integration, we deliver outcomes that move your business forward.",
-  bgImage = "/images/what-we-do-bg.svg",
+  bgImage = asset("/images/what-we-do-bg.svg"),
   items = {},
 }: HomeWhatWeDoProps) {
   const workflow = items.workflow || {
-    videoSrc: "/Animation/1.webm",
+    videoSrc: asset("/Animation/1.webm"),
     title: "AI Workflow Automation",
     description:
       "Transform repetitive business processes into intelligent AI-powered workflows that eliminate bottlenecks and drive exponential efficiency.",
@@ -96,28 +97,28 @@ export function HomeWhatWeDo({
   };
 
   const triage = items.triage || {
-    videoSrc: "/Animation/2.webm",
+    videoSrc: asset("/Animation/2.webm"),
     title: "Support Triage & AI Ticketing",
     description:
       "Connect emails, WhatsApp, and websites to a unified AI system that triages, responds, and resolves customer inquiries instantly.",
   };
 
   const ecosystem = items.ecosystem || {
-    videoSrc: "/Animation/4.webm",
+    videoSrc: asset("/Animation/4.webm"),
     title: "Enterprise AI Ecosystem",
     description:
       "Connect AI agents, enterprise applications, data pipelines, and custom ERP solutions into one intelligent business ecosystem.",
   };
 
   const voice = items.voice || {
-    videoSrc: "/Animation/5.webm",
+    videoSrc: asset("/Animation/5.webm"),
     title: "AI Voice Agent Deployment",
     description:
       "Deploy multilingual AI voice agents that handle high-volume calls with human-like natural language processing and zero latency.",
   };
 
   const documentItem = items.document || {
-    videoSrc: "/Animation/6.webm",
+    videoSrc: asset("/Animation/6.webm"),
     title: "AI Document Processing",
     description:
       "Automatically extract, classify, and validate data from invoices, contracts, and IDs with 99% accuracy using proprietary OCR models.",

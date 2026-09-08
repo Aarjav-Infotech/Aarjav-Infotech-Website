@@ -3,6 +3,7 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
 const insuranceFaqs = [
   {
@@ -47,7 +48,7 @@ const insuranceConfig: IndustryConfig = {
     title: "One Policy. One Connected Insurance Ecosystem.",
     description:
       "Bring customers, policies, claims, documents, data, and AI agents together through a unified digital ecosystem that helps insurance teams operate with greater speed and intelligence.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Insurance Agentic OS Control Plane",
   },
   strategySection: {
@@ -117,7 +118,7 @@ const insuranceConfig: IndustryConfig = {
       "Apply AI where it matters most—from customer interactions and claims to underwriting, documents, and operational workflows.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Intelligent Claims Automation Icon",
         title: "Intelligent Claims Automation",
         desc: "Accelerate claim processing by automating intake, document extraction, validation, assessment routing, and status communication.",
@@ -128,7 +129,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "AI-Powered Underwriting Icon",
         title: "AI-Powered Underwriting",
         desc: "Empower underwriting teams with intelligent support for screening applications, gathering information, identifying risk factors, and making faster decisions.",
@@ -140,7 +141,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Customer & Agent Assistance Icon",
         title: "Customer & Agent Assistance",
         desc: "Enable AI voice and chat agents that provide instant support for policy questions, claim updates, service requests, and routine insurance interactions.",
@@ -152,7 +153,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Policy & Document Intelligence Icon",
         title: "Policy & Document Intelligence",
         desc: "Turn unstructured insurance documents, medical records, and claims evidence into actionable, searchable data.",

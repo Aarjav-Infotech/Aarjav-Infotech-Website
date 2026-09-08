@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/cdn";
 
 export interface FeatureCard {
   iconSrc: string;
@@ -21,22 +22,22 @@ export interface WhySupportAutomationProps {
 
 const defaultCards: FeatureCard[] = [
   {
-    iconSrc: "/images/matter-1.svg",
+    iconSrc: asset("/images/matter-1.svg"),
     title: "Faster Response Times",
     description: "Automatically prioritize and route tickets.",
   },
   {
-    iconSrc: "/images/matter-2.svg",
+    iconSrc: asset("/images/matter-2.svg"),
     title: "Higher Resolution Accuracy",
     description: "AI understands context for right routing.",
   },
   {
-    iconSrc: "/images/matter-3.svg",
+    iconSrc: asset("/images/matter-3.svg"),
     title: "Reduced Support Costs",
     description: "Automate repetitive tasks effortlessly.",
   },
   {
-    iconSrc: "/images/matter-4.svg",
+    iconSrc: asset("/images/matter-4.svg"),
     title: "Scalable Customer Support",
     description: "AI understands context for right routing.",
   },
@@ -47,7 +48,7 @@ export function WhySupportAutomation({
   title = "Why Enterprises Choose AI Support Automation",
   description = "Reduce response times, improve customer satisfaction, and empower support teams with intelligent automation that scales effortlessly.",
   cards = defaultCards,
-  bgImage = "/images/why-it-matters-bg.svg",
+  bgImage = asset("/images/why-it-matters-bg.svg"),
   className,
 }: WhySupportAutomationProps) {
   return (
