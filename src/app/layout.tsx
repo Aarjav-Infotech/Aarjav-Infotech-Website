@@ -70,7 +70,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${urbanist.variable} ${hubotSans.variable}`}>
       <head>
-        {/* Google Structured Data / Rich Snippets */}
+        <link
+          rel="preconnect"
+          href="https://cdn.aarjavinfotech.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
