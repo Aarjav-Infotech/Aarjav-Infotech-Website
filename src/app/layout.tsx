@@ -76,6 +76,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           crossOrigin="anonymous"
         />
         <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
