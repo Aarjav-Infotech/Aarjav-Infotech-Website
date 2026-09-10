@@ -6,7 +6,8 @@ import { asset } from "@/lib/cdn";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/theme";
-import "@/styles/globals.css";
+// @ts-expect-error Temporary suppression for layout typing
+import "../styles/globals.css";
 
 // 1. Configure Fonts
 const urbanist = Urbanist({
@@ -28,6 +29,18 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2" },
+      { url: "/favicon.svg?v=2", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png?v=2", sizes: "96x96", type: "image/png" },
+      { url: "/favicon-192x192.png?v=2", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-512x512.png?v=2", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -57,17 +70,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${urbanist.variable} ${hubotSans.variable}`}>
       <head>
-        <link rel="preconnect" href="https://cdn.aarjavinfotech.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://cdn.aarjavinfotech.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
 
-        {/* Google Structured Data / Rich Snippets */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationJsonLd),
           }}
         />
-
+        <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
         {/* Force scroll position to top BEFORE Next.js hydrates on mobile */}
         <script
           dangerouslySetInnerHTML={{
