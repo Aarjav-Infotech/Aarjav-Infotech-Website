@@ -6,8 +6,7 @@ import { asset } from "@/lib/cdn";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/theme";
-// @ts-expect-error Temporary suppression for layout typing
-import "../styles/globals.css";
+import "@/styles/globals.css";
 
 // 1. Configure Fonts
 const urbanist = Urbanist({
@@ -97,6 +96,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
+        <script defer src="https://um-72a93c1389c14698b9e12ae076c083b2.ecs.ap-south-1.on.aws/recorder.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
       </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
