@@ -96,7 +96,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
-        <script defer src="https://um-72a93c1389c14698b9e12ae076c083b2.ecs.ap-south-1.on.aws/recorder.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
+        <script defer src="https://umami.aarjavinfotech.com/script.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
+        <script defer src="https://umami.aarjavinfotech.com/recorder.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
       </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
