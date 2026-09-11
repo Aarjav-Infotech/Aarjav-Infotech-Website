@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { FileText, Mail, Paperclip, X } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { asset } from "@/lib/cdn";
-import { CONTACT_INFO } from "@/lib/constants";
 import { submitContactForm } from "@/lib/contact";
 
 const CONTACT_FORM_SESSION_KEY = "aarjav_contact_form_submission";
@@ -60,8 +59,8 @@ export function ContactFormSection({
   const [statusMessage, setStatusMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [attachments, setAttachments] = useState<File[]>([]);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const [attachments, setAttachments] = useState<File[]>([]);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     setIsSubmitted(Boolean(getStoredSubmission()));
@@ -89,20 +88,20 @@ export function ContactFormSection({
     },
   ];
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = e.target.files;
 
-    if (files && files.length > 0) {
-      setAttachments((prev) => [...prev, ...Array.from(files)]);
-    }
-  };
+  //   if (files && files.length > 0) {
+  //     setAttachments((prev) => [...prev, ...Array.from(files)]);
+  //   }
+  // };
 
-  const removeAttachment = (indexToRemove: number) => {
-    setAttachments((prev) => prev.filter((_, idx) => idx !== indexToRemove));
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
+  // const removeAttachment = (indexToRemove: number) => {
+  //   setAttachments((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+  //   if (fileInputRef.current) {
+  //     fileInputRef.current.value = "";
+  //   }
+  // };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,13 +115,13 @@ export function ContactFormSection({
       return;
     }
 
-    if (attachments.length > 0) {
-      setStatus("error");
-      setStatusMessage(
-        `File attachments are not supported in the online form yet. Please email ${CONTACT_INFO.email} directly with your files.`,
-      );
-      return;
-    }
+    // if (attachments.length > 0) {
+    //   setStatus("error");
+    //   setStatusMessage(
+    //     `File attachments are not supported in the online form yet. Please email ${CONTACT_INFO.email} directly with your files.`,
+    //   );
+    //   return;
+    // }
 
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
@@ -155,10 +154,10 @@ export function ContactFormSection({
         setStatus("success");
         setStatusMessage("Thanks for submitting — we will get back to you!");
         setFormData({ name: "", email: "", phone: "", projectDetails: "" });
-        setAttachments([]);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
+        // setAttachments([]);
+        // if (fileInputRef.current) {
+        //   fileInputRef.current.value = "";
+        // }
         return;
       }
 
@@ -410,15 +409,15 @@ export function ContactFormSection({
                   aria-hidden="true"
                 />
 
-                <input
+                {/* <input
                   type="file"
                   ref={fileInputRef}
                   onChange={handleFileChange}
                   className="hidden"
                   multiple
-                />
+                /> */}
 
-                <div className="pt-1">
+                {/* <div className="pt-1">
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
@@ -427,9 +426,9 @@ export function ContactFormSection({
                     <Paperclip className="size-3.5 shrink-0 rotate-45 sm:size-4" />
                     <span>Add an Attachment</span>
                   </button>
-                </div>
+                </div> */}
 
-                {attachments.length > 0 && (
+                {/* {attachments.length > 0 && (
                   <div className="flex flex-wrap gap-2 pt-1">
                     {attachments.map((file, index) => (
                       <div
@@ -450,7 +449,7 @@ export function ContactFormSection({
                       </div>
                     ))}
                   </div>
-                )}
+                )} */}
 
                 {statusMessage && (
                   <p
