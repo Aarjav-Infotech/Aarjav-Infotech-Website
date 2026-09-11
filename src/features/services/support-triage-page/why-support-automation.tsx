@@ -53,13 +53,13 @@ export function WhySupportAutomation({
 }: WhySupportAutomationProps) {
   return (
     <section
-      className={cn("w-full bg-white py-8 sm:py-12 lg:py-16 " , className)}
+      className={cn("w-full bg-white py-8 sm:py-12 lg:py-16", className)}
     >
       <div className="mx-auto max-w-full">
         {/* Main Section Card Container with Background Image */}
         <div
           className={cn(
-            "relative w-full overflow-hidden rounded-[40px] bg-blue bg-cover bg-center bg-no-repeat p-6 shadow-xl sm:rounded-[40px] sm:p-10 lg:p-14 border-b-9 border-[#ffffff]",
+            "bg-blue relative w-full overflow-hidden rounded-[40px] border-b-9 border-[#ffffff] bg-cover bg-center bg-no-repeat p-6 shadow-xl sm:rounded-[40px] sm:p-10 lg:p-14",
           )}
           style={bgImage ? { backgroundImage: `url(${bgImage})` } : undefined}
         >
@@ -77,7 +77,7 @@ export function WhySupportAutomation({
               </h2>
 
               {description && (
-                <p className="mt-4 max-w-xl text-sm leading-relaxed font-medium  sm:text-basic sm:leading-relaxed">
+                <p className="sm:text-basic mt-4 max-w-xl text-sm leading-relaxed font-medium sm:leading-relaxed">
                   {description}
                 </p>
               )}

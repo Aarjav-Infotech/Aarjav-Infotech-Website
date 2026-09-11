@@ -56,18 +56,18 @@ export default function AiVoiceImplementationRoadmap() {
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
             Our AI Voice Deployment Process
           </h2>
-          <p className="mx-auto max-w-2xl text-basic leading-relaxed text-neutral-500 sm:text-base">
+          <p className="text-basic mx-auto max-w-2xl leading-relaxed text-neutral-500 sm:text-base">
             From planning to continuous optimization, we deploy AI Voice Agents
             that integrate seamlessly into your existing business ecosystem.
           </p>
         </div>
 
         {/* Process Cards Flow Container */}
-        <div className="relative mx-auto ">
+        <div className="relative mx-auto">
           {/* Top Row: Steps 01, 02, 03 */}
           <div className="relative grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
             {/* Step 01 */}
-            <div className="relative flex flex-col justify-between rounded-[2rem] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md border-b-7 border-[#dcdce0ab]">
+            <div className="relative flex flex-col justify-between rounded-[2rem] border-b-7 border-[#dcdce0ab] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md">
               <div>
                 <div className="mb-1 flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-base font-bold text-white shadow-md shadow-blue-500/20">
@@ -96,7 +96,7 @@ export default function AiVoiceImplementationRoadmap() {
             </div>
 
             {/* Step 02 */}
-            <div className="relative flex flex-col justify-between rounded-[2rem] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md border-b-7 border-[#dcdce0ab]">
+            <div className="relative flex flex-col justify-between rounded-[2rem] border-b-7 border-[#dcdce0ab] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md">
               <div>
                 <div className="mb-1 flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-base font-bold text-white shadow-md shadow-blue-500/20">
@@ -125,7 +125,7 @@ export default function AiVoiceImplementationRoadmap() {
             </div>
 
             {/* Step 03 */}
-            <div className="relative flex flex-col justify-between rounded-[2rem] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md border-b-7 border-[#dcdce0ab]">
+            <div className="relative flex flex-col justify-between rounded-[2rem] border-b-7 border-[#dcdce0ab] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md">
               <div>
                 <div className="mb-1 flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-base font-bold text-white shadow-md shadow-blue-500/20">
@@ -157,7 +157,7 @@ export default function AiVoiceImplementationRoadmap() {
           {/* Bottom Row: Step 05 (Left) and Step 04 (Right) with 05 <- 04 Arrow */}
           <div className="mt-12 grid grid-cols-1 gap-10 md:mt-12 md:grid-cols-2 md:gap-8 lg:gap-10">
             {/* Step 05 (Left) */}
-            <div className="relative flex flex-col justify-between rounded-[2rem] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md border-b-7 border-[#dcdce0ab]">
+            <div className="relative flex flex-col justify-between rounded-[2rem] border-b-7 border-[#dcdce0ab] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md">
               <div>
                 <div className="mb-1 flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-base font-bold text-white shadow-md shadow-blue-500/20">
@@ -174,7 +174,7 @@ export default function AiVoiceImplementationRoadmap() {
             </div>
 
             {/* Step 04 (Right) */}
-            <div className="relative flex flex-col justify-between rounded-[2rem] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md border-b-7 border-[#dcdce0ab]">
+            <div className="relative flex flex-col justify-between rounded-[2rem] border-b-7 border-[#dcdce0ab] bg-[#f4f5f7] p-8 shadow-sm transition-all duration-300 hover:shadow-md">
               <div>
                 <div className="mb-1 flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-base font-bold text-white shadow-md shadow-blue-500/20">

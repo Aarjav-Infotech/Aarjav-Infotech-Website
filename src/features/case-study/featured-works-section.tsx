@@ -327,7 +327,7 @@ export function FeaturedWorksSection() {
                   <button
                     type="button"
                     onClick={() => setSelectedCase(item)}
-                    className="inline-flex items-center gap-2 border-b-1 rounded-full bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)]  transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
+                    className="inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
                   >
                     <span>Read More</span>
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

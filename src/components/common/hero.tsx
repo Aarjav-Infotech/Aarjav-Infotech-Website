@@ -65,7 +65,8 @@ export function Hero({
     <section
       className={cn(
         "section-padding relative flex h-full w-full min-w-0 flex-col justify-center overflow-hidden",
-        (bgImage || bgVideo) && "rounded-b-[40px] pt-24 pb-16 lg:pt-28 lg:pb-20",
+        (bgImage || bgVideo) &&
+          "rounded-b-[40px] pt-24 pb-16 lg:pt-28 lg:pb-20",
         !(bgImage || bgVideo) && "bg-gradient-to-b",
         !(bgImage || bgVideo) && (toneClasses as Record<string, string>)[tone],
         bgImage && "bg-cover bg-center bg-no-repeat",
@@ -87,7 +88,7 @@ export function Hero({
       <Container className="w-full min-w-0">
         <div
           className={cn(
-            "relative z-10 w-full min-w-0 mt-20",
+            "relative z-10 mt-20 w-full min-w-0",
             layout === "split"
               ? "site-container grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]"
               : cn("max-w-full", align === "center" && "mx-auto"),
@@ -148,7 +149,7 @@ export function Hero({
                 id="hero-heading"
                 subtitle={subtitle}
                 className={cn(
-                  "w-full text-3xl font-semibold tracking-tight text-[#000000] sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[82px] leading-tight lg:leading-[1.1]",
+                  "w-full text-3xl leading-tight font-semibold tracking-tight text-[#000000] sm:text-5xl md:text-6xl lg:text-[76px] lg:leading-[1.1] xl:text-[82px]",
                   titleClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}
@@ -167,7 +168,7 @@ export function Hero({
                   },
                 }}
                 className={cn(
-                  "max-w-3xl text-base font-medium leading-relaxed text-[#000000] sm:text-[20px]",
+                  "max-w-3xl text-base leading-relaxed font-medium text-[#000000] sm:text-[20px]",
                   descriptionClassName,
                 )}
                 style={{ fontFamily: "'Urbanist', sans-serif" }}

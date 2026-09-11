@@ -222,10 +222,11 @@ export function AgenticStackSection() {
                     type="button"
                     tabIndex={isMounted ? 0 : -1}
                     onClick={() => handleTabClick(index)}
-                    className={`flex items-center justify-center rounded-full px-3.5 py-1 font-bold whitespace-nowrap transition-all duration-200 ${isActive
-                      ? "scale-105 bg-[#0052FF] text-white shadow-md"
-                      : "bg-slate-100 text-slate-700 active:scale-95"
-                      }`}
+                    className={`flex items-center justify-center rounded-full px-3.5 py-1 font-bold whitespace-nowrap transition-all duration-200 ${
+                      isActive
+                        ? "scale-105 bg-[#0052FF] text-white shadow-md"
+                        : "bg-slate-100 text-slate-700 active:scale-95"
+                    }`}
                   >
                     {layer.layerNumber}
                   </button>
@@ -248,14 +249,16 @@ export function AgenticStackSection() {
                   return (
                     <div
                       key={layer.id}
-                      className={`relative h-[110px] w-[200px] transition-all duration-300 ease-out ${index > 0 ? "-mt-[55px]" : ""
-                        }`}
+                      className={`relative h-[110px] w-[200px] transition-all duration-300 ease-out ${
+                        index > 0 ? "-mt-[55px]" : ""
+                      }`}
                       style={{ zIndex: strictZIndex }}
                     >
                       {/* Fully Opaque Solid Container: Only translates up on active */}
                       <div
-                        className={`relative size-full opacity-100 transition-transform duration-300 ease-out ${isActive ? "-translate-y-2.5" : "translate-y-0"
-                          }`}
+                        className={`relative size-full opacity-100 transition-transform duration-300 ease-out ${
+                          isActive ? "-translate-y-2.5" : "translate-y-0"
+                        }`}
                       >
                         <Image
                           src={layer.iconSrc}
@@ -278,7 +281,7 @@ export function AgenticStackSection() {
                           className="pointer-events-none absolute top-1/2 left-[105%] z-40 flex -translate-y-1/2 items-center"
                         >
                           <div className="size-2.5 rounded-full bg-[#002688] shadow-sm ring-4 ring-blue-100" />
-                          <div className="h-[3px] w-40 border-t-2 border-dashed border-rgba(199, 196, 217, 1)" />
+                          <div className="border-rgba(199, 196, 217, 1) h-[3px] w-40 border-t-2 border-dashed" />
                         </motion.div>
                       )}
                     </div>
@@ -300,8 +303,8 @@ export function AgenticStackSection() {
                     className="flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center gap-2.5 font-bold tracking-[3.5px] bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] bg-clip-text text-transparent text-xl">
-                        <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] shadow-[0_0_12px_rgba(7,95,243,0.8)] " />
+                      <div className="flex items-center gap-2.5 bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] bg-clip-text text-xl font-bold tracking-[3.5px] text-transparent">
+                        <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] shadow-[0_0_12px_rgba(7,95,243,0.8)]" />
                         {currentData.layerNumber}
                       </div>
 

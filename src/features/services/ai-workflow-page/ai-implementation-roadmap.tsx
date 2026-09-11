@@ -107,7 +107,7 @@ export function AiImplementationRoadmap({
                   className="relative flex flex-col items-center text-center"
                 >
                   {/* Image Step Badge Container */}
-                  <div className="relative z-10 flex size-14 items-center justify-center rounded-2xl border border-blue-400/30 bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] p-3 text-white transition-transform hover:scale-105 sm:size-16 sm:p-3.5 lg:size-18 lg:p-4 shadow-md">
+                  <div className="relative z-10 flex size-14 items-center justify-center rounded-2xl border border-blue-400/30 bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] p-3 text-white shadow-md transition-transform hover:scale-105 sm:size-16 sm:p-3.5 lg:size-18 lg:p-4">
                     <div className="relative size-full">
                       <Image
                         src={step.iconSrc}

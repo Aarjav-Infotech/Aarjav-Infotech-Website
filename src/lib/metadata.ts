@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { APP_DESCRIPTION, APP_NAME, APP_URL } from "@/lib/constants";
+import { APP_DESCRIPTION, APP_NAME, APP_URL } from "./constants";
+import { getOpenGraphImageForPath } from "./opengraph-images";
 
 export interface PageMetadataOptions {
   title?: string;
@@ -19,13 +20,20 @@ export function createMetadata({
 }: PageMetadataOptions = {}): Metadata {
   const pageTitle = title ? `${title} | ${APP_NAME}` : APP_NAME;
   const url = `${APP_URL}${path}`;
+  const ogImage = getOpenGraphImageForPath(path);
 
   return {
-    title: pageTitle,
+    title: {
+      absolute: pageTitle,
+    },
     description,
     metadataBase: new URL(APP_URL),
     alternates: {
       canonical: url,
+      types: {
+        "text/markdown":
+          path === "/" || path === "" ? "/index.md" : `${path}.md`,
+      },
     },
     openGraph: {
       type: "website",
@@ -34,11 +42,13 @@ export function createMetadata({
       siteName: APP_NAME,
       title: pageTitle,
       description,
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description,
+      images: [ogImage.url],
     },
     robots: noIndex
       ? { index: false, follow: false }

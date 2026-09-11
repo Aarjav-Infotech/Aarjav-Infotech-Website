@@ -3,9 +3,8 @@ import { z } from "zod";
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_APP_URL: z.string().url(),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
-  NEXT_PUBLIC_CDN_URL: z
-    .union([z.string().url(), z.literal("")])
-    .optional(),
+  NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: z.string().optional(),
+  NEXT_PUBLIC_CDN_URL: z.union([z.string().url(), z.literal("")]).optional(),
 });
 
 const serverEnvSchema = z.object({
@@ -31,6 +30,8 @@ function validateClientEnv(): ClientEnv {
   const parsed = clientEnvSchema.safeParse({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
+    NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY:
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
     NEXT_PUBLIC_CDN_URL: process.env.NEXT_PUBLIC_CDN_URL,
   });
 

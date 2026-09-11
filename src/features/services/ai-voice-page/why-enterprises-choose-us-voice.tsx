@@ -76,7 +76,7 @@ export default function WhyEnterprisesChooseUsVoice() {
                 className={`flex flex-col justify-between rounded-[2.5rem] bg-white p-8 shadow-[0_15px_35px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-2xl ${item.offset}`}
               >
                 <div>
-                  <div className="relative mb-8 flex h-20 w-20 items-center justify-center rounded-2xl  p-3">
+                  <div className="relative mb-8 flex h-20 w-20 items-center justify-center rounded-2xl p-3">
                     <Image
                       src={item.iconSrc}
                       alt={item.title}

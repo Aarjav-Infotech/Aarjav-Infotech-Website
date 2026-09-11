@@ -96,12 +96,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
-        <script defer src="https://umami.aarjavinfotech.com/script.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
-        <script defer src="https://umami.aarjavinfotech.com/recorder.js" data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"></script>
+        <script
+          defer
+          src="https://umami.aarjavinfotech.com/script.js"
+          data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"
+        ></script>
+        <script
+          defer
+          src="https://umami.aarjavinfotech.com/recorder.js"
+          data-website-id="5dfde79b-1ef2-4c3e-a46b-1fc6c724933d"
+        ></script>
       </head>
       <body className="bg-background text-foreground min-h-screen font-sans antialiased">
         <a
-          href="#"
+          href="#main-content"
           tabIndex={-1}
           className="bg-primary text-primary-foreground focus:z-toast sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:rounded-full focus:px-4 focus:py-2"
         >

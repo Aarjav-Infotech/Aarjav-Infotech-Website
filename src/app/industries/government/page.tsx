@@ -1,11 +1,19 @@
-import GovernmentContent from "@/features/Industry/government-content";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "AI That Makes Government Operations Smarter | Aarjav Infotech",
+import GovernmentContent from "@/features/Industry/government-content";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "AI for Government",
   description:
-    "Transform public sector operations with intelligent AI solutions that automate complex workflows, accelerate citizen services, and create connected experiences.",
-};
+    "Aarjav Infotech builds AI for public-sector operations: workflow automation, citizen services, and security-minded deployments.",
+  path: "/industries/government",
+});
 
 export default function GovernmentPage() {
-  return <GovernmentContent />;
+  return (
+    <main id="main-content">
+      <GovernmentContent />
+    </main>
+  );
 }
