@@ -3,6 +3,34 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const insuranceFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for insurance and how does it differ from traditional claims RPA or point AI?",
+    answer:
+      "RPA only automates mechanical form submissions, and point AI tools merely parse isolated PDFs. An Insurance Agentic OS coordinates the entire policy and claims lifecycle—orchestrating FNOL intake, medical record synthesis, fraud pattern cross-referencing, and adjustor triage under uniform regulatory governance.",
+  },
+  {
+    question:
+      "Do we need to replace our current policy administration or core claims systems?",
+    answer:
+      "No. It connects as an intelligent orchestration plane directly over Guidewire, Duck Creek, Applied Systems, Salesforce Financial Services Cloud, and on-premise mainframe policy databases via secure, bi-directional APIs without rewriting core policy records.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated underwriting or claims workflow in production?",
+    answer:
+      "Regulated insurance workflows deploy in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow underwriting leads, actuarial teams, and legal counsel to audit and approve processes rapidly.",
+  },
+  {
+    question:
+      "What safeguards prevent AI hallucinations and ungrounded claim denials?",
+    answer:
+      "Agents operate with deterministic rule boundaries and strictly require human authorization before executing any adverse coverage decision, claim denial, or fraud escalation. Every recommendation links to exact policy clause citations with a complete tamper-proof audit trail.",
+  },
+];
 
 const insuranceConfig: IndustryConfig = {
   eyebrow: "",
@@ -20,7 +48,7 @@ const insuranceConfig: IndustryConfig = {
     title: "One Policy. One Connected Insurance Ecosystem.",
     description:
       "Bring customers, policies, claims, documents, data, and AI agents together through a unified digital ecosystem that helps insurance teams operate with greater speed and intelligence.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Insurance Agentic OS Control Plane",
   },
   strategySection: {
@@ -90,7 +118,7 @@ const insuranceConfig: IndustryConfig = {
       "Apply AI where it matters most—from customer interactions and claims to underwriting, documents, and operational workflows.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Intelligent Claims Automation Icon",
         title: "Intelligent Claims Automation",
         desc: "Accelerate claim processing by automating intake, document extraction, validation, assessment routing, and status communication.",
@@ -101,7 +129,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "AI-Powered Underwriting Icon",
         title: "AI-Powered Underwriting",
         desc: "Empower underwriting teams with intelligent support for screening applications, gathering information, identifying risk factors, and making faster decisions.",
@@ -113,7 +141,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Customer & Agent Assistance Icon",
         title: "Customer & Agent Assistance",
         desc: "Enable AI voice and chat agents that provide instant support for policy questions, claim updates, service requests, and routine insurance interactions.",
@@ -125,7 +153,7 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Policy & Document Intelligence Icon",
         title: "Policy & Document Intelligence",
         desc: "Turn unstructured insurance documents, medical records, and claims evidence into actionable, searchable data.",
@@ -137,6 +165,11 @@ const insuranceConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Insurance FAQs",
+    title: "Frequently Asked Questions About Insurance AI",
+    faqs: insuranceFaqs,
   },
 };
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { asset } from "@/lib/cdn";
 
 export default function EnterpriseCoreCapabilitiesSection() {
   const eyebrow = "Core Capabilities";
@@ -48,7 +49,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
                 </div>
                 <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                   <Image
-                    src="/images/ecosystem-1.png"
+                    src={asset("/images/ecosystem-1.png")}
                     alt="AI Agent Orchestration"
                     fill
                     className="object-contain p-3"
@@ -72,7 +73,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
                 </div>
                 <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                   <Image
-                    src="/images/ecosystem-2.png"
+                    src={asset("/images/ecosystem-2.png")}
                     alt="Enterprise System Integration"
                     fill
                     className="object-contain p-3"
@@ -101,7 +102,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
                   </div>
                   <div className="relative h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                     <Image
-                      src="/images/ecosystem-3.png"
+                      src={asset("/images/ecosystem-3.png")}
                       alt="Unified Data Pipelines"
                       fill
                       className="object-contain p-4"
@@ -116,7 +117,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
                 <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
                   <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                     <Image
-                      src="/images/ecosystem-4.png"
+                      src={asset("/images/ecosystem-4.png")}
                       alt="Custom ERP & Business Platforms"
                       fill
                       className="object-contain p-4"
@@ -138,7 +139,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
                 <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5">
                   <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                     <Image
-                      src="/images/ecosystem-5.png"
+                      src={asset("/images/ecosystem-5.png")}
                       alt="Workflow & Event Automation"
                       fill
                       className="object-contain p-4"
@@ -162,7 +163,7 @@ export default function EnterpriseCoreCapabilitiesSection() {
             <div className="flex flex-col justify-between rounded-[2.5rem] border border-neutral-100 bg-[#f8fafc] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5 lg:col-span-1">
               <div className="relative mb-6 min-h-[380px] w-full flex-1 overflow-hidden rounded-2xl border border-neutral-100 bg-white">
                 <Image
-                  src="/images/ecosystem-6.png"
+                  src={asset("/images/ecosystem-6.png")}
                   alt="Security & Governance"
                   fill
                   className="object-contain p-4"

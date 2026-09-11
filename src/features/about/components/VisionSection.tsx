@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Target, Gauge, ShieldCheck, Coins } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface MetricBar {
   label: string;
@@ -92,7 +93,7 @@ export function VisionSection({
           {/* Left Card - Background Image */}
           <div className="relative flex min-h-[420px] flex-col items-center justify-between overflow-hidden rounded-[32px] p-8 text-center text-white shadow-xl sm:p-12 lg:col-span-6">
             <Image
-              src="/images/vision-bg.svg"
+              src={asset("/images/vision-bg.svg")}
               alt="Vision card background"
               fill
               priority

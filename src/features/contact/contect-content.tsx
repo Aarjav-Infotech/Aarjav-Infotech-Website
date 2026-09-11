@@ -7,7 +7,7 @@ import {
 } from "@/components/common/hero-floating-icons";
 import { ContactFormSection } from "./contact-form-section";
 import { HomeFaq } from "@/features/home/components/home-faq";
-import { ContactSection } from "@/features/home/components/home-contact";
+import { asset } from "@/lib/cdn";
 
 export function ContactFeature() {
   const contactHeroProps = {
@@ -24,12 +24,12 @@ export function ContactFeature() {
       </span>
     ),
     titleClassName:
-      "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+      "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
     description:
       "Have a question or looking to transform your enterprise operations with AI? Connect with our solution engineering team.",
     descriptionClassName:
       "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-    bgImage: "/images/hero-background.png",
+    bgImage: asset("/images/hero-background.png"),
     className:
       "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
     decoration: <HeroFloatingIcons />,
@@ -40,7 +40,6 @@ export function ContactFeature() {
       <Hero {...contactHeroProps} />
       <ContactFormSection />
       <HomeFaq />
-      <ContactSection />
     </div>
   );
 }

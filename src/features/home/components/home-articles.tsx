@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 export interface ArticleItem {
   id: string | number;
@@ -18,21 +19,21 @@ const defaultArticles: ArticleItem[] = [
     id: 1,
     date: "June 7, 2026",
     title: "LLM Agnostic Solutions: The 2026 Enterprise AI Guide",
-    image: "/images/article-1.svg",
+    image: asset("/images/article-1.svg"),
     link: "#",
   },
   {
     id: 2,
     date: "May 16, 2026",
     title: "Snowflake Cortex Alternative: 2026 Evaluation Framework",
-    image: "/images/article-2.svg",
+    image: asset("/images/article-2.svg"),
     link: "#",
   },
   {
     id: 3,
     date: "April 7, 2026",
     title: "Multi-agent vs single-agent AI systems: 2026 decision guide",
-    image: "/images/article-3.svg",
+    image: asset("/images/article-3.svg"),
     link: "#",
   },
 ];
@@ -107,7 +108,7 @@ export function HomeArticles({
 
                 {/* Compact Read More Pill Button */}
                 <div className="mt-5 inline-flex">
-                  <span className="text-basic inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-[#f3f4f6] px-4 py-2 font-semibold text-slate-900 shadow-sm transition-all duration-200 group-hover:bg-slate-200">
+                  <span className="group inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm">
                     Read more
                     <ArrowRight className="size-3.5" />
                   </span>

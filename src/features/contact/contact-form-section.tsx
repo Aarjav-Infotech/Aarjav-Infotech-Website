@@ -1,14 +1,45 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { Mail, Headphones, MapPin, Paperclip, X, FileText } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { FileText, Mail, Paperclip, X } from "lucide-react";
 
+import { asset } from "@/lib/cdn";
 import { CONTACT_INFO } from "@/lib/constants";
-import {
-  contactMapsHref,
-  contactPhoneHref,
-  submitContactForm,
-} from "@/lib/contact";
+import { submitContactForm } from "@/lib/contact";
+
+const CONTACT_FORM_SESSION_KEY = "aarjav_contact_form_submission";
+const CONTACT_FORM_TTL_MS = 24 * 60 * 60 * 1000;
+
+function getStoredSubmission() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    const raw = window.sessionStorage.getItem(CONTACT_FORM_SESSION_KEY);
+    if (!raw) {
+      return null;
+    }
+
+    const parsed = JSON.parse(raw) as { timestamp?: number };
+    if (typeof parsed.timestamp !== "number") {
+      window.sessionStorage.removeItem(CONTACT_FORM_SESSION_KEY);
+      return null;
+    }
+
+    const isStillValid = Date.now() - parsed.timestamp < CONTACT_FORM_TTL_MS;
+    if (!isStillValid) {
+      window.sessionStorage.removeItem(CONTACT_FORM_SESSION_KEY);
+      return null;
+    }
+
+    return parsed;
+  } catch {
+    window.sessionStorage.removeItem(CONTACT_FORM_SESSION_KEY);
+    return null;
+  }
+}
 
 interface ContactFormSectionProps {
   eyebrow?: string;
@@ -27,35 +58,42 @@ export function ContactFormSection({
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const topCards = [
+  useEffect(() => {
+    setIsSubmitted(Boolean(getStoredSubmission()));
+  }, []);
+
+  const locations = [
     {
-      title: "E-mail address",
-      value: CONTACT_INFO.email,
-      href: `mailto:${CONTACT_INFO.email}`,
-      icon: Mail,
+      country: "India",
+      iconSrc: asset("/images/office.svg"),
+      phoneIconSrc: asset("/images/call.svg"),
+      locationIconSrc: asset("/images/location.svg"),
+      phone: "+91 99649 19000 (Call & what's app)",
+      phoneHref: "tel:+919964919000",
+      address:
+        "526, Mahek IT Park, Kshanagar, Old GIDC, Katargam, Surat, Gujarat 395004.",
     },
     {
-      title: "Phone number",
-      value: CONTACT_INFO.phone,
-      href: contactPhoneHref(),
-      icon: Headphones,
-    },
-    {
-      title: "Our Location",
-      value: CONTACT_INFO.address,
-      href: contactMapsHref(),
-      icon: MapPin,
+      country: "USA",
+      iconSrc: asset("/images/office.svg"),
+      phoneIconSrc: asset("/images/whatsapp.svg"),
+      locationIconSrc: asset("/images/location.svg"),
+      phone: "+1 (551) 208-0596",
+      phoneHref: "tel:+15512080596",
+      address: "204 Lawson Pl, Paramus, NJ 07652, USA",
     },
   ];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files);
-      setAttachments((prev) => [...prev, ...newFiles]);
+    const files = e.target.files;
+
+    if (files && files.length > 0) {
+      setAttachments((prev) => [...prev, ...Array.from(files)]);
     }
   };
 
@@ -70,6 +108,13 @@ export function ContactFormSection({
     e.preventDefault();
     setStatus("idle");
     setStatusMessage("");
+
+    if (getStoredSubmission()) {
+      setIsSubmitted(true);
+      setStatus("success");
+      setStatusMessage("Thanks for submitting — we will get back to you!");
+      return;
+    }
 
     if (attachments.length > 0) {
       setStatus("error");
@@ -102,11 +147,13 @@ export function ContactFormSection({
       );
 
       if (result.success) {
-        setStatus("success");
-        setStatusMessage(
-          result.message ??
-            "Thank you! Your message has been sent successfully.",
+        window.sessionStorage.setItem(
+          CONTACT_FORM_SESSION_KEY,
+          JSON.stringify({ timestamp: Date.now() }),
         );
+        setIsSubmitted(true);
+        setStatus("success");
+        setStatusMessage("Thanks for submitting — we will get back to you!");
         setFormData({ name: "", email: "", phone: "", projectDetails: "" });
         setAttachments([]);
         if (fileInputRef.current) {
@@ -126,269 +173,311 @@ export function ContactFormSection({
   };
 
   return (
-    <section className="relative w-full bg-white px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-full space-y-12">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {topCards.map((card, idx) => {
-            const Icon = card.icon;
-            return (
-              <a
-                key={idx}
-                href={card.href}
-                target={card.title === "Our Location" ? "_blank" : undefined}
-                rel={
-                  card.title === "Our Location"
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="group hover:shadow-3xl flex flex-col items-center justify-center rounded-[32px] border border-white/90 bg-[#F4F4F5] px-6 py-10 text-center shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="relative mb-5 flex h-18 w-18 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white shadow-[0_8px_18px_rgba(0,82,204,0.35)] transition-transform duration-300 group-hover:scale-105">
-                  <Icon className="h-6 w-6 stroke-[2]" />
+    <section className="relative w-full bg-[#FFFFFF] px-4 py-8 sm:px-6 sm:py-12 md:py-16 lg:px-8">
+      <div className="mx-auto max-w-[1240px] space-y-8 sm:space-y-12">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:gap-8">
+          {locations.map((loc, idx) => (
+            <div
+              key={idx}
+              className="border-grey relative flex flex-col justify-between rounded-[24px] border-b-7 bg-[#f4f5f7] p-6 shadow-[0_12px_32px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] sm:rounded-[32px] sm:p-8 md:rounded-[36px] md:p-6"
+            >
+              <div>
+                <div className="relative mb-4 flex size-10 items-center justify-center rounded-[15px] bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] transition-transform duration-300 hover:scale-105 sm:mb-6 sm:size-14 md:size-16">
+                  <Image
+                    src={loc.iconSrc}
+                    alt={`${loc.country} Office`}
+                    fill
+                    className="object-contain p-4 drop-shadow-md"
+                    priority
+                  />
                 </div>
 
-                <h3 className="text-lg font-bold text-slate-900">
-                  {card.title}
+                <h3 className="text-lg font-bold tracking-tight text-neutral-900 sm:text-xl md:text-2xl">
+                  {loc.country}
                 </h3>
-                <p className="mt-1.5 text-base font-medium text-slate-600">
-                  {card.value}
-                </p>
-              </a>
-            );
-          })}
+
+                <div className="mt-3 space-y-2 text-xs text-neutral-700 sm:mt-4 sm:space-y-2.5 sm:text-sm">
+                  <div className="flex items-center gap-2 sm:gap-2">
+                    <div className="relative size-4 shrink-0">
+                      <Image
+                        src={loc.phoneIconSrc}
+                        alt="Phone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <a
+                      href={loc.phoneHref}
+                      className="text-base font-medium break-all transition-colors hover:text-[#0053FA]"
+                    >
+                      {loc.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-start gap-2 sm:gap-2">
+                    <div className="relative mt-0.5 size-4 shrink-0">
+                      <Image
+                        src={loc.locationIconSrc}
+                        alt="Location"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <span className="text-base leading-relaxed">
+                      {loc.address}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
-          {/* LEFT COLUMN: Text & Social Pills */}
-          <div className="flex flex-col justify-between self-stretch lg:col-span-6">
-            <div className="space-y-6">
+        <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
+          <div className="flex flex-col justify-between lg:col-span-6">
+            <div>
               {eyebrow && (
-                <div>
-                  <div className="inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-sm sm:border-b-4 sm:text-[14px]">
-                    <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
-                    {eyebrow}
-                  </div>
+                <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-bold text-[#002688] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
+                  <span className="size-1.5 rounded-full bg-[#002688]" />
+                  {eyebrow}
                 </div>
               )}
 
-              {/* Title */}
-              <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[56px] lg:leading-[1.12]">
-                Let&apos;s Build <br />
+              <h2 className="font-semibold tracking-tight text-[3xl] text-neutral-950 sm:text-4xl md:text-5xl lg:text-[72px] lg:leading-[1.12]">
+                Let&apos;s Build <br className="hidden sm:inline" />
                 Intelligent Things
               </h2>
 
-              {/* Description */}
-              <p className="max-w-[480px] text-base leading-relaxed text-slate-600">
+              <p className="mt-4 max-w-full text-sm leading-relaxed text-black sm:mt-6 sm:text-base sm:leading-relaxed">
                 combining creativity, technology, and strategy to craft
                 solutions that think, adapt, and inspire. Connect with us to
                 turn visionary ideas into meaningful, data-driven realities.
               </p>
             </div>
 
-            {/* Social Buttons */}
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              {/* Twitter / X */}
+            <div className="mt-8 space-y-3 sm:mt-12 sm:space-y-4 lg:mt-16">
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:shadow-3xl flex items-center gap-3 rounded-full border-b-[7px] border-[#eaeaf2] bg-white py-2.5 pr-2.5 pl-6 text-base font-semibold text-slate-800 shadow-xl transition-all"
+                href="mailto:business@aarjavinfotech.com"
+                className="border-grey inline-flex w-full max-w-full items-center justify-between rounded-full border-b-7 bg-[#f4f5f7] py-2.5 pr-3 pl-4 shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] hover:shadow-[0_12px_24px_rgba(0,0,0,0.1)] sm:max-w-[340px] sm:py-3 sm:pr-3.5 sm:pl-6"
               >
-                <span>Twitter / X</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0052cc] text-sm font-bold text-white shadow-sm">
-                  𝕏
+                <span className="truncate text-xs font-semibold text-neutral-900 sm:text-lg">
+                  business@aarjavinfotech.com
+                </span>
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-white shadow-xs">
+                  <Mail className="size-3.5" />
                 </span>
               </a>
 
-              {/* Facebook */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:shadow-3xl flex items-center gap-3 rounded-full border-b-[7px] border-[#eaeaf2] bg-white py-2.5 pr-2.5 pl-6 text-base font-semibold text-slate-800 shadow-xl transition-all"
-              >
-                <span>Facebook</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0052cc] text-sm font-bold text-white shadow-sm">
-                  f
-                </span>
-              </a>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border-grey inline-flex min-w-[130px] flex-1 items-center justify-between rounded-full border-b-7 bg-[#f4f5f7] py-2 pr-2.5 pl-4 shadow-[0_8px_18px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] sm:min-w-[155px] sm:flex-initial sm:py-2.5 sm:pr-3 sm:pl-5"
+                >
+                  <span className="text-xs font-semibold text-neutral-900 sm:text-lg">
+                    Twitter / X
+                  </span>
+                  <span className="flex size-6 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-xs font-bold text-white shadow-xs sm:size-7">
+                    𝕏
+                  </span>
+                </a>
+
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border-grey inline-flex min-w-[130px] flex-1 items-center justify-between rounded-full border-b-7 bg-[#f4f5f7] py-2 pr-2.5 pl-4 shadow-[0_8px_18px_rgba(0,0,0,0.06)] transition-all hover:scale-[1.01] sm:min-w-[155px] sm:flex-initial sm:py-2.5 sm:pr-3 sm:pl-5"
+                >
+                  <span className="text-xs font-semibold text-neutral-900 sm:text-lg">
+                    Facebook
+                  </span>
+                  <span className="flex size-6 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_100%)] text-xs font-bold text-white shadow-xs sm:size-7">
+                    f
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Contact Form Card */}
-          <div className="relative rounded-[36px] border border-white/90 bg-[#F4F4F5] p-8 shadow-2xl sm:p-12 lg:col-span-6">
-            <h3 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-              Fill this form below
-            </h3>
-
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-              {/* Name Field */}
-              <div className="space-y-1">
-                <label
-                  htmlFor="contact-name"
-                  className="text-sm font-semibold text-slate-800"
-                >
-                  Your Name
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  placeholder="Enter your full name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
-                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
-                />
-              </div>
-
-              {/* Email Field */}
-              <div className="space-y-1">
-                <label
-                  htmlFor="contact-email"
-                  className="text-sm font-semibold text-slate-800"
-                >
-                  Your Email
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  required
-                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
-                />
-              </div>
-
-              {/* Phone Field */}
-              <div className="space-y-1">
-                <label
-                  htmlFor="contact-phone"
-                  className="text-sm font-semibold text-slate-800"
-                >
-                  Your Phone
-                </label>
-                <input
-                  id="contact-phone"
-                  type="tel"
-                  name="phone"
-                  placeholder="Enter your phone number (optional)"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
-                />
-              </div>
-
-              {/* Project Details */}
-              <div className="space-y-1">
-                <label
-                  htmlFor="contact-message"
-                  className="text-sm font-semibold text-slate-800"
-                >
-                  More About The Project
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows={3}
-                  value={formData.projectDetails}
-                  onChange={(e) =>
-                    setFormData({ ...formData, projectDetails: e.target.value })
-                  }
-                  required
-                  className="w-full resize-none border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
-                />
-              </div>
-
-              {/* Hidden honeypot for Web3Forms spam protection */}
-              <input
-                type="checkbox"
-                name="botcheck"
-                tabIndex={-1}
-                autoComplete="off"
-                className="hidden"
-                aria-hidden="true"
-              />
-
-              {/* Hidden File Input */}
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                className="hidden"
-                multiple
-              />
-
-              {/* Add Attachment Button */}
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 transition-colors hover:text-[#0052cc]"
-                >
-                  <Paperclip className="h-4 w-4" />
-                  <span>Add an Attachment</span>
-                </button>
-              </div>
-
-              {/* Attached Files List */}
-              {attachments.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {attachments.map((file, index) => (
-                    <div
-                      key={index}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
-                    >
-                      <FileText className="h-3.5 w-3.5 text-blue-600" />
-                      <span className="max-w-[140px] truncate">
-                        {file.name}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeAttachment(index)}
-                        className="rounded-full p-0.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </div>
-                  ))}
+          <div className="border-grey relative rounded-[24px] border-b-7 bg-[#F4F4F5] p-6 shadow-[0_16px_40px_rgba(0,0,0,0.06)] sm:rounded-[32px] sm:p-8 md:rounded-[36px] md:p-10 lg:col-span-6 lg:p-12">
+            {isSubmitted ? (
+              <div className="flex min-h-[420px] items-center justify-center p-4 text-center">
+                <div className="max-w-md">
+                  <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-2xl text-green-600">
+                    ✓
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-tight text-neutral-950 sm:text-3xl">
+                    Thanks for submitting
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-slate-700 sm:text-lg">
+                    We will get back to you soon.
+                  </p>
                 </div>
-              )}
-
-              {statusMessage && (
-                <p
-                  role="status"
-                  className={`text-sm ${
-                    status === "success"
-                      ? "text-green-600"
-                      : status === "error"
-                        ? "text-red-600"
-                        : "text-slate-600"
-                  }`}
-                >
-                  {statusMessage}
-                </p>
-              )}
-
-              {/* Submit Button */}
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-4 text-base font-semibold text-white shadow-[0_12px_24px_rgba(0,82,204,0.3)] transition-all hover:bg-[#0043a8] hover:shadow-[0_14px_28px_rgba(0,82,204,0.4)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  {status === "loading" ? "Sending..." : "Submit Message"}
-                </button>
               </div>
-            </form>
+            ) : (
+              <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="contact-name"
+                    className="text-sm font-semibold text-slate-800"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
+                    className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label
+                    htmlFor="contact-email"
+                    className="text-sm font-semibold text-slate-800"
+                  >
+                    Your Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                    className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label
+                    htmlFor="contact-phone"
+                    className="text-sm font-semibold text-slate-800"
+                  >
+                    Your Phone
+                  </label>
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    name="phone"
+                    placeholder="Enter your phone number (optional)"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    className="w-full border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label
+                    htmlFor="contact-message"
+                    className="text-sm font-semibold text-slate-800"
+                  >
+                    More About The Project
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={3}
+                    value={formData.projectDetails}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        projectDetails: e.target.value,
+                      })
+                    }
+                    required
+                    className="w-full resize-none border-b border-slate-300 bg-transparent py-2.5 text-base text-slate-900 placeholder:text-slate-400 focus:border-[#0052cc] focus:outline-none"
+                  />
+                </div>
+
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                  multiple
+                />
+
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="inline-flex cursor-pointer items-center gap-2 text-xs font-bold text-neutral-900 transition-opacity hover:opacity-80 sm:text-sm"
+                  >
+                    <Paperclip className="size-3.5 shrink-0 rotate-45 sm:size-4" />
+                    <span>Add an Attachment</span>
+                  </button>
+                </div>
+
+                {attachments.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {attachments.map((file, index) => (
+                      <div
+                        key={index}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-2.5 py-1 text-xs font-medium text-neutral-700 shadow-xs sm:gap-2 sm:px-3"
+                      >
+                        <FileText className="size-3 text-blue-600 sm:size-3.5" />
+                        <span className="max-w-[120px] truncate sm:max-w-[140px]">
+                          {file.name}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeAttachment(index)}
+                          className="cursor-pointer rounded-full p-0.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700"
+                        >
+                          <X className="size-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {statusMessage && (
+                  <p
+                    role="status"
+                    className={`text-sm ${
+                      status === "success"
+                        ? "text-green-600"
+                        : status === "error"
+                          ? "text-red-600"
+                          : "text-slate-600"
+                    }`}
+                  >
+                    {statusMessage}
+                  </p>
+                )}
+
+                <div className="pt-4 sm:pt-6">
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-4 text-base font-semibold text-white shadow-[0_12px_24px_rgba(0,82,204,0.3)] transition-all hover:bg-[#0043a8] hover:shadow-[0_14px_28px_rgba(0,82,204,0.4)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {status === "loading" ? "Sending..." : "Submit Message"}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>

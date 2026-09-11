@@ -3,6 +3,34 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const healthcareFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for healthcare and how is it different from RPA or point AI tools?",
+    answer:
+      "RPA automates clicks on screens. Point AI tools solve one task like transcribing notes. A Healthcare Agentic OS coordinates patient intake, scheduling, documentation synthesis, prior authorization, and denial management as one system, governed end-to-end.",
+  },
+  {
+    question:
+      "Do I need to replace our EHR, CRM, or revenue cycle systems to run this platform?",
+    answer:
+      "No. It integrates directly with your core EHR (Epic, Cerner, Athenahealth, Allscripts), billing engines, CRMs, and payer portals via FHIR/HL7 standards and secure APIs. It sits as an intelligent control plane above them.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated healthcare workflow in production?",
+    answer:
+      "Regulated clinical and administrative workflows go live in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow risk, clinical, and compliance teams to validate and sign off rapidly.",
+  },
+  {
+    question:
+      "How does the platform ensure HIPAA compliance and prevent model hallucinations?",
+    answer:
+      "The system runs inside your sovereign, HIPAA-compliant VPC with strict BAA safeguards and zero data retention for model training. Deterministic guardrails enforce that human clinicians retain final sign-off on any outputs affecting diagnosis, treatment, or coverage.",
+  },
+];
 
 const healthcareConfig: IndustryConfig = {
   eyebrow: "",
@@ -20,7 +48,7 @@ const healthcareConfig: IndustryConfig = {
     title: "One Healthcare Objective. Every Workflow Connected.",
     description:
       "Bring patient information, clinical systems, AI agents, documents, operational workflows, and enterprise applications together through one intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Healthcare Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -90,7 +118,7 @@ const healthcareConfig: IndustryConfig = {
       "Apply AI where it can make the biggest operational difference—from patient engagement and clinical documentation to revenue cycle and care coordination.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Make Every Patient Interaction Smarter Icon",
         title: "Make Every Patient Interaction Smarter",
         desc: "AI voice and chat agents can support appointment scheduling, patient questions, reminders, follow-ups, and routine service requests around the clock.",
@@ -102,7 +130,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Turn Healthcare Information Into Action Icon",
         title: "Turn Healthcare Information Into Action",
         desc: "Process clinical documents and unstructured information to extract, summarize, classify, and organize data for healthcare teams.",
@@ -114,7 +142,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Simplify the Healthcare Revenue Cycle Icon",
         title: "Simplify the Healthcare Revenue Cycle",
         desc: "Automate and streamline processes around coding support, claims, billing workflows, prior authorization, and denial management.",
@@ -126,7 +154,7 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Connect Teams Around Better Care Icon",
         title: "Connect Teams Around Better Care",
         desc: "Coordinate referrals, patient transitions, follow-ups, internal workflows, and operational tasks through intelligent AI-powered orchestration.",
@@ -138,6 +166,11 @@ const healthcareConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Healthcare FAQs",
+    title: "Frequently Asked Questions About AI in Healthcare",
+    faqs: healthcareFaqs,
   },
 };
 

@@ -3,6 +3,34 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const governmentFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for government and how is it different from standard citizen portals or RPA?",
+    answer:
+      "Citizen portals only display static forms, and RPA handles simple automated entries. An Agentic OS orchestrates multi-agency workflows, cross-references records, validates submitted documentation, and automates public service triage with full regulatory oversight.",
+  },
+  {
+    question:
+      "Do we need to replace our existing case management, ERP, or legacy government databases?",
+    answer:
+      "No. The platform deploys as an orchestration and intelligence plane directly over your existing infrastructure, connecting through secure APIs and FedRAMP-grade connectors without altering core agency systems of record.",
+  },
+  {
+    question:
+      "How does the system ensure statutory compliance and maintain public accountability?",
+    answer:
+      "Every workflow produces an immutable, time-stamped audit trail tracking data provenance and decisions. Critical actions involving benefit allocations, citizen rights, or legal interpretations require explicit human-in-the-loop authorization.",
+  },
+  {
+    question:
+      "Who controls the sovereign data, agency policies, and deployed agents?",
+    answer:
+      "Your agency retains 100% data ownership. Systems run inside isolated, sovereign government cloud enclaves or on-premise infrastructure. Citizen records and public intelligence never cross institutional boundaries or train commercial models.",
+  },
+];
 
 const governmentConfig: IndustryConfig = {
   eyebrow: "",
@@ -20,7 +48,7 @@ const governmentConfig: IndustryConfig = {
     title: "One Connected Platform for Every Public Service",
     description:
       "Bring AI agents, government applications, enterprise data, documents, and operational workflows together in an intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Government Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -90,34 +118,39 @@ const governmentConfig: IndustryConfig = {
       "From citizen services to internal administration, apply AI across the workflows that matter most.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Citizen Service Automation Icon",
         title: "Citizen Service Automation",
         desc: "AI voice and chat agents provide instant assistance for citizen questions, service requests, status updates, and routine inquiries.",
         capabilities: ["Citizen Support", "AI Voice & Chat Agents"],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Document & Data Processing Icon",
         title: "Document & Data Processing",
         desc: "Extract, classify, validate, and organize information from license applications, reports, and other government documents.",
         capabilities: ["OCR", "Data Extraction", "Classification"],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Workflow Automation Icon",
         title: "Workflow Automation",
         desc: "Automate approvals, routing, notifications, case management, and repetitive administrative processes across agency teams.",
         capabilities: ["Approvals", "Routing", "Case Management"],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Enterprise Integration Icon",
         title: "Enterprise Integration",
         desc: "Connect AI agents with existing government applications, CRMs, databases, ERPs, and legacy systems.",
         capabilities: ["APIs", "ERP/CRM Integration", "Data Syncing"],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About AI in Government",
+    faqs: governmentFaqs,
   },
 };
 

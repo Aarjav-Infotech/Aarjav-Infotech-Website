@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import { asset } from "@/lib/cdn";
+
 export default function WhyItMattersSection() {
   const eyebrow = "Why It Matters";
 
@@ -36,7 +38,12 @@ export default function WhyItMattersSection() {
     <section className="w-full bg-white py-12">
       <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         {/* Main Container with Direct CSS Background */}
-        <div className="relative w-full overflow-hidden rounded-[24px] border border-neutral-800/80 bg-black bg-[url('/images/matter-bg.svg')] bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:rounded-[32px] sm:px-10 sm:py-16 md:rounded-[40px] md:py-20 lg:px-12">
+        <div
+          className="relative w-full overflow-hidden rounded-[24px] border border-neutral-800/80 bg-black bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:rounded-[32px] sm:px-10 sm:py-16 md:rounded-[40px] md:py-20 lg:px-12"
+          style={{
+            backgroundImage: `url(${asset("/images/matter-bg.svg")})`,
+          }}
+        >
           {/* Subtle Dark Overlay to Ensure High Contrast & Hide Bottom Boundary */}
           <div className="pointer-events-none absolute inset-0 bg-black/30" />
 

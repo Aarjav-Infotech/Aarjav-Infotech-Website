@@ -3,6 +3,34 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const realEstateFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for real estate and how is it different from standard chatbots or listing portals?",
+    answer:
+      "Listing portals display static inventories and simple bots answer basic queries. A Real Estate Agentic OS coordinates cross-channel buyer qualification, schedule sync for site viewings, lease documentation parsing, and CRM updates as one unified, governed operational system.",
+  },
+  {
+    question:
+      "Do we need to replace our existing MLS feeds, PropTech platforms, or CRM systems?",
+    answer:
+      "No. It connects directly over your existing platforms (Salesforce, HubSpot, Yardi, RealPage, Buildium, and localized MLS IDX feeds) via secure APIs without migrating or disrupting your source records.",
+  },
+  {
+    question:
+      "How quickly can we deploy AI agents for lead qualification and tour scheduling?",
+    answer:
+      "Production-ready agents deploy in 3 to 6 weeks. Pre-built connectors for WhatsApp, email, SMS, and portal webhooks allow sales and leasing teams to automate lead triage rapidly with immediate pipeline visibility.",
+  },
+  {
+    question:
+      "How does the platform handle lease compliance, pricing data, and transaction privacy?",
+    answer:
+      "All proprietary valuation models, title documents, and tenant PII operate within isolated, enterprise-grade cloud environments. Deterministic rules ensure pricing and contract terms strictly mirror approved brokerage guidelines without hallucinated commitments.",
+  },
+];
 
 const realEstateConfig: IndustryConfig = {
   eyebrow: "",
@@ -26,7 +54,7 @@ const realEstateConfig: IndustryConfig = {
     title: "One Property Objective. Every Workflow Connected.",
     description:
       "Bring property data, customer interactions, AI agents, documents, CRM systems, and operational workflows together through one intelligent real-estate ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Real Estate Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -96,7 +124,7 @@ const realEstateConfig: IndustryConfig = {
       "Apply AI across the workflows that matter most—from property discovery and lead conversion to documentation and property operations.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Help Customers Find the Right Property Icon",
         title: "Help Customers Find the Right Property",
         desc: "AI agents can understand buyer and tenant preferences and help surface relevant properties based on location, budget, requirements, amenities, and availability.",
@@ -108,7 +136,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Turn More Inquiries Into Opportunities Icon",
         title: "Turn More Inquiries Into Opportunities",
         desc: "Automatically capture, qualify, route, and follow up with property leads while keeping sales teams focused on high-value conversations.",
@@ -120,7 +148,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Make Property Documentation Smarter Icon",
         title: "Make Property Documentation Smarter",
         desc: "Extract, classify, validate, summarize, and organize information from agreements, applications, verification documents, invoices, and transaction records.",
@@ -132,7 +160,7 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Automate the Work Behind Every Property Icon",
         title: "Automate the Work Behind Every Property",
         desc: "Connect property management workflows, tenant requests, maintenance operations, communications, and internal processes through intelligent automation.",
@@ -144,6 +172,11 @@ const realEstateConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Real Estate FAQs",
+    title: "Frequently Asked Questions About Real Estate AI",
+    faqs: realEstateFaqs,
   },
 };
 

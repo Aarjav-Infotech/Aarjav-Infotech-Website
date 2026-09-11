@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { asset } from "@/lib/cdn";
 
 interface CaseStudyItem {
   id: string;
@@ -30,7 +31,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Full-Stack Construction Website",
     description:
       "A complete full-stack construction company website built with Vite, React, Tailwind CSS, and Node.js. Designed to showcase projects, services, and company credentials with a modern, responsive layout optimised for mobile, tablet, and desktop.",
-    imageSrc: "/images/case-studys-1.svg",
+    imageSrc: asset("/images/case-studys-1.svg"),
     imageAlt: "Sahaj Construction Website Preview",
     industry: "Construction & Infrastructure",
     technologies: [
@@ -65,7 +66,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Luxury Jewelry Landing Page",
     description:
       "A high-converting landing page for a fine jewelry brand focused on showcasing 10K, 14K & 18K gold with lab-grown diamonds. Delivered with fast load performance, optimised SEO, and a conversion-driven UI/UX across all devices.",
-    imageSrc: "/images/case-studys-2.svg",
+    imageSrc: asset("/images/case-studys-2.svg"),
     imageAlt: "Glamora Jewels Landing Page Preview",
     industry: "Luxury Retail & E-Commerce",
     technologies: ["React", "Node.js", "PostgreSQL", "Content SEO"],
@@ -93,7 +94,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "AI-Powered Textile Design Platform",
     description:
       "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
-    imageSrc: "/images/case-studys-3.svg",
+    imageSrc: asset("/images/case-studys-3.svg"),
     imageAlt: "Delfa Pattern Generator Preview",
     industry: "AI & Textile Technology",
     technologies: [
@@ -311,11 +312,11 @@ export function FeaturedWorksSection() {
                   </div>
 
                   {/* Summary */}
-                  <div className="space-y-2 border-l-2 border-slate-300 pt-2 pl-4">
-                    <h4 className="text-base font-bold text-slate-900 md:text-lg">
+                  <div className="space-y-2 border-l-5 border-white pt-2 pl-4">
+                    <h4 className="text-base font-bold text-black md:text-xl">
                       {item.subtitle}
                     </h4>
-                    <p className="text-basic sm:text-basic leading-relaxed text-slate-600">
+                    <p className="text-basic sm:text-basic leading-relaxed text-black">
                       {item.description}
                     </p>
                   </div>
@@ -326,7 +327,7 @@ export function FeaturedWorksSection() {
                   <button
                     type="button"
                     onClick={() => setSelectedCase(item)}
-                    className="group text-basic inline-flex cursor-pointer items-center gap-2 rounded-full bg-slate-200/80 px-6 py-2.5 font-semibold text-slate-900 transition-colors hover:bg-slate-300"
+                    className="inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
                   >
                     <span>Read More</span>
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

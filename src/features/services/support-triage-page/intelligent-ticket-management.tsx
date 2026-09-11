@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/cdn";
 
 export interface TicketFeatureCard {
   title: string;
@@ -28,7 +29,7 @@ const defaultClassification: TicketFeatureCard = {
   title: "AI Ticket Classification",
   description:
     "Automatically categorize incoming tickets based on intent, urgency, department, product, or issue type using intelligent language understanding.",
-  imageSrc: "/images/support-core-1.png",
+  imageSrc: asset("/images/support-core-1.png"),
   imageAlt: "AI Ticket Classification Diagram",
 };
 
@@ -36,7 +37,7 @@ const defaultPrioritySla: TicketFeatureCard = {
   title: "Priority & SLA Management",
   description:
     "Identify urgent issues, monitor SLA deadlines, escalate critical cases automatically, and ensure every request receives timely attention.",
-  imageSrc: "/images/support-core-4.png",
+  imageSrc: asset("/images/support-core-4.png"),
   imageAlt: "Priority & SLA Management Grid",
 };
 
@@ -44,7 +45,7 @@ const defaultSmartRouting: TicketFeatureCard = {
   title: "Smart Ticket Routing",
   description:
     "Route tickets instantly to the right support team based on expertise, workload, customer priority, or historical resolution patterns.",
-  imageSrc: "/images/support-core-2.png",
+  imageSrc: asset("/images/support-core-2.png"),
   imageAlt: "Smart Ticket Routing Flow",
 };
 
@@ -52,7 +53,7 @@ const defaultResponseAssistance: TicketFeatureCard = {
   title: "AI Response Assistance",
   description:
     "Generate contextual response suggestions, knowledge base recommendations, and automated replies to help support agents respond faster.",
-  imageSrc: "/images/support-core-3.png",
+  imageSrc: asset("/images/support-core-3.png"),
   imageAlt: "AI Response Assistance Interface",
 };
 
@@ -60,7 +61,7 @@ const defaultOmnichannel: TicketFeatureCard = {
   title: "Omnichannel Support Integration",
   description:
     "Connect email, live chat, WhatsApp, web forms, CRM platforms, and helpdesk systems into one intelligent support workflow.",
-  imageSrc: "/images/support-core-5.png",
+  imageSrc: asset("/images/support-core-5.png"),
   imageAlt: "Omnichannel Integration Hub",
 };
 
@@ -68,7 +69,7 @@ const defaultAnalytics: TicketFeatureCard = {
   title: "Analytics & Continuous Improvement",
   description:
     "Track ticket trends, response performance, customer satisfaction, agent productivity, and AI accuracy to continuously optimize support operations.",
-  imageSrc: "/images/support-core-6.png",
+  imageSrc: asset("/images/support-core-6.png"),
   imageAlt: "Analytics and Growth Metric Card",
 };
 

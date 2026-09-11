@@ -3,9 +3,37 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const enterpriseFaqs = [
+  {
+    question:
+      "What exactly is an Enterprise Agentic OS and how is it different from standard RPA or point AI tools?",
+    answer:
+      "RPA automates repetitive clicks on fixed UIs. Point AI tools solve single, isolated prompts. An Enterprise Agentic OS coordinates cross-departmental operations—from ERP data sync and invoice processing to multi-agent approvals—governed by unified enterprise security.",
+  },
+  {
+    question:
+      "Do we need to replace our current ERP, CRM, or data warehouse infrastructure?",
+    answer:
+      "No. The platform deploys as an intelligent orchestration plane directly above your existing systems (SAP, Oracle, Salesforce, Microsoft Dynamics, Snowflake), connecting them via bi-directional, authenticated APIs without disrupting business continuity.",
+  },
+  {
+    question:
+      "How quickly can we deploy and run an enterprise AI workflow in production?",
+    answer:
+      "Production-ready workflows deploy in 4 to 6 weeks. Standardized pre-built enterprise connectors and role-based validation checkpoints allow IT and security teams to review, audit, and sign off rapidly.",
+  },
+  {
+    question:
+      "Who owns the enterprise data, custom agents, and fine-tuned models?",
+    answer:
+      "Your organization retains 100% data and model ownership. Everything runs in your sovereign VPC or private cloud environment. Proprietary records and internal communications never leave your perimeter or train public third-party models.",
+  },
+];
 
 const enterpriseConfig: IndustryConfig = {
-  eyebrow: "Industries - Enterprise",
+  eyebrow: "",
   heroTitle: (
     <>
       AI That Powers the <br /> Modern Enterprise
@@ -24,7 +52,7 @@ const enterpriseConfig: IndustryConfig = {
     title: "One Business Objective. Every System Connected.",
     description:
       "Bring enterprise applications, AI agents, data pipelines, documents, business processes, and decision-making workflows together through one intelligent ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Enterprise Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -94,7 +122,7 @@ const enterpriseConfig: IndustryConfig = {
       "Deploy AI where it can create the greatest operational impact—from customer experience and finance to internal operations and decision-making.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Automate Work Across Departments Icon",
         title: "Automate Work Across Departments",
         desc: "Connect business processes and automate repetitive workflows across operations, finance, HR, sales, customer service, and administration.",
@@ -106,7 +134,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Give Every Team an Intelligent Assistant Icon",
         title: "Give Every Team an Intelligent Assistant",
         desc: "Deploy specialized AI agents that can answer questions, perform tasks, retrieve information, and support employees across business functions.",
@@ -118,7 +146,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Turn Business Data Into Action Icon",
         title: "Turn Business Data Into Action",
         desc: "Process documents, connect data sources, extract insights, and make enterprise information accessible to both people and AI systems.",
@@ -130,7 +158,7 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Build Around Your Enterprise Icon",
         title: "Build Around Your Enterprise",
         desc: "Extend existing ERP and business platforms with AI-powered modules, custom workflows, intelligent dashboards, and purpose-built enterprise applications.",
@@ -142,6 +170,11 @@ const enterpriseConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About Enterprise AI",
+    faqs: enterpriseFaqs,
   },
 };
 

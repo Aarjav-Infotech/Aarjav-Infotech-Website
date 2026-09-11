@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MoveRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { asset } from "@/lib/cdn";
 
 export interface Product {
   imageSrc: string;
@@ -41,42 +42,42 @@ const itemVariants: Variants = {
 
 const defaultProducts: Product[] = [
   {
-    imageSrc: "/images/product-1.svg",
+    imageSrc: asset("/images/product-1.svg"),
     tags: ["VOICE", "AI"],
     title: "AI Voice Agent Deployment",
     workflow: "Listen → Understand → Respond → Log",
     result: "24/7 customer support with faster resolution and higher CSAT.",
   },
   {
-    imageSrc: "/images/product-2.svg",
+    imageSrc: asset("/images/product-2.svg"),
     tags: ["DIAMOND", "ERP"],
     title: "AI Diamond Stock Market Management",
     workflow: "Analyze → Forecast → Trade → Report",
     result: "Smarter trading decisions with real-time insights and accuracy.",
   },
   {
-    imageSrc: "/images/product-3.svg",
+    imageSrc: asset("/images/product-3.svg"),
     tags: ["TEXTILE", "ERP"],
     title: "AI Textile Management",
     workflow: "Plan → Produce → Track → Optimise",
     result: "Smarter trading decisions with real-time insights and accuracy.",
   },
   {
-    imageSrc: "/images/product-4.svg",
+    imageSrc: asset("/images/product-4.svg"),
     tags: ["CONSTRUCTION", "ERP"],
     title: "AI Construction",
     workflow: "Plan → Allocate → Track → Report",
     result: "On-time project delivery with better resource utilisation.",
   },
   {
-    imageSrc: "/images/product-5.svg",
+    imageSrc: asset("/images/product-5.svg"),
     tags: ["ESTIMATION", "AI AGENT"],
     title: "AI BOQ Estimation Agent",
     workflow: "Extract → Calculate → Estimate → Export",
     result: "Accurate BOQs in minutes, reducing manual effort by 80%.",
   },
   {
-    imageSrc: "/images/product-6.svg",
+    imageSrc: asset("/images/product-6.svg"),
     tags: ["DOCUMENT", "ERP"],
     title: "AI Document Processing",
     workflow: "Extract → Validate → Classify → Store",
@@ -89,7 +90,7 @@ export function HomeProducts({
   title = "Built for Real-World Impact",
   subtitle = "Explore our suite of AI-powered products designed to automate operations, improve accuracy, and drive growth across industries.",
   products = defaultProducts,
-  bgImageSrc = "/images/home-product-bg.svg",
+  bgImageSrc = asset("/images/home-product-bg.svg"),
 }: HomeProductsProps) {
   return (
     <section className="relative w-full px-3 py-4 sm:px-6 lg:px-8">
@@ -209,7 +210,7 @@ export function HomeProducts({
                 </div>
 
                 {/* Result Text */}
-                <p className="line-clamp-2 text-sm font-bold tracking-[0.5px] text-[#2b2bad] sm:text-[16px] sm:leading-[1.45] sm:tracking-[0.7px]">
+                <p className="line-clamp-2 text-sm font-semibold tracking-[0.5px] text-[#183ecf] sm:text-[16px] sm:leading-[1.45] sm:tracking-[0.7px]">
                   {product.result}
                 </p>
               </div>

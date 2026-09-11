@@ -11,6 +11,7 @@ import { AiStatisticsSection } from "@/features/services/ai-workflow-page/ai-sta
 import AiCoreCapabilitiesSection from "./ai-core-capabilities";
 import WhyEnterprisesChooseUs from "./why-enterprises-choose-us";
 import AiImplementationRoadmap from "./ai-implementation-roadmap";
+import { asset } from "@/lib/cdn";
 
 const aiWorkflowHeroProps = {
   align: "center" as const,
@@ -26,11 +27,12 @@ const aiWorkflowHeroProps = {
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
-  description: "",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
+  description:
+    "Transform repetitive business processes into intelligent AI-powered workflows that eliminate bottlenecks and drive exponential efficiency.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

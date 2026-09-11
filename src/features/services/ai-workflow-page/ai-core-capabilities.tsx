@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/cdn";
 
 export interface CapabilityCard {
   title: string;
@@ -26,7 +27,7 @@ const defaultMainFeature: CapabilityCard = {
   title: "Intelligent Process Automation",
   description:
     "Automate repetitive business tasks, approvals, notifications, and multi-step workflows with AI-driven decision making. We design AI-powered workflows that seamlessly connect people, applications, and data across your organization.",
-  imageSrc: "/images/bento-1.png",
+  imageSrc: asset("/images/bento-1.png"),
   imageAlt: "Intelligent Process Automation Diagram",
 };
 
@@ -34,7 +35,7 @@ const defaultTopRightFeature: CapabilityCard = {
   title: "Document & Data Processing",
   description:
     "Extract, classify, validate, and route information from invoices, contracts, forms, emails, and business documents automatically.",
-  imageSrc: "/images/bento-2.png",
+  imageSrc: asset("/images/bento-2.png"),
   imageAlt: "Document & Data Processing Workflow",
 };
 
@@ -42,7 +43,7 @@ const defaultBottomLeftFeature: CapabilityCard = {
   title: "Cross-Platform Integrations",
   description:
     "Extract, classify, validate, and route information from invoices, contracts, forms, emails, and business documents automatically.",
-  imageSrc: "/images/bento-3.png",
+  imageSrc: asset("/images/bento-3.png"),
   imageAlt: "Cross-Platform Integration Diagram",
 };
 
@@ -50,7 +51,7 @@ const defaultBottomRightFeature: CapabilityCard = {
   title: "AI Decision Workflows",
   description:
     "Enable workflows that can analyze information, make recommendations, trigger actions, and continuously improve with AI.",
-  imageSrc: "/images/bento-4.png",
+  imageSrc: asset("/images/bento-4.png"),
   imageAlt: "AI Decision Workflows Trigger Diagram",
 };
 

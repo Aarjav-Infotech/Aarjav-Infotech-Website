@@ -3,7 +3,33 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
 
+export const bankingFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for banking and how is it different from RPA or point AI tools?",
+    answer:
+      "RPA automates clicks. Point AI tools solve one task. An Agentic OS coordinates onboarding, KYC, fraud, credit, servicing, and compliance as one system, governed end-to-end.",
+  },
+  {
+    question:
+      "Do I need to replace our core banking, CRM or fraud systems to run this platform?",
+    answer:
+      "No. It integrates directly with your core (Temenos, Finacle, FIS, Fiserv), CRM, fraud, AML, and case management systems. It sits as an intelligent control plane above them.",
+  },
+  {
+    question:
+      "How quickly can we run a regulated banking workflow in production?",
+    answer:
+      "Regulated workflows go live in 4 to 8 weeks. Pre-built connectors and deterministic compliance guardrails allow risk teams to validate and sign off rapidly.",
+  },
+  {
+    question: "How does the platform handle model risk and regulator scrutiny?",
+    answer:
+      "Every agent action, prompt, and API payload produces an immutable audit trail with full lineage. We enforce deterministic guardrails before transactions execute to prevent hallucinations.",
+  },
+];
 const bankingConfig: IndustryConfig = {
   eyebrow: "",
   heroTitle: "AI That Powers Modern Banking",
@@ -20,7 +46,7 @@ const bankingConfig: IndustryConfig = {
     title: "One Intelligent Layer Across Your Banking Operations",
     description:
       "Connect customers, employees, data, applications, and workflows through a unified AI ecosystem designed to make banking operations faster, smarter, and more efficient.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Banking Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -88,7 +114,7 @@ const bankingConfig: IndustryConfig = {
       "From customer interactions to back-office operations, connect AI and automation across critical banking processes.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "AI Customer Support Icon",
         title: "AI-powered support for every customer interaction.",
         desc: "Deploy AI voice and chat agents that can handle customer queries, account assistance, and routine interactions 24/7.",
@@ -100,7 +126,7 @@ const bankingConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Workflow Automation Icon",
         title: "Turn repetitive banking processes into intelligent workflows.",
         desc: "Automate onboarding, KYC, document verification, approvals, and internal workflows while connecting existing systems.",
@@ -112,7 +138,7 @@ const bankingConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Security & Risk Icon",
         title: "Make financial operations more secure and proactive.",
         desc: "Use AI to identify unusual activity, support risk assessment, monitor transactions, and streamline compliance.",
@@ -124,7 +150,7 @@ const bankingConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Analytics & Intelligence Icon",
         title: "Turn banking data into actionable intelligence.",
         desc: "Connect enterprise data and AI models to help teams understand performance and make faster, data-driven decisions.",
@@ -136,6 +162,11 @@ const bankingConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions About AI in Banking",
+    faqs: bankingFaqs,
   },
 };
 

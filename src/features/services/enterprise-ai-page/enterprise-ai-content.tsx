@@ -12,6 +12,7 @@ import EnterpriseCoreCapabilitiesSection from "./enterprise-core-capabilities";
 // import WhyEnterprisesChooseUsEcosystem from "./why-enterprises-choose-us-ecosystem";
 import WhyItMattersSection from "./enterprice-why-matters";
 import EnterpriseImplementationRoadmap from "./enterprise-implementation-roadmap";
+import { asset } from "@/lib/cdn";
 
 const enterpriseHeroProps = {
   align: "center" as const,
@@ -27,12 +28,12 @@ const enterpriseHeroProps = {
     </span>
   ),
   titleClassName:
-    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold max-w-[960px] mx-auto text-center",
+    "text-[#000000] text-[38px] md:text-[68px] lg:text-[76px] font-bold  mx-auto text-center",
   description:
     "Connect disconnected tools so data flows where you need it, when needed.",
   descriptionClassName:
     "text-[#2C3E50] text-[16px] md:text-[19px] font-medium leading-[1.5] max-w-[780px] mx-auto mt-12",
-  bgImage: "/images/hero-background.png",
+  bgImage: asset("/images/hero-background.png"),
   className:
     "rounded-[36px] border border-white/40 shadow-sm md:rounded-[48px]",
   decoration: <HeroFloatingIcons />,

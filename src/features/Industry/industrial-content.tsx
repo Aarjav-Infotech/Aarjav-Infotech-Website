@@ -3,9 +3,37 @@
 import IndustryPageLayout, {
   type IndustryConfig,
 } from "@/features/Industry/industry-page-layout";
+import { asset } from "@/lib/cdn";
+
+const industrialFaqs = [
+  {
+    question:
+      "What exactly is an Agentic OS for industrial operations and how does it differ from traditional SCADA or MES?",
+    answer:
+      "SCADA and MES monitor signals and log shop-floor states. An Industrial Agentic OS coordinates multi-system execution across SCADA, MES, ERP, and supply chain layers—orchestrating predictive work orders, automated inventory refills, and shift reporting under unified operational governance.",
+  },
+  {
+    question:
+      "Do we need to replace our current SCADA, PLC controllers, or ERP software?",
+    answer:
+      "No. It connects on top of your existing industrial control systems, historians, and enterprise resource platforms (SAP, Siemens, Rockwell Automation, Oracle) using secure edge gateways and standard industrial protocols (OPC UA, MQTT, REST APIs) without line shutdowns.",
+  },
+  {
+    question:
+      "How quickly can we deploy and validate an industrial AI workflow on our line?",
+    answer:
+      "Standard predictive maintenance and workflow automation agents go live within 4 to 8 weeks. Pre-built connectors and simulated test runs allow plant engineering and safety leads to validate performance before production rollout.",
+  },
+  {
+    question:
+      "What failsafes ensure AI actions do not compromise physical plant safety or machinery?",
+    answer:
+      "All automated operations enforce deterministic hard limits aligned with machine OEM safety specs and ISO/OSHA standards. Autonomous agents only execute within bounded operational envelopes, requiring mandatory floor-supervisor sign-off for critical setpoint alterations or shutdowns.",
+  },
+];
 
 const industrialConfig: IndustryConfig = {
-  eyebrow: "Industries - Industrial",
+  eyebrow: "",
   heroTitle: (
     <>
       AI That Powers Smarter <br /> Industrial Operations
@@ -24,7 +52,7 @@ const industrialConfig: IndustryConfig = {
     title: "One Industrial Objective. Every Operation Connected.",
     description:
       "Bring production data, machines, enterprise applications, AI agents, documents, and operational workflows together through one intelligent industrial ecosystem.",
-    imageSrc: "/images/common-industries.svg",
+    imageSrc: asset("/images/common-industries.svg"),
     imageAlt: "Industrial Agentic OS Control Plane Diagram",
   },
   strategySection: {
@@ -94,7 +122,7 @@ const industrialConfig: IndustryConfig = {
       "Apply AI across key industrial touchpoints—from predictive maintenance and quality inspection to supply chain orchestration.",
     cards: [
       {
-        imageSrc: "/images/solution-1.svg",
+        imageSrc: asset("/images/solution-1.svg"),
         imageAlt: "Predictive Maintenance & Health Icon",
         title: "Predictive Maintenance & Monitoring",
         desc: "Analyze machine telemetry, vibration data, and temperature logs to detect anomalies and predict equipment failure before downtime happens.",
@@ -106,7 +134,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-2.svg",
+        imageSrc: asset("/images/solution-2.svg"),
         imageAlt: "Intelligent Supply Chain & Inventory Icon",
         title: "Intelligent Supply Chain & Inventory",
         desc: "Automate purchase orders, reorder point triggers, supplier communications, and material delivery tracking across plants.",
@@ -118,7 +146,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-3.svg",
+        imageSrc: asset("/images/solution-3.svg"),
         imageAlt: "Automated Quality Inspection & Safety Icon",
         title: "Automated Quality Inspection & Safety",
         desc: "Extract, classify, and summarize defect logs, compliance certifications, and environmental safety audits instantly.",
@@ -130,7 +158,7 @@ const industrialConfig: IndustryConfig = {
         ],
       },
       {
-        imageSrc: "/images/solution-4.svg",
+        imageSrc: asset("/images/solution-4.svg"),
         imageAlt: "Connected Plant Orchestration Icon",
         title: "Connected Plant & Shift Orchestration",
         desc: "Connect field teams, technicians, and operations managers with AI assistants for shift handovers, SOP search, and fast troubleshooting.",
@@ -142,6 +170,11 @@ const industrialConfig: IndustryConfig = {
         ],
       },
     ],
+  },
+  HomeFaq: {
+    eyebrow: "Industrial FAQs",
+    title: "Frequently Asked Questions About Industrial AI",
+    faqs: industrialFaqs,
   },
 };
 

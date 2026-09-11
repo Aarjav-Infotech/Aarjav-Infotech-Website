@@ -4,20 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { asset } from "@/lib/cdn";
 
 const ICONS = {
-  icon1: "/icons/icon-1.svg",
-  icon2: "/icons/icon-2.svg",
-  icon3: "/icons/icon-3.svg",
-  icon4: "/icons/icon-4.svg",
-  icon5: "/icons/icon-5.svg",
-  icon6: "/icons/icon-6.svg",
-  icon7: "/icons/icon-7.svg",
-  icon8: "/icons/icon-8.svg",
-  icon9: "/icons/icon-9.svg",
-  icon10: "/icons/icon-10.svg",
-  icon11: "/icons/icon-11.svg",
-  icon12: "/icons/icon-12.svg",
+  icon1: asset("/icons/icon-1.svg"),
+  icon2: asset("/icons/icon-2.svg"),
+  icon3: asset("/icons/icon-3.svg"),
+  icon4: asset("/icons/icon-4.svg"),
+  icon5: asset("/icons/icon-5.svg"),
+  icon6: asset("/icons/icon-6.svg"),
+  icon7: asset("/icons/icon-7.svg"),
+  icon8: asset("/icons/icon-8.svg"),
+  icon9: asset("/icons/icon-9.svg"),
+  icon10: asset("/icons/icon-10.svg"),
+  icon11: asset("/icons/icon-11.svg"),
+  icon12: asset("/icons/icon-12.svg"),
 };
 
 function TechImage({ src, alt }: { src: string; alt: string }) {

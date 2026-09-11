@@ -17,6 +17,8 @@ import {
   Building,
   Factory,
   Briefcase,
+  Gem,
+  Bot,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,17 +28,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { asset } from "@/lib/cdn";
 import { APP_NAME, ROUTES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 // Navigation Links Configuration
 const NAV_LINKS = [
-  { label: "Home", href: ROUTES.home || "/" },
-  { label: "About", href: "/about" },
-  { label: "AI Services", href: "/services" },
-  { label: "Industries", href: "/industries" },
-  { label: "Case Study", href: "/case-study" },
-  { label: "Contact", href: ROUTES.contact || "/contact" },
+  { label: "AI Services", href: "/services", hasDropdown: true },
+  { label: "Digital Products", href: "/our-products", hasDropdown: true },
+  { label: "Industries", href: "/industries", hasDropdown: true },
+  { label: "Case Studies", href: "/case-study", hasDropdown: false },
+  { label: "About", href: "/about", hasDropdown: true },
 ];
 
 // Mega Menu Items - AI Services
@@ -70,6 +72,24 @@ const AI_SERVICES_ITEMS = [
     title: "AI Document Processing",
     description: "Launch pay-per-call campaigns and monitor commission",
     href: "/services/ai-document-processing",
+  },
+];
+
+// Mega Menu Items - Digital Products
+const DIGITAL_PRODUCTS_ITEMS = [
+  {
+    icon: Bot,
+    title: "Vani Sahay",
+    description:
+      "Multilingual AI companion for digital financial security and fraud defense",
+    href: "/our-products/vani-sahay",
+  },
+  {
+    icon: Gem,
+    title: "Heera One",
+    description:
+      "Intelligent ERP platform for diamond manufacturing and global sales",
+    href: "/our-products/heeraone",
   },
 ];
 
@@ -119,6 +139,23 @@ const INDUSTRIES_ITEMS = [
   },
 ];
 
+// Mega Menu Items - About
+const ABOUT_ITEMS = [
+  {
+    icon: Building2,
+    title: "Company Overview",
+    description: "Learn about our vision, leadership, and enterprise mission",
+    href: "/about",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security & Governance",
+    description:
+      "Enterprise compliance, zero-trust architectures, and protocols",
+    href: "/about#security",
+  },
+];
+
 export function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -164,13 +201,27 @@ export function Navbar() {
     setIsOpen((prev) => !prev);
   }, []);
 
-  // Toggle mega menu state strictly on click
   const handleMegaMenuToggle = (label: string) => {
     setActiveMegaMenu((prev) => (prev === label ? null : label));
   };
 
   const toggleMobileSubmenu = (label: string) => {
     setMobileSubmenuOpen((prev) => (prev === label ? null : label));
+  };
+
+  const getActiveMenuItems = (label: string | null) => {
+    switch (label) {
+      case "AI Services":
+        return AI_SERVICES_ITEMS;
+      case "Digital Products":
+        return DIGITAL_PRODUCTS_ITEMS;
+      case "Industries":
+        return INDUSTRIES_ITEMS;
+      case "About":
+        return ABOUT_ITEMS;
+      default:
+        return [];
+    }
   };
 
   return (
@@ -183,22 +234,23 @@ export function Navbar() {
       <div ref={navRef} className="relative w-full px-4 md:px-8">
         <nav
           className={cn(
-            "mx-auto flex h-[64px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-4 py-2 shadow-sm ring-1 ring-black/5 transition-all duration-300 sm:h-[72px] sm:px-6 sm:py-[10px] lg:px-[30px]",
+            "mx-auto flex h-[60px] w-full max-w-[1380px] items-center justify-between rounded-[60px] px-4 py-2 shadow-sm ring-1 ring-black/5 transition-all duration-300 sm:h-[72px] sm:px-6 sm:py-[10px] lg:px-[30px]",
             isScrolled ? "bg-white/80 backdrop-blur-md" : "bg-white",
           )}
           aria-label="Main navigation"
         >
+          {/* Brand Logo */}
           <Link
             href={ROUTES.home || "/"}
             className="flex shrink-0 items-center transition-opacity hover:opacity-80"
             onClick={closeMenu}
           >
             <Image
-              src="/svg/logo.svg"
+              src={asset("/svg/logo.svg")}
               alt={APP_NAME}
               width={180}
               height={48}
-              className="h-8 w-auto sm:h-10 lg:h-12"
+              className="h-7 w-auto sm:h-10 lg:h-12"
               style={{ width: "auto" }}
               priority
             />
@@ -206,17 +258,15 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <ul
-            className="hidden items-center gap-0.5 lg:flex xl:gap-1"
+            className="hidden items-center gap-0.5 lg:flex xl:gap-2"
             role="list"
           >
             {NAV_LINKS.map((link) => {
-              const isHasDropdown =
-                link.label === "AI Services" || link.label === "Industries";
               const isDropdownActive = activeMegaMenu === link.label;
 
               return (
-                <li key={link.href} className="static lg:relative">
-                  {isHasDropdown ? (
+                <li key={link.label} className="static lg:relative">
+                  {link.hasDropdown ? (
                     <button
                       type="button"
                       onClick={() => handleMegaMenuToggle(link.label)}
@@ -246,11 +296,19 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className="group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm"
+                      className={cn(
+                        "group/link text-foreground hover:text-primary lg:text-basic relative flex items-center gap-1 rounded-md px-2 py-2 text-xs font-medium whitespace-nowrap transition-colors xl:px-3 xl:text-sm",
+                        pathname === link.href && "text-primary font-semibold",
+                      )}
                     >
                       <span className="relative inline-block whitespace-nowrap">
                         {link.label}
-                        <span className="bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100" />
+                        <span
+                          className={cn(
+                            "bg-primary absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/link:scale-x-100",
+                            pathname === link.href && "scale-x-100",
+                          )}
+                        />
                       </span>
                     </Link>
                   )}
@@ -259,6 +317,7 @@ export function Navbar() {
             })}
           </ul>
 
+          {/* Desktop CTA Button */}
           <div className="hidden shrink-0 lg:block">
             <Button
               asChild
@@ -275,7 +334,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full lg:hidden"
+            className="size-9 rounded-full text-slate-800 hover:bg-slate-100 active:scale-95 lg:hidden"
             onClick={toggleMenu}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -297,17 +356,22 @@ export function Navbar() {
             >
               <div className="w-[1100px] max-w-[calc(100vw-2rem)] rounded-[28px] border border-slate-100 bg-white/95 p-8 shadow-2xl ring-1 ring-slate-900/5 backdrop-blur-2xl">
                 <div className="grid grid-cols-12 gap-8">
-                  {/* Service / Industries Grid Options */}
-                  <div className="col-span-8 flex flex-col justify-between">
+                  {/* Grid Options */}
+                  <div className="col-span-8 flex flex-col">
                     <div className="mb-4 text-xs font-semibold tracking-wider text-slate-400 uppercase">
                       {activeMegaMenu}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-                      {(activeMegaMenu === "AI Services"
-                        ? AI_SERVICES_ITEMS
-                        : INDUSTRIES_ITEMS
-                      ).map((item) => {
+                    <div
+                      className={cn(
+                        "grid gap-x-4 gap-y-3",
+                        activeMegaMenu === "Digital Products" ||
+                          activeMegaMenu === "About"
+                          ? "grid-cols-1"
+                          : "grid-cols-2",
+                      )}
+                    >
+                      {getActiveMenuItems(activeMegaMenu).map((item) => {
                         const Icon = item.icon;
                         return (
                           <Link
@@ -341,16 +405,18 @@ export function Navbar() {
                       </div>
                       <Link
                         href={
-                          activeMegaMenu === "AI Services"
-                            ? "/platform-overview"
-                            : "/case-study"
+                          activeMegaMenu === "Digital Products"
+                            ? "/our-products/vani-sahay"
+                            : activeMegaMenu === "AI Services"
+                              ? "/services"
+                              : "/case-study"
                         }
                         onClick={closeMenu}
                         className="group/preview block overflow-hidden rounded-2xl"
                       >
                         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
                           <Image
-                            src="/images/ai-megamenu.svg"
+                            src={asset("/images/ai-megamenu.svg")}
                             alt="Overview"
                             fill
                             className="object-cover transition-transform duration-500 group-hover/preview:scale-105"
@@ -358,14 +424,18 @@ export function Navbar() {
                         </div>
                         <div className="mt-3">
                           <h4 className="text-sm font-bold text-slate-900 group-hover/preview:text-blue-600">
-                            {activeMegaMenu === "AI Services"
-                              ? "Platform Overview"
-                              : "Industry Success Stories"}
+                            {activeMegaMenu === "Digital Products"
+                              ? "Vani Sahay Overview"
+                              : activeMegaMenu === "AI Services"
+                                ? "Platform Overview"
+                                : "Industry Success Stories"}
                           </h4>
                           <p className="mt-0.5 text-xs text-slate-500">
-                            {activeMegaMenu === "AI Services"
-                              ? "Take a free tour of our platform features"
-                              : "See how we empower diverse global sectors"}
+                            {activeMegaMenu === "Digital Products"
+                              ? "See how our financial AI agent shields users from scams"
+                              : activeMegaMenu === "AI Services"
+                                ? "Take a free tour of our platform features"
+                                : "See how we empower diverse global sectors"}
                           </p>
                         </div>
                       </Link>
@@ -381,56 +451,59 @@ export function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <>
-              {/* Darkened Overlay */}
+              {/* Darkened Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={closeMenu}
-                className="fixed inset-0 -z-10 bg-slate-900/40 backdrop-blur-xs lg:hidden"
+                className="fixed inset-0 top-0 left-0 -z-10 h-screen w-screen bg-slate-950/40 backdrop-blur-sm lg:hidden"
               />
 
-              {/* Floating Mobile Menu Container */}
+              {/* Floating Mobile Dropdown Sheet */}
               <motion.nav
                 id="mobile-menu"
-                initial={{ opacity: 0, y: -10, scale: 0.96 }}
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.96 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="mx-auto mt-3 max-h-[calc(100dvh-120px)] w-full max-w-[1380px] overflow-y-auto rounded-[28px] border border-slate-200/80 bg-white/95 p-5 shadow-2xl backdrop-blur-xl lg:hidden"
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="mx-auto mt-2.5 flex max-h-[calc(100dvh-95px)] w-full max-w-[1380px] flex-col rounded-[24px] border border-slate-200/80 bg-white/95 p-3.5 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl sm:p-5 lg:hidden"
                 aria-label="Mobile navigation"
               >
-                <div className="flex flex-col gap-0">
-                  <ul className="space-y-1" role="list">
+                {/* Scrollable Nav Item Area */}
+                <div className="divide-y divide-slate-100 overflow-y-auto overscroll-contain pr-1">
+                  <ul className="space-y-1 pb-3" role="list">
                     {NAV_LINKS.map((link) => {
-                      const isDropdown =
-                        link.label === "AI Services" ||
-                        link.label === "Industries";
                       const isSubmenuOpen = mobileSubmenuOpen === link.label;
 
-                      if (isDropdown) {
-                        const items =
-                          link.label === "AI Services"
-                            ? AI_SERVICES_ITEMS
-                            : INDUSTRIES_ITEMS;
+                      if (link.hasDropdown) {
+                        const items = getActiveMenuItems(link.label);
 
                         return (
-                          <li key={link.href} className="flex flex-col">
+                          <li key={link.label} className="flex flex-col">
                             <button
+                              type="button"
                               onClick={() => toggleMobileSubmenu(link.label)}
-                              className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-[#0053FA]"
+                              className={cn(
+                                "flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors sm:text-base",
+                                isSubmenuOpen
+                                  ? "bg-blue-50/70 text-[#0053FA]"
+                                  : "text-slate-800 hover:bg-slate-50",
+                              )}
                             >
                               <span>{link.label}</span>
                               <ChevronDown
                                 className={cn(
                                   "size-4 shrink-0 transition-transform duration-200",
-                                  isSubmenuOpen && "rotate-180 text-[#0053FA]",
+                                  isSubmenuOpen
+                                    ? "rotate-180 text-[#0053FA]"
+                                    : "text-slate-400",
                                 )}
                               />
                             </button>
 
-                            {/* Mobile Accordion Submenu */}
+                            {/* Accordion List */}
                             <AnimatePresence>
                               {isSubmenuOpen && (
                                 <motion.div
@@ -438,9 +511,9 @@ export function Navbar() {
                                   animate={{ opacity: 1, height: "auto" }}
                                   exit={{ opacity: 0, height: 0 }}
                                   transition={{ duration: 0.2 }}
-                                  className="overflow-hidden pr-2 pl-4"
+                                  className="overflow-hidden"
                                 >
-                                  <div className="flex flex-col gap-1 py-2">
+                                  <div className="my-1.5 space-y-1 rounded-xl border border-slate-100 bg-slate-50/70 p-1.5 pl-2">
                                     {items.map((item) => {
                                       const Icon = item.icon;
                                       return (
@@ -448,12 +521,19 @@ export function Navbar() {
                                           key={item.title}
                                           href={item.href}
                                           onClick={closeMenu}
-                                          className="flex items-center gap-3 rounded-lg p-2 text-sm text-slate-700 hover:bg-slate-100"
+                                          className="flex items-start gap-2.5 rounded-lg p-2 transition-colors hover:bg-white active:bg-white"
                                         >
-                                          <Icon className="size-4 text-blue-600" />
-                                          <span className="font-medium">
-                                            {item.title}
-                                          </span>
+                                          <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-blue-600 shadow-xs">
+                                            <Icon className="size-3.5" />
+                                          </div>
+                                          <div className="flex flex-col">
+                                            <span className="text-xs font-semibold text-slate-800 sm:text-sm">
+                                              {item.title}
+                                            </span>
+                                            <span className="line-clamp-1 text-[11px] text-slate-500">
+                                              {item.description}
+                                            </span>
+                                          </div>
                                         </Link>
                                       );
                                     })}
@@ -466,37 +546,36 @@ export function Navbar() {
                       }
 
                       return (
-                        <li key={link.href}>
+                        <li key={link.label}>
                           <Link
                             href={link.href}
                             className={cn(
-                              "flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold transition-colors",
+                              "flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors sm:text-base",
                               pathname === link.href
-                                ? "bg-slate-100 text-[#0053FA]"
+                                ? "bg-blue-50/80 font-bold text-[#0053FA]"
                                 : "text-slate-800 hover:bg-slate-50 hover:text-[#0053FA]",
                             )}
                             onClick={closeMenu}
                           >
-                            <span className="whitespace-nowrap">
-                              {link.label}
-                            </span>
-                            <ArrowRight className="size-4 shrink-0 opacity-40" />
+                            <span>{link.label}</span>
+                            <ArrowRight className="size-3.5 shrink-0 opacity-40" />
                           </Link>
                         </li>
                       );
                     })}
                   </ul>
 
-                  <div className="mt-2 border-t border-slate-100 pt-4">
+                  {/* Fixed Bottom Action Button Area */}
+                  <div className="pt-3">
                     <Button
                       asChild
-                      className="w-full gap-3 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] px-6 py-6 text-white shadow-md"
+                      className="w-full gap-2 rounded-full border-b-4 border-black bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] px-5 py-5 text-xs font-semibold text-white shadow-md active:translate-y-0.5 sm:py-6 sm:text-sm"
                     >
                       <Link
                         href={ROUTES.contact || "/contact"}
                         onClick={closeMenu}
                       >
-                        Book a discovery call{" "}
+                        Book a discovery call
                         <ArrowRight className="ml-1 size-4 shrink-0" />
                       </Link>
                     </Button>

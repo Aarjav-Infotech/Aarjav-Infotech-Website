@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { asset } from "@/lib/cdn";
+
 export interface LayerData {
   id: string;
   layerNumber: string;
@@ -27,7 +29,7 @@ const LAYERS: LayerData[] = [
       "Competitors' agents, no lock-in required",
     ],
     tags: ["AWS Bedrock", "Azure AI", "GCP Vertex", "LangChain", "On-prem"],
-    iconSrc: "/images/layer-1.svg",
+    iconSrc: asset("/images/layer-1.svg"),
   },
   {
     id: "layer-02",
@@ -41,7 +43,7 @@ const LAYERS: LayerData[] = [
       "Zero-trust credential delegation",
     ],
     tags: ["OAuth2", "Vault", "IAM", "Compliance"],
-    iconSrc: "/images/layer-2.svg",
+    iconSrc: asset("/images/layer-2.svg"),
   },
   {
     id: "layer-03",
@@ -55,7 +57,7 @@ const LAYERS: LayerData[] = [
       "Sub-second execution speeds",
     ],
     tags: ["LlamaIndex", "AutoGPT", "FastAPI"],
-    iconSrc: "/images/layer-3.svg",
+    iconSrc: asset("/images/layer-3.svg"),
   },
   {
     id: "layer-04",
@@ -69,7 +71,7 @@ const LAYERS: LayerData[] = [
       "Real-time ETL data pipelines",
     ],
     tags: ["Pinecone", "Unstructured", "Milvus"],
-    iconSrc: "/images/layer-4.svg",
+    iconSrc: asset("/images/layer-4.svg"),
   },
   {
     id: "layer-05",
@@ -83,7 +85,7 @@ const LAYERS: LayerData[] = [
       "Privacy-first memory encryption",
     ],
     tags: ["Neo4j", "Redis", "MemGPT"],
-    iconSrc: "/images/layer-5.svg",
+    iconSrc: asset("/images/layer-5.svg"),
   },
   {
     id: "layer-06",
@@ -97,7 +99,7 @@ const LAYERS: LayerData[] = [
       "Full rollback & undo history",
     ],
     tags: ["Zapier", "REST APIs", "Playwright"],
-    iconSrc: "/images/layer-6.svg",
+    iconSrc: asset("/images/layer-6.svg"),
   },
   {
     id: "layer-07",
@@ -111,7 +113,7 @@ const LAYERS: LayerData[] = [
       "Custom telemetry webhooks",
     ],
     tags: ["Datadog", "OpenTelemetry", "PostHog"],
-    iconSrc: "/images/layer-7.svg",
+    iconSrc: asset("/images/layer-7.svg"),
   },
 ];
 
@@ -189,7 +191,12 @@ export function AgenticStackSection() {
     >
       <div className="relative mx-auto flex w-full max-w-full flex-col justify-center lg:sticky lg:top-8 lg:min-h-[calc(100vh-4rem)]">
         {/* Outer Container */}
-        <div className="relative overflow-hidden rounded-[24px] bg-[url('/images/layersection-bg.svg')] bg-cover bg-center bg-no-repeat p-5 sm:rounded-[32px] sm:p-8 lg:p-12">
+        <div
+          className="relative overflow-hidden rounded-[24px] bg-cover bg-center bg-no-repeat p-5 sm:rounded-[32px] sm:p-8 lg:p-12"
+          style={{
+            backgroundImage: `url(${asset("/images/layersection-bg.svg")})`,
+          }}
+        >
           {/* Header */}
           <div className="mx-auto mb-6 flex max-w-3xl flex-col items-center text-center sm:mb-10">
             <div className="text-basic mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-[14px]">
@@ -271,10 +278,10 @@ export function AgenticStackSection() {
                             stiffness: 350,
                             damping: 30,
                           }}
-                          className="pointer-events-none absolute top-1/2 left-[95%] z-40 flex -translate-y-1/2 items-center"
+                          className="pointer-events-none absolute top-1/2 left-[105%] z-40 flex -translate-y-1/2 items-center"
                         >
                           <div className="size-2.5 rounded-full bg-[#002688] shadow-sm ring-4 ring-blue-100" />
-                          <div className="h-[2px] w-40 border-t-2 border-dotted border-[#002688]" />
+                          <div className="border-rgba(199, 196, 217, 1) h-[3px] w-40 border-t-2 border-dashed" />
                         </motion.div>
                       )}
                     </div>
@@ -296,12 +303,12 @@ export function AgenticStackSection() {
                     className="flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center gap-2.5 font-extrabold tracking-widest text-[#002688]">
-                        <span className="h-4 w-1 rounded-full bg-[#002688]" />
+                      <div className="flex items-center gap-2.5 bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] bg-clip-text text-xl font-bold tracking-[3.5px] text-transparent">
+                        <span className="h-4 w-1 rounded-full bg-gradient-to-b from-[rgb(9,30,70)] to-[rgb(7,95,243)] shadow-[0_0_12px_rgba(7,95,243,0.8)]" />
                         {currentData.layerNumber}
                       </div>
 
-                      <h3 className="text-basic mt-3 font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+                      <h3 className="text-basic mt-3 font-bold tracking-[0.5px] text-slate-900 sm:text-2xl lg:text-3xl">
                         {currentData.title}
                       </h3>
 
@@ -323,9 +330,9 @@ export function AgenticStackSection() {
                       {currentData.tags.map((tag, idx) => (
                         <span
                           key={idx}
-                          className="inline-block rounded-full bg-gradient-to-b from-[#0031a5] to-[#0052e0] p-[3px]"
+                          className="inline-block rounded-full bg-gradient-to-b from-[#0031a5] to-[#0052e0] p-[2px] font-light"
                         >
-                          <span className="block rounded-full bg-white px-2.5 py-1 font-semibold text-[#2B2BAD] sm:px-4 sm:py-1.5">
+                          <span className="block rounded-full bg-[#ffffffe6] px-2.5 py-1 font-semibold text-[#2B2BAD] sm:px-4 sm:py-1.5">
                             {tag}
                           </span>
                         </span>
