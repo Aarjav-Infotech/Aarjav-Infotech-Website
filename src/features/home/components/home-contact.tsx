@@ -2,9 +2,8 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { Mail, Headphones, Paperclip, ArrowUpRight } from "lucide-react";
+import { Mail, Headphones, ArrowUpRight } from "lucide-react";
 import { asset } from "@/lib/cdn";
-import { CONTACT_INFO } from "@/lib/constants";
 import { submitContactForm } from "@/lib/contact";
 
 const HOME_CONTACT_FORM_KEY = "aarjav_home_contact_submission";
@@ -112,7 +111,7 @@ export function ContactSection({
     emailOrPhone: "",
     projectDetails: "",
   });
-  const [fileName, setFileName] = useState<string | null>(null);
+  // const [fileName, setFileName] = useState<string | null>(null);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -123,11 +122,11 @@ export function ContactSection({
     setIsSubmitted(Boolean(getStoredSubmission()));
   }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-    }
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setFileName(e.target.files[0].name);
+  //   }
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,13 +140,13 @@ export function ContactSection({
       return;
     }
 
-    if (fileName) {
-      setStatus("error");
-      setStatusMessage(
-        `File attachments are not supported in the online form yet. Please email ${CONTACT_INFO.email} directly with your files.`,
-      );
-      return;
-    }
+    // if (fileName) {
+    //   setStatus("error");
+    //   setStatusMessage(
+    //     `File attachments are not supported in the online form yet. Please email ${CONTACT_INFO.email} directly with your files.`,
+    //   );
+    //   return;
+    // }
 
     const trimmedName = formData.name.trim();
     const trimmedProject = formData.projectDetails.trim();
@@ -194,7 +193,7 @@ export function ContactSection({
         setStatus("success");
         setStatusMessage("Thanks for submitting — we will get back to you!");
         setFormData({ name: "", emailOrPhone: "", projectDetails: "" });
-        setFileName(null);
+        // setFileName(null);
         setIsSubmitted(true);
         return;
       }
@@ -385,7 +384,7 @@ export function ContactSection({
                         />
                       </div>
 
-                      <div className="mt-1">
+                      {/* <div className="mt-1">
                         <label className="inline-flex cursor-pointer items-center gap-2 text-xs font-bold text-slate-900 transition hover:opacity-80 sm:text-sm">
                           <Paperclip className="size-4 shrink-0" />
                           <span className="truncate">
@@ -397,7 +396,7 @@ export function ContactSection({
                             className="hidden"
                           />
                         </label>
-                      </div>
+                      </div> */}
 
                       {statusMessage && (
                         <p
