@@ -65,6 +65,8 @@ export function getOrganizationJsonLd() {
 }
 
 export function getWebSiteJsonLd() {
+  // Do not add SearchAction / potentialAction. Google crawls the template
+  // URL `/?q={search_term_string}` as a real page when sitelinks search is set.
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",

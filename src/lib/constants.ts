@@ -1,10 +1,17 @@
 import { MOTION } from "./theme";
+import { joinOriginAndPath, normalizeOrigin } from "./seo";
 
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME ?? "Aarjav Infotech";
 
-/** Canonical public origin used in sitemap, robots, Open Graph, and JSON-LD. */
-export const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://aarjavinfotech.com";
+/** Canonical public origin: apex, HTTPS, no trailing slash. */
+export const APP_URL = normalizeOrigin(
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://aarjavinfotech.com",
+);
+
+/** Absolute URL for a site path (`/` → origin, `/about` → origin/about). */
+export function canonicalUrl(path = ""): string {
+  return joinOriginAndPath(APP_URL, path);
+}
 
 export const APP_DESCRIPTION =
   "Aarjav Infotech is an AI-native agency in Surat, India that designs and deploys secure enterprise AI agents, workflow automation, document processing, and voice AI for regulated industries.";

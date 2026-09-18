@@ -25,7 +25,13 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        headers: [{ key: "Vary", value: "Accept, Accept-Encoding" }],
+        headers: [
+          { key: "Vary", value: "Accept, Accept-Encoding" },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains",
+          },
+        ],
       },
     ];
   },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { APP_DESCRIPTION, APP_NAME, APP_URL } from "./constants";
+import { APP_DESCRIPTION, APP_NAME, APP_URL, canonicalUrl } from "./constants";
 import { getOpenGraphImageForPath } from "./opengraph-images";
 
 export interface PageMetadataOptions {
@@ -19,7 +19,7 @@ export function createMetadata({
   noIndex = false,
 }: PageMetadataOptions = {}): Metadata {
   const pageTitle = title ? `${title} | ${APP_NAME}` : APP_NAME;
-  const url = `${APP_URL}${path}`;
+  const url = canonicalUrl(path);
   const ogImage = getOpenGraphImageForPath(path);
 
   return {

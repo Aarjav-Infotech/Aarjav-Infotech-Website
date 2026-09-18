@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_APP_URL: z.string().url(),
+  NEXT_PUBLIC_APP_URL: z
+    .string()
+    .url()
+    .transform((value) => value.replace(/\/+$/, "")),
   NEXT_PUBLIC_APP_NAME: z.string().min(1),
   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: z.string().optional(),
   NEXT_PUBLIC_CDN_URL: z.union([z.string().url(), z.literal("")]).optional(),

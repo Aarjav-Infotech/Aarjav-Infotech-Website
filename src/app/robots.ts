@@ -4,11 +4,14 @@ import { APP_URL } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: ["/", "/images/"],
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: ["/", "/images/"],
+        disallow: ["/api/", "/mcp", "/*?q=", "/*?*q=*"],
+      },
+    ],
     sitemap: `${APP_URL}/sitemap.xml`,
-    host: APP_URL,
+    host: new URL(APP_URL).host,
   };
 }

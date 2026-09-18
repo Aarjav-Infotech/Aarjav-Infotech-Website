@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 
-import { APP_URL, ROUTES } from "@/lib/constants";
+import { ROUTES, canonicalUrl } from "@/lib/constants";
 import { INDEXABLE_PATHS } from "@/lib/site-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   return INDEXABLE_PATHS.map((path) => ({
-    url: `${APP_URL}${path === "/" ? "" : path}`,
+    url: canonicalUrl(path),
     lastModified,
     changeFrequency: "monthly" as const,
     priority:

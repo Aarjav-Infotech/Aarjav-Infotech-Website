@@ -4,7 +4,16 @@ import { describe, it } from "node:test";
 import { preferredType, parseAccept } from "./accept.ts";
 import { CONTACT_INFO, HOME_SSR_COPY } from "./constants.ts";
 import { contactPhoneHref, formatContactAddress } from "./contact.ts";
-import { getFaqJsonLd, getOrganizationJsonLd } from "./json-ld.ts";
+import {
+  getFaqJsonLd,
+  getOrganizationJsonLd,
+  getWebSiteJsonLd,
+} from "./json-ld.ts";
+import {
+  getSeoRedirectUrl,
+  joinOriginAndPath,
+  normalizeOrigin,
+} from "./seo.ts";
 import {
   getLlmsTxt,
   getMarkdownForPath,
@@ -119,6 +128,51 @@ describe("JSON-LD organization", () => {
     assert.equal(faq["@type"], "FAQPage");
     assert.ok(Array.isArray(faq.mainEntity) && faq.mainEntity.length >= 4);
   });
+
+  it("does not advertise a sitelinks SearchAction", () => {
+    const site = getWebSiteJsonLd();
+    assert.equal("potentialAction" in site, false);
+    assert.equal(JSON.stringify(site).includes("search_term_string"), false);
+  });
+});
+
+describe("SEO URL helpers", () => {
+  it("strips trailing slashes from the public origin", () => {
+    assert.equal(
+      normalizeOrigin("https://aarjavinfotech.com/"),
+      "https://aarjavinfotech.com",
+    );
+    assert.equal(
+      joinOriginAndPath("https://aarjavinfotech.com/", "/about"),
+      "https://aarjavinfotech.com/about",
+    );
+    assert.equal(
+      joinOriginAndPath("https://aarjavinfotech.com/", "/"),
+      "https://aarjavinfotech.com",
+    );
+  });
+
+  it("301s www, leftover sitelinks search, and double-slash paths to apex", () => {
+    const search = getSeoRedirectUrl(
+      new URL("https://www.aarjavinfotech.com/?q={search_term_string}"),
+    );
+    assert.equal(search?.href, "https://aarjavinfotech.com/");
+
+    const wwwHome = getSeoRedirectUrl(
+      new URL("https://www.aarjavinfotech.com/about"),
+    );
+    assert.equal(wwwHome?.href, "https://aarjavinfotech.com/about");
+
+    const doubles = getSeoRedirectUrl(
+      new URL("https://aarjavinfotech.com//about"),
+    );
+    assert.equal(doubles?.href, "https://aarjavinfotech.com/about");
+
+    assert.equal(
+      getSeoRedirectUrl(new URL("https://aarjavinfotech.com/")),
+      null,
+    );
+  });
 });
 
 describe("indexable sitemap paths", () => {
@@ -137,6 +191,10 @@ describe("metadata", () => {
       String(meta.alternates?.canonical).startsWith(
         "https://aarjavinfotech.com",
       ),
+    );
+    assert.equal(
+      String(meta.alternates?.canonical).includes("aarjavinfotech.com//"),
+      false,
     );
     assert.equal(meta.alternates?.canonical, meta.openGraph?.url);
     const og = meta.openGraph as {

@@ -2,6 +2,8 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { appendVaryAccept, preferredType } from "@/lib/accept";
+import { APP_URL } from "@/lib/constants";
+import { getSeoRedirectUrl } from "@/lib/seo";
 
 function isStaticAsset(pathname: string): boolean {
   // .md is negotiated content, not a static file
@@ -11,6 +13,13 @@ function isStaticAsset(pathname: string): boolean {
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  const seoRedirect = getSeoRedirectUrl(req.nextUrl, APP_URL);
+  if (seoRedirect) {
+    const redirected = NextResponse.redirect(seoRedirect, 301);
+    appendVaryAccept(redirected.headers);
+    return redirected;
+  }
 
   // Explicit .md sibling URLs always serve Markdown (before static-asset skip).
   if (pathname.endsWith(".md")) {

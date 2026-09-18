@@ -3,7 +3,7 @@ import { Urbanist, Hubot_Sans } from "next/font/google";
 
 import { SiteLayout } from "@/components/layout/site-layout";
 import { asset } from "@/lib/cdn";
-import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
+import { APP_DESCRIPTION, APP_NAME, APP_URL } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { BRAND } from "@/lib/theme";
 import "@/styles/globals.css";
@@ -60,7 +60,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: APP_NAME,
-  url: "https://aarjavinfotech.com",
+  url: APP_URL,
   logo: asset("/images/logo.png"),
 };
 
