@@ -4,19 +4,19 @@ import React from "react";
 import Image from "next/image";
 import { asset } from "@/lib/cdn";
 
-interface VaniSahayAboutProductProps {
+interface DhvaneeAboutProductProps {
   bgImageSrc?: string;
   containerImageSrc?: string;
   phishingCardSrc?: string;
   autoTranslateCardSrc?: string;
 }
 
-export default function VaniSahayAboutProductSection({
+export default function DhvaneeAboutProductSection({
   bgImageSrc = asset("/images/vani-about-bg.svg"),
   containerImageSrc = asset("/images/vani-chat-container.svg"),
   phishingCardSrc = asset("/images/phishing-risk-card.svg"),
   autoTranslateCardSrc = asset("/images/auto-translate-card.svg"),
-}: VaniSahayAboutProductProps) {
+}: DhvaneeAboutProductProps) {
   const eyebrow = "About Product";
 
   return (

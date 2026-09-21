@@ -79,10 +79,10 @@ const AI_SERVICES_ITEMS = [
 const DIGITAL_PRODUCTS_ITEMS = [
   {
     icon: Bot,
-    title: "Vani Sahay",
+    title: "Dhvanee",
     description:
       "Multilingual AI companion for digital financial security and fraud defense",
-    href: "/our-products/vani-sahay",
+    href: "/our-products/dhvanee",
   },
   {
     icon: Gem,

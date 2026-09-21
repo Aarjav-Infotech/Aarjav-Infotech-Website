@@ -119,6 +119,33 @@ const CASE_STUDIES: CaseStudyItem[] = [
       { value: "Custom", label: "AI ENGINE" },
     ],
   },
+  {
+    id: "zeeva-chemical-llp",
+    number: "04",
+    title: "Delfa Pattern Generator",
+    tags: ["NEXT.JS", "MACHINE LEARNING", "GAN", "PYTHON", "AI PLATFORM"],
+    subtitle: "AI-Powered Textile Design Platform",
+    description:
+      "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
+    imageSrc: asset("/images/case-studys-3.svg"),
+    imageAlt: "Delfa Pattern Generator Preview",
+    industry: "AI & Textile Technology",
+    technologies: ["Next.js", "Adobe Inc.", "UX & UI", "Brand Design"],
+    projectDetailsText: [
+      "An end-to-end web platform leveraging generative adversarial networks (GANs) to assist textile designers in instantly creating high-resolution patterns.",
+    ],
+    projectResearchText: [
+      "Focused on reducing generative model inferencing latencies and creating an intuitive UI for layered color separation controls.",
+    ],
+    projectResultsText: [
+      "Accelerated designer turnaround time from days to minutes, processing thousands of generated variations daily.",
+    ],
+    metrics: [
+      { value: "Real-time", label: "PROCESSING" },
+      { value: "100%", label: "RESPONSIVE" },
+      { value: "Custom", label: "AI ENGINE" },
+    ],
+  },
 ];
 
 export function FeaturedWorksSection() {

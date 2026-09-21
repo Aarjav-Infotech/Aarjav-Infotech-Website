@@ -13,6 +13,7 @@ import BusinessIntelligenceSection from "@/features/our-products/heeraone/heerao
 import MovementProcessSection from "@/features/our-products/heeraone/heeraone-movement-section";
 import ConnectedEcosystemSection from "@/features/our-products/heeraone/heeraone-ecosystem-section";
 import AIBusinessAssistantSection from "@/features/our-products/heeraone/heeraone-ai-assistant-section";
+import { BusinessOperations } from "@/features/our-products/heeraone/heeraone-business-operations";
 import { asset } from "@/lib/cdn";
 
 const heeraOneHeroProps = {
@@ -45,6 +46,7 @@ export function HeeraOneContent() {
     <div className="relative w-full bg-white">
       <Hero {...heeraOneHeroProps} />
       <HeeraOneAboutSection />
+      <BusinessOperations />
       <BusinessIntelligenceSection />
       <MovementProcessSection />
       <ConnectedEcosystemSection />

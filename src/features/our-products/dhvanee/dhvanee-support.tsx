@@ -5,6 +5,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { asset } from "@/lib/cdn";
 
+export interface DhvaneeLanguageSupportProps {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+
 interface LanguagePill {
   label: string;
   className: string;
@@ -61,25 +67,32 @@ const languages: LanguagePill[] = [
   },
 ];
 
-export function VaniSahayLanguageSupport() {
+export function DhvaneeLanguageSupport({
+  eyebrow = "Language Support",
+  title = "Speak Your Language",
+  subtitle = "Financial security shouldn't be limited by language barriers. Vani Sahay understands and protects in multiple dialects.",
+}: DhvaneeLanguageSupportProps) {
   return (
     <section className="relative w-full overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center sm:mb-16">
-          <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-3.5 py-1 text-xs font-semibold text-[#0053FA]">
-            <span className="size-1.5 rounded-full bg-[#0053FA]" />
-            Language Support
-          </div>
+          {eyebrow && (
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-lg">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+              {eyebrow}
+            </div>
+          )}
 
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-[46px] lg:leading-tight">
-            Speak Your Language
+            {title}
           </h2>
 
-          <p className="mt-3 max-w-[560px] text-xs leading-relaxed text-slate-500 sm:mt-4 sm:text-sm md:text-base">
-            Financial security shouldn&apos;t be limited by language barriers.
-            Vani Sahay understands and protects in multiple dialects.
-          </p>
+          {subtitle && (
+            <p className="mt-3 max-w-[560px] text-xs leading-relaxed text-slate-500 sm:mt-4 sm:text-sm md:text-base">
+              {subtitle}
+            </p>
+          )}
         </div>
 
         {/* Orbit Area with Radial Soft Blue Glow */}
@@ -149,4 +162,4 @@ export function VaniSahayLanguageSupport() {
   );
 }
 
-export default VaniSahayLanguageSupport;
+export default DhvaneeLanguageSupport;

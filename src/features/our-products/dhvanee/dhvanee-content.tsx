@@ -7,11 +7,11 @@ import {
 } from "@/components/common/hero-floating-icons";
 import { ContactSection } from "@/features/home/components/home-contact";
 import { HomeFaq } from "@/features/home/components/home-faq";
-import HowVaniSahayWorksSection from "./vaani-sahay-process";
-import VaniSahayAboutProductSection from "./vaani-sahay-products";
-import ComprehensiveAssistanceSection from "./vaani-sahay-features";
-import VaniSahayLanguageSupport from "./vaani-sahay-support";
-import EnterpriseTrustSection from "./vaani-sahay-security";
+import HowDhvaneeWorksSection from "./dhvanee-process";
+import DhvaneeAboutProductSection from "./dhvanee-products";
+import ComprehensiveAssistanceSection from "./dhvanee-features";
+import DhvaneeLanguageSupport from "./dhvanee-support";
+import EnterpriseTrustSection from "./dhvanee-security";
 import { asset } from "@/lib/cdn";
 
 const aiVoiceHeroProps = {
@@ -43,10 +43,10 @@ export function AIVoiceContent() {
   return (
     <>
       <Hero {...aiVoiceHeroProps} />
-      <VaniSahayAboutProductSection />
+      <DhvaneeAboutProductSection />
       <ComprehensiveAssistanceSection />
-      <VaniSahayLanguageSupport />
-      <HowVaniSahayWorksSection />
+      <DhvaneeLanguageSupport />
+      <HowDhvaneeWorksSection />
       <EnterpriseTrustSection />
       <HomeFaq />
       <ContactSection />

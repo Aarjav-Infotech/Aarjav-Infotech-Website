@@ -3,7 +3,7 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
 
-export default function HowVaniSahayWorksSection() {
+export default function HowDhvaneeWorksSection() {
   const eyebrow = "The process we follow";
 
   const steps = [
@@ -42,7 +42,7 @@ export default function HowVaniSahayWorksSection() {
           {/* Section Header */}
           <div className="mb-12 flex flex-col items-center text-center sm:mb-16 md:mb-20">
             {eyebrow && (
-              <div className="text-basic mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-bold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-[14px]">
+              <div className="text-basic mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-bold text-[#2b2bad] shadow-xs sm:mb-6 sm:border-b-4 sm:text-lg">
                 <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
                 {eyebrow}
               </div>
