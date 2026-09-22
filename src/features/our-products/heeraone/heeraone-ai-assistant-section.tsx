@@ -43,7 +43,7 @@ export default function AIBusinessAssistantSection({
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           {eyebrow && (
-            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-[14px]">
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-lg">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>
@@ -74,12 +74,12 @@ export default function AIBusinessAssistantSection({
 
               {/* AI Response */}
               <div className="flex items-start gap-3">
-                <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0038b8] p-1.5 text-white shadow-sm">
+                <div className="relative flex h-14 w-14 shrink-0 items-center justify-center p-1.5">
                   <Image
-                    src={asset("/images/ai-avatar.svg")}
+                    src={asset("/icons/avatar-robot.svg")}
                     alt="AI Avatar"
-                    width={20}
-                    height={20}
+                    width={32}
+                    height={32}
                     className="h-full w-full object-contain"
                   />
                 </div>

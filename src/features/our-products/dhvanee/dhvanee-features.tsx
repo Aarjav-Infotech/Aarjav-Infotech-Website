@@ -4,6 +4,12 @@ import React from "react";
 import Image from "next/image";
 import { asset } from "@/lib/cdn";
 
+export interface ComprehensiveAssistanceProps {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+
 interface AssistanceCard {
   title: string;
   description: string;
@@ -91,25 +97,32 @@ const assistanceCards: AssistanceCard[] = [
   },
 ];
 
-export function ComprehensiveAssistanceSection() {
+export function ComprehensiveAssistanceSection({
+  eyebrow = "All-in-one Support",
+  title = "Comprehensive AI Financial Assistance",
+  subtitle = "Intelligent support for every financial need, all in one secure place.",
+}: ComprehensiveAssistanceProps) {
   return (
     <section className="relative w-full bg-white px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 lg:px-8">
       <div className="mx-auto max-w-[1240px]">
         {/* Section Header */}
         <div className="mx-auto mb-8 flex max-w-2xl flex-col items-center text-center sm:mb-12 md:mb-14">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50/70 px-3.5 py-1 text-base font-semibold text-[#0053FA] sm:mb-4 sm:text-base">
-            <span className="size-1.5 rounded-full bg-[#0053FA]" />
-            All-in-one Support
-          </div>
+          {eyebrow && (
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-lg">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
+              {eyebrow}
+            </div>
+          )}
 
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-[42px] lg:leading-[1.18]">
-            Comprehensive AI Financial Assistance
+            {title}
           </h2>
 
-          <p className="mt-2.5 max-w-[520px] text-base leading-relaxed text-slate-500 sm:mt-4 sm:text-base md:text-base">
-            Intelligent support for every financial need, all in one secure
-            place.
-          </p>
+          {subtitle && (
+            <p className="mt-2.5 max-w-[520px] text-base leading-relaxed text-slate-500 sm:mt-4 sm:text-base md:text-base">
+              {subtitle}
+            </p>
+          )}
         </div>
 
         {/* 5-Card Bento Grid */}
