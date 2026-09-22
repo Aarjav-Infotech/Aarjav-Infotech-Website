@@ -74,12 +74,12 @@ export default function AIBusinessAssistantSection({
 
               {/* AI Response */}
               <div className="flex items-start gap-3">
-                <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0038b8] p-1.5 text-white shadow-sm">
+                <div className="relative flex h-14 w-14 shrink-0 items-center justify-center p-1.5">
                   <Image
-                    src={asset("/images/ai-avatar.svg")}
+                    src={asset("/icons/avatar-robot.svg")}
                     alt="AI Avatar"
-                    width={20}
-                    height={20}
+                    width={32}
+                    height={32}
                     className="h-full w-full object-contain"
                   />
                 </div>

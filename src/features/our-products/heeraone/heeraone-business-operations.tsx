@@ -153,7 +153,7 @@ export function BusinessOperations({
 }: BusinessOperationsProps) {
   return (
     <section className="relative w-full bg-white px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
