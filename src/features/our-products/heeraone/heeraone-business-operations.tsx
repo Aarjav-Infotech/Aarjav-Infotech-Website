@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
+import { asset } from "@/lib/cdn";
 
 export interface BusinessOperationsProps {
   eyebrow?: string;
@@ -19,7 +20,7 @@ interface OperationCard {
 
 const operations: OperationCard[] = [
   {
-    iconSrc: "/icons/purchase.svg",
+    iconSrc: asset("/icons/purchase.svg"),
     title: "Purchase",
     description:
       "Manage rough and polished sourcing with multi-currency vendor ledgers.",
@@ -30,7 +31,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/icons/assortment.svg",
+    iconSrc: asset("/icons/assortment.svg"),
     title: "Assortment",
     description:
       "Grade, sort, and mix parcels with complete traceability and cost allocation.",
@@ -48,7 +49,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/icons/manufacturing.svg",
+    iconSrc: asset("/icons/Manufacturing.svg"),
     title: "Manufacturing",
     description:
       "Track yield, labor costs, and stages from rough planning to final polish.",
@@ -61,19 +62,19 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/icons/stock.svg",
+    iconSrc: asset("/icons/stock.svg"),
     title: "Stock Management",
     description:
       "Real-time vault control, memo tracking, and automated Rapaport pricing.",
     badge: (
-      <div className="text-[14px]] flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between text-[14px]">
         <span className="text-black">Total Carats</span>
         <span className="font-semibold text-[#2b2bad]">4,521.80 ct</span>
       </div>
     ),
   },
   {
-    iconSrc: "/icons/sales.svg",
+    iconSrc: asset("/icons/sales.svg"),
     title: "Sales",
     description:
       "B2B portal, retail POS, invoicing, and customer relationship management.",
@@ -84,19 +85,18 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/icons/finance.svg",
+    iconSrc: asset("/icons/finance.svg"),
     title: "Finance",
     description:
       "Integrated accounting, P&L reporting, and multi-currency exchange handling.",
     badge: (
       <div className="inline-flex items-center gap-1 text-[14px] font-semibold text-[#2b2bad]">
-        <span className="text-[14px]"></span>
         <span>+12.5%</span>
       </div>
     ),
   },
   {
-    iconSrc: "/icons/team.svg",
+    iconSrc: asset("/icons/teams.svg"),
     title: "Team & Permissions",
     description:
       "Granular role-based access control for branches, departments, and external partners.",
@@ -117,12 +117,12 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/icons/audit.svg",
+    iconSrc: asset("/icons/audit.svg"),
     title: "Activity Audit",
     description:
       "Immutable logs of every transaction, stone movement, and price change.",
     badge: (
-      <div className="border-l-2.5 flex items-center gap-2 border-[#2b2bad] pl-2 text-[14px] text-slate-600">
+      <div className="flex items-center gap-2 border-l-[2.5px] border-[#2b2bad] pl-2 text-[14px] text-slate-600">
         <span>Modified price on Stone #1204</span>
       </div>
     ),
@@ -204,6 +204,7 @@ export function BusinessOperations({
                     width={20}
                     height={20}
                     className="h-full w-full object-contain brightness-0 invert"
+                    unoptimized
                   />
                 </div>
 
