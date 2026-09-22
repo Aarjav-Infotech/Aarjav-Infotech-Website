@@ -19,7 +19,7 @@ interface OperationCard {
 
 const operations: OperationCard[] = [
   {
-    iconSrc: "/images/purchase.svg",
+    iconSrc: "/icons/purchase.svg",
     title: "Purchase",
     description:
       "Manage rough and polished sourcing with multi-currency vendor ledgers.",
@@ -30,7 +30,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/assortment.svg",
+    iconSrc: "/icons/assortment.svg",
     title: "Assortment",
     description:
       "Grade, sort, and mix parcels with complete traceability and cost allocation.",
@@ -48,7 +48,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/manufacturing.svg",
+    iconSrc: "/icons/manufacturing.svg",
     title: "Manufacturing",
     description:
       "Track yield, labor costs, and stages from rough planning to final polish.",
@@ -61,7 +61,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/stock.svg",
+    iconSrc: "/icons/stock.svg",
     title: "Stock Management",
     description:
       "Real-time vault control, memo tracking, and automated Rapaport pricing.",
@@ -73,7 +73,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/sales.svg",
+    iconSrc: "/icons/sales.svg",
     title: "Sales",
     description:
       "B2B portal, retail POS, invoicing, and customer relationship management.",
@@ -84,7 +84,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/finance.svg",
+    iconSrc: "/icons/finance.svg",
     title: "Finance",
     description:
       "Integrated accounting, P&L reporting, and multi-currency exchange handling.",
@@ -96,7 +96,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/team.svg",
+    iconSrc: "/icons/team.svg",
     title: "Team & Permissions",
     description:
       "Granular role-based access control for branches, departments, and external partners.",
@@ -117,7 +117,7 @@ const operations: OperationCard[] = [
     ),
   },
   {
-    iconSrc: "/images/audit.svg",
+    iconSrc: "/icons/audit.svg",
     title: "Activity Audit",
     description:
       "Immutable logs of every transaction, stone movement, and price change.",

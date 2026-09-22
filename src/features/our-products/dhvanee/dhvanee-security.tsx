@@ -16,21 +16,21 @@ const securityFeaturesRow1: SecurityFeature[] = [
     title: "Secure Conversations",
     description:
       "End-to-end encryption for all chat data. Personally Identifiable Information (PII) is automatically redacted before AI processing.",
-    iconSrc: asset("/images/security-icons-1.svg"),
+    iconSrc: asset("/icons/security-icons-1.svg"),
     iconAlt: "Secure Conversations Lock Icon",
   },
   {
     title: "Responsible AI",
     description:
       "Strict adherence to financial advisory guidelines. The AI is constrained to provide support and education, not financial advice.",
-    iconSrc: asset("/images/security-icons-2.svg"),
+    iconSrc: asset("/icons/security-icons-2.svg"),
     iconAlt: "Responsible AI Icon",
   },
   {
     title: "Human-in-the-Loop",
     description:
       "Seamless handoff to human support agents when high-risk scenarios are detected or user frustration is identified.",
-    iconSrc: asset("/images/security-icon-3.svg"),
+    iconSrc: asset("/icons/security-icons-3.svg"),
     iconAlt: "Human-in-the-Loop Support Icon",
   },
 ];
@@ -40,14 +40,14 @@ const securityFeaturesRow2: SecurityFeature[] = [
     title: "Continuous Intelligence",
     description:
       "Regularly updated threat models informed by the latest regional fraud patterns and banking advisories.",
-    iconSrc: asset("/images/security-icons-4.svg"),
+    iconSrc: asset("/icons/security-icons-4.svg"),
     iconAlt: "Continuous Intelligence Threat Model Icon",
   },
   {
     title: "Enterprise Integration",
     description:
       "Deployable within existing banking apps via SDKs or as a standalone WhatsApp integration. Fully compatible with major core banking and CRM systems.",
-    iconSrc: asset("/images/security-icons-5.svg"),
+    iconSrc: asset("/icons/security-icons-5.svg"),
     iconAlt: "Enterprise Integration Code Icon",
   },
 ];
