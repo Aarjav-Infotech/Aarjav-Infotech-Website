@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { asset } from "@/lib/cdn";
 
 interface CaseStudyItem {
@@ -355,18 +356,64 @@ const CASE_STUDIES: CaseStudyItem[] = [
   },
 ];
 
-export function FeaturedWorksSection() {
-  const [selectedCase, setSelectedCase] = useState<CaseStudyItem | null>(null);
+function FeaturedWorksContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const requestedId = searchParams.get("id");
 
-  // VIEW 2: CASE STUDY DETAIL VIEW (Triggered on 'Read More' click)
+  const [selectedCase, setSelectedCase] = useState<CaseStudyItem | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const projectDetailsRef = useRef<HTMLDivElement>(null);
+
+  // Auto-select and center project details when ?id= is passed from Home
+  useEffect(() => {
+    if (requestedId) {
+      const match = CASE_STUDIES.find((item) => item.id === requestedId);
+      if (match) {
+        setSelectedCase(match);
+        setTimeout(() => {
+          projectDetailsRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }, 100);
+      }
+    }
+  }, [requestedId]);
+
+  const handleSelectCase = (item: CaseStudyItem) => {
+    setSelectedCase(item);
+    router.replace(`/case-study?id=${item.id}`, { scroll: false });
+    setTimeout(() => {
+      projectDetailsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 60);
+  };
+
+  const handleBackToList = () => {
+    setSelectedCase(null);
+    router.replace("/case-study", { scroll: false });
+    setTimeout(() => {
+      sectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 40);
+  };
+
+  // VIEW 2: CASE STUDY DETAIL VIEW
   if (selectedCase) {
     return (
-      <section className="mx-auto max-w-[1180px] bg-white px-4 py-12 text-slate-900 sm:px-6 lg:px-8">
-        {/* Top Navigation: Go Back Button */}
+      <section
+        ref={sectionRef}
+        className="mx-auto max-w-[1180px] bg-white px-4 py-12 text-slate-900 sm:px-6 lg:px-8"
+      >
         <div className="mb-10 flex justify-start">
           <button
             type="button"
-            onClick={() => setSelectedCase(null)}
+            onClick={handleBackToList}
             className="group text-basic inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-[#F8F9FA] px-4 py-2 font-semibold text-slate-700 shadow-xs transition-colors hover:bg-slate-200 hover:text-slate-900"
           >
             <ArrowLeft className="size-4 text-[#0053FA] transition-transform group-hover:-translate-x-1" />
@@ -374,9 +421,11 @@ export function FeaturedWorksSection() {
           </button>
         </div>
 
-        {/* Project Details Grid (Image + Text) */}
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* Laptop Preview */}
+        {/* Project Details Grid (Targeted for exact center scroll) */}
+        <div
+          ref={projectDetailsRef}
+          className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12"
+        >
           <div className="relative h-[300px] w-full overflow-hidden rounded-[24px] sm:h-[380px] md:h-[420px] lg:col-span-6">
             <Image
               src={selectedCase.imageSrc}
@@ -387,7 +436,6 @@ export function FeaturedWorksSection() {
             />
           </div>
 
-          {/* Project Details Description */}
           <div className="flex flex-col justify-start space-y-4 text-left lg:col-span-6">
             <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
               Project Details
@@ -403,9 +451,7 @@ export function FeaturedWorksSection() {
           </div>
         </div>
 
-        {/* Technology Pills & Industry Row */}
         <div className="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
-          {/* Tech Badges with Outline Blue Style */}
           <div className="text-left lg:col-span-7">
             <span className="text-basic mb-3 block font-semibold text-[#64748B]">
               Technology
@@ -422,7 +468,6 @@ export function FeaturedWorksSection() {
             </div>
           </div>
 
-          {/* Solid Blue Industry Pill */}
           <div className="text-left lg:col-span-5">
             <span className="text-basic mb-3 block font-semibold tracking-wider text-[#64748B] uppercase">
               INDUSTRY
@@ -433,7 +478,6 @@ export function FeaturedWorksSection() {
           </div>
         </div>
 
-        {/* Project Research Section */}
         <div className="mt-14 space-y-4 text-left">
           <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
             Project Research
@@ -448,7 +492,6 @@ export function FeaturedWorksSection() {
           ))}
         </div>
 
-        {/* Project Results Section */}
         <div className="mt-14 space-y-4 text-left">
           <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
             Project Results
@@ -463,7 +506,6 @@ export function FeaturedWorksSection() {
           ))}
         </div>
 
-        {/* Metrics Bar with Vertical Dividers */}
         <div className="mt-16 border-t border-b border-slate-200 py-8">
           <div className="grid grid-cols-3 divide-x divide-slate-200">
             {selectedCase.metrics.map((metric) => (
@@ -484,8 +526,10 @@ export function FeaturedWorksSection() {
 
   // VIEW 1: CARDS LIST VIEW (Default View)
   return (
-    <section className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-      {/* Eyebrow Header */}
+    <section
+      ref={sectionRef}
+      className="mx-auto max-w-[1280px] scroll-mt-24 px-4 py-16 sm:px-6 md:py-24 lg:px-8"
+    >
       <div className="mb-12 flex flex-col items-center text-center md:mb-16">
         <span className="text-basic inline-block rounded-md border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold tracking-wide text-[#2b2bad] shadow-xl/20">
           Featured Works
@@ -502,7 +546,6 @@ export function FeaturedWorksSection() {
               key={item.id}
               className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-8"
             >
-              {/* Laptop Screenshot */}
               <div
                 className={`relative h-[280px] w-full overflow-hidden rounded-[28px] bg-slate-100 sm:h-[360px] md:h-[420px] lg:col-span-5 ${
                   isEven ? "lg:order-2" : "lg:order-1"
@@ -517,7 +560,6 @@ export function FeaturedWorksSection() {
                 />
               </div>
 
-              {/* Information Card */}
               <div
                 className={`flex flex-col justify-between rounded-[32px] bg-[#F3F4F6] p-6 sm:p-8 md:p-10 lg:col-span-7 lg:min-h-[420px] ${
                   isEven ? "lg:order-1" : "lg:order-2"
@@ -533,7 +575,6 @@ export function FeaturedWorksSection() {
                     </h3>
                   </div>
 
-                  {/* Badges */}
                   <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
                       <span
@@ -545,7 +586,6 @@ export function FeaturedWorksSection() {
                     ))}
                   </div>
 
-                  {/* Summary */}
                   <div className="space-y-2 border-l-5 border-white pt-2 pl-4">
                     <h4 className="text-base font-bold text-black md:text-xl">
                       {item.subtitle}
@@ -556,11 +596,10 @@ export function FeaturedWorksSection() {
                   </div>
                 </div>
 
-                {/* Read More Trigger */}
                 <div className="pt-6">
                   <button
                     type="button"
-                    onClick={() => setSelectedCase(item)}
+                    onClick={() => handleSelectCase(item)}
                     className="inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
                   >
                     <span>Read More</span>
@@ -573,6 +612,20 @@ export function FeaturedWorksSection() {
         })}
       </div>
     </section>
+  );
+}
+
+export function FeaturedWorksSection() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-20 text-center text-slate-400">
+          Loading case studies...
+        </div>
+      }
+    >
+      <FeaturedWorksContent />
+    </Suspense>
   );
 }
 

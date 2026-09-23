@@ -43,7 +43,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "Full", label: "Stack" },
     ],
     image: asset("/images/case-studys-1.svg"),
-    link: "/case-studies/sahaj-construction",
+    link: "/case-study?id=sahaj-construction",
   },
   {
     id: "glamora-jewels",
@@ -59,7 +59,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "Optimised", label: "SEO" },
     ],
     image: asset("/images/case-studys-2.svg"),
-    link: "/case-studies/glamora-jewels",
+    link: "/case-study?id=glamora-jewels",
   },
   {
     id: "delfa-pattern-generator",
@@ -75,7 +75,7 @@ const defaultProjects: CaseStudyItem[] = [
       { value: "Infinite", label: "Patterns" },
     ],
     image: asset("/images/case-studys-3.svg"),
-    link: "/case-studies/delfa-pattern-generator",
+    link: "/case-study?id=delfa-pattern-generator",
   },
 ];
 
@@ -164,7 +164,7 @@ export function HomeCaseStudies({
               size="lg"
               className="rounded-full bg-[linear-gradient(180deg,#0031a5_0%,#0052e0_100%)] px-6 font-bold text-white shadow-[0_6px_20px_rgba(0,49,165,0.35)] hover:opacity-95 sm:px-8"
             >
-              <Link href="/case-studies" className="flex items-center gap-2">
+              <Link href="/case-study" className="flex items-center gap-2">
                 View all Case studies
                 <ArrowRight className="size-4" />
               </Link>

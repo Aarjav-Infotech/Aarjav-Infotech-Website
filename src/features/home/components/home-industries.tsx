@@ -33,7 +33,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Real-Time Payment Processing",
       "Regulatory Compliance Automation",
     ],
-    link: "/solutions/banking",
+    link: "/industries/banking",
   },
   {
     id: "insurance",
@@ -50,7 +50,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Fraud Pattern Analytics",
       "Regulatory Auditing Tools",
     ],
-    link: "/solutions/insurance",
+    link: "/industries/insurance",
   },
   {
     id: "government",
@@ -67,7 +67,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Audit & Compliance Tracking",
       "Document Intelligence",
     ],
-    link: "/solutions/government",
+    link: "/industries/government",
   },
   {
     id: "healthcare",
@@ -84,7 +84,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Telehealth Extensions",
       "Diagnostic Assistant Tools",
     ],
-    link: "/solutions/healthcare",
+    link: "/industries/healthcare",
   },
   {
     id: "real-estate",
@@ -101,7 +101,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Portfolio Risk Analytics",
       "CRM & Lead Intelligence",
     ],
-    link: "/solutions/real-estate",
+    link: "/industries/real-estate",
   },
   {
     id: "industrial",
@@ -118,7 +118,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Factory Floor Insights",
       "Inventory Forecasting",
     ],
-    link: "/solutions/industrial",
+    link: "/industries/industrial",
   },
   {
     id: "enterprise",
@@ -135,7 +135,7 @@ const defaultIndustries: IndustrySolution[] = [
       "Data Warehouse Integration",
       "Legacy System Modernization",
     ],
-    link: "/solutions/enterprise",
+    link: "/industries/enterprise",
   },
 ];
 

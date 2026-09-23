@@ -120,17 +120,26 @@ export function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/ai-voice-agent"
+                      className="transition hover:text-white"
+                    >
                       AI Voice Agent Deployment
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/enterprise-ai-page"
+                      className="transition hover:text-white"
+                    >
                       Enterprise AI Ecosystem
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/services/ai-document-processing"
+                      className="transition hover:text-white"
+                    >
                       AI Document Processing
                     </Link>
                   </li>
@@ -144,32 +153,50 @@ export function Footer() {
                 </h4>
                 <ul className="mt-1 space-y-2 text-xs text-slate-200 sm:text-sm">
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/our-products/dhvanee"
+                      className="transition hover:text-white"
+                    >
                       AI Voice Agent Deployment
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/our-products/heeraone"
+                      className="transition hover:text-white"
+                    >
                       AI Diamond Stock Market Management
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/coming-soon"
+                      className="transition hover:text-white"
+                    >
                       AI Textile Management
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/coming-soon"
+                      className="transition hover:text-white"
+                    >
                       AI Construction
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/coming-soon"
+                      className="transition hover:text-white"
+                    >
                       AI BOQ Estimation Agent
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="transition hover:text-white">
+                    <Link
+                      href="/coming-soon"
+                      className="transition hover:text-white"
+                    >
                       AI Document Processing
                     </Link>
                   </li>

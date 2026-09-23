@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Hero } from "@/components/common/hero";
 import {
   HeroFloatingIcons,
@@ -21,6 +22,26 @@ import { HomeFaq } from "./home-faq";
 import { HomeArticles } from "./home-articles";
 
 export function HomeContent() {
+  useEffect(() => {
+    // Disable browser default scroll restoration
+    if (
+      typeof window !== "undefined" &&
+      "scrollRestoration" in window.history
+    ) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    // Instantly jump to top
+    window.scrollTo(0, 0);
+
+    // Backup timer to override any lower-section inputs trying to autofocus
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Hero
@@ -43,12 +64,12 @@ export function HomeContent() {
         actions={[
           {
             label: "Book a discovery call",
-            href: ROUTES.services,
+            href: ROUTES.contact,
             hasArrow: true,
           },
           {
             label: "View automation examples",
-            href: ROUTES.contact,
+            href: ROUTES.services,
             variant: "outline",
           },
         ]}
