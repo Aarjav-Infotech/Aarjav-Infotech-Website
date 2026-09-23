@@ -7,7 +7,7 @@ export const metadata: Metadata = createMetadata({
   title: "Support Triage and AI Ticketing",
   description:
     "Aarjav Infotech connects email, WhatsApp, and web channels to AI support triage and ticketing that classifies, responds, and resolves.",
-  path: "/services/support-triage-ticketing",
+  path: "/services/AI-Voice-Agent-Deployment",
 });
 
 export default function SupportTriagePage() {

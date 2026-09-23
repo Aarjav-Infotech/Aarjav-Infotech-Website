@@ -412,7 +412,7 @@ export function Navbar() {
                               : "/case-study"
                         }
                         onClick={closeMenu}
-                        className="group/preview block overflow-hidden rounded-2xl"
+                        className="group/preview block overflow-hidden"
                       >
                         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
                           <Image

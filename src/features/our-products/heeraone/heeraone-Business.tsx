@@ -61,12 +61,12 @@ export default function BusinessIntelligenceSection({
 
   return (
     <section className="relative w-full px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto">
+      <div className="mx-auto max-w-6xl">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           {/* Eyebrow Pill */}
           {eyebrow && (
-            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-lg">
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-[14px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>

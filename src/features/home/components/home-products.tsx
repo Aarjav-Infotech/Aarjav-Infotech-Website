@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { asset } from "@/lib/cdn";
@@ -11,6 +12,7 @@ export interface Product {
   title: string;
   workflow: string;
   result: string;
+  href?: string;
 }
 
 interface HomeProductsProps {
@@ -47,6 +49,7 @@ const defaultProducts: Product[] = [
     title: "AI Voice Agent Deployment",
     workflow: "Listen → Understand → Respond → Log",
     result: "24/7 customer support with faster resolution and higher CSAT.",
+    href: "/coming-soon",
   },
   {
     imageSrc: asset("/images/product-2.svg"),
@@ -54,6 +57,7 @@ const defaultProducts: Product[] = [
     title: "AI Diamond Stock Market Management",
     workflow: "Analyze → Forecast → Trade → Report",
     result: "Smarter trading decisions with real-time insights and accuracy.",
+    href: "/coming-soon",
   },
   {
     imageSrc: asset("/images/product-3.svg"),
@@ -61,6 +65,7 @@ const defaultProducts: Product[] = [
     title: "AI Textile Management",
     workflow: "Plan → Produce → Track → Optimise",
     result: "Smarter trading decisions with real-time insights and accuracy.",
+    href: "/coming-soon",
   },
   {
     imageSrc: asset("/images/product-4.svg"),
@@ -68,6 +73,7 @@ const defaultProducts: Product[] = [
     title: "AI Construction",
     workflow: "Plan → Allocate → Track → Report",
     result: "On-time project delivery with better resource utilisation.",
+    href: "/coming-soon",
   },
   {
     imageSrc: asset("/images/product-5.svg"),
@@ -75,6 +81,7 @@ const defaultProducts: Product[] = [
     title: "AI BOQ Estimation Agent",
     workflow: "Extract → Calculate → Estimate → Export",
     result: "Accurate BOQs in minutes, reducing manual effort by 80%.",
+    href: "/coming-soon",
   },
   {
     imageSrc: asset("/images/product-6.svg"),
@@ -82,6 +89,7 @@ const defaultProducts: Product[] = [
     title: "AI Document Processing",
     workflow: "Extract → Validate → Classify → Store",
     result: "99% data accuracy with zero manual data entry.",
+    href: "/coming-soon",
   },
 ];
 
@@ -167,7 +175,7 @@ export function HomeProducts({
                     />
                   </div>
 
-                  {/* Tags & Action Arrow Row */}
+                  {/* Tags & Action Arrow Link Row */}
                   <div className="mb-4 flex items-center justify-between gap-2">
                     <div className="flex flex-wrap items-center gap-1.5">
                       {product.tags?.map((tag) => (
@@ -180,12 +188,13 @@ export function HomeProducts({
                       ))}
                     </div>
 
-                    <button
-                      aria-label="View product details"
-                      className="flex h-8 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-600 transition-colors duration-200 hover:border-blue-600 hover:bg-[#2b2bad] hover:text-white sm:w-12"
+                    <Link
+                      href={product.href || "/coming-soon"}
+                      aria-label={`View details for ${product.title}`}
+                      className="flex h-8 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-600 transition-colors duration-200 hover:border-[#2b2bad] hover:bg-[#2b2bad] hover:text-white sm:w-12"
                     >
                       <MoveRight className="h-4 w-4" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
 

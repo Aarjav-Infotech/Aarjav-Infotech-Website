@@ -10,6 +10,13 @@ import { submitContactForm } from "@/lib/contact";
 const CONTACT_FORM_SESSION_KEY = "aarjav_contact_form_submission";
 const CONTACT_FORM_TTL_MS = 24 * 60 * 60 * 1000;
 
+const initialFormData = {
+  name: "",
+  email: "",
+  phone: "",
+  projectDetails: "",
+};
+
 function getStoredSubmission() {
   if (typeof window === "undefined") {
     return null;
@@ -47,12 +54,7 @@ interface ContactFormSectionProps {
 export function ContactFormSection({
   eyebrow = "Contact",
 }: ContactFormSectionProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    projectDetails: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -62,9 +64,19 @@ export function ContactFormSection({
   // const [attachments, setAttachments] = useState<File[]>([]);
   // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  // Auto-switch back to a clean, blank form 3 seconds after greeting
   useEffect(() => {
-    setIsSubmitted(Boolean(getStoredSubmission()));
-  }, []);
+    if (!isSubmitted) return;
+
+    const timer = setTimeout(() => {
+      setFormData(initialFormData);
+      setIsSubmitted(false);
+      setStatus("idle");
+      setStatusMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [isSubmitted]);
 
   const locations = [
     {
@@ -109,6 +121,7 @@ export function ContactFormSection({
     setStatusMessage("");
 
     if (getStoredSubmission()) {
+      setFormData(initialFormData);
       setIsSubmitted(true);
       setStatus("success");
       setStatusMessage("Thanks for submitting — we will get back to you!");
@@ -150,10 +163,10 @@ export function ContactFormSection({
           CONTACT_FORM_SESSION_KEY,
           JSON.stringify({ timestamp: Date.now() }),
         );
+        setFormData(initialFormData);
         setIsSubmitted(true);
         setStatus("success");
         setStatusMessage("Thanks for submitting — we will get back to you!");
-        setFormData({ name: "", email: "", phone: "", projectDetails: "" });
         // setAttachments([]);
         // if (fileInputRef.current) {
         //   fileInputRef.current.value = "";
@@ -368,7 +381,7 @@ export function ContactFormSection({
                     id="contact-phone"
                     type="tel"
                     name="phone"
-                    placeholder="Enter your phone number (optional)"
+                    placeholder="Enter your phone number"
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
