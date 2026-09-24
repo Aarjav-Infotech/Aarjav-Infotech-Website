@@ -275,7 +275,7 @@ export function Footer() {
                 Privacy policy
               </Link>
               <Link
-                href="/cookie policy"
+                href="/cookie-policy"
                 className="transition hover:text-white"
               >
                 Cookie policy

@@ -322,10 +322,10 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                       </button>
                     </div>
                     <p className="mt-2 text-[14px] text-black sm:text-[16px]">
-                      &ldquo;Sed vitae velit erat. Pellentesque lobortis felis
-                      vel mi congue, in sollicitudin orci tincidunt. Praesent
-                      turpis justo, posuere eget justo sit amet, efficitur
-                      suscipit elit.&rdquo;
+                      "Sed vitae velit erat. Pellentesque lobortis felis vel mi
+                      congue, in sollicitudin orci tincidunt. Praesent turpis
+                      justo, posuere eget justo sit amet, efficitur suscipit
+                      elit.";
                     </p>
                   </div>
                 </div>
@@ -356,9 +356,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                         Reply ↗
                       </button>
                     </div>
-                    <p className="mt-2 text-[16px] text-black">
-                      &ldquo;Thank you!&rdquo;
-                    </p>
+                    <p className="mt-2 text-[16px] text-black">"Thank you!";</p>
                   </div>
                 </div>
               </div>
