@@ -77,18 +77,8 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
     message: "",
   });
 
-  // Synchronous pre-paint scroll reset
-  useLayoutEffect(() => {
+  const scrollToTop = () => {
     if (typeof window !== "undefined") {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-
-      // Reset Lenis / custom smooth scroller. Use an intermediate `unknown` cast to satisfy TS
-      // when augmenting the Window type with a non-standard `lenis` shape.
       const win = window as unknown as Window & {
         lenis?: {
           scrollTo: (target: number, options?: { immediate?: boolean }) => void;
@@ -97,24 +87,27 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
       if (win.lenis && typeof win.lenis.scrollTo === "function") {
         win.lenis.scrollTo(0, { immediate: true });
       }
-    }
-  }, [id]);
-
-  // Post-mount backup scroll checks to overcome late hydration/image shifts
-  useEffect(() => {
-    const forceTop = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-      const target = document.getElementById("article-top");
-      if (target) {
-        target.scrollIntoView({ behavior: "instant", block: "start" });
-      }
-    };
+    }
+  };
 
-    forceTop();
-    const t1 = setTimeout(forceTop, 30);
-    const t2 = setTimeout(forceTop, 100);
+  // Synchronous pre-paint scroll reset on ID change
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      scrollToTop();
+    }
+  }, [id]);
+
+  // Post-mount backup scroll checks to combat image hydration and layout shifts
+  useEffect(() => {
+    scrollToTop();
+    const t1 = setTimeout(scrollToTop, 50);
+    const t2 = setTimeout(scrollToTop, 150);
 
     return () => {
       clearTimeout(t1);
@@ -148,12 +141,12 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
             </div>
 
             {/* Meta Details */}
-            <div className="mt-5 flex flex-wrap items-center gap-6 text-xs text-black">
+            <div className="mt-5 flex flex-wrap items-center gap-4 text-[16px] text-black sm:gap-6">
               {/* Author */}
               <div className="flex items-center gap-1.5">
-                <div className="relative h-3.5 w-3.5 shrink-0 text-black">
+                <div className="relative size-4 shrink-0 text-black">
                   <Image
-                    src="/icons/user-icon.svg"
+                    src={asset("/icons/user-icon.svg")}
                     alt="Author"
                     fill
                     className="object-contain"
@@ -164,9 +157,9 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
               {/* Date */}
               <div className="flex items-center gap-1.5">
-                <div className="relative h-3.5 w-3.5 shrink-0">
+                <div className="relative size-4 shrink-0">
                   <Image
-                    src="/icons/calendar-icon.svg"
+                    src={asset("/icons/calendar-icon.svg")}
                     alt="Date"
                     fill
                     className="object-contain"
@@ -177,9 +170,9 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
               {/* Comments */}
               <div className="flex items-center gap-1.5">
-                <div className="relative h-3.5 w-3.5 shrink-0">
+                <div className="relative size-4 shrink-0">
                   <Image
-                    src="/icons/comment-icon.svg"
+                    src={asset("/icons/comment-icon.svg")}
                     alt="Comments"
                     fill
                     className="object-contain"
@@ -190,28 +183,36 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
+            <h1 className="mt-6 text-[20px] font-semibold tracking-tight text-slate-900 sm:text-[22px] md:text-[24px]">
               {article.title}
             </h1>
 
             {/* Paragraphs 1 & 2 */}
-            <div className="mt-6 space-y-4 text-xs leading-relaxed text-slate-600 sm:text-sm">
+            <div className="mt-6 space-y-4 text-sm leading-relaxed text-black sm:text-[16px]">
               <p>{article.paragraphs[0]}</p>
               <p>{article.paragraphs[1]}</p>
             </div>
 
-            {/* Highlighted Quote Box */}
-            <div className="relative my-8 overflow-hidden rounded-2xl bg-[#090D1A] p-8 text-white sm:p-10">
-              <p className="max-w-[580px] text-base leading-relaxed font-medium sm:text-lg">
+            <div className="relative my-8 overflow-hidden rounded-2xl p-8 text-white sm:p-10">
+              <Image
+                src={asset("/icon/quote-bg.svg")}
+                alt="Quote background"
+                fill
+                priority={false}
+                className="-z-10 object-cover"
+              />
+              <div className="absolute inset-0 -z-10 bg-black/40" />
+
+              <p className="relative max-w-[580px] text-base leading-relaxed font-medium sm:text-lg">
                 &ldquo;{article.quote}&rdquo;
               </p>
-              <div className="mt-4 text-right font-serif text-4xl text-slate-700 select-none">
+              <div className="relative mt-4 text-right font-serif text-4xl text-slate-400 select-none">
                 ”
               </div>
             </div>
 
             {/* Paragraphs 3 & 4 */}
-            <div className="space-y-4 text-xs leading-relaxed text-slate-600 sm:text-sm">
+            <div className="space-y-4 text-sm leading-relaxed text-black sm:text-[16px]">
               <p>{article.paragraphs[2]}</p>
               <p>{article.paragraphs[3]}</p>
             </div>
@@ -219,13 +220,13 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
             {/* Tags & Social Links */}
             <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-6">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-semibold text-slate-700">
+                <span className="text-[14px] font-semibold text-black sm:text-[16px]">
                   Tags:
                 </span>
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-[#0053FA] px-3.5 py-1 text-[11px] font-medium text-white shadow-sm"
+                    className="rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-3.5 py-1 text-[14px] font-medium text-white shadow-sm sm:text-[16px]"
                   >
                     {tag}
                   </span>
@@ -233,29 +234,29 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="text-xs font-semibold text-slate-700">
+                <span className="text-[14px] font-semibold text-black sm:text-[16px]">
                   Share:
                 </span>
                 <button
                   type="button"
                   aria-label="Share on Twitter"
-                  className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0053FA] text-white transition hover:opacity-90"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white transition hover:opacity-90"
                 >
-                  <Twitter className="h-3.5 w-3.5" />
+                  <Twitter className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   aria-label="Share on LinkedIn"
-                  className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0053FA] text-white transition hover:opacity-90"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white transition hover:opacity-90"
                 >
-                  <Linkedin className="h-3.5 w-3.5" />
+                  <Linkedin className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   aria-label="Share on Message"
-                  className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0053FA] text-white transition hover:opacity-90"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] text-white transition hover:opacity-90"
                 >
-                  <MessageCircle className="h-3.5 w-3.5" />
+                  <MessageCircle className="h-4 w-4" />
                 </button>
               </div>
             </div>
@@ -266,27 +267,32 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
               <div className="mt-6 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white">
-                    D
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-slate-100">
+                    <Image
+                      src={asset("/icons/comment-1.svg")}
+                      alt="Davies"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="text-sm font-semibold text-slate-900">
+                        <h4 className="text-[18px] font-semibold text-slate-900">
                           Davies
                         </h4>
-                        <span className="text-[11px] text-slate-400">
+                        <span className="text-[14px] text-black">
                           July 8, 2025 at 7:35 am
                         </span>
                       </div>
                       <button
                         type="button"
-                        className="text-xs font-medium text-slate-500 hover:text-blue-600"
+                        className="text-[16px] font-medium text-black hover:text-blue-600"
                       >
                         Reply ↗
                       </button>
                     </div>
-                    <p className="mt-2 text-xs text-slate-600">
+                    <p className="mt-2 text-[16px] text-black">
                       &ldquo;Sed vitae velit erat. Pellentesque lobortis felis
                       vel mi congue, in sollicitudin orci tincidunt. Praesent
                       turpis justo, posuere eget justo sit amet, efficitur
@@ -296,27 +302,32 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                 </div>
 
                 <div className="ml-8 flex items-start gap-4 sm:ml-12">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-800 text-xs font-semibold text-white">
-                    S
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-slate-100">
+                    <Image
+                      src={asset("/icons/comment-2.svg")}
+                      alt="Shin"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="text-sm font-semibold text-slate-900">
+                        <h4 className="text-[18px] font-semibold text-slate-900">
                           Shin
                         </h4>
-                        <span className="text-[11px] text-slate-400">
+                        <span className="text-[14px] text-black">
                           July 8, 2025 at 7:35 am
                         </span>
                       </div>
                       <button
                         type="button"
-                        className="text-xs font-medium text-slate-500 hover:text-blue-600"
+                        className="text-[16px] font-medium text-black hover:text-blue-600"
                       >
                         Reply ↗
                       </button>
                     </div>
-                    <p className="mt-2 text-xs text-slate-600">
+                    <p className="mt-2 text-[16px] text-black">
                       &ldquo;Thank you!&rdquo;
                     </p>
                   </div>
@@ -326,20 +337,21 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
             {/* Comment Form */}
             <div className="mt-14 border-t border-slate-100 pt-8">
-              <h3 className="text-xl font-bold text-slate-900">
+              <h3 className="text-[22px] font-semibold tracking-tight text-black sm:text-[36px]">
                 Post a Comments
               </h3>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-4 text-[16px] text-black">
                 Your email address will not be published. Required fields are
                 marked *
               </p>
 
               <form
-                className="mt-6 space-y-4"
+                className="mt-8 space-y-7"
                 onSubmit={(e) => e.preventDefault()}
               >
+                {/* Your Name */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-700">
+                  <label className="block text-[14px] font-medium text-black">
                     Your Name
                   </label>
                   <input
@@ -349,11 +361,13 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                     onChange={(e) =>
                       setCommentForm({ ...commentForm, name: e.target.value })
                     }
-                    className="mt-1.5 w-full rounded-md border border-slate-200 px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none"
+                    className="mt-2 w-full border-b border-slate-200 bg-transparent pb-3 text-[18px] text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
+
+                {/* Your Email */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-700">
+                  <label className="block text-[14px] font-semibold text-slate-900">
                     Your Email
                   </label>
                   <input
@@ -363,15 +377,17 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                     onChange={(e) =>
                       setCommentForm({ ...commentForm, email: e.target.value })
                     }
-                    className="mt-1.5 w-full rounded-md border border-slate-200 px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none"
+                    className="mt-2 w-full border-b border-slate-200 bg-transparent pb-3 text-[18px] text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
+
+                {/* Messenger */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-700">
-                    Message
+                  <label className="block text-[14px] font-semibold text-slate-900">
+                    Messenger
                   </label>
                   <textarea
-                    rows={4}
+                    rows={3}
                     value={commentForm.message}
                     onChange={(e) =>
                       setCommentForm({
@@ -379,15 +395,19 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                         message: e.target.value,
                       })
                     }
-                    className="mt-1.5 w-full rounded-md border border-slate-200 px-3.5 py-2 text-xs text-slate-900 focus:border-blue-500 focus:outline-none"
+                    className="mt-2 w-full resize-none border-b border-slate-200 bg-transparent pb-3 text-[18px] text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="rounded-lg bg-[#0053FA] px-6 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
-                >
-                  Submit Message
-                </button>
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] py-3.5 text-[16px] font-semibold text-white shadow-[0_12px_24px_-6px_rgba(0,0,0,0.35)] transition-all hover:opacity-95 active:scale-[0.99]"
+                  >
+                    Submit Message
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -396,12 +416,12 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
           <div className="space-y-10 lg:col-span-4">
             {/* Search */}
             <div>
-              <h3 className="text-base font-bold text-slate-900">Search</h3>
+              <h3 className="text-[32px] font-semibold text-black">Search</h3>
               <div className="relative mt-3">
                 <input
                   type="text"
                   placeholder="Search"
-                  className="w-full border-b border-slate-200 pb-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
+                  className="w-full border-b border-slate-200 pb-2 text-[16px] text-[#71717A] placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                 />
                 <Search className="absolute top-0 right-1 h-4 w-4 text-slate-400" />
               </div>
@@ -409,15 +429,16 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
             {/* Recent Posts */}
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-[32px] font-semibold text-black">
                 Recent posts
               </h3>
               <div className="mt-4 space-y-4">
                 {recentPosts.map((item) => (
                   <Link
                     key={item.id}
-                    href={`/articles?id=${item.id}#article-top`}
-                    scroll={false}
+                    href={`/articles?id=${item.id}`}
+                    scroll={true}
+                    onClick={scrollToTop}
                     className="group flex items-center gap-3"
                   >
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-slate-900">
@@ -429,10 +450,10 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                       />
                     </div>
                     <div>
-                      <h4 className="line-clamp-2 text-xs font-semibold text-slate-800 transition group-hover:text-blue-600">
+                      <h4 className="line-clamp-2 text-[18px] font-semibold text-slate-800 transition group-hover:text-blue-600">
                         {item.title}
                       </h4>
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[14px] text-black">
                         {item.date}
                       </span>
                     </div>
@@ -443,26 +464,26 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
 
             {/* Category */}
             <div>
-              <h3 className="text-base font-bold text-slate-900">Category</h3>
-              <ul className="mt-4 space-y-2.5 text-xs text-slate-600">
+              <h3 className="text-[32px] font-semibold text-black">Category</h3>
+              <ul className="mt-4 space-y-2.5 text-[18px] text-black">
                 <li className="flex justify-between">
                   <span>AI & Automation</span>
-                  <span className="text-slate-400">(4)</span>
+                  <span className="text-black">(4)</span>
                 </li>
                 <li className="flex justify-between">
                   <span>Enterprise AI</span>
-                  <span className="text-slate-400">(2)</span>
+                  <span className="text-black">(2)</span>
                 </li>
                 <li className="flex justify-between">
                   <span>Digital Transformation</span>
-                  <span className="text-slate-400">(1)</span>
+                  <span className="text-black">(1)</span>
                 </li>
               </ul>
             </div>
 
             {/* Popular tag */}
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-[32px] font-semibold text-black">
                 Popular tag
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -474,7 +495,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-[#0053FA] px-3 py-1 text-[11px] font-medium text-white shadow-sm"
+                    className="rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-3 py-1 text-[12px] font-medium text-white shadow-sm sm:text-[16px]"
                   >
                     {tag}
                   </span>

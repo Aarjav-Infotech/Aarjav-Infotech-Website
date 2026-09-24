@@ -32,7 +32,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Full-Stack Construction Website",
     description:
       "A complete full-stack construction company website built with Vite, React, Tailwind CSS, and Node.js. Designed to showcase projects, services, and company credentials with a modern, responsive layout optimised for mobile, tablet, and desktop.",
-    imageSrc: asset("/images/case-studys-1.svg"),
+    imageSrc: asset("/images/case-studys-1.png"),
     imageAlt: "Sahaj Construction Website Preview",
     industry: "Construction & Infrastructure",
     technologies: [
@@ -67,7 +67,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Luxury Jewelry Landing Page",
     description:
       "A high-converting landing page for a fine jewelry brand focused on showcasing 10K, 14K & 18K gold with lab-grown diamonds. Delivered with fast load performance, optimised SEO, and a conversion-driven UI/UX across all devices.",
-    imageSrc: asset("/images/case-studys-2.svg"),
+    imageSrc: asset("/images/case-studys-2.png"),
     imageAlt: "Glamora Jewels Landing Page Preview",
     industry: "Luxury Retail & E-Commerce",
     technologies: ["React", "Node.js", "PostgreSQL", "Content SEO"],
@@ -95,7 +95,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "AI-Powered Textile Design Platform",
     description:
       "An AI-powered platform generating production-ready textile patterns using ML models trained on domain-specific datasets. Users customise parameters to create unique designs dynamically. Includes layer separation, image upscaling, and a credit-based system for controlled monetization.",
-    imageSrc: asset("/images/case-studys-3.svg"),
+    imageSrc: asset("/images/case-studys-3.png"),
     imageAlt: "Delfa Pattern Generator Preview",
     industry: "AI & Textile Technology",
     technologies: [
@@ -134,7 +134,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Modern Corporate & Chemical Portfolio Website",
     description:
       "Zeeva Chemical LLP required a modern corporate website to strengthen its digital presence and professionally showcase its chemical and aerosol product portfolio.",
-    imageSrc: asset("/images/case-studys-1.svg"),
+    imageSrc: asset("/images/case-studys-4.png"),
     imageAlt: "Zeeva Chemical LLP Website Preview",
     industry: "Chemical Manufacturing & Aerosol Products",
     technologies: [
@@ -167,7 +167,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Interactive Academic Portfolio & AI Support Platform",
     description:
       "A modern academic portfolio platform presenting research, publications, and books with AI assistance.",
-    imageSrc: asset("/images/case-studys-2.svg"),
+    imageSrc: asset("/images/case-studys-5.png"),
     imageAlt: "Professor Andrew Caplin Website Preview",
     industry: "Education & Academic Research",
     technologies: [
@@ -200,7 +200,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "High-End E-Commerce Jewelry Storefront",
     description:
       "A conversion-focused Shopify storefront showcasing fine jewelry collections with smooth animations.",
-    imageSrc: asset("/images/case-studys-3.svg"),
+    imageSrc: asset("/images/case-studys-6.png"),
     imageAlt: "The Custom Club Preview",
     industry: "Jewelry & E-commerce",
     technologies: [
@@ -232,7 +232,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Imitation Jewelry Inventory & Order Management Platform",
     description:
       "A full-stack centralized management portal providing SKU-based inventory tracking and order workflows.",
-    imageSrc: asset("/images/case-studys-1.svg"),
+    imageSrc: asset("/images/case-studys-7.png"),
     imageAlt: "SalePulse Management Platform Preview",
     industry: "Jewelry & Retail Management",
     technologies: [
@@ -271,7 +271,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Centralized Enterprise Textile ERP Platform",
     description:
       "A unified textile ERP linking accounting, procurement, manufacturing, and inventory workflows.",
-    imageSrc: asset("/images/case-studys-2.svg"),
+    imageSrc: asset("/images/case-studys-8.png"),
     imageAlt: "TEXONE ERP Platform Preview",
     industry: "Textile & Manufacturing",
     technologies: [
@@ -310,7 +310,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Role-Based Purchase Order Workflow Platform",
     description:
       "A centralized PO management solution offering multi-type PO support and role-based approval hierarchies.",
-    imageSrc: asset("/images/case-studys-3.svg"),
+    imageSrc: asset("/images/case-studys-3.png"),
     imageAlt: "Procure Flow Platform Preview",
     industry: "Procurement & Enterprise Operations",
     technologies: [
