@@ -3,7 +3,14 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Twitter, Linkedin, MessageCircle, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  Twitter,
+  Linkedin,
+  MessageCircle,
+  Search,
+  ArrowLeft,
+} from "lucide-react";
 import { asset } from "@/lib/cdn";
 
 export interface ArticleData {
@@ -69,6 +76,7 @@ export const articlesDataset: Record<number, ArticleData> = {
 };
 
 export default function ArticleDetail({ id = 1 }: { id?: number }) {
+  const router = useRouter();
   const key = id ?? 1;
   const article = (articlesDataset[key] ?? articlesDataset[1]) as ArticleData;
   const [commentForm, setCommentForm] = useState({
@@ -90,6 +98,17 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
+    }
+  };
+
+  const handleBack = () => {
+    const blogElement =
+      document.getElementById("articles-section") ||
+      document.getElementById("blog-section");
+    if (blogElement) {
+      blogElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      router.push("/articles#articles-section");
     }
   };
 
@@ -125,7 +144,19 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
       id="article-top"
       className="w-full bg-white px-4 py-12 sm:px-6 lg:px-12"
     >
-      <div className="mx-auto mt-20 max-w-full">
+      <div className="mx-auto mt-12 max-w-full sm:mt-20">
+        {/* Back to Blog Section Button */}
+        <div className="mb-6 flex items-center">
+          <button
+            type="button"
+            onClick={handleBack}
+            className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-[#0053FA] hover:text-[#0053FA]"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span>Back to Articles</span>
+          </button>
+        </div>
+
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Main Article Content */}
           <div className="lg:col-span-8">
@@ -193,24 +224,22 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
               <p>{article.paragraphs[1]}</p>
             </div>
 
-            <div className="relative my-8 overflow-hidden rounded-2xl p-8 text-white sm:p-10">
+            {/* Highlighted Quote Box */}
+            <div className="relative my-8 flex min-h-[220px] flex-col justify-center overflow-hidden rounded-2xl p-8 sm:min-h-[240px] sm:p-12">
+              {/* Background Image via CDN */}
               <Image
-                src={asset("/icon/quote-bg.svg")}
+                src={asset("/icons/quote-bg.svg")}
                 alt="Quote background"
                 fill
                 priority={false}
-                className="-z-10 object-cover"
+                className="pointer-events-none object-cover object-right-bottom"
               />
-              <div className="absolute inset-0 -z-10 bg-black/40" />
 
-              <p className="relative max-w-[580px] text-base leading-relaxed font-medium sm:text-lg">
+              {/* Quote Text */}
+              <p className="relative z-10 text-[16px] leading-relaxed font-medium text-white sm:text-[28px] md:text-[32px]">
                 &ldquo;{article.quote}&rdquo;
               </p>
-              <div className="relative mt-4 text-right font-serif text-4xl text-slate-400 select-none">
-                ”
-              </div>
             </div>
-
             {/* Paragraphs 3 & 4 */}
             <div className="space-y-4 text-sm leading-relaxed text-black sm:text-[16px]">
               <p>{article.paragraphs[2]}</p>
@@ -269,7 +298,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                 <div className="flex items-start gap-4">
                   <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-slate-100">
                     <Image
-                      src={asset("/icons/comment-1.svg")}
+                      src={asset("/images/comment-1.svg")}
                       alt="Davies"
                       fill
                       className="object-cover"
@@ -278,7 +307,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="text-[18px] font-semibold text-slate-900">
+                        <h4 className="text-[14px] font-semibold text-slate-900 sm:text-[18px]">
                           Davies
                         </h4>
                         <span className="text-[14px] text-black">
@@ -292,7 +321,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                         Reply ↗
                       </button>
                     </div>
-                    <p className="mt-2 text-[16px] text-black">
+                    <p className="mt-2 text-[14px] text-black sm:text-[16px]">
                       &ldquo;Sed vitae velit erat. Pellentesque lobortis felis
                       vel mi congue, in sollicitudin orci tincidunt. Praesent
                       turpis justo, posuere eget justo sit amet, efficitur
@@ -304,7 +333,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                 <div className="ml-8 flex items-start gap-4 sm:ml-12">
                   <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-slate-100">
                     <Image
-                      src={asset("/icons/comment-2.svg")}
+                      src={asset("/images/comment-2.svg")}
                       alt="Shin"
                       fill
                       className="object-cover"
@@ -313,7 +342,7 @@ export default function ArticleDetail({ id = 1 }: { id?: number }) {
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="text-[18px] font-semibold text-slate-900">
+                        <h4 className="text-[14px] font-semibold text-slate-900 sm:text-[18px]">
                           Shin
                         </h4>
                         <span className="text-[14px] text-black">

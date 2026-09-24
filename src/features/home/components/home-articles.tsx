@@ -48,7 +48,10 @@ export function HomeArticles({
   articles = defaultArticles,
 }: HomeArticlesProps) {
   return (
-    <section className="relative w-full bg-white py-10 md:py-12">
+    <section
+      id="articles-section"
+      className="relative w-full scroll-mt-[150px] bg-white py-10 md:py-12"
+    >
       <div className="mx-auto max-w-[1404px] px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center">
@@ -81,7 +84,6 @@ export function HomeArticles({
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group flex flex-col items-start"
             >
-              {/* Routes to /articles?id=1, 2, or 3 */}
               <Link
                 href={`/articles?id=${article.id}`}
                 className="flex w-full flex-col"

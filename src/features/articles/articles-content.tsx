@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Hero } from "@/components/common/hero";
 import {
   HeroFloatingIcons,
@@ -37,6 +38,20 @@ const articlesHeroProps = {
 };
 
 export function ArticlesContent() {
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.location.hash === "#articles-section"
+    ) {
+      const elem = document.getElementById("articles-section");
+      if (elem) {
+        setTimeout(() => {
+          elem.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
     <>
       <Hero {...articlesHeroProps} />
