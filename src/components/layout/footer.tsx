@@ -85,7 +85,7 @@ export function Footer() {
                 </Link>
               </div>
 
-              <h3 className="mt-5 text-xl leading-snug font-bold tracking-tight text-white sm:mt-7 sm:text-2xl lg:text-3xl">
+              <h3 className="mt-8 text-xl leading-snug font-bold tracking-tight text-white sm:mt-5 sm:mt-7 sm:text-2xl lg:text-3xl">
                 Automations that ship & keep <br className="hidden sm:inline" />
                 running.
               </h3>
@@ -274,8 +274,11 @@ export function Footer() {
               <Link href="/privacy" className="transition hover:text-white">
                 Privacy policy
               </Link>
-              <Link href="/llms.txt" className="transition hover:text-white">
-                llms.txt
+              <Link
+                href="/cookie-policy"
+                className="transition hover:text-white"
+              >
+                Cookie policy
               </Link>
             </div>
           </div>

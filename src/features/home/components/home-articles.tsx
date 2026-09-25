@@ -7,34 +7,30 @@ import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/cdn";
 
 export interface ArticleItem {
-  id: string | number;
+  id: number;
   date: string;
   title: string;
   image: string;
-  link: string;
 }
 
-const defaultArticles: ArticleItem[] = [
+export const defaultArticles: ArticleItem[] = [
   {
     id: 1,
-    date: "June 7, 2026",
+    date: "August 24, 2026",
     title: "LLM Agnostic Solutions: The 2026 Enterprise AI Guide",
     image: asset("/images/article-1.svg"),
-    link: "#",
   },
   {
     id: 2,
     date: "May 16, 2026",
     title: "Snowflake Cortex Alternative: 2026 Evaluation Framework",
     image: asset("/images/article-2.svg"),
-    link: "#",
   },
   {
     id: 3,
     date: "April 7, 2026",
     title: "Multi-agent vs single-agent AI systems: 2026 decision guide",
     image: asset("/images/article-3.svg"),
-    link: "#",
   },
 ];
 
@@ -52,12 +48,15 @@ export function HomeArticles({
   articles = defaultArticles,
 }: HomeArticlesProps) {
   return (
-    <section className="relative w-full bg-white py-10 md:py-12">
+    <section
+      id="articles-section"
+      className="relative w-full scroll-mt-[150px] bg-white py-10 md:py-12"
+    >
       <div className="mx-auto max-w-[1404px] px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center">
           {eyebrow && (
-            <div className="boder-slate-200 mb-4 inline-flex items-center gap-1.5 rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm">
+            <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>
@@ -85,8 +84,10 @@ export function HomeArticles({
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group flex flex-col items-start"
             >
-              <Link href={article.link} className="flex w-full flex-col">
-                {/* Image Container with Rounded Corners */}
+              <Link
+                href={`/articles?id=${article.id}`}
+                className="flex w-full flex-col"
+              >
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100">
                   <Image
                     src={article.image}
@@ -96,19 +97,16 @@ export function HomeArticles({
                   />
                 </div>
 
-                {/* Date */}
-                <span className="text-basic mt-4 font-medium text-slate-400">
+                <span className="mt-4 text-base font-medium text-slate-400">
                   {article.date}
                 </span>
 
-                {/* Article Title */}
                 <h3 className="mt-2 text-lg leading-snug font-bold text-slate-900 transition-colors group-hover:text-[#2b2bad] sm:text-xl">
                   {article.title}
                 </h3>
 
-                {/* Compact Read More Pill Button */}
                 <div className="mt-5 inline-flex">
-                  <span className="group inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm">
+                  <span className="group inline-flex items-center gap-2 rounded-full border-b bg-[#d6d6d666] px-4 py-2 font-bold text-slate-900 shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-sm">
                     Read more
                     <ArrowRight className="size-3.5" />
                   </span>
