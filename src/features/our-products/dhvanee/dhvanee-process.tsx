@@ -49,7 +49,7 @@ export default function HowDhvaneeWorksSection() {
             )}
 
             <h2 className="mb-3 text-3xl font-bold tracking-tight text-neutral-950 sm:mb-4 sm:text-4xl md:text-5xl lg:text-[46px]">
-              How Vani Sahay Works
+              How dhvanee Works
             </h2>
 
             <p className="mx-auto max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-sm md:text-[15px]">

@@ -25,7 +25,7 @@ const operations: OperationCard[] = [
     description:
       "Manage rough and polished sourcing with multi-currency vendor ledgers.",
     badge: (
-      <div className="inline-flex w-fit items-center rounded-[8px] border border-[#2b2bad] bg-[#CADEFF] px-3 py-1 text-[14px] font-medium text-blue-900">
+      <div className="inline-flex max-w-full items-center truncate rounded-[8px] border border-[#2b2bad] bg-[#CADEFF] px-2.5 py-1 text-xs font-medium text-blue-900 sm:text-[13px] md:text-[14px]">
         PO-2024-089 • Approved
       </div>
     ),
@@ -36,11 +36,11 @@ const operations: OperationCard[] = [
     description:
       "Grade, sort, and mix parcels with complete traceability and cost allocation.",
     badge: (
-      <div className="flex items-center gap-1.5">
+      <div className="flex flex-wrap items-center gap-1.5">
         {["VVS1", "D", "EX"].map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-[#2b2bad] bg-[#CADEFF] px-2 py-0.5 text-[14px] font-semibold text-blue-700"
+            className="rounded-md border border-[#2b2bad] bg-[#CADEFF] px-2 py-0.5 text-xs font-semibold text-blue-700 sm:text-[13px] md:text-[14px]"
           >
             {tag}
           </span>
@@ -67,7 +67,7 @@ const operations: OperationCard[] = [
     description:
       "Real-time vault control, memo tracking, and automated Rapaport pricing.",
     badge: (
-      <div className="flex w-full items-center justify-between text-[14px]">
+      <div className="flex w-full items-center justify-between text-xs sm:text-[13px] md:text-[14px]">
         <span className="text-black">Total Carats</span>
         <span className="font-semibold text-[#2b2bad]">4,521.80 ct</span>
       </div>
@@ -79,7 +79,7 @@ const operations: OperationCard[] = [
     description:
       "B2B portal, retail POS, invoicing, and customer relationship management.",
     badge: (
-      <span className="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[14px] font-medium text-emerald-600">
+      <span className="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-600 sm:text-[13px] md:text-[14px]">
         Invoice Paid
       </span>
     ),
@@ -90,7 +90,7 @@ const operations: OperationCard[] = [
     description:
       "Integrated accounting, P&L reporting, and multi-currency exchange handling.",
     badge: (
-      <div className="inline-flex items-center gap-1 text-[14px] font-semibold text-[#2b2bad]">
+      <div className="inline-flex items-center gap-1 text-xs font-semibold text-[#2b2bad] sm:text-[13px] md:text-[14px]">
         <span>+12.5%</span>
       </div>
     ),
@@ -105,12 +105,12 @@ const operations: OperationCard[] = [
         {["A", "B"].map((initial, i) => (
           <div
             key={i}
-            className="flex h-6 w-6 items-center justify-center rounded-full border border-[#2b2bad] bg-blue-100 text-[12px] font-semibold text-blue-700"
+            className="flex h-6 w-6 items-center justify-center rounded-full border border-[#2b2bad] bg-blue-100 text-[11px] font-semibold text-blue-700 sm:text-[12px]"
           >
             {initial}
           </div>
         ))}
-        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-[#2b2bad] bg-blue-600 text-[12px] font-medium text-white">
+        <div className="flex h-6 w-6 items-center justify-center rounded-full border border-[#2b2bad] bg-blue-600 text-[11px] font-medium text-white sm:text-[12px]">
           +3
         </div>
       </div>
@@ -122,8 +122,8 @@ const operations: OperationCard[] = [
     description:
       "Immutable logs of every transaction, stone movement, and price change.",
     badge: (
-      <div className="flex items-center gap-2 border-l-[2.5px] border-[#2b2bad] pl-2 text-[14px] text-slate-600">
-        <span>Modified price on Stone #1204</span>
+      <div className="flex max-w-full items-center gap-2 border-l-[2.5px] border-[#2b2bad] pl-2 text-xs text-slate-600 sm:text-[13px] md:text-[14px]">
+        <span className="truncate">Modified price on Stone #1204</span>
       </div>
     ),
   },
@@ -152,30 +152,30 @@ export function BusinessOperations({
   subtitle = "A unified digital operating system covering every aspect of your diamond enterprise.",
 }: BusinessOperationsProps) {
   return (
-    <section className="relative w-full bg-white px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto">
+    <section className="relative w-full bg-white px-4 py-10 sm:px-6 sm:py-14 md:py-18 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-7xl">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
-          className="mb-14 flex flex-col items-center text-center"
+          className="mb-8 flex flex-col items-center text-center sm:mb-12 lg:mb-16"
         >
           {/* Eyebrow Pill */}
           {eyebrow && (
-            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-8 sm:border-b-4 sm:text-lg">
+            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-6 sm:border-b-4 sm:text-base">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>
           )}
 
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-5xl">
             {title}
           </h2>
 
           {subtitle && (
-            <p className="mt-3 text-sm text-slate-500 sm:text-base">
+            <p className="mt-2.5 max-w-2xl text-xs text-slate-500 sm:mt-3 sm:text-sm md:text-base">
               {subtitle}
             </p>
           )}
@@ -186,18 +186,18 @@ export function BusinessOperations({
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6"
         >
           {operations.map((item, idx) => (
             <motion.div
               key={idx}
               variants={cardVariants}
-              className="group flex min-h-[220px] flex-col justify-between rounded-[24px] border border-slate-200/70 bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.03)] transition-all duration-300 hover:border-slate-300 hover:shadow-md"
+              className="group flex min-h-[200px] transform-gpu flex-col justify-between rounded-[20px] border border-slate-200/70 bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.03)] transition-all duration-300 hover:border-slate-300 hover:shadow-md sm:min-h-[220px] sm:rounded-[24px] sm:p-5 lg:p-6"
             >
               <div>
                 {/* Square Blue Icon Button with Image */}
-                <div className="relative mb-4 flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] p-2 shadow-sm transition-transform duration-200 group-hover:scale-105">
+                <div className="relative mb-3.5 flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] p-2 shadow-sm transition-transform duration-200 group-hover:scale-105 sm:mb-4 sm:h-10 sm:w-10">
                   <Image
                     src={item.iconSrc}
                     alt={item.title}
@@ -209,16 +209,16 @@ export function BusinessOperations({
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="mb-2 text-[20px] font-bold text-[#2b2bad]">
+                <h3 className="mb-1.5 text-lg font-bold text-[#2b2bad] sm:mb-2 sm:text-[19px] lg:text-[20px]">
                   {item.title}
                 </h3>
-                <p className="text-[14px] leading-relaxed text-black">
+                <p className="text-xs leading-relaxed text-slate-700 sm:text-[13px] lg:text-[14px]">
                   {item.description}
                 </p>
               </div>
 
               {/* Card-Specific Micro Badge / Footer UI */}
-              <div className="pt-5">{item.badge}</div>
+              <div className="pt-4 sm:pt-5">{item.badge}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -226,3 +226,5 @@ export function BusinessOperations({
     </section>
   );
 }
+
+export default BusinessOperations;

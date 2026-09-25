@@ -75,7 +75,7 @@ const languages: LanguagePill[] = [
 export function DhvaneeLanguageSupport({
   eyebrow = "Language Support",
   title = "Speak Your Language",
-  subtitle = "Financial security shouldn't be limited by language barriers. Vani Sahay understands and protects in multiple dialects.",
+  subtitle = "Financial security shouldn't be limited by language barriers. dhvanee understands and protects in multiple dialects.",
 }: DhvaneeLanguageSupportProps) {
   return (
     <section className="xs:px-4 relative w-full overflow-hidden bg-white px-3 py-14 sm:px-6 sm:py-20 md:py-24 lg:px-8">
@@ -142,7 +142,7 @@ export function DhvaneeLanguageSupport({
             <div className="relative flex size-12 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] shadow-[0_8px_20px_rgba(0,38,136,0.35)] sm:size-14">
               <Image
                 src={asset("/images/mic.svg")}
-                alt="Vani Sahay Voice AI"
+                alt="dhvanee Voice AI"
                 width={28}
                 height={28}
                 className="size-6 object-contain brightness-0 invert sm:size-7"
@@ -152,7 +152,7 @@ export function DhvaneeLanguageSupport({
 
             {/* Title */}
             <h3 className="text-base font-bold tracking-tight text-slate-900 sm:text-lg">
-              Vani Sahay
+              dhvanee
             </h3>
 
             {/* Ready to help pill */}

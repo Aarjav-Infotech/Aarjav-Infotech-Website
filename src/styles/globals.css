@@ -151,6 +151,16 @@ img {
     @apply border-border;
   }
 
+  /* In your globals.css or component styles */
+  /* .fix-safari-render {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+} */
+
   html {
     @apply scroll-smooth;
 
@@ -240,7 +250,23 @@ img {
   .container-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
+  .typewriter-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: normal;
+    animation: typing 4s steps(100, end) 0.5s 1 normal both;
+  }
 
+  @keyframes typing {
+    from {
+      max-height: 0;
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      max-height: 200px;
+      clip-path: inset(0 0 0 0);
+    }
+  }
   .site-container {
     width: 100%;
     margin-left: auto;
