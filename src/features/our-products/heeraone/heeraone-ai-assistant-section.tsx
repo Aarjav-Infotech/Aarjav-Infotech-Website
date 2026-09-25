@@ -63,6 +63,8 @@ export default function AIBusinessAssistantSection({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (!entry) return;
+
         // Clear all active intervals & timeouts
         clearInterval(userTimer);
         clearInterval(aiTimer);
