@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { motion, type Variants } from "framer-motion";
 import { asset } from "@/lib/cdn";
 
 interface CaseStudyItem {
@@ -310,7 +311,7 @@ const CASE_STUDIES: CaseStudyItem[] = [
     subtitle: "Role-Based Purchase Order Workflow Platform",
     description:
       "A centralized PO management solution offering multi-type PO support and role-based approval hierarchies.",
-    imageSrc: asset("/images/case-studys-3.png"),
+    imageSrc: asset("/images/case-studys-9.png"),
     imageAlt: "Procure Flow Platform Preview",
     industry: "Procurement & Enterprise Operations",
     technologies: [
@@ -337,6 +338,25 @@ const CASE_STUDIES: CaseStudyItem[] = [
   },
 ];
 
+// Reusable animation variants
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const tagItemAnim: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+};
+
 function FeaturedWorksContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -346,7 +366,6 @@ function FeaturedWorksContent() {
   const sectionRef = useRef<HTMLElement>(null);
   const projectDetailsRef = useRef<HTMLDivElement>(null);
 
-  // Auto-select and center project details when ?id= is passed from Home
   useEffect(() => {
     if (requestedId) {
       const match = CASE_STUDIES.find((item) => item.id === requestedId);
@@ -391,23 +410,33 @@ function FeaturedWorksContent() {
         ref={sectionRef}
         className="mx-auto max-w-[1180px] bg-white px-4 py-12 text-slate-900 sm:px-6 lg:px-8"
       >
-        <div className="mb-10 flex justify-start">
+        <motion.div
+          initial={{ opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mb-10 flex justify-start"
+        >
           <button
             type="button"
             onClick={handleBackToList}
-            className="group text-basic inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-[#F8F9FA] px-4 py-2 font-semibold text-slate-700 shadow-xs transition-colors hover:bg-slate-200 hover:text-slate-900"
+            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-[#F8F9FA] px-4 py-2 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:bg-slate-200 hover:text-slate-900"
           >
             <ArrowLeft className="size-4 text-[#0053FA] transition-transform group-hover:-translate-x-1" />
             <span>Back to Case Studies</span>
           </button>
-        </div>
+        </motion.div>
 
-        {/* Project Details Grid (Targeted for exact center scroll) */}
+        {/* Project Details Grid */}
         <div
           ref={projectDetailsRef}
           className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12"
         >
-          <div className="relative h-[300px] w-full overflow-hidden rounded-[24px] sm:h-[380px] md:h-[420px] lg:col-span-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55 }}
+            className="relative h-[300px] w-full transform-gpu overflow-hidden rounded-[24px] sm:h-[380px] md:h-[420px] lg:col-span-6"
+          >
             <Image
               src={selectedCase.imageSrc}
               alt={selectedCase.imageAlt}
@@ -415,92 +444,130 @@ function FeaturedWorksContent() {
               className="object-cover object-center"
               priority
             />
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col justify-start space-y-4 text-left lg:col-span-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="flex flex-col justify-start space-y-4 text-left lg:col-span-6"
+          >
             <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
               Project Details
             </h2>
             {selectedCase.projectDetailsText.map((p, idx) => (
               <p
                 key={idx}
-                className="text-basic sm:text-basic md:text-basic leading-relaxed text-[#64748B]"
+                className="text-basic leading-relaxed text-[#64748B]"
               >
                 {p}
               </p>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+        {/* Tech Stack & Industry */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10 grid grid-cols-1 items-start gap-8 border-t border-slate-100 pt-8 lg:grid-cols-12"
+        >
           <div className="text-left lg:col-span-7">
-            <span className="text-basic mb-3 block font-semibold text-[#64748B]">
+            <span className="mb-3 block text-sm font-semibold tracking-wide text-[#64748B] uppercase">
               Technology
             </span>
             <div className="flex flex-wrap gap-2.5">
-              {selectedCase.technologies.map((tech) => (
-                <span
+              {selectedCase.technologies.map((tech, i) => (
+                <motion.span
                   key={tech}
-                  className="inline-block rounded-full border border-[#0053FA] bg-white px-4 py-1.5 text-sm font-semibold text-[#003BDE] shadow-xs"
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  className="inline-block rounded-full border border-[#0053FA]/30 bg-blue-50/50 px-4 py-1.5 text-xs font-semibold text-[#003BDE] shadow-xs"
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </div>
           </div>
 
           <div className="text-left lg:col-span-5">
-            <span className="text-basic mb-3 block font-semibold tracking-wider text-[#64748B] uppercase">
+            <span className="mb-3 block text-sm font-semibold tracking-wide text-[#64748B] uppercase">
               INDUSTRY
             </span>
-            <span className="text-basic inline-block rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-5 py-2 font-semibold text-white">
+            <span className="inline-block rounded-full bg-[linear-gradient(180deg,#002688_0%,#0053FA_60%,#3BE4FF_100%)] bg-[length:200%_200%] px-5 py-2 text-sm font-semibold text-white shadow-sm">
               {selectedCase.industry}
             </span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-14 space-y-4 text-left">
+        {/* Project Research */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55 }}
+          className="mt-14 space-y-4 text-left"
+        >
           <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
             Project Research
           </h2>
           {selectedCase.projectResearchText.map((p, idx) => (
-            <p
-              key={idx}
-              className="text-basic sm:text-basic md:text-basic leading-relaxed text-[#64748B]"
-            >
+            <p key={idx} className="text-basic leading-relaxed text-[#64748B]">
               {p}
             </p>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-14 space-y-4 text-left">
+        {/* Project Results */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.55 }}
+          className="mt-14 space-y-4 text-left"
+        >
           <h2 className="text-3xl font-bold tracking-tight text-[#0B0F19] md:text-4xl">
             Project Results
           </h2>
           {selectedCase.projectResultsText.map((p, idx) => (
-            <p
-              key={idx}
-              className="text-basic sm:text-basic md:text-basic leading-relaxed text-[#64748B]"
-            >
+            <p key={idx} className="text-basic leading-relaxed text-[#64748B]">
               {p}
             </p>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 border-t border-b border-slate-200 py-8">
+        {/* Metrics Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 border-t border-b border-slate-200 py-8"
+        >
           <div className="grid grid-cols-3 divide-x divide-slate-200">
-            {selectedCase.metrics.map((metric) => (
-              <div key={metric.label} className="px-4 text-center">
+            {selectedCase.metrics.map((metric, i) => (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="px-4 text-center"
+              >
                 <div className="text-2xl font-bold text-[#0B0F19] sm:text-3xl md:text-4xl">
                   {metric.value}
                 </div>
-                <div className="mt-2 text-sm font-medium tracking-widest text-[#94A3B8] uppercase">
+                <div className="mt-2 text-xs font-semibold tracking-widest text-[#94A3B8] uppercase sm:text-sm">
                   {metric.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
     );
   }
@@ -511,23 +578,40 @@ function FeaturedWorksContent() {
       ref={sectionRef}
       className="mx-auto max-w-[1280px] scroll-mt-24 px-4 py-16 sm:px-6 md:py-24 lg:px-8"
     >
-      <div className="mb-12 flex flex-col items-center text-center md:mb-16">
+      {/* Header Pill with subtle entrance */}
+      <motion.div
+        initial={{ opacity: 0, y: -14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.45 }}
+        className="mb-12 flex flex-col items-center text-center md:mb-16"
+      >
         <span className="text-basic inline-block rounded-md border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 font-semibold tracking-wide text-[#2b2bad] shadow-xl/20">
           Featured Works
         </span>
-      </div>
+      </motion.div>
 
+      {/* Case Studies Staggered List */}
       <div className="space-y-12 md:space-y-16">
         {CASE_STUDIES.map((item, index) => {
           const isEven = index % 2 !== 0;
 
           return (
-            <div
+            <motion.div
               key={item.id}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              variants={fadeInUp}
               className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-8"
             >
-              <div
-                className={`relative h-[280px] w-full overflow-hidden rounded-[28px] bg-slate-100 sm:h-[360px] md:h-[420px] lg:col-span-5 ${
+              {/* Image Preview with slide & zoom on scroll */}
+              <motion.div
+                initial={{ opacity: 0, x: isEven ? 40 : -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className={`group relative h-[280px] w-full transform-gpu overflow-hidden rounded-[28px] bg-slate-100 sm:h-[360px] md:h-[420px] lg:col-span-5 ${
                   isEven ? "lg:order-2" : "lg:order-1"
                 }`}
               >
@@ -535,13 +619,18 @@ function FeaturedWorksContent() {
                   src={item.imageSrc}
                   alt={item.imageAlt}
                   fill
-                  className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   priority={index === 0}
                 />
-              </div>
+              </motion.div>
 
-              <div
-                className={`flex flex-col justify-between rounded-[32px] bg-[#F3F4F6] p-6 sm:p-8 md:p-10 lg:col-span-7 lg:min-h-[420px] ${
+              {/* Content Card with subtle elevation */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: 0.15 }}
+                className={`flex transform-gpu flex-col justify-between rounded-[32px] bg-[#F3F4F6] p-6 shadow-xs transition-shadow duration-300 hover:shadow-md sm:p-8 md:p-10 lg:col-span-7 lg:min-h-[420px] ${
                   isEven ? "lg:order-1" : "lg:order-2"
                 }`}
               >
@@ -555,39 +644,49 @@ function FeaturedWorksContent() {
                     </h3>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  {/* Staggered tags */}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    transition={{ staggerChildren: 0.05 }}
+                    className="flex flex-wrap gap-2"
+                  >
                     {item.tags.map((tag) => (
-                      <span
+                      <motion.span
                         key={tag}
-                        className="rounded-full border border-slate-200/60 bg-white px-3 py-1 text-sm font-bold tracking-wider text-slate-700 uppercase shadow-2xs"
+                        variants={tagItemAnim}
+                        className="rounded-full border border-slate-200/60 bg-white px-3 py-1 text-xs font-bold tracking-wider text-slate-700 uppercase shadow-2xs sm:text-sm"
                       >
                         {tag}
-                      </span>
+                      </motion.span>
                     ))}
-                  </div>
+                  </motion.div>
 
-                  <div className="space-y-2 border-l-5 border-white pt-2 pl-4">
+                  <div className="space-y-2 border-l-4 border-white pt-2 pl-4">
                     <h4 className="text-base font-bold text-black md:text-xl">
                       {item.subtitle}
                     </h4>
-                    <p className="text-basic sm:text-basic leading-relaxed text-black">
+                    <p className="text-basic leading-relaxed text-black">
                       {item.description}
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-6">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="button"
                     onClick={() => handleSelectCase(item)}
-                    className="inline-flex items-center gap-2 rounded-full border-b-1 bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-all duration-150 hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-full border-b bg-[#d6d6d666] px-4 py-2 font-bold text-black shadow-[0_4px_0_#d8dbe0,0_10px_20px_rgba(0,0,0,0.12),0_4px_6px_rgba(0,0,0,0.06)] transition-colors hover:bg-white active:translate-y-[2px] active:shadow-[0_2px_0_#d8dbe0,0_4px_8px_rgba(0,0,0,0.1)] sm:gap-2.5 sm:px-6 sm:py-2.5 sm:text-base"
                   >
                     <span>Read More</span>
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           );
         })}
       </div>

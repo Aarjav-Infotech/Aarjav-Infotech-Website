@@ -58,15 +58,15 @@ export default function DhvaneeAboutProductSection({
               {/* Left Column: Descriptive Content */}
               <div className="space-y-6 text-left sm:space-y-8 lg:col-span-5">
                 <p className="text-base leading-[1.65] font-normal text-neutral-100 sm:text-lg md:text-[18px]">
-                  “<strong className="font-bold text-white">Vani Sahay</strong>{" "}
-                  is an AI-powered financial assistance agent that helps users
+                  “<strong className="font-bold text-white">dhvanee</strong> is
+                  an AI-powered financial assistance agent that helps users
                   identify potential fraud, understand financial risks, resolve
                   payment-related concerns, and access the right support-
                   through simple, multilingual conversations.”
                 </p>
 
                 <p className="text-xs leading-[1.7] text-neutral-400 sm:text-sm md:text-[15px]">
-                  From suspicious messages to payment concerns, Vani Sahay helps
+                  From suspicious messages to payment concerns, dhvanee helps
                   users understand financial risks and take the right next step
                   through simple, conversational guidance.
                 </p>
@@ -79,7 +79,7 @@ export default function DhvaneeAboutProductSection({
                   <div className="relative aspect-[540/460] w-full overflow-hidden rounded-[24px] shadow-2xl sm:rounded-[30px]">
                     <Image
                       src={containerImageSrc}
-                      alt="Vani Sahay Chat Container"
+                      alt="dhvanee Chat Container"
                       fill
                       className="object-contain"
                       priority

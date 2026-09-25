@@ -83,7 +83,7 @@ const assistanceCards: AssistanceCard[] = [
   {
     title: "Multilingual AI",
     description:
-      "Communicate in your preferred language. Vani Sahay speaks multiple languages fluently.",
+      "Communicate in your preferred language. dhvanee speaks multiple languages fluently.",
     iconSrc: asset("/images/assistances-5.svg"),
     iconAlt: "Multilingual AI Icon",
     imageSrc: asset("/images/feacture-5.svg"),

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   ShoppingCart,
@@ -10,7 +10,7 @@ import {
   ArrowUp,
   AlertTriangle,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 
 interface BusinessIntelligenceSectionProps {
   eyebrow?: string;
@@ -50,6 +50,56 @@ const chartDataByRange: Record<TimeRangeKey, ChartDataPoint> = {
 
 const timeRanges: TimeRangeKey[] = ["7 Days", "30 Days", "90 Days"];
 
+// Counter that restarts every time the section scrolls into view
+function Counter({
+  from = 0,
+  to,
+  duration = 1.4,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+}: {
+  from?: number;
+  to: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(nodeRef, {
+    once: false,
+    margin: "-20% 0px -20% 0px",
+  });
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node) return;
+
+    if (isInView) {
+      const controls = animate(from, to, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+        onUpdate(value) {
+          node.textContent = `${prefix}${value.toFixed(decimals)}${suffix}`;
+        },
+      });
+
+      return () => controls.stop();
+    } else {
+      node.textContent = `${prefix}${from.toFixed(decimals)}${suffix}`;
+    }
+  }, [from, to, duration, prefix, suffix, decimals, isInView]);
+
+  return (
+    <span ref={nodeRef}>
+      {prefix}
+      {from.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+}
+
 export default function BusinessIntelligenceSection({
   eyebrow = "Business Intelligence",
   title = "Business Intelligence & Operational Control",
@@ -61,10 +111,9 @@ export default function BusinessIntelligenceSection({
 
   return (
     <section className="relative w-full px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto">
+      <div className="mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
-          {/* Eyebrow Pill */}
           {eyebrow && (
             <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-lg">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
@@ -84,7 +133,7 @@ export default function BusinessIntelligenceSection({
 
         {/* Top 3 KPI Cards */}
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Total Inventory Value */}
+          {/* Card 1: Total Inventory Value */}
           <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.04)] ring-1 ring-slate-100">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#eff4fe] text-[#0052e0]">
               <Box className="h-5 w-5 stroke-[2]" />
@@ -94,7 +143,7 @@ export default function BusinessIntelligenceSection({
                 Total Inventory Value
               </p>
               <h3 className="text-2xl font-bold tracking-tight text-slate-900">
-                $45.2M
+                <Counter to={45.2} prefix="$" suffix="M" decimals={1} />
               </h3>
               <div className="mt-1 inline-flex items-center gap-1 rounded bg-[#eafaf1] px-1.5 py-0.5 text-[11px] font-medium text-[#1db469]">
                 <ArrowUp className="h-3 w-3 stroke-[2.5]" />
@@ -103,7 +152,7 @@ export default function BusinessIntelligenceSection({
             </div>
           </div>
 
-          {/* Today's Sales */}
+          {/* Card 2: Today's Sales */}
           <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.04)] ring-1 ring-slate-100">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#eff4fe] text-[#0052e0]">
               <ShoppingCart className="h-5 w-5 stroke-[2]" />
@@ -113,7 +162,7 @@ export default function BusinessIntelligenceSection({
                 Today's Sales
               </p>
               <h3 className="text-2xl font-bold tracking-tight text-slate-900">
-                $1.8M
+                <Counter to={1.8} prefix="$" suffix="M" decimals={1} />
               </h3>
               <div className="mt-1 inline-flex items-center gap-1 rounded bg-[#eafaf1] px-1.5 py-0.5 text-[11px] font-medium text-[#1db469]">
                 <ArrowUp className="h-3 w-3 stroke-[2.5]" />
@@ -122,7 +171,7 @@ export default function BusinessIntelligenceSection({
             </div>
           </div>
 
-          {/* Active Diamond Inventory */}
+          {/* Card 3: Active Diamond Inventory */}
           <div className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-[0_6px_24px_rgba(0,0,0,0.04)] ring-1 ring-slate-100">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#eff4fe] text-[#0052e0]">
               <Sparkles className="h-5 w-5 stroke-[2]" />
@@ -132,7 +181,7 @@ export default function BusinessIntelligenceSection({
                 Active Diamond inventory
               </p>
               <h3 className="text-2xl font-bold tracking-tight text-slate-900">
-                842
+                <Counter to={842} decimals={0} />
               </h3>
               <div className="mt-1 inline-flex items-center gap-1 rounded bg-[#fef0f0] px-1.5 py-0.5 text-[11px] font-medium text-[#f04438]">
                 <AlertTriangle className="h-3 w-3 stroke-[2.5]" />
@@ -418,7 +467,7 @@ export default function BusinessIntelligenceSection({
                   Total
                 </span>
                 <span className="text-base font-bold text-slate-800">
-                  42,459
+                  <Counter to={42459} decimals={0} />
                 </span>
               </div>
             </div>
@@ -430,7 +479,9 @@ export default function BusinessIntelligenceSection({
                   <span className="h-2 w-2 rounded-full border-2 border-[#0053fa] bg-transparent" />
                   <span className="font-medium text-slate-700">Finished</span>
                 </div>
-                <span className="font-semibold text-slate-800">23,043</span>
+                <span className="font-semibold text-slate-800">
+                  <Counter to={23043} decimals={0} />
+                </span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -438,7 +489,9 @@ export default function BusinessIntelligenceSection({
                   <span className="h-2 w-2 rounded-full border-2 border-[#fb923c] bg-transparent" />
                   <span className="font-medium text-slate-700">Pending</span>
                 </div>
-                <span className="font-semibold text-slate-800">14,658</span>
+                <span className="font-semibold text-slate-800">
+                  <Counter to={14658} decimals={0} />
+                </span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -446,7 +499,9 @@ export default function BusinessIntelligenceSection({
                   <span className="h-2 w-2 rounded-full border-2 border-[#ef4444] bg-transparent" />
                   <span className="font-medium text-slate-700">Rejected</span>
                 </div>
-                <span className="font-semibold text-slate-800">4,758</span>
+                <span className="font-semibold text-slate-800">
+                  <Counter to={4758} decimals={0} />
+                </span>
               </div>
             </div>
           </div>
