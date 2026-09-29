@@ -27,6 +27,22 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
+  // Global fallback Open Graph configuration for the entire site
+  openGraph: {
+    type: "website",
+    url: APP_URL,
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
+    siteName: APP_NAME,
+    images: [
+      {
+        url: asset("/images/fallback-og.jpg"), // Updated to your new fallback image filename
+        width: 1200,
+        height: 630,
+        alt: `${APP_NAME} - Next-Generation AI Automation`,
+      },
+    ],
+  },
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -82,7 +98,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             __html: JSON.stringify(organizationJsonLd),
           }}
         />
-        <link rel="dns-prefetch" href="https://cdn.aarjavinfotech.com" />
         {/* Force scroll position to top BEFORE Next.js hydrates on mobile */}
         <script
           dangerouslySetInnerHTML={{

@@ -63,14 +63,12 @@ export default function AIBusinessAssistantSection({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry) return;
-
         // Clear all active intervals & timeouts
         clearInterval(userTimer);
         clearInterval(aiTimer);
         clearTimeout(pauseTimer);
 
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           // Reset states
           setUserTypedText("");
           setIsUserTypingDone(false);
