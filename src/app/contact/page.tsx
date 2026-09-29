@@ -3,13 +3,30 @@ import type { Metadata } from "next";
 import ContactFeature from "@/features/contact/contect-content";
 import { CONTACT_INFO } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
+import { asset } from "@/lib/cdn";
 
-export const metadata: Metadata = createMetadata({
-  title: "Contact Aarjav Infotech",
-  description:
-    "Contact Aarjav Infotech solution engineers to automate and scale enterprise workflows with secure AI agents.",
-  path: "/contact",
-});
+export const metadata: Metadata = {
+  ...createMetadata({
+    title: "Contact Us",
+    description:
+      "Get in touch with Aarjav Infotech to discuss your enterprise AI and automation implementation needs.",
+    path: "/contact",
+  }),
+  openGraph: {
+    title: "Contact Us | Aarjav Infotech",
+    description:
+      "Get in touch with Aarjav Infotech to discuss your enterprise AI and automation implementation needs.",
+    url: "/contact",
+    images: [
+      {
+        url: asset("/images/contact-us.png"),
+        width: 1200,
+        height: 630,
+        alt: "Contact Us - Aarjav Infotech",
+      },
+    ],
+  },
+};
 
 export default function ContactPage() {
   return (

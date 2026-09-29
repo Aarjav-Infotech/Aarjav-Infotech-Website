@@ -68,7 +68,7 @@ export default function AIBusinessAssistantSection({
         clearInterval(aiTimer);
         clearTimeout(pauseTimer);
 
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           // Reset states
           setUserTypedText("");
           setIsUserTypingDone(false);

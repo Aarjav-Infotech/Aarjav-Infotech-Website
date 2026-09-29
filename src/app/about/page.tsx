@@ -4,13 +4,31 @@ import { AboutContent } from "@/features/about/components/about-content";
 import { JsonLd } from "@/components/common/json-ld";
 import { getOrganizationJsonLd } from "@/lib/json-ld";
 import { createMetadata } from "@/lib/metadata";
+import { asset } from "@/lib/cdn"; // 1. Import your asset helper
 
-export const metadata: Metadata = createMetadata({
-  title: "About Aarjav Infotech",
-  description:
-    "Learn about Aarjav Infotech — our mission, vision, and commitment to enterprise AI automation excellence in Surat, India.",
-  path: "/about",
-});
+export const metadata: Metadata = {
+  ...createMetadata({
+    title: "About Aarjav Infotech",
+    description:
+      "Learn about Aarjav Infotech — our mission, vision, and commitment to enterprise AI automation excellence in Surat, India.",
+    path: "/about",
+  }),
+  // 2. Add the custom Open Graph image configuration
+  openGraph: {
+    title: "About Aarjav Infotech",
+    description:
+      "Learn about Aarjav Infotech — our mission, vision, and commitment to enterprise AI automation excellence in Surat, India.",
+    url: "/about",
+    images: [
+      {
+        url: asset("/images/about-us.png"),
+        width: 1200,
+        height: 630,
+        alt: "About Aarjav Infotech - AI-native enterprise automation partner",
+      },
+    ],
+  },
+};
 
 export default function AboutPage() {
   return (
