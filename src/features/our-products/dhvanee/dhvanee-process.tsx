@@ -53,7 +53,7 @@ export default function HowDhvaneeWorksSection() {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const, // Fixed with "as const" to satisfy strict Framer Motion types
         stiffness: 120,
         damping: 14,
       },
@@ -62,7 +62,7 @@ export default function HowDhvaneeWorksSection() {
 
   return (
     <section className="w-full bg-white px-4 py-10 font-sans sm:px-6 sm:py-14 md:px-8 md:py-16">
-      <div className="mx-auto max-w-[1320px]">
+      <div className="mx-auto">
         {/* Main Card Container with subtle outer gradient */}
         <div className="relative w-full overflow-hidden rounded-[28px] border border-blue-100/60 bg-gradient-to-b from-[#EFF5FF] via-[#F4F8FF] to-[#E9F1FE] px-5 py-12 shadow-xs sm:rounded-[36px] sm:px-10 sm:py-16 md:rounded-[44px] md:px-14 md:py-20 lg:px-16">
           {/* Section Header */}

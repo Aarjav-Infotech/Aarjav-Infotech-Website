@@ -104,7 +104,7 @@ export function ComprehensiveAssistanceSection({
 }: ComprehensiveAssistanceProps) {
   return (
     <section className="relative w-full bg-white px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 lg:px-8">
-      <div className="mx-auto max-w-[1240px]">
+      <div className="mx-auto">
         {/* Section Header */}
         <div className="mx-auto mb-8 flex max-w-2xl flex-col items-center text-center sm:mb-12 md:mb-14">
           {eyebrow && (

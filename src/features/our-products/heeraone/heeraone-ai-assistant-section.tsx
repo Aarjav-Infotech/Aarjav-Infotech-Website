@@ -131,7 +131,7 @@ export default function AIBusinessAssistantSection({
 
   return (
     <section className="relative w-full overflow-hidden rounded-[28px] border-b-8 border-[#E3E3E3] bg-gradient-to-b from-[#ffffff] via-[#cae2fe] via-[#ebf4ff] via-[45%] via-[75%] to-[#a8ceff] px-4 py-12 sm:rounded-[36px] sm:border-b-10 sm:px-6 sm:py-16 md:py-20 lg:rounded-[40px] lg:px-8">
-      <div className="relative z-10 mx-auto max-w-7xl">
+      <div className="relative z-10 mx-auto max-w-full">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           {eyebrow && (

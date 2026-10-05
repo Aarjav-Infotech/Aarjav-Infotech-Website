@@ -210,7 +210,7 @@ export function ContactSection({
 
   return (
     <section className="w-full bg-white px-3 py-6 font-sans sm:px-6 sm:py-10 lg:px-8">
-      <div className="mx-auto max-w-[1280px]">
+      <div className="mx-auto">
         <div className="relative overflow-hidden rounded-[24px] bg-slate-900 p-5 sm:rounded-[36px] sm:p-8 md:p-12 lg:p-16">
           <div className="pointer-events-none absolute inset-0 size-full select-none">
             <Image

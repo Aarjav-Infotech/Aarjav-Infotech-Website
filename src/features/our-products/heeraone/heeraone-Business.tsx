@@ -111,7 +111,7 @@ export default function BusinessIntelligenceSection({
 
   return (
     <section className="relative w-full px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-full">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           {eyebrow && (

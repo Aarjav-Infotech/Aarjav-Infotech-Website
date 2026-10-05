@@ -22,8 +22,8 @@ export function HeeraOneAboutSection({
   updateCardImageSrc,
 }: HeeraOneAboutSectionProps) {
   return (
-    <section className="relative w-full bg-white px-3 py-6 sm:px-6 sm:py-10 md:py-14 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative w-full bg-white px-3 py-6 sm:px-6 sm:py-10 md:py-14 lg:px-2">
+      <div className="mx-auto max-w-full">
         {/* Main Card with Curved Borders */}
         <div className="relative overflow-hidden rounded-[24px] px-4 pt-8 pb-10 sm:rounded-[32px] sm:px-8 sm:pt-12 sm:pb-14 md:px-12 lg:rounded-[40px] lg:px-16 lg:pt-16 lg:pb-24">
           {/* Background Ambient Graphic */}
@@ -45,7 +45,7 @@ export function HeeraOneAboutSection({
             {/* Header / Pill Badge */}
             <div className="mb-8 flex flex-col items-center text-center sm:mb-12">
               {eyebrow && (
-                <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-6 sm:border-b-4 sm:text-base">
+                <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-lg">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
                   {eyebrow}
                 </div>

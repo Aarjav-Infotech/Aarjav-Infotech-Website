@@ -65,7 +65,7 @@ const containerVariants = {
   },
 };
 
-// Bouncy card entry & hover variants
+// Bouncy card entry & hover variants with "as const" for TypeScript
 const cardVariants = {
   hidden: {
     opacity: 0,
@@ -77,7 +77,7 @@ const cardVariants = {
     y: 0,
     scale: 1,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 140,
       damping: 14,
     },

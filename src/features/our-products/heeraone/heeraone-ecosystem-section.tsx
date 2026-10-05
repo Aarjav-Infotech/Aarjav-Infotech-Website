@@ -80,7 +80,7 @@ export default function ConnectedEcosystemSection({
 }: ConnectedEcosystemSectionProps) {
   return (
     <section className="relative w-full px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-full">
         {/* Main Card Container */}
         <div className="relative overflow-hidden rounded-[36px] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] ring-1 ring-slate-100 sm:p-10 lg:p-14">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
