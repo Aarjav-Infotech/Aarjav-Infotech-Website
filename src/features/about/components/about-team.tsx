@@ -50,7 +50,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Noah Reed",
     role: "ML/Agent Lead",
     bio: "Builds domain agents",
-    image: asset("/images/teams-image.svg"),
+    image: asset("/images/testimonial-3.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -60,17 +60,17 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Jordan Brooks",
     role: "Data Engineer",
     bio: "Secure access policies",
-    image: asset("/images/teams-image.svg"),
+    image: asset("/images/testimonial-1.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
   },
   {
-    name: "Lucas Hayes",
+    name: "Haily Hayes",
     role: "Solutions Architect",
     bio: "Connects AI to your stack",
-    image: asset("/images/teams-image.svg"),
+    image: asset("/images/testimonial-2.svg"),
     socials: {
       github: "https://github.com",
       linkedin: "https://linkedin.com",
@@ -108,7 +108,7 @@ export function AboutTeamSection({
         <div className="relative z-10 mx-auto w-full max-w-[1400px]">
           {/* Header Badge & Title */}
           <div className="flex flex-col items-center px-2 text-center">
-            <div className="inline-flex items-center gap-2 rounded bg-black/90 px-3.5 py-1 text-xs font-semibold text-white shadow-md sm:px-4 sm:py-1.5 sm:text-sm">
+            <div className="boder-slate-200 mb-6 inline-block rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold tracking-wide text-[#2b2bad] shadow-xl/20 sm:text-[18px]">
               <span className="size-2 rounded-full bg-white" />
               {eyebrow}
             </div>

@@ -75,7 +75,7 @@ export function AiImplementationRoadmap({
           {/* Header Block */}
           <div className="flex flex-col items-center text-center">
             {eyebrow && (
-              <div className="mb-4 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-white/80 px-3.5 py-1 text-xs font-bold text-[#2b2bad] shadow-xs backdrop-blur-md sm:mb-6 sm:border-b-4 sm:text-[14px]">
+              <div className="boder-slate-200 mb-6 inline-block rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold tracking-wide text-[#2b2bad] shadow-xl/20 sm:text-[18px]">
                 <span className="h-1.5 w-1.5 rounded bg-[#2b2bad]" />
                 {eyebrow}
               </div>

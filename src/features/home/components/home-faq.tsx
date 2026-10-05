@@ -33,7 +33,7 @@ export function HomeFaq({
       <div className="mx-auto max-w-4xl">
         <div className="relative z-20 mx-auto mb-8 flex max-w-xl flex-col items-center text-center sm:mb-12 lg:mb-14">
           {eyebrow && (
-            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-10 sm:border-b-4 sm:text-[14px]">
+            <div className="boder-slate-200 mb-6 inline-block rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold tracking-wide text-[#2b2bad] shadow-xl/20 sm:text-[18px]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>
