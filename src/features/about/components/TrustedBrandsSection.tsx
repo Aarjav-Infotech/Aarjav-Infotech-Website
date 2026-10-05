@@ -9,12 +9,13 @@ interface Logo {
 }
 
 const LOGOS: Logo[] = [
-  { name: "Brand 1", src: asset("/images/partner-1.svg") },
-  { name: "Brand 2", src: asset("/images/partner-2.svg") },
-  { name: "Brand 3", src: asset("/images/partner-3.svg") },
-  { name: "Brand 4", src: asset("/images/partner-4.svg") },
-  { name: "Brand 5", src: asset("/images/partner-5.svg") },
-  { name: "Brand 6", src: asset("/images/partner-6.svg") },
+  { name: "Brand 1", src: asset("/icons/Company-logo-1.svg") },
+  { name: "Brand 2", src: asset("/icons/Company-logo-2.svg") },
+  { name: "Brand 3", src: asset("/icons/Company-logo-3.svg") },
+  { name: "Brand 4", src: asset("/icons/Company-logo-4.svg") },
+  { name: "Brand 5", src: asset("/icons/Company-logo-5.svg") },
+  { name: "Brand 6", src: asset("/icons/Company-logo-6.svg") },
+  { name: "Brand 7", src: asset("/icons/Company-logo-7.svg") },
 ];
 
 export function TrustedBrandsSection() {

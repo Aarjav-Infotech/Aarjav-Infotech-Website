@@ -225,12 +225,12 @@ export function AboutWhyChooseUs() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-[#FAFAFC] px-4 py-12 sm:px-6 lg:h-[350vh] lg:px-8 lg:py-0"
+      className="relative w-full bg-[#FAFAFC] px-4 py-12 sm:px-6 lg:h-[350vh] lg:px-8 lg:py-12"
     >
       <div className="mx-auto flex w-full max-w-[1280px] flex-col justify-center lg:sticky lg:top-8 lg:min-h-[calc(100vh-4rem)]">
         {/* Header Badge & Title */}
         <div className="flex flex-col items-center text-center">
-          <div className="text-basic inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 font-semibold text-[#002688] shadow-sm">
+          <div className="boder-slate-200 mb-6 inline-block rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold tracking-wide text-[#2b2bad] shadow-xl/20 sm:text-[18px]">
             <span className="size-1.5 rounded-full bg-[#002688]" />
             Why Choose Us
           </div>

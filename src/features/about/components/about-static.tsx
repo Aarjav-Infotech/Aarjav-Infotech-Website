@@ -119,7 +119,7 @@ export function AboutStaticSection() {
         <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Side: Static Section (Does not slide) */}
           <div className="flex flex-col justify-start lg:col-span-6">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-[#002688]">
+            <div className="boder-slate-200 mb-2 inline-block w-fit rounded border-b-4 bg-[#F5F5F5] px-3.5 py-1 text-[14px] font-semibold tracking-wide text-[#2b2bad] shadow-xl/20 sm:text-[18px]">
               <span className="size-1.5 rounded-full bg-[#002688]" />
               Statistic
             </div>

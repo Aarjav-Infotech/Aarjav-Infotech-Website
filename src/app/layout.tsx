@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
   },
   description: APP_DESCRIPTION,
-  // Global fallback Open Graph configuration for the entire site
   openGraph: {
     type: "website",
     url: APP_URL,
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     images: [
       {
-        url: asset("/images/fallback-og.jpg"), // Updated to your new fallback image filename
+        url: asset("/images/fallback-og.png"),
         width: 1200,
         height: 630,
         alt: `${APP_NAME} - Next-Generation AI Automation`,
