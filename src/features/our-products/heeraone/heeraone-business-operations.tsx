@@ -153,7 +153,7 @@ export function BusinessOperations({
 }: BusinessOperationsProps) {
   return (
     <section className="relative w-full bg-white px-4 py-10 sm:px-6 sm:py-14 md:py-18 lg:px-8 lg:py-20">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-full">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -164,7 +164,7 @@ export function BusinessOperations({
         >
           {/* Eyebrow Pill */}
           {eyebrow && (
-            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border-b-2 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-xs font-semibold text-[#2b2bad] shadow-sm sm:mb-6 sm:border-b-4 sm:text-base">
+            <div className="mb-6 inline-flex items-center gap-1.5 rounded border-b-4 border-slate-200 bg-[#F5F5F5] px-3.5 py-1 text-base font-semibold text-[#2b2bad] shadow-sm sm:text-lg">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b2bad]" />
               {eyebrow}
             </div>

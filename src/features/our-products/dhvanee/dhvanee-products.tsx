@@ -20,8 +20,8 @@ export default function DhvaneeAboutProductSection({
   const eyebrow = "About Product";
 
   return (
-    <section className="w-full bg-white px-4 py-10 md:px-8 md:py-12">
-      <div className="mx-auto max-w-[1320px]">
+    <section className="w-full bg-white px-4 py-10 md:px-2 md:py-12">
+      <div className="mx-auto">
         {/* Main Outer Container with Figma Radius & Border */}
         <div className="relative w-full overflow-hidden rounded-[32px] border border-neutral-900 bg-black px-6 py-14 text-white shadow-2xl sm:rounded-[40px] sm:px-12 sm:py-16 md:rounded-[48px] md:px-16 md:py-20 lg:px-20">
           {/* Background Glow & Filament Mesh (From Figma Layer: 'glowing-filament-ignites-inspiration') */}

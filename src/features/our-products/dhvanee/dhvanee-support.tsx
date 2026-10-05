@@ -79,7 +79,7 @@ export function DhvaneeLanguageSupport({
 }: DhvaneeLanguageSupportProps) {
   return (
     <section className="xs:px-4 relative w-full overflow-hidden bg-white px-3 py-14 sm:px-6 sm:py-20 md:py-24 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-full">
         {/* Header */}
         <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center text-center sm:mb-16">
           {eyebrow && (

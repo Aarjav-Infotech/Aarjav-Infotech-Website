@@ -22,8 +22,8 @@ export function HeeraOneAboutSection({
   updateCardImageSrc,
 }: HeeraOneAboutSectionProps) {
   return (
-    <section className="relative w-full bg-white px-3 py-6 sm:px-6 sm:py-10 md:py-14 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative w-full bg-white px-3 py-6 sm:px-6 sm:py-10 md:py-14 lg:px-2">
+      <div className="mx-auto max-w-full">
         {/* Main Card with Curved Borders */}
         <div className="relative overflow-hidden rounded-[24px] px-4 pt-8 pb-10 sm:rounded-[32px] sm:px-8 sm:pt-12 sm:pb-14 md:px-12 lg:rounded-[40px] lg:px-16 lg:pt-16 lg:pb-24">
           {/* Background Ambient Graphic */}
